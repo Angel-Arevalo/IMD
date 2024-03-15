@@ -1,0 +1,65 @@
+
+.rectangle_1{
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border: 1px solid black;
+    /* Centrar la figura en la pantalla */
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    /* Agregar transición suave para la rotación */
+    transition: transform 1s ease;
+}
+.triangulo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-right: 50px solid transparent;
+    border-top: 50px solid transparent;
+    border-left: 50px solid red;
+    border-bottom: 50px solid red;
+}
+.triangulo_2{
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 57%;
+    border-right: 50px solid transparent;
+    border-top: 50px solid transparent;
+    border-left: 50px solid blue;
+    border-bottom: 50px solid blue;
+    transform: scaleX(-1);
+}
+.triangulo_3{
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 40%;
+    left: 50%;
+    border-right: 50px solid transparent;
+    border-top: 50px solid transparent;
+    border-left: 50px solid violet;
+    border-bottom: 50px solid violet;
+    transform: scaleY(-1);
+}
+.triangulo_4{
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 40%;
+    left: 57%;
+    border-right: 50px solid transparent;
+    border-top: 50px solid transparent;
+    border-left: 50px solid green;
+    border-bottom: 50px solid green;
+    transform: scaleX(-1) scaleY(-1);
+}
+
+.rotar {
+    transform: translate(-50%, -50%) rotate(-10deg);
+}
