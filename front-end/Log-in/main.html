@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="Cart"></div> <!--Rectangulo del fondo--> 
+
+    <input type="text" id="InputUser" class="Basic_Position"> <!--Primer input, lee la información del nombre de usuario-->
+    <input type="text" id="InputPassword" class="Basic_Position"><!--Segundo input, lee la información de la contraseña de usuario-->
+
+    <select class="Basic_Position" id="Selector"><!--Selector de Rol-->
+        <option value="Estudiante"> Estudiante</option>
+        <option value="Profesor">Profesor</option>
+    </select>
+    
+    <button onclick="Save()" class="Basic_Position" id="Save"> Guardar </button> <!--Boton para guardar-->
+
+    <!--Texto-->
+    <p id="Welcome" class="Cart">Bienvenido. Ingrese un usuario y una contraseña de mínimo de 8 digitos. Para su usurario es preferible
+        que use sus nombres y apellidos.
+    </p>
+</body>
+<script src="main.js"></script>
+</html>
