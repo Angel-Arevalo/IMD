@@ -1,12 +1,33 @@
 import mysql.connector
 
-conexion = mysql.connector.connect(user = 'Ariel', password = 'G7i5oOmePha_4',
-                                    host = 'localhost',
-                                    database = 'usuarios',
-                                    port = '3306',)
+
+class ConexionDB:
+
+    def conexionDataBase():
+
+        try:
+            conexion = mysql.connector.connect(
+                                user = 'Ariel', 
+                                password = 'G7i5oOmePha_4',
+                                host = 'localhost',
+                                database = 'usuarios',
+                                port = '3306',
+                                )
+            
+            print("Conexion Exitosa")
+
+            return conexion
+
+        except mysql.connector.Error as error:
+            print("Error al conectarse a la base de datos {}".format(error))
+
+            print("Conexion Fallida")
+
+            return conexion
+    
+    conexionDataBase()
 
 
-miCursor = conexion.cursor()
 
 ''''
 miCursor.execute(""" 
@@ -21,9 +42,3 @@ miCursor.execute("""
 )
 """)
 '''
-
-
-
-conexion.commit()
-
-conexion.close()
