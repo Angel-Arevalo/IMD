@@ -27,8 +27,6 @@ class ConexionDB:
     
     conexionDataBase()
 
-    pass
-
 
 
 ''''
