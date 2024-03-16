@@ -50,6 +50,24 @@ class User {
         }
         alert(Help);
     }
+    //Enviar información al back-end
+    SendDate() {
+        fetch('http://localhost:5000/ruta_del_backend', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'Nombre':this.#Username,
+                                  'Contraseña':this.#UserPassword,
+                                  'Rol':this.#UserRol})
+        }
+        )
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    }
+
 
     //Impreción de comprobación
     printDcot() {
@@ -63,9 +81,5 @@ const user = new User;
 function Save() {//función para obtener el usuario del archivo HTML
     user.SaveUser();
     user.printDcot();
+     user.SendDate();
 }
-fetch('http://localhost:5000/')
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-    });
