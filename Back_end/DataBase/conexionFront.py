@@ -14,7 +14,7 @@ def recibir_dato():
     User = InputUser(Nombre, Contraseña, Rol)#Aqui logro guardar el usuario en la base de datos
     User.GuardarEnDataUsers()
     print("Dato recibido:", Nombre + ' ' + Contraseña + ' ' + Rol)
-    return jsonify({"mensaje": "Datos recibidos correctamente"})
+    return jsonify({"mensaje": "Hello world"})
 
 if __name__ == '__main__':
     app.run(debug=True)

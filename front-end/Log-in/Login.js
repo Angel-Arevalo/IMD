@@ -81,5 +81,5 @@ const user = new User;
 function Save() {//función para obtener el usuario del archivo HTML
     user.SaveUser();
     user.printDcot();
-     user.SendDate();
+    user.SendDate();
 }
