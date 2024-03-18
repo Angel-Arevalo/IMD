@@ -7,6 +7,7 @@ class InputUser:
         self.Usuario = Usuario
         self.Contraseña = Contraseña
         self.Rol = Rol
+        self.Ceasar = 10
     
     def GuardarEnDataUsers(self):
         apuntador = sql.connect(Base_Direction)
@@ -16,3 +17,26 @@ class InputUser:
             apuntador.commit()
         finally:
             apuntador.close()
+
+
+    def Encriptar(self): 
+        
+        encriptado = ''
+        for letra in self.Contraseña:
+            encriptado+= chr(ord(letra) + self.Ceasar)
+            
+        return encriptado
+
+    def Desencriptar(self): 
+        
+        desencriptado = self.Encriptar()
+        for letra in self.Contraseña:
+            encriptado+= chr(ord(letra) - self.Ceasar)
+            
+        return desencriptado
+        
+
+
+    
+
+            
