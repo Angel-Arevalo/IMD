@@ -1,6 +1,6 @@
 class User {
     //Variables
-    #Username;#UserPassword;#UserRol;#bool;//bool es true si y solo si sedigitó bien el usuario y contraseña
+    #Username;#UserPassword;//bool es true si y solo si sedigitó bien el usuario y contraseña
 
     //Inicio de funciones set,get y constructor
     constructor() {
@@ -15,24 +15,17 @@ class User {
     set Password(Password) {
         this.#UserPassword = Password;
     }
-
-    get Bool() {
-        return this.#bool;
-    }
     //fin de funciones set, get y constructor
 
     //Guardar usuario
-    SaveUser() {
-        
+    SaveUser() {  
         let NameHelp = document.getElementById("InputUser").value;
         let PassHelp = document.getElementById("InputPassword").value;
-        let RolHelp = document.getElementById("Selector").value;
 
         if (NameHelp != "" && PassHelp != "" && PassHelp.length >= 8) {
             this.#UserPassword = PassHelp;
             this.#Username = NameHelp;
-            this.#UserRol = RolHelp;
-            this.#bool = true;
+            this.SendData();
         } else this.AlertUser(NameHelp,PassHelp);
         
     }
@@ -50,10 +43,30 @@ class User {
         }
         alert(Help);
     }
+    //Enviar información al back-end
+    SendData() {
+        fetch('http://localhost:5000/ruta_del_backend', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'Nombre':this.#Username,
+                                  'Contraseña':this.#UserPassword})
+        }
+        )
+        .then(response => response.json())
+        .then(data => alert(data.mensaje))
+        .catch(error => console.error('Error:', error));
+    }
+
 
     //Impreción de comprobación
     printDcot() {
-        console.log(this.#Username, " ", this.#UserPassword, " "," ",this.#UserRol," ", this.#bool);
+        console.log(this.#Username, " ", this.#UserPassword);
+    }
+    ComproIfExist(x) {
+        alert("Helo world");
     }
 }
 
@@ -64,8 +77,3 @@ function Save() {//función para obtener el usuario del archivo HTML
     user.SaveUser();
     user.printDcot();
 }
-fetch('http://localhost:5000/')
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-    });
