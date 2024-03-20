@@ -1,0 +1,55 @@
+/* Body */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Declaración de las interfaces básicas */
+.Basic_Position {
+    position: absolute;
+    border-radius: 5px;
+    font-weight: 100;
+}
+
+.Cart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(188, 204, 204);
+    border-radius: 5px;
+}
+
+#Welcome {
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+#Text {
+    top: 20%;
+    left: 5%;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+/* Modificaciones */
+#InputUser, #InputPassword, #Selector, #Save, #Registro, #Ingreso {
+    width: 30vw;
+    height: 5vh;
+    left: 35%;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 600px) {
+    #InputUser, #InputPassword, #Selector, #Save, #Registro, #Ingreso {
+        width: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
