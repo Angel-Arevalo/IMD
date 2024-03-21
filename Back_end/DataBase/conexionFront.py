@@ -10,10 +10,10 @@ def recibir_dato():
     data = request.json
     Nombre = data.get('Nombre')
     Contraseña = data.get('Contraseña')
+    Email = data.get('Correo')
     Rol = data.get('Rol')
-    User = InputUser(Nombre, Contraseña, Rol)#Aqui logro guardar el usuario en la base de datos
+    User = InputUser(Nombre, Contraseña, Rol, Email)#Aqui logro guardar el usuario en la base de datos
     User.GuardarEnDataUsers()
-    print("Dato recibido:", Nombre + ' ' + Contraseña + ' ' + Rol)
     return jsonify({"mensaje": "Hello world"})
 
 if __name__ == '__main__':

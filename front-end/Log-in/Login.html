@@ -10,20 +10,20 @@
     
     <div class="Cart"></div> <!--Rectangulo del fondo--> 
 
-    <input type="text" id="InputUser" class="Basic_Position"> <!--Primer input, lee la información del nombre de usuario-->
-    <input type="text" id="InputPassword" class="Basic_Position"><!--Segundo input, lee la información de la contraseña de usuario-->
+     <!--Primer input, lee la información del nombre de usuario-->
+    <input type="text" id="InputUser" class="Basic_Position" placeholder="Ingrese el usuario">
+    <input type="text" id="InputPassword" class="Basic_Position" placeholder="Ingrese la constraseña"><!--Segundo input, lee la información de la contraseña de usuario-->
 
-    <select class="Basic_Position" id="Selector"><!--Selector de Rol-->
+    <!--<select class="Basic_Position" id="Selector">Selector de Rol
         <option value="Estudiante"> Estudiante</option>
         <option value="Profesor">Profesor</option>
-    </select>
-    
-    <button onclick="Save()" class="Basic_Position" id="Save"> Guardar </button> <!--Boton para guardar-->
+    </select>-->
+    <button onclick="Save()" id="Save"> Guardar </button> <!--Boton para guardar-->
 
-    <!--Texto-->
-    <p id="Welcome" class="Cart">Bienvenido. Ingrese un usuario y una contraseña de mínimo de 8 digitos. Para su usurario es preferible
-        que use sus nombres y apellidos.
-    </p>
+    <!--creación de nuevo usuario-->
+    <h1 id="Information_register">No tiene una cuenta?</h1>
+    <button onclick="window.location.href = '../Log-in/Registro/Registro.html'" id="GoToRe">Registrese aquí</button>
+    
 </body>
 <script src="Login.js"></script>
 </html>
