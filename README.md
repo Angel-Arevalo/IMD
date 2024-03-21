@@ -1,25 +1,8 @@
-ESTRUCTURA DEL PROYECTO. 
+BASE DE DATOS DB
 
-BASES DE DATOS: 
+NUEVO USUARIO:
+-Crear nuevo.
+-Encontrar si el usuario ya existe. 
 
-- Python.
-- Posgres. 
-- SQL.
-- Hashmap.
-
-INTERFAZ DE USUARIO. 
-
-- Interfaz data sheet.
-- Login (Diferencia entre la aplicación y el jefe y secretaria, y los empleados)
-- Swing.
-
-LIBERIAS: 
-- calendar.
-- Scanner.
-- GeorianCalendar.
-- Timer.
-- 
-
-
-
-
+RECONOCER CUENTA: 
+-Log in.
