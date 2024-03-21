@@ -10,7 +10,7 @@ def recibir_dato():
     data = request.json
     Nombre = data.get('Nombre')
     Contraseña = data.get('Contraseña')
-    Email = data.get('Email')
+    Email = data.get('Correo')
     Rol = data.get('Rol')
     User = InputUser(Nombre, Contraseña, Rol, Email)#Aqui logro guardar el usuario en la base de datos
     User.GuardarEnDataUsers()
