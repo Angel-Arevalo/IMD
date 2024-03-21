@@ -1,6 +1,6 @@
 import sqlite3 as sql
 
-Base_Direction = r'C:\Users\Angel Arevalo\OneDrive\Documentos\GitHub\Null\Back_end\DataBase\DataUsers.db'
+Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
 class InputUser:
     def __init__(self, Usuario, Contraseña,Rol, Email):
@@ -27,7 +27,6 @@ class InputUser:
         for letra in self.Contraseña:
             encriptado += chr(ord(letra) + self.Ceasar)
             
-        print(encriptado)
         self.Contraseña = encriptado
 
     def Desencriptar(self): 
@@ -36,7 +35,7 @@ class InputUser:
         for letra in self.Contraseña:
             encriptado += chr(ord(letra) - self.Ceasar)
             
-        self.contraseña = desencriptado
+        self.Contraseña = desencriptado
         
 
 
