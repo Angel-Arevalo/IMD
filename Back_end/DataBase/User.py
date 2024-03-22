@@ -20,6 +20,18 @@ class InputUser:
         finally:
             apuntador.close()
 
+    def VerificarLogin(self):
+        # Aqui supongo que la contraseña no esta encriptada
+        self.Encriptar()
+        apuntador = sql.connect(Base_Direction)
+        name = self.Usuario 
+        password = self.Contraseña
+        get_info = apuntador.execute(f"SELECT * FROM Usuarios WHERE Contraseña = '{password}' AND Nombre_Usuario = '{name}'")
+        store_info = get_info.fetchall()
+        if (store_info == []): 
+            return "Usuario o Contraseña Incorrectos"
+        else: 
+            return "Usuario Registrado"
 
     def Encriptar(self): 
         
@@ -39,6 +51,5 @@ class InputUser:
         
 
 
-    
 
-            
+
