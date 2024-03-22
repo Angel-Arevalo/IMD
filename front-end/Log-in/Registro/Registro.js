@@ -1,6 +1,6 @@
 class Registro {
     //Variables
-    #Username; #UserPassword; #UserEmail; #Rol;
+    #Username; #UserPassword; #UserEmail; #Rol; #ValidAdress = false;
 
     //Constructor
     constructor() {
@@ -17,13 +17,16 @@ class Registro {
         let Addres = document.getElementById('Email').value;
         
         if (Name != "" && Pass!= "" && Pass.length >= 8 && Addres != "") {
-            console.log("Hello world");
-            this.#UserPassword = Pass;
-            this.#Username = Name;
-            this.#UserEmail = Addres;
-            this.#Rol = document.getElementById('Selector').value;
-            this.SendData();
-        } else this.AlertUser(Name,Pass);
+            this.RevisionCorreo();//reviso que el correo sea correcto
+            if(this.#ValidAdress) {
+                console.log("Hello world");
+                this.#UserPassword = Pass;
+                this.#Username = Name;
+                this.#UserEmail = Addres;
+                this.#Rol = document.getElementById('Selector').value;
+                this.SendData();
+            }
+        } else this.AlertUser(Name,Pass,Addres);
     }
 
     SendData () {
@@ -50,8 +53,8 @@ class Registro {
     }
 
     //Método para alertar que se está insertando algo mal
-    AlertUser(Name, Pass) {
-        let Help = "", bool = false;
+    AlertUser(Name, Pass, Addres) {
+        let Help = "", bool = false, boolAdress = false;
         if (Name == "") {
             Help += "Usuario incorrecto. ";
         } if (Pass == "") {
@@ -59,11 +62,31 @@ class Registro {
             Help += "Contraseña vacía. ";
         } if (Pass.length < 8 && bool == false) {
             Help += "Contraseña invalida.";
-        }
+        } if(Addres == "") {Help += "Correo vacio";;boolAdress = true}
+        if (this.#ValidAdress && !boolAdress) {Help += " Correo invalido."};
+        
         alert(Help);
     }
-    printDcot() {
-        console.log(this.#Username, " ", this.#UserPassword);
+    
+    RevisionCorreo() {
+        let arroba = this.#UserEmail.indexOf("@");
+        let PalaResultante = this.#UserEmail.substring(arroba);
+
+        if (arroba == -1) {
+            switch (PalaResultante.toLowerCase()) {//designo el valor de verdad
+            case "@gmail.com": 
+                this.#ValidAdress = true;
+                break
+            case "@unal.edu.co":
+                this.#ValidAdress = true;
+                break
+            case "@hotmail.com":
+                this.#ValidAdress = true;
+                break
+            default:
+                this.#ValidAdress = false;
+                break;
+        }}else this.#ValidAdress = false;
     }
 }
 
@@ -72,5 +95,4 @@ const regis = new Registro();
 function Send() {
     console.log("Hello world");
     regis.SaveUser();
-    regis.printDcot();
 }

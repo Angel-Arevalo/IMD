@@ -1,19 +1,14 @@
 class User {
     //Variables
     #Username;#UserPassword;//bool es true si y solo si sedigitó bien el usuario y contraseña
-
     //Inicio de funciones set,get y constructor
     constructor() {
         this.#Username = "";
         this.#UserPassword = "";
     }
 
-    set SetName(name) {
-        this.#Username = name;
-    }
-
-    set Password(Password) {
-        this.#UserPassword = Password;
+    get GetName() {
+        return this.#Username;
     }
     //fin de funciones set, get y constructor
 
@@ -22,7 +17,7 @@ class User {
         let NameHelp = document.getElementById("InputUser").value;
         let PassHelp = document.getElementById("InputPassword").value;
 
-        if (NameHelp != "" && PassHelp != "" && PassHelp.length >= 8) {
+        if (NameHelp != "" && PassHelp != "") {
             this.#UserPassword = PassHelp;
             this.#Username = NameHelp;
             this.SendData();
@@ -52,21 +47,19 @@ class User {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({'Nombre':this.#Username,
-                                  'Contraseña':this.#UserPassword})
+                                  'Contraseña':this.#UserPassword,
+                                  'Correo': "",
+                                  'Rol': "",})
         }
         )
         .then(response => response.json())
-        .then(data => alert(data.mensaje))
+        .then(data => {
+            alert(data.mensaje)
+            if(data.mensaje == "Usuario recibido"){
+                localStorage.setItem('mensaje', '1');
+                window.location.href = '../Worlds/EscogerMundo.html';
+            }else alert(data.mensaje)})
         .catch(error => console.error('Error:', error));
-    }
-
-
-    //Impreción de comprobación
-    printDcot() {
-        console.log(this.#Username, " ", this.#UserPassword);
-    }
-    ComproIfExist(x) {
-        alert("Helo world");
     }
 }
 
@@ -75,5 +68,5 @@ const user = new User;
 
 function Save() {//función para obtener el usuario del archivo HTML
     user.SaveUser();
-    user.printDcot();
 }
+

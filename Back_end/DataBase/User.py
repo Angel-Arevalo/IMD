@@ -2,8 +2,19 @@ import sqlite3 as sql
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
+def constructor(data):#función denominada así para lograr más encapsulamiento
+    Nombre = data.get('Nombre')
+    Contraseña = data.get('Contraseña')
+    Email = data.get('Correo')
+    Rol = data.get('Rol')
+    User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
+    if (Email != ""):#reviso si es un log in o un registro
+        return User.GuardarEnDataUsers()
+    else: 
+        return User.VerificarLogin()
+
 class InputUser:
-    def __init__(self, Usuario, Contraseña,Rol, Email):
+    def __init__(self, Usuario, Contraseña,Rol, Email):#constructor
         self.Usuario = str(Usuario)
         self.Contraseña = str(Contraseña)
         self.Rol = str(Rol)
