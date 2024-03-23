@@ -8,4 +8,6 @@ addEventListener('load', function() {
     }  
 })
 
-
+var miTexto = localStorage.getItem('Nombre');
+localStorage.setItem('Nombre','');
+document.getElementById("Nombre").innerHTML = miTexto;

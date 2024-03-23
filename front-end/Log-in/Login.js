@@ -54,8 +54,7 @@ class User {
         )
         .then(response => response.json())
         .then(data => {
-            alert(data.mensaje)
-            if(data.mensaje == "Usuario recibido"){
+            if(data.mensaje != "Usuario o Contraseña Incorrectos"){
                 localStorage.setItem('mensaje', '1');
                 window.location.href = '../Worlds/EscogerMundo.html';
             }else alert(data.mensaje)})
