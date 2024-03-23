@@ -73,6 +73,6 @@ class InputUser:
         
         desencriptado = self.Encriptar()
         for letra in self.Contraseña:
-            encriptado += chr(ord(letra) - self.Ceasar)
+            desencriptado += chr(ord(letra) - self.Ceasar)
             
         self.Contraseña = desencriptado
