@@ -2,8 +2,19 @@ import sqlite3 as sql
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
+def constructor(data):#función denominada así para lograr más encapsulamiento
+    Nombre = data.get('Nombre')
+    Contraseña = data.get('Contraseña')
+    Email = data.get('Correo')
+    Rol = data.get('Rol')
+    User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
+    if (Email != ""):#reviso si es un log in o un registro
+        return User.GuardarEnDataUsers()
+    else: 
+        return User.VerificarLogin()
+
 class InputUser:
-    def __init__(self, Usuario, Contraseña,Rol, Email):
+    def __init__(self, Usuario, Contraseña,Rol, Email):#constructor
         self.Usuario = str(Usuario)
         self.Contraseña = str(Contraseña)
         self.Rol = str(Rol)
@@ -11,14 +22,20 @@ class InputUser:
         self.Ceasar = 10
     
     def GuardarEnDataUsers(self):
-        self.Encriptar()#llamado a la encriptación
-        apuntador = sql.connect(Base_Direction)
-        try:
-            insert = 'INSERT INTO Usuarios (Nombre_Usuario, Contraseña, Rol, Email) VALUES (?, ?, ?, ?)'
-            apuntador.execute(insert, (self.Usuario, self.Contraseña, self.Rol, self.Email))
-            apuntador.commit()
-        finally:
-            apuntador.close()
+        Registro = self.VerificarRegistro()
+        if (Registro == "Usuario Correcto"):
+            self.Encriptar()#llamado a la encriptación
+            apuntador = sql.connect(Base_Direction)
+            try:
+                insert = 'INSERT INTO Usuarios (Nombre_Usuario, Contraseña, Rol, Email) VALUES (?, ?, ?, ?)'
+                apuntador.execute(insert, (self.Usuario, self.Contraseña, self.Rol, self.Email))
+                apuntador.commit()
+            finally:
+                apuntador.close()
+
+            return Registro
+        else:
+            return Registro
 
     def VerificarLogin(self):
         # Aqui supongo que la contraseña no esta encriptada
@@ -32,6 +49,17 @@ class InputUser:
             return "Usuario o Contraseña Incorrectos"
         else: 
             return "Usuario Registrado"
+
+    def VerificarRegistro(self):
+        #El mismo código que en VerificarLogin con algunas modificaciones
+        apuntador = sql.connect(Base_Direction)
+        name = self.Usuario
+        get_info = apuntador.execute(f"SELECT * FROM Usuarios WHERE Nombre_Usuario = '{name}'")
+        lista = get_info.fetchall()
+        if (len(lista) == 0):
+            return "Usuario Correcto"
+        else:
+            return "Usuario en uso"
 
     def Encriptar(self): 
         
@@ -48,8 +76,3 @@ class InputUser:
             encriptado += chr(ord(letra) - self.Ceasar)
             
         self.Contraseña = desencriptado
-        
-
-
-
-
