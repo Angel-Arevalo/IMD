@@ -7,33 +7,23 @@
     <title>Document</title>
 </head>
 <body>
-
+    
     <div class="Cart"></div> <!--Rectangulo del fondo--> 
 
-    <div class="Basic_Position" id="Welcome">
-        <p>Bienvenido. Ingrese un usuario y una contraseña de mínimo de 8 digitos. Para su usurario es preferible
-        que use sus nombres y apellidos.</p>
-    </div>
+     <!--Primer input, lee la información del nombre de usuario-->
+    <input type="text" id="InputUser" class="Basic_Position" placeholder="Ingrese el usuario">
+    <input type="text" id="InputPassword" class="Basic_Position" placeholder="Ingrese la constraseña"><!--Segundo input, lee la información de la contraseña de usuario-->
 
-    <div class="Basic_Position" id="Text">
-        <p>Bienvenido a IMD, si tiene una cuenta elija la opción "Ingresar con cuenta", si no, elija
-            la opción "Registrarse".</p>
-    </div>
-
-    <input type="text" id="InputUser" class="Basic_Position">
-    <input type="text" id="InputPassword" class="Basic_Position">
-    
-    <select class="Basic_Position" id="Selector">
-        <option value="Estudiante">Estudiante</option>
+    <!--<select class="Basic_Position" id="Selector">Selector de Rol
+        <option value="Estudiante"> Estudiante</option>
         <option value="Profesor">Profesor</option>
-    </select>
+    </select>-->
+    <button onclick="Save()" id="Save"> Guardar </button> <!--Boton para guardar-->
 
-    <button onclick="Save()" class="Basic_Position" id="Save">Guardar</button>
-
-    <button id="Registro" class="Basic_Position" onclick="abrirRegistro()">Registrarse</button>
-    <button id="Ingreso" class="Basic_Position">Ingresar con cuenta</button>
-
+    <!--creación de nuevo usuario-->
+    <h1 id="Information_register">No tiene una cuenta?</h1>
+    <button onclick="window.location.href = '../Log-in/Registro/Registro.html'" id="GoToRe">Registrese aquí</button>
+    
 </body>
-<script src="Login.js"></script>
+    <script src="Login.js"></script>
 </html>
-
