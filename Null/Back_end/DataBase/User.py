@@ -32,9 +32,28 @@ class InputUser:
             return "Usuario o Contraseña Incorrectos"
         else: 
             return "Usuario Registrado"
+        
+    def ObtenerUsuarios(self ):
+        # Aqui obtengo a los usuarios
+        pointer = sql.connect(Base_Direction)
+        cursor = pointer.cursor()
+        cursor.execute(f"SELECT Nombre_Usuario FROM usuarios")
+        get_info = cursor.fetchall()
+        allUsers = [row[0] for row in get_info]
+        cursor.close()
+        pointer.close()
+        return allUsers
+
+    def VerficarSignUp(self):
+        # Aqui vefifico si el usuario ya existe
+        name = self.Usuario
+        allUsers = self.ObtenerUsuarios()
+        if name in allUsers:
+            return "Este nombre de usuario ya esta en uso."
+        else:
+            return "Nombre de usuario valido."
 
     def Encriptar(self): 
-        
         encriptado = ''
         for letra in self.Contraseña:
             encriptado += chr(ord(letra) + self.Ceasar)
@@ -42,13 +61,11 @@ class InputUser:
         self.Contraseña = encriptado
 
     def Desencriptar(self): 
-        
         desencriptado = self.Encriptar()
         for letra in self.Contraseña:
-            encriptado += chr(ord(letra) - self.Ceasar)
+            desencriptado += chr(ord(letra) - self.Ceasar)
             
         self.Contraseña = desencriptado
-        
 
 
 
