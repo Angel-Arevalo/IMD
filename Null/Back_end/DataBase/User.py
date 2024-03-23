@@ -33,7 +33,7 @@ class InputUser:
         else: 
             return "Usuario Registrado"
         
-    def ObtenerUsuarios(self ):
+    def ObtenerUsuarios(self):
         # Aqui obtengo a los usuarios
         pointer = sql.connect(Base_Direction)
         cursor = pointer.cursor()
