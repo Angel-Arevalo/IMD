@@ -113,8 +113,8 @@ main {
         height: 7vh;
     }
     #Information_register {
-        top: 10%;
-        left: 5%;
+        top: 65%;
+        left: 6%;
         font-size: 80%;
         margin: 30px;
     }
