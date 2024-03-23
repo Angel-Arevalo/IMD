@@ -83,3 +83,78 @@ main {
     color: rgb(141, 99, 209);
     transform: scale(0.95);
 }
+/* Add this media query to adjust styles for smaller screens like phones */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 25px;
+    }
+    .Cart {
+        top: 20%;
+        right: 5%;
+        height: 30vh;
+        width: 90vw;
+    }
+    #InputUser{
+        top: 27%;
+        right: 15%;
+        width: 70vw;
+        height: 3vh;
+    }
+    #InputPassword {
+        top: 37%;
+        right: 15%;
+        width: 70vw;
+        height: 3vh;
+    }
+    #Save, #GoToRe {
+        top: 60%;
+        right: 10%;
+        width: 20vw;
+        height: 7vh;
+    }
+    #Information_register {
+        top: 10%;
+        left: 5%;
+        font-size: 80%;
+        margin: 30px;
+    }
+}
+
+/* Add this media query to adjust styles for larger screens like computers */
+@media only screen and (min-width: 769px) {
+    .Cart {
+        top: 35%;
+        right: 15%;
+        height: 35vh;
+        width: 29vw;
+    }
+    #InputUser {
+        top: 45%;
+        right: 27%;
+        width: 15vw;
+        height: 3vh;
+    }
+    #InputPassword {
+        top: 55%;
+        right: 27%;
+        width: 15vw;
+        height: 3vh;
+    }
+    #Save {
+        height: 4vh;
+        width: 5vw;
+        top: 51%;
+        right: 20%;
+    }
+    #Information_register {
+        color: #fff;
+        top: 35%;
+        left: 18%;
+    }
+    #GoToRe {
+        height: 6vh;
+        width: 8vw;
+        top: 45%;
+        left: 18%;
+    }
+}
