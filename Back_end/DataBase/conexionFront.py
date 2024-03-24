@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/ruta_del_backend": {"origins": "*"}})
 
 @app.route('/ruta_del_backend', methods=['POST'])
-def recibir_dato():
+def recibir_dato():#main del back end
     respuesta = constructor(data = request.json)
     #las próximas condiciones retornan algo dependiento de la verificación en User (log in)
     if (respuesta == "Usuario o Contraseña Incorrectos"):
@@ -18,6 +18,7 @@ def recibir_dato():
         return jsonify({"mensaje": "Usuario en uso"})
     if (respuesta == "Usuario Correcto"):
         return jsonify({"mensaje": "Usuario Correcto"})
+    #Respuesta por defecto
     print(respuesta)
     return jsonify({"mensaje": "hubo un error"})
 

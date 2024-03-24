@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mundos</title>
+    <link rel="stylesheet" href="EscogerMundo.css">
+    <link rel="icon" href="../LogoPágina.png" type="image/x-icon">
 </head>
 <body>
-    <div id="Nombre"></div>
-    
+    <!--Parte superior de la página-->
+    <div id="nav">
+        <div id="NombrePoo">IMD</div>
+        <div id="Nombre"></div>
+    </div>
+    <!--Elección del mundo 1-->
+    <div id="Tutorial" onclick="Pasar(), window.location.href = '../Worlds/Tutorial/Tutorial.html'"></div>
+    <p id="TutorialTEXT">Tutorial</p>
+
+    <!--Elección del mundo 2-->
+    <div id="Historia"></div>
+    <p id="HistoriaTEXT">Demostración de las civilizaciones antiguas</p>
+
+    <!--Elección del mundo 3-->
+    <div id="Pitagoras"></div>
+    <div id="PitagorasTEXT">Demostraciones de Pitágoras</div>
+
+    <!--Elección del mundo 4-->
+    <div id="Euclides"></div>
+    <div id="EuclidesTEXT">Demostración de Euclides</div>
 </body>
     <script src="EscogerMundo.js"></script>
 </html>
