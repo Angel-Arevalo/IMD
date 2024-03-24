@@ -8,6 +8,11 @@ addEventListener('load', function() {
     }  
 })
 
-var miTexto = localStorage.getItem('Nombre');
+var Username = localStorage.getItem('Nombre');
 localStorage.setItem('Nombre','');
-document.getElementById("Nombre").innerHTML = miTexto;
+document.getElementById("Nombre").innerHTML = Username;
+
+function Pasar() {
+    localStorage.setItem('mensaje','1');
+    localStorage.setItem('Nombre', Username);
+}

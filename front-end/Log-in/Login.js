@@ -56,6 +56,7 @@ class User {
         .then(data => {
             if(data.mensaje != "Usuario o Contraseña Incorrectos"){
                 localStorage.setItem('mensaje', '1');
+                localStorage.setItem('Nombre', this.#Username);
                 window.location.href = '../Worlds/EscogerMundo.html';
             }else alert(data.mensaje)})
         .catch(error => console.error('Error:', error));

@@ -33,9 +33,7 @@ class InputUser:
             finally:
                 apuntador.close()
 
-            return Registro
-        else:
-            return Registro
+        return Registro
 
     def VerificarLogin(self):
         # Aqui supongo que la contraseña no esta encriptada
