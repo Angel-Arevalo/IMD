@@ -16,6 +16,10 @@ function Trip(params) {
         window.location.href = "../Tutorial/Nivel2/Nivel2.html";
     }if (params == "N3") {
         window.location.href = "../Tutorial/Nivel3/Nivel3.html";
+    }if (params == "N4") {
+        window.location.href = "../Tutorial/Nivel4/Nivel4.html";
+    }if (params == "N5") {
+        window.location.href = "../Tutorial/Nivel5/Nivel5.html";
     }
 }
 function Principal() {
