@@ -38,7 +38,7 @@
     width: 100%;
     height: 35%;
     clip-path: polygon(0 100%, 100% 100%, 100% 0);
-    background: rgb(255, 234, 130);
+    background: rgb(229, 227, 227);
 }
 /*Interfaces del centro*/
 .CuadC {
@@ -53,22 +53,6 @@
     width: 100%;
     clip-path: polygon(0 100%, 50% 0, 100% 100%);
     background: rgb(250, 149, 149);
-}
-.TMenor {
-    position: absolute;
-    height: 100%;
-    width: 50%;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    background: rgb(179, 251, 161);
-}
-.TMenor2 {
-    transform: scaleX(-1);
-    right: 0;
-    position: absolute;
-    height: 100%;
-    width: 50%;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    background: rgb(179, 251, 161);
 }
 .TMayorinv {
     transform: scaleY(-1);
@@ -203,7 +187,6 @@
     position: absolute;
     width: 50%;
     height: 100%;
-    background: rgb(176, 174, 174);
     transform: scaleX(-1) scaleY(-1);
 }
 #MenorDerN {
@@ -215,7 +198,6 @@
     width: 50%;
     height: 100%;
     bottom: 0;
-    background: rgb(176, 174, 174);
     transform: scaleX(-1);
 }
 #MenorDerN2 {
@@ -230,7 +212,6 @@
     top: 89.9%;
 }
 #Pequeño, #Pequeño1 {
-    background: rgb(176, 174, 174);
     top: 0;
     position: absolute;
     height: 25%;

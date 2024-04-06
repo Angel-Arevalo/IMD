@@ -8,26 +8,28 @@ function empezar() {
         switch (Name) {
             case "Paralelepipedo":
                 break;
-            case "TranguloColaiv":
+            case "Triangulo":
                 CrearDiv(Name);
                 figura = document.getElementById('Mover');
                 listaObjetos = document.getElementsByClassName('Triangulo');
-                console.log(listaObjetos);
-                Mover = new MoverTriangulos(figura, listaObjetos);
+                Mover = new MoverTriangulos(figura, listaObjetos, listaObjetos.length);
                 break;
             default:
                 break;
         }
-    }
+        jugando = true;
+    }else alert("Solo puede mover una figura a la vez");
 }
 
 function CrearDiv(tipo) {
-    let div = document.createElement('div');
+    let divNew = document.createElement('div');
+    let divOld = document.getElementById(tipo);
+    //Creo al nuevo elemento
+    divNew = divOld.cloneNode(true);
+    divNew.id = 'Mover';
+    divNew.style.background = "rgb(233, 221, 221)";
 
-    div.classList.add(tipo);
-    div.id = 'Mover';
-    div.style.background = "rgb(186, 184, 184)";
-    div.style.top = 
+    divNew.removeAttribute('onclick');
 
-    document.body.appendChild(div);
+    document.body.appendChild(divNew);
 }

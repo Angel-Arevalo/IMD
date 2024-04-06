@@ -1,11 +1,14 @@
+let ListaValoresTriangulos = [false, false, false, false, false, false, false, false];
+
 class MoverTriangulos {
-    constructor(figura, referencia) {
+    constructor(figura, referencia, numeroObjetos) {
         this.figura = figura;
         this.FiguraMoviendose = false;
         this.InicioX = 0;
         this.InicioY = 0;
         this.Fijado = false;
         this.referencia = referencia;
+        //En transformaciones obtengo la matriz de giro de cada div
         this.Transformaciones = this.ObtenerMatrizDeRotacion(referencia);
         console.log(this.Transformaciones);
         console.log(this.referencia);
@@ -23,7 +26,6 @@ class MoverTriangulos {
             this.FiguraMoviendose = true;
             this.inicioX = evento.clientX - this.figura.getBoundingClientRect().left;
             this.inicioY = evento.clientY - this.figura.getBoundingClientRect().top;
-            console.log(window.getComputedStyle(this.figura).getPropertyValue('transform'));
             this.fijar();
         }
     }
@@ -37,44 +39,53 @@ class MoverTriangulos {
         }
     }
 
-    soltar() {
-        this.FiguraMoviendose = false;
+    soltar(borar) {
+        if (borar == 1) {
+            this.CrearDiv();
+        }else this.FiguraMoviendose = false;
     }
 
-    ObtenerRotacion(objeto, transform) {
+    CompararRotacion(objeto, transform) {
         let Rotacion = window.getComputedStyle(objeto).getPropertyValue('transform');
+        let Igual = true;
+        
         if (Rotacion == "none") {
-            Rotacion = ['1','0','0','1','0','0'];
+            Rotacion = ['1',' 0',' 0',' 1',' 0',' 0'];
         }else {
             Rotacion = Rotacion.substring(7, Rotacion.length - 1).split(',')
         }
-        
+
         for (var i = 0; i < Rotacion.length; i++) {
             if (Rotacion[i] != transform[i]) {
-                return false;
+                Igual = false;
             }
         }
-        return true;
+        return Igual;
     }
 
     fijar() {
         //Declaración de variables
         let AyudaFijar = this.figura.getBoundingClientRect();
         let Fijar, Rotacion;
-        
+
         for (let i = 0; i < this.referencia.length; i++) {
             Fijar = this.referencia[i].getBoundingClientRect();
-            Rotacion = this.ObtenerRotacion(this.figura, this.Transformaciones[i]);
+            Rotacion = this.CompararRotacion(this.figura, this.Transformaciones[i]);
+            
              // Condición
             if (AyudaFijar.left - 25 <= Fijar.left &&
                 AyudaFijar.right + 25 >= Fijar.right &&
                 AyudaFijar.top - 25 <= Fijar.top &&
-                AyudaFijar.bottom + 25 >= Fijar.bottom && Rotacion) {
+                AyudaFijar.bottom + 25 >= Fijar.bottom 
+                && Rotacion && !ListaValoresTriangulos[i]) {
                     this.figura.style.left = Fijar.left + 'px';
                     this.figura.style.top = Fijar.top + 'px'; 
+                    this.figura.style.width = Fijar.width + 'px';
+                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
-                    this.soltar();
-                    break;
+                    ListaValoresTriangulos[i] = true;
+                    this.soltar(1);
+                    i = this.referencia.length;
             }
         }  
     }
@@ -99,21 +110,6 @@ class MoverTriangulos {
         }
     }
 
-    ModificarTamaño() {
-        if (this.ModificarEscala == 0) {
-            this.figura.style.width = `4.2vw`;
-            this.figura.style.height = `6.15vw`;
-        }if (this.ModificarEscala == 1) {
-            this.figura.style.width = `4.1vw`;
-            this.figura.style.height = `2.476875vw`;
-        }if (this.ModificarEscala == 2) {
-            this.figura.style.width = `8.4vw`;
-            this.figura.style.height = `10.5vw`;
-        }
-        this.ModificarEscala += 1
-        this.ModificarEscala = this.ModificarEscala%3
-    }
-
     ModificarRotacion() {
         this.Grado += 180;
         this.figura.style.transform = `rotate(${this.Grado}deg)`;
@@ -124,10 +120,24 @@ class MoverTriangulos {
         for (var i = 0; i < ObjetoPorRevisar.length; i++) {
             let Ayuda = window.getComputedStyle(ObjetoPorRevisar[i]).getPropertyValue('transform');
             if (Ayuda == "none") {
-                Lista.push(['1','0','0','1','0','0'])
+                Lista.push(['1',' 0',' 0',' 1',' 0',' 0']);
             }else Lista.push(Ayuda.substring(7, Ayuda.length - 1).split(','));
         }
         return Lista;
+    }
+
+    CrearDiv() {
+        let Div = document.createElement('div');
+        let DivOriginal = document.getElementById('Mover');
+        Div = DivOriginal.cloneNode(true);
+        Div.id = ""; 
+        Div.style.background = "rgb(118, 118, 118)"
+        let body = document.body;
+        //borro el div que ya estaba
+        body.removeChild(DivOriginal);
+        //Añado el div
+        body.appendChild(Div); 
+        jugando = false;
     }
 }
 
