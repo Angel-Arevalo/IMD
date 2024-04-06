@@ -21,7 +21,7 @@ class Registro {
             this.#UserPassword = Pass;
             this.#Username = Name;
             this.#UserEmail = Addres;
-            this.#Rol = document.getElementById('Selector');
+            this.#Rol = document.getElementById('Selector').value;
             this.SendData();
         } else this.AlertUser(Name,Pass);
     }
