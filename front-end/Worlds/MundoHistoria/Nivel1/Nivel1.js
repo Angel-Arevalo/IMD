@@ -1,9 +1,11 @@
 //funciones para Cargar página
 var leer = localStorage.getItem('mensaje');
+let horaInicial
 
 addEventListener('load', function() {
     if (leer == "1") {
         localStorage.setItem('mensaje','0');
+        horaInicial = ObtenerHora();
     }else if(leer == "0") {
         window.location.href = '../../../Log-in/Login.html';
     }  
@@ -79,7 +81,7 @@ function empezar() {
         }
         
     }else alert("Solo puede mover una figura a la vez");
-
+    console.log(Paralelepipedo + Cuadrados + Triangulos + Casas + SemiTrig + TMayor);
 }
 
 function CrearDiv(tipo) {
@@ -101,11 +103,27 @@ function Regresar() {
 }
 
 function Verificar() {
-    if (Paralelepipedo + Cuadrados + Triangulos + Casas + SemiTrig + Cuadrados + TMayor == 30) {
-        localStorage.setItem('mensaje', '1');
-        window.location.href = '../MundoHistoria.html';
+    if (Paralelepipedo + Cuadrados + Triangulos + Casas + SemiTrig + TMayor == 30) {
+        localStorage.setItem('Calificacion', Calificar());
     }else alert("Aún hay figuras sin acomodar");
 }
-var fechaHoraInicio = new Date(0);
-let fechae = fechaHoraInicio.toString();
-console.log(fechae.split(' ')[4]);
+
+function ObtenerHora() {
+    var fechaHoraInicio = new Date();
+    let fecha = fechaHoraInicio.toString();
+    let horaInicio = fecha.split(' ')[4].split(':');
+
+    for (let i = 0; i < 3; i++) {
+         horaInicio[i] = (horaInicio[i])*(Math.pow(60, 2 - i));
+    }
+
+    return horaInicio[0] + horaInicio[1] + horaInicio[2];
+}
+
+function Calificar() {
+    let horaFinal = ObtenerHora();
+    //En este momento el tiempo usado está en segundos
+    let TiempoUsado = horaFinal - horaInicial;
+    TiempoUsado = (TiempoUsado - TiempoUsado%90)/90;
+    return 5 - TiempoUsado;
+}
