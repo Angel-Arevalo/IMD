@@ -1,0 +1,110 @@
+/*Cuadricula en la que están las L*/
+#Cuadricula {
+    width: 16vh;
+    height: 16vh;
+    position: absolute;
+    border: 0.1em solid black;
+    top: 40%;
+    left: 40%;
+}
+
+.L {
+    position: absolute;
+    width: 8vh;
+    height: 8vh;
+    clip-path: polygon(0 0, 50% 0, 50% 50%, 100% 50%, 100% 100%, 0 100%);
+    background: rgb(161, 161, 161);
+    box-sizing: border-box;
+}
+#PrimeraL, #SegundaL{
+    transform: rotate(90deg);
+}
+#SegundaL {
+    left: 8vh;
+    top: 0vh;
+}
+#TerceraL {
+    left: 4vh;
+    top: 4vh;
+}
+#CuartaL {
+    top: 8vh;
+    left: 0vh;
+}
+#QuintaL {
+    transform: rotate(270deg);
+    bottom: 0%;
+    right: 0vh;
+}
+#cuadrado {
+    position: absolute;
+    width: 4vh;
+    height: 4vh;
+    right: 0vh;
+    top: 4vh;
+    background: rgb(0, 0, 0);
+    transform: scaleX(-1); /* Reflejar horizontalmente */
+}
+
+#Lmov1 {
+    top: 10%;
+    left: 15%;
+    background: blue;
+}
+#Lmov2 {
+    top: 20%;
+    left: 15%;
+    background: blue;
+}
+#Lmov3 {
+    top: 30%;
+    left: 15%;
+    background: greenyellow;
+}
+#Lmov4 {
+    top: 40%;
+    left: 15%;
+    background: greenyellow;
+}
+#Lmov5 {
+    top: 50%;
+    left: 15%;
+    background: rgb(255, 7, 7);
+}
+/*Estilo de botones*/
+#BotonRotar {
+    top: 3%;
+    left: 18%;
+    height: 4vh;
+    width: 7vw;
+    position: absolute;
+    padding: 0.35rem 0.4rem;
+    background:#ffffff;
+    border-radius: 0.5em;
+    border: 0.1em solid black;
+}
+#BotonVerificar {
+    top: 3%;
+    left: 5%;
+    height: 4vh;
+    width: 7vw;
+    position: absolute;
+    padding: 0.35rem 0.4rem;
+    background:#ffffff;
+    border-radius: 0.5em;
+    border: 0.1em solid black;
+}
+#BotonVolver {
+    top: 3%;
+    left: 35%;
+    height: 4vh;
+    width: 7vw;
+    position: absolute;
+    padding: 0.35rem 0.4rem;
+    background:#ffffff;
+    border-radius: 0.5em;
+    border: 0.1em solid black;
+}
+#BotonVerificar:hover, #BotonRotar:hover,#BotonVolver:hover {
+    transform: scale(1.2);
+}

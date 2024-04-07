@@ -1,0 +1,126 @@
+/*Declaración de atributos basicos de body*/
+body {
+    background: linear-gradient(to right,#acb7be,#888fd8);
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/*Manipulación de objetos del nav*/
+#nav {
+    margin: 0;
+    width: 100%;
+    height: 10vh;
+    background: linear-gradient(to bottom, #69a1c7, #7e86dd);
+    color: white;
+    display: flex;
+    position: relative;
+}
+
+#Nombre {
+    position: absolute;
+    right: 5%;
+    top: 30%;
+    font-size: 1.5rem;
+}
+/*Animaciones de objetos del nav*/
+#NombrePoo {
+    position: absolute;
+    left: 3%;
+    top: 30%;
+    font-size: 2rem;
+}
+#NombrePoo:hover {
+    transform: scale(0.9);
+    color: rgb(187, 171, 212);
+}
+#Nombre:hover {
+    transform: scale(0.9);
+    color: rgb(187, 171, 212);
+}
+/*Fin de animaciones de objetos del nav*/
+/*Fin de manipulación de objetos del nav*/
+
+/*Inicio de creación de interacción con los mundos*/
+#Tutorial {
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+    background: #e9e9e9;
+    position: relative;
+    margin-top: 8%;
+    margin-left: 15%;
+}
+#TutorialTEXT {
+    color:white;
+    position: relative;
+    margin-left: 17%;
+}
+
+#Historia {
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+    background: #e9e9e9;
+    position: absolute;
+    margin-left: 31%;
+}
+#HistoriaTEXT {
+    color:white;
+    position: absolute;
+    top: 60%;
+    left: 27%;
+}
+
+#Pitagoras {
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+    background: #e9e9e9;
+    position: absolute;
+    top: 28%;
+    left: 45%;
+}
+#PitagorasTEXT {
+    color:white;
+    position: absolute;
+    top: 43%;
+    left: 43%;
+}
+
+#Euclides {
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+    background: #e9e9e9;
+    position: absolute;
+    top: 40%;
+    left: 61%;
+}
+#EuclidesTEXT {
+    color:white;
+    position: absolute;
+    top: 55%;
+    left: 60%;
+}
+/*Inicio de animaciones de la interacción con los mundos*/
+#Tutorial:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 40px rgb(161, 109, 245);
+    background: white;
+}
+#Historia:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 40px rgb(161, 109, 245);
+    background: white;
+}
+#Pitagoras:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 40px rgb(161, 109, 245);
+    background: white;
+}
+#Euclides:hover {
+    transform: scale(1.25);
+    box-shadow: 0 0 40px rgb(161, 109, 245);
+    background: white;
+}
+/*Fin de animaciones de la interacción con los mundos*/
+/*Fin de creación de interacción con los mundos*/
