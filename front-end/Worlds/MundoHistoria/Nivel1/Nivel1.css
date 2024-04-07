@@ -1,23 +1,40 @@
 /*Interfaces para crear objetos*/
-.Para1 {
-    margin-top: 70%;
+.Paralelepipedo {
+    background: beige;
     width: 25%;
     height: 25%;
     clip-path: polygon(0 100%, 100% 75%, 100% 0, 0 25%);
-    background: rgb(159, 159, 250);
 }
-.Para2 {
-    margin-top: 70%;
-    width: 25%;
-    height: 25%;
-    clip-path: polygon(0 0, 100% 25%, 100% 100%, 0 75%);
-    background: rgb(159, 159, 250);
+/*Modificaciones a elmentos Para1*/
+#PP {
+    background: rgb(194, 185, 185);
+    margin-top: 90%;
+    transform: scaleX(-1);
 }
+#PS {
+    background: rgb(225, 225, 221);
+    margin-top: 90%;
+}
+#Cn, #Ci, #Cn2, #Ci2 {
+    position: absolute;
+    width: 4.2272vw;
+    height: 9.9075vw;
+}
+#Cn, #Cn2 {
+    background: rgb(225, 225, 221)
+}#Ci, #Ci2 {
+    background: rgb(194, 185, 185);
+}
+#Ci, #Ci2 {
+    transform: scaleX(-1);
+    right: 0;
+}
+/*Fin*/
 .Semi-trig {
     margin-top: 58%;
     width: 100%;
     height: 28%;
-    background-color: rgb(252, 133, 133);
+    background: rgb(106, 106, 108);
     clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 75%);
 }
 /*Elementos de Semi-trig invertidos*/
@@ -32,13 +49,13 @@
 .Cuadrado {
     width: 100%;
     height: 30%;
-    background-color: rgb(190, 253, 253);
+    background-color: rgb(199, 202, 202);
 }
 .Triangulo {
     width: 100%;
     height: 35%;
     clip-path: polygon(0 100%, 100% 100%, 100% 0);
-    background: rgb(229, 227, 227);
+    background: rgb(232, 225, 225);
 }
 /*Interfaces del centro*/
 .CuadC {
@@ -54,33 +71,6 @@
     clip-path: polygon(0 100%, 50% 0, 100% 100%);
     background: rgb(250, 149, 149);
 }
-.TMayorinv {
-    transform: scaleY(-1);
-    position: absolute;
-    margin-top: 0;
-    height: 100%;
-    width: 100%;
-    clip-path: polygon(0 100%, 50% 0, 100% 100%);
-    background: rgb(250, 149, 149);
-}
-.TMenorinv {
-    transform: scaleY(-1);
-    position: absolute;
-    height: 100%;
-    width: 50%;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    background: rgb(179, 251, 161);
-}
-.TMenor2inv {
-    transform: scale(-1);
-    right: 0;
-    position: absolute;
-    height: 100%;
-    width: 50%;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    background: rgb(179, 251, 161);
-}
-
 /*Interfaces movibles*/
 .Para1Mov {
     position: absolute;
@@ -130,26 +120,6 @@
     transform: scale(-1);
 }
 /*Creación del centro*/
-#Ci, #Cn {
-    position: absolute;
-    background: rgb(245, 245, 191);
-    width: 4.2272vw;
-    height: 9.9075vw;
-}
-#Ci {
-    right: 0;
-    transform: scaleX(-1);
-}
-#Ci2, #Cn2 {
-    position: absolute;
-    background: beige;
-    width: 4.2272vw;
-    height: 9.9075vw;
-}
-#Ci2 {
-    right: 0;
-    transform: scaleX(-1);
-}
 #ContenedorCabeza {
     width: 8.4544vw;
     position: relative;
@@ -161,7 +131,7 @@
     top: 24.7%;
     width: 8.4vw;
     height: 7.3vw;
-    background: rgb(194, 194, 197);
+    background: rgb(146, 146, 148);
     clip-path: polygon(0 100%, 0 33%, 50.5% 0, 100% 33%, 100% 100%);
 }
 #Cola {
@@ -222,25 +192,13 @@
     right: 0;
     transform: scaleY(-1) scaleX(1);
 }
-#ContendorEjemplosNeutros {
-    width: 15vw;
-    height: 50vw;
-    position: absolute;
-    right: 15%;
-    top: 5%;
-    border: 0.1em solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 /*Clases de ejemplo*/
-.Para1Mov2 {
+.ParalelepipedoMov {
     top: 10%;
     right: 25%;
     position: absolute;
-    width: 3.2vw;
-    height: 7.5vw;
+    width: 5vw;
+    height: 8vw;
     clip-path: polygon(0 100%, 100% 75%, 100% 0, 0 25%);
     background: rgb(0, 0, 0);
 }
@@ -248,8 +206,8 @@
     top: 45%;
     right: 15%;
     position: absolute;
-    width: 8.4vw;
-    height: 10.5vw;
+    width: 9vw;
+    height: 10vw;
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
     background: rgb(0,0,0);
 }

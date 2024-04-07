@@ -8,12 +8,13 @@
     <link rel="icon" href="../../../LogoPágina.png">
 </head>
 <body>
+    
     <div id="Halcón">
         <div id="AlaIzquierda">
-            <div class="Para1" id="Help"></div><!--Paralelepipedo 1, 2-->
-            <div class="Para2"></div>
-            <div class="Para1"></div>
-            <div class="Para2"></div>
+            <div class="Paralelepipedo" id="PS"></div><!--Paralelepipedo 1, 2-->
+            <div class="Paralelepipedo" id="PP"></div><!--Paralelepipedo p-->
+            <div class="Paralelepipedo" id="PS"></div>
+            <div class="Paralelepipedo" id="PP"></div>
         </div>
         <div id="Cuerpo">
             <div id="Pi"> <!--Parte izquierda, centro, derecha-->
@@ -24,8 +25,8 @@
             </div>
             <div id="Pc">
                 <div id="ContenedorCabeza">
-                    <div class="Para1Mov" id="Cn"></div><!--Cabeza normal, invertida-->
-                    <div class="Para1Mov" id="Ci"></div>
+                    <div class="Paralelepipedo" id="Cn"></div><!--Cabeza normal, invertida-->
+                    <div class="Paralelepipedo" id="Ci"></div>
                 </div>
                 <div class="Casa"></div>
                 <div class="CuadC" id="Primero">
@@ -40,8 +41,8 @@
                 </div>
                 <div id="ContenedorPies">
                     <div class="Triangulo" id="Pequeño"></div>
-                    <div class="Para1Mov" id="Cn2"></div><!--Cabeza normal, invertida-->
-                    <div class="Para1Mov" id="Ci2"></div><!--Cabeza normal, invertida-->
+                    <div class="Paralelepipedo" id="Cn2"></div><!--Cabeza normal, invertida-->
+                    <div class="Paralelepipedo" id="Ci2"></div><!--Cabeza normal, invertida-->
                     <div class="Triangulo" id="Pequeño1"></div>
                 </div>
                 <div class="Casa" id="Cola"></div>
@@ -54,18 +55,19 @@
             </div>
         </div>
         <div id="AlaDerecha">
-            <div class="Para1"></div><!--Paralelepipedo 1, 2-->
-            <div class="Para2"></div>
-            <div class="Para1"></div>
-            <div class="Para2"></div>
+            <div class="Paralelepipedo" id="PS"></div><!--Paralelepipedo 1, 2-->
+            <div class="Paralelepipedo" id="PP"></div>
+            <div class="Paralelepipedo" id="PS"></div>
+            <div class="Paralelepipedo" id="PP"></div>
         </div>
     </div>
     
-    <div class="Para1Mov2" onclick="Name = 'Paralelepipedo';empezar()" id="Paralelepipedo"></div>
+    <div class="ParalelepipedoMov" onclick="Name = 'Paralelepipedo';empezar()" id="Paralelepipedo"></div>
     <div class="TranguloColaiv" onclick="Name = 'Triangulo';empezar()" id="Triangulo"></div>
     <div class="Casamv" onclick="Name = 'Casa';empezar()" id="Casa"></div>
      <div class="Cuadradomov" onclick="Name = 'Cuadrado';empezar()" id="Cuadrado"></div>
-    <div class="Semi-trigmov" onclick="Name = 'Semi-trig';empezar()" id="Semi-Trig"></div>
+    <div class="Semi-trigmov" onclick="Name = 'Semi-trig';empezar()" id="Semi-trig"></div>
+    <div class="Trianmov"></div>
     <button onclick="Mover.ModificarReflexion('x')">Reflejar con respecto a x</button>
     <button onclick="Mover.ModificarReflexion()">Reflejar con respecto a y</button>
     <button onclick="Mover.ModificarRotacion()">Rotar</button>

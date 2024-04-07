@@ -1,7 +1,11 @@
 let ListaValoresTriangulos = [false, false, false, false, false, false, false, false];
+let ListaValoresCasa = [false, false];
+let ListaSemiTrig = [false, false, false, false];
+let ListaCuad = [false, false];
+let ListaValoresParalelepidos = [false, false, false, false, false, false, false, false, false, false, false, false];
 
 class MoverTriangulos {
-    constructor(figura, referencia, numeroObjetos) {
+    constructor(figura, referencia) {
         this.figura = figura;
         this.FiguraMoviendose = false;
         this.InicioX = 0;
@@ -39,10 +43,8 @@ class MoverTriangulos {
         }
     }
 
-    soltar(borar) {
-        if (borar == 1) {
-            this.CrearDiv();
-        }else this.FiguraMoviendose = false;
+    soltar() {
+        this.FiguraMoviendose = false;
     }
 
     CompararRotacion(objeto, transform) {
@@ -84,7 +86,9 @@ class MoverTriangulos {
                     this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     ListaValoresTriangulos[i] = true;
-                    this.soltar(1);
+                    let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    this.soltar();
                     i = this.referencia.length;
             }
         }  
@@ -126,27 +130,191 @@ class MoverTriangulos {
         return Lista;
     }
 
-    CrearDiv() {
+    CrearDiv(background) {
         let Div = document.createElement('div');
         let DivOriginal = document.getElementById('Mover');
+        ;
         Div = DivOriginal.cloneNode(true);
         Div.id = ""; 
-        Div.style.background = "rgb(118, 118, 118)"
+        Div.style.background = `${ListaBackground(background)}`;
         let body = document.body;
         //borro el div que ya estaba
         body.removeChild(DivOriginal);
         //Añado el div
         body.appendChild(Div); 
         jugando = false;
+
+        function ListaBackground(background) {
+            let lista = [], ayuda, i = 0;
+            let recorte = background.substring(4, background.length - 1) + ',';
+
+            while (i < 3) {
+                ayuda = recorte.substring(0, recorte.indexOf(','));
+                recorte = recorte.substring(recorte.indexOf(',') + 2);
+                lista.push(parseFloat(ayuda) - 50)
+                i++;
+            }
+            return `rgb(${lista[0]}, ${lista[1]}, ${lista[2]})`;
+        }
     }
 }
 
-class MoverInrotables extends MoverTriangulos {
+class MoverCasas extends MoverTriangulos {
     constructor(figura, referencias) {
         super(figura, referencias)
     }
 
-    ModificarTamaño() {
-        alert("Esta figura no acepta cambios de tamaño");
+    fijar() {
+        //Declaración de variables
+        let AyudaFijar = this.figura.getBoundingClientRect();
+        let Fijar, Rotacion;
+
+        for (let i = 0; i < this.referencia.length; i++) {
+            Fijar = this.referencia[i].getBoundingClientRect();
+            Rotacion = this.CompararRotacion(this.figura, this.Transformaciones[i]);
+            
+             // Condición
+            if (AyudaFijar.left - 25 <= Fijar.left &&
+                AyudaFijar.right + 25 >= Fijar.right &&
+                AyudaFijar.top - 25 <= Fijar.top &&
+                AyudaFijar.bottom + 25 >= Fijar.bottom 
+                && Rotacion && !ListaValoresCasa[i]) {
+                    this.figura.style.left = Fijar.left + 'px';
+                    this.figura.style.top = Fijar.top + 'px'; 
+                    this.figura.style.width = Fijar.width + 'px';
+                    this.figura.style.height = Fijar.height + 'px';
+                    this.Fijado = true;
+                    ListaValoresCasa[i] = true;
+                    this.soltar();
+                    let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    i = this.referencia.length;
+            }
+        }  
+    }
+    ModificarRotacion() {
+        alert("Este objeto no se puede rotar");
+    }
+    ModificarReflexion(sentido) {
+        alert("Este objeto no se puede reflejar");
+    }
+}
+
+class MoverTrig extends MoverTriangulos {
+    constructor(figura, referencias) {
+        super(figura, referencias)
+    }
+
+    fijar() {
+        //Declaración de variables
+        let AyudaFijar = this.figura.getBoundingClientRect();
+        let Fijar, Rotacion;
+
+        for (let i = 0; i < this.referencia.length; i++) {
+            Fijar = this.referencia[i].getBoundingClientRect();
+            Rotacion = this.CompararRotacion(this.figura, this.Transformaciones[i]);
+            
+             // Condición
+            if (AyudaFijar.left - 25 <= Fijar.left &&
+                AyudaFijar.right + 25 >= Fijar.right &&
+                AyudaFijar.top - 25 <= Fijar.top &&
+                AyudaFijar.bottom + 25 >= Fijar.bottom 
+                && Rotacion && !ListaSemiTrig[i]) {
+                    this.figura.style.left = Fijar.left + 'px';
+                    this.figura.style.top = Fijar.top + 'px'; 
+                    this.figura.style.width = Fijar.width + 'px';
+                    this.figura.style.height = Fijar.height + 'px';
+                    this.Fijado = true;
+                    ListaSemiTrig[i] = true;
+                    this.soltar();
+                    let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    i = this.referencia.length;
+            }
+        }  
+    }
+}
+
+class MoverCuad extends MoverTriangulos {
+    constructor(figura, referencias) {
+        super(figura, referencias)
+    }
+
+    fijar() {
+        //Declaración de variables
+        let AyudaFijar = this.figura.getBoundingClientRect();
+        let Fijar, Rotacion;
+
+        for (let i = 0; i < this.referencia.length; i++) {
+            Fijar = this.referencia[i].getBoundingClientRect();
+            Rotacion = this.CompararRotacion(this.figura, this.Transformaciones[i]);
+            
+             // Condición
+            if (AyudaFijar.left - 25 <= Fijar.left &&
+                AyudaFijar.right + 25 >= Fijar.right &&
+                AyudaFijar.top - 25 <= Fijar.top &&
+                AyudaFijar.bottom + 25 >= Fijar.bottom 
+                && Rotacion && !ListaCuad[i]) {
+                    this.figura.style.left = Fijar.left + 'px';
+                    this.figura.style.top = Fijar.top + 'px'; 
+                    this.figura.style.width = Fijar.width + 'px';
+                    this.figura.style.height = Fijar.height + 'px';
+                    this.Fijado = true;
+                    ListaCuad[i] = true;
+                    this.soltar();
+                    let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    i = this.referencia.length;
+            }
+        }  
+    }
+}
+
+class MoverParalelepipedos extends MoverTriangulos {
+    constructor(figura, referencias) {
+        super(figura, referencias)
+    }
+
+    fijar() {
+        //Declaración de variables
+        let AyudaFijar = this.figura.getBoundingClientRect();
+        let Fijar, Rotacion;
+
+        for (let i = 0; i < this.referencia.length; i++) {
+            Fijar = this.referencia[i].getBoundingClientRect();
+            Rotacion = this.CompararRotacion(this.figura, this.Transformaciones[i]);
+            
+             // Condición
+            if (AyudaFijar.left - 25 <= Fijar.left &&
+                AyudaFijar.right + 25 >= Fijar.right &&
+                AyudaFijar.top - 25 <= Fijar.top &&
+                AyudaFijar.bottom + 25 >= Fijar.bottom 
+                && Rotacion && !ListaValoresParalelepidos[i]) {
+                    this.figura.style.left = Fijar.left + 'px';
+                    this.figura.style.top = Fijar.top + 'px'; 
+                    this.figura.style.width = Fijar.width + 'px';
+                    this.figura.style.height = Fijar.height + 'px';
+                    this.Fijado = true;
+                    ListaValoresParalelepidos[i] = true;
+                    this.soltar();
+                    let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    i = this.referencia.length;
+            }
+        }  
+    }
+    ModificarRotacion() {
+        alert("Este objeto no se puede rotar");
+    }
+    ModificarReflexion(para) {
+        if (para == 'x') {
+            if (!this.ModificadoRefX) {
+               this.figura.style.transform = "scaleX(-1)";
+               this.ModificadoRefX = true;
+           }else {
+               this.figura.style.transform = "scaleX(1)";
+               this.ModificadoRefX = false;
+           }
+       }else alert("Esteobjeto no se puede reflejar con respecto a y");
     }
 }
