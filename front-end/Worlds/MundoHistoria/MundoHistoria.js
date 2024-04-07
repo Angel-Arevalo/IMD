@@ -10,9 +10,18 @@ addEventListener('load', function() {
 })
 
 //Funciones para viajar entre archivos
-function Principal() {
+function Principal(direccion) {
     localStorage.setItem('mensaje','1');
-    window.location.href = '../EscogerMundo.html';
+    switch (direccion) {
+        case 'P':
+            window.location.href = '../EscogerMundo.html';
+            break;
+        case 'N1':
+            window.location.href = '../MundoHistoria/Nivel1/Nivel1.html';
+            break;
+        default:
+            break;
+    }
 }
 
 

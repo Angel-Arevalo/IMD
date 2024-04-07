@@ -67,10 +67,16 @@
     <div class="Casamv" onclick="Name = 'Casa';empezar()" id="Casa"></div>
      <div class="Cuadradomov" onclick="Name = 'Cuadrado';empezar()" id="Cuadrado"></div>
     <div class="Semi-trigmov" onclick="Name = 'Semi-trig';empezar()" id="Semi-trig"></div>
-    <div class="Trianmov"></div>
-    <button onclick="Mover.ModificarReflexion('x')">Reflejar con respecto a x</button>
-    <button onclick="Mover.ModificarReflexion()">Reflejar con respecto a y</button>
-    <button onclick="Mover.ModificarRotacion()">Rotar</button>
+    <div class="Trianmov" onclick="Name = 'TMayor'; empezar()" id="TMayor"></div>
+
+    <div id="ContenedorBotones">
+        <button class="Boton" onclick="Mover.ModificarReflexion('x')">Reflejar con respecto a x</button>
+        <button class="Boton" onclick="Mover.ModificarReflexion('y')">Reflejar con respecto a y</button>
+        <button class="Boton" onclick="Mover.ModificarRotacion()">Rotar</button>
+        <button class="Boton" onclick="Verificar()">Verificar</button>
+        <button class="Boton" onclick="Regresar()">Regresar al menú</button>
+    </div>
+    
 </body>
 <script src="../Clases.js"></script>
 <script src="Nivel1.js"></script>

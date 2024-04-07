@@ -3,6 +3,7 @@ let ListaValoresCasa = [false, false];
 let ListaSemiTrig = [false, false, false, false];
 let ListaCuad = [false, false];
 let ListaValoresParalelepidos = [false, false, false, false, false, false, false, false, false, false, false, false];
+let ListaValoresTMyor = [false, false];
 
 class MoverTriangulos {
     constructor(figura, referencia) {
@@ -14,8 +15,6 @@ class MoverTriangulos {
         this.referencia = referencia;
         //En transformaciones obtengo la matriz de giro de cada div
         this.Transformaciones = this.ObtenerMatrizDeRotacion(referencia);
-        console.log(this.Transformaciones);
-        console.log(this.referencia);
         this.ModificadoRefX = false;
         this.ModificadoRefY = false;
         this.ModificarEscala = 0;
@@ -87,7 +86,7 @@ class MoverTriangulos {
                     this.Fijado = true;
                     ListaValoresTriangulos[i] = true;
                     let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
-                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1), this.referencia[i]);
                     this.soltar();
                     i = this.referencia.length;
             }
@@ -130,18 +129,13 @@ class MoverTriangulos {
         return Lista;
     }
 
-    CrearDiv(background) {
-        let Div = document.createElement('div');
+    CrearDiv(background, referencia) {
+        let Div = referencia;
         let DivOriginal = document.getElementById('Mover');
-        ;
-        Div = DivOriginal.cloneNode(true);
-        Div.id = ""; 
         Div.style.background = `${ListaBackground(background)}`;
         let body = document.body;
         //borro el div que ya estaba
         body.removeChild(DivOriginal);
-        //Añado el div
-        body.appendChild(Div); 
         jugando = false;
 
         function ListaBackground(background) {
@@ -187,7 +181,7 @@ class MoverCasas extends MoverTriangulos {
                     ListaValoresCasa[i] = true;
                     this.soltar();
                     let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
-                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1), this.referencia[i]);
                     i = this.referencia.length;
             }
         }  
@@ -228,7 +222,7 @@ class MoverTrig extends MoverTriangulos {
                     ListaSemiTrig[i] = true;
                     this.soltar();
                     let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
-                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1), this.referencia[i]);
                     i = this.referencia.length;
             }
         }  
@@ -263,7 +257,7 @@ class MoverCuad extends MoverTriangulos {
                     ListaCuad[i] = true;
                     this.soltar();
                     let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
-                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1), this.referencia[i]);
                     i = this.referencia.length;
             }
         }  
@@ -298,7 +292,7 @@ class MoverParalelepipedos extends MoverTriangulos {
                     ListaValoresParalelepidos[i] = true;
                     this.soltar();
                     let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
-                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1));
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1), this.referencia[i]);
                     i = this.referencia.length;
             }
         }  
@@ -316,5 +310,51 @@ class MoverParalelepipedos extends MoverTriangulos {
                this.ModificadoRefX = false;
            }
        }else alert("Esteobjeto no se puede reflejar con respecto a y");
+    }
+}
+
+class MoverTMayor extends MoverTriangulos {
+    constructor(figura, referencia) {
+        super(figura,referencia);
+    }
+    fijar() {
+        //Declaración de variables
+        let AyudaFijar = this.figura.getBoundingClientRect();
+        let Fijar, Rotacion;
+
+        for (let i = 0; i < this.referencia.length; i++) {
+            Fijar = this.referencia[i].getBoundingClientRect();
+            Rotacion = this.CompararRotacion(this.figura, this.Transformaciones[i]);
+            
+             // Condición
+            if (AyudaFijar.left - 25 <= Fijar.left &&
+                AyudaFijar.right + 25 >= Fijar.right &&
+                AyudaFijar.top - 25 <= Fijar.top &&
+                AyudaFijar.bottom + 25 >= Fijar.bottom 
+                && Rotacion && !ListaValoresTMyor[i]) {
+                    this.figura.style.left = Fijar.left + 'px';
+                    this.figura.style.top = Fijar.top + 'px'; 
+                    this.figura.style.width = Fijar.width + 'px';
+                    this.figura.style.height = Fijar.height + 'px';
+                    this.Fijado = true;
+                    ListaValoresTMyor[i] = true;
+                    this.soltar();
+                    let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
+                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1), this.referencia[i]);
+                    i = this.referencia.length;
+            }
+        }  
+    }
+
+    ModificarReflexion(para) {
+        if (para != 'x') {
+            if (!this.ModificadoRefY) {
+               this.figura.style.transform = "scaleY(-1)";
+               this.ModificadoRefY = true;
+           }else {
+               this.figura.style.transform = "scaleY(1)";
+               this.ModificadoRefY = false;
+           }
+       }
     }
 }
