@@ -12,7 +12,16 @@ var Username = localStorage.getItem('Nombre');
 localStorage.setItem('Nombre','');
 document.getElementById("Nombre").innerHTML = Username;
 
-function Pasar() {
+function Pasar(mundo) {
     localStorage.setItem('mensaje','1');
     localStorage.setItem('Nombre', Username);
+    switch (mundo) {
+        case Tutorial:
+            window.location.href = '../Worlds/Tutorial/Tutorial.html';
+            break;
+        case Historia:
+            window.location.href = '../Worlds/MundoHistoria/MundoHistoria.html';
+            break
+    }
+    
 }
