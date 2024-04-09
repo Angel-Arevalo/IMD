@@ -1,12 +1,12 @@
 body {
     font-family: sans-serif;
-    height: 91vh;
+    font-size: 1vw;
 }
 /*Interfaces*/
 .NivelContenedor {
     position: relative;
     width: 40%;
-    height: 7%;
+    height: 7vw;
     margin-left: 28%;
     margin-top: 2%;
 }
@@ -23,8 +23,39 @@ body {
     position: absolute;
     right: 5%;
     top: 24%;
-    height: 2.8vh;
+    height: 1.8vw;
     width: 4.4vw;
+    padding: 0.35rem 0.4rem;
+    background:#ffffff;
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+    font-size: 1vw;
+}
+.BL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: 60%;
+    top: 24%;
+    height: 1.8vw;
+    width: 4.4vw;
+    padding: 0.35rem 0.4rem;
+    background:#ffffff;
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+}
+.BE {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    right: 30%;
+    top: 24%;
+    height: 1.8vw;
+    width: 5vw;
     padding: 0.35rem 0.4rem;
     background:#ffffff;
     border: 0.1em solid black;
@@ -57,6 +88,6 @@ body {
     top: 15%;
 }
 /*Hovers*/
-.B:hover {
+.B:hover, .BL:hover, .BE:hover {
     transform: scale(1.1);
 }

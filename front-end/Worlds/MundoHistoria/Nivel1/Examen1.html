@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen | Nivel 1</title>
+    <link rel="icon" href="../../../LogoPágina.png">
+    <link rel="stylesheet" href="Examen1.css">
+</head>
+<body>
+    <div id="Instrucciones">
+        <h2>Instrucciones y recomendaciones</h2>
+        - Cuando elije <em style="color:rgb(227, 130, 130);">Continuar al examen</em>, si sale sin complentar el examen, su nota es 0. <br>
+        - Es recomendable leer la leccion del nivel antes de entrar a responder el examen,<br>
+        si no lo ha hecho, elija la opcion <em style="color:rgb(227, 130, 130);">Regresar a la lección</em>. <br>
+        - Trate de no usar herramientas virtuales para hacer copia. <br>
+        <div id="BotonesElección">
+            <button class="Boton" id="BotIzq" onclick="Eleccion('Volver')">Regresar a la lección</button>
+            <button class="Boton" id="BotDer" onclick="Eleccion()">Continuar al examen</button>
+        </div>
+    </div>
+    
+    <div id="Mostrar">
+        <div id="Cuestionario">
+            <div class="Pregunta">
+                <!--0, 1, 2, 3, 4, 5, 6, 7, 8, 9; -&#8722; simbolo menos-->
+                <!--&#1632;, &#1633;, &#1634;, &#1635;, &#1636;, &#1637;, &#1638;, &#1639;, &#1640;, &#1641;-->
+                1)  ¿A qué número corresponde el siguiente dígito?, <em>&#1639;&#1640;&#1636;&#1635;&#1634;&#1638;</em> :<br><br>
+                <span class="quad"></span>a. <em>783427</em> <br>
+                <span class="quad"></span>b. <em>172839</em> <br>
+                <span class="quad"></span>c. <em>784326</em> <br>
+                <span class="quad"></span>d. <em>7843260</em> <br>
+            </div>
+            <div class="Pregunta">
+                2)  En números indo-arábicos, ¿cuánto es <em>(45 &times; 3)/15 - 17</em>?: <br><br>
+                <span class="quad"></span>a. <em>&#1635;&#1636;</em> <br>
+                <span class="quad"></span>b. <em>&#8722;&#1640;</em> <br>
+                <span class="quad"></span>c. <em>&#1632;</em> <br>
+                <span class="quad"></span>d. <em>&#1640;</em> <br>
+            </div>
+            <div class="Pregunta">
+                3) Según el video mostrado en la lección, ¿apróximandamento cuánto es &radic;13? <br><br>
+                <span class="quad"></span>a. <em>3.6060</em> <br>
+                <span class="quad"></span>b. <em>3.4642</em> <br>
+                <span class="quad"></span>c. <em>3.6055</em> <br>
+                <span class="quad"></span>d. <em>4</em> <br>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+<script src="Examen1.js"></script>
+</html>
