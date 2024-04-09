@@ -1,4 +1,5 @@
 import sqlite3 as sql
+from Encrypter import Encrypter
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
@@ -79,19 +80,7 @@ class InputUser:
             return "Usuario Correcto"
         else:
             return "Usuario en uso"
-
-    def Encriptar(self): 
         
-        encriptado = ''
-        for letra in self.Contraseña:
-            encriptado += chr(ord(letra) + self.Ceasar)
-            
-        self.Contraseña = encriptado
-
-    def Desencriptar(self): 
+    def Encriptar(self):
+        return Encrypter.RSA_Encrypt(self.Contraseña)
         
-        desencriptado = self.Encriptar()
-        for letra in self.Contraseña:
-            desencriptado += chr(ord(letra) - self.Ceasar)
-            
-        self.Contraseña = desencriptado
