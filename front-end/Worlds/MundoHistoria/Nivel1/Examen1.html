@@ -23,6 +23,7 @@
     </div>
     
     <div id="Mostrar">
+        <button class="Boton" id="Regresar" onclick="Eleccion('VolverMenu')">Volver al menú</button>
         <div id="ContenedorTitulo">
             <h1>Cuestionario</h1>
         </div>
@@ -84,8 +85,12 @@
             </div>
         </div>
 
-        <h1 style="margin-left: 25%; font-size: 100%;">Ingreso de respuestas</h1>
-        <input type="text" placeholder="Respuestas aqui" id="IngresoRespuestas">
+        <div id="ContenedorPies">
+            <h1 style="margin-left: 35%; font-size: 100%;">Ingreso de respuestas</h1>
+            <input type="text" placeholder="Respuestas aqui" id="IngresoRespuestas">
+            <button class="Boton" id="BotonTerminar" onclick="Revision()">Terminar Examen</button>
+        </div>
+        
 
         <div class="Ayudas">
             <div id="Info">
@@ -96,9 +101,12 @@
             <img src="../../../Imagenes/NúmerosHindus.jpg" id="Sn"><!--Sistema numerico-->
             <img src="../../../Imagenes/Sqrt.jpg" id="sqrt">
         </div>
+
+        
     </div>
     
 
 </body>
+<script src="../Calificacion.js"></script>
 <script src="Examen1.js"></script>
 </html>
