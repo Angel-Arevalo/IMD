@@ -12,19 +12,20 @@ addEventListener('load', function() {
 //Funciones para viajar entre archivos
 function Viajar(direccion) {
     localStorage.setItem('mensaje','1');
-    switch (direccion) {
-        case 'P':
-            window.location.href = '../EscogerMundo.html';
-            break;
-        case 'N1':
-            window.location.href = '../MundoHistoria/Nivel1/Nivel1.html';
-            break;
-        case 'L1':
-            window.location.href = '../MundoHistoria/Nivel1/Leccion1.html';
-        case 'E1':
-            window.location.href = '../MundoHistoria/Nivel1/Examen1.html';
-        default:
-            break;
+    if (direccion == 'P') {
+        window.location.href = "../EscogerMundo.html";
+    }else if (direccion == 'Leccion 1') {
+        window.location.href = "Nivel1/Leccion1.html";
+    }else if(direccion == 'Examen 1') {
+        window.location.href = "Nivel1/Examen1.html";
+    }else if(direccion == 'Nivel 1') {
+        window.location.href = "Nivel1/Nivel1.html";
+    }else if(direccion == 'Leccion 2') {
+        window.location.href = "Nivel2/Leccion2.html";
+    }else if(direccion == 'Examen 2') {
+        window.location.href = "Nivel2/Examen2.html";
+    }else if(direccion == 'Nivel 2') {
+        window.location.href = "Nivel2/Nivel2.html";
     }
 }
 

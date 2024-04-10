@@ -1,0 +1,44 @@
+body {
+    font-family: sans-serif;
+    font-size: 1vw;
+}
+
+/*Configuración de carta de texto*/
+#Texto {
+    width: 45vw;
+    height: auto;
+    border: 0.1em solid black;
+    border-radius: 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#Titulo {
+    height: 5vw;
+    width: 100%;
+    text-align: center;
+}
+#Imagenes {
+    display: flex;
+    justify-content: center;
+}
+.Parrafo {
+    width: 80%;
+    height: auto;
+}
+.ContenedorImagen {
+    width: 30%;
+    height: auto;
+}
+.Imagen {
+    width: 100%;
+    height: auto;
+}
+.Imagen:hover {
+    transform: scale(1.1);
+}
+.TextoPequeño {
+    font-size: 0.7vw;
+    text-align: center;
+}

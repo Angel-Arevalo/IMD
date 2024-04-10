@@ -1,6 +1,6 @@
 var leer = localStorage.getItem('mensaje');
 let horaInicial;
-
+/*
 addEventListener('load', function() {
     if (leer == "1") {
         localStorage.setItem('mensaje','0');
@@ -8,7 +8,7 @@ addEventListener('load', function() {
         window.location.href = '../../../Log-in/Login.html';
     }  
 })
-
+*/
 let Veces = [false, false];
 let Nota = 0;
 
