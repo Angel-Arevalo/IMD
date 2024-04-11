@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from User import constructor
+from Clases.User import constructor
 
 app = Flask(__name__)
-CORS(app, resources={r"/ruta_del_backend": {"origins": "*"}})
+CORS(app, resources={r"/Back_end/DataBase": {"origins": "*"}})
 
-@app.route('/ruta_del_backend', methods=['POST'])
+@app.route(r"/Back_end/DataBase", methods=['POST'])
 def recibir_dato():#main del back end
     respuesta = constructor(data = request.json)
     #las próximas condiciones retornan algo dependiento de la verificación en User (log in)
