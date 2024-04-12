@@ -25,7 +25,3 @@ class Encrypter:
             final_Password = final_Password+str(hex(final_Num))+' '
         return final_Password
     
-
-encriptador = Encrypter('hola')
-print(encriptador.From_String_To_RSA())
-print(encriptador.RSA_Encrypt())
