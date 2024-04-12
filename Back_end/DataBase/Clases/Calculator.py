@@ -71,5 +71,5 @@ class Calculator:
 
 
 
-calculadora1 = Calculator({'a': 33.0, 'c': 45.8, 'd': 0.0, 'f': 54.0})
-print(calculadora1.desviacionEstandard())
+''' calculadora1 = Calculator({'a': 33.0, 'c': 45.8, 'd': 0.0, 'f': 54.0})
+print(calculadora1.desviacionEstandard()) '''
