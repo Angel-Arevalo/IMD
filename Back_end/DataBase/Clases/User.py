@@ -125,21 +125,8 @@ class InputUser:
         else:
             return "Usuario en uso"
 
-    def Encriptar(self): 
-        
-        encriptado = ''
-        for letra in self.Contraseña:
-            encriptado += chr(ord(letra) + self.Ceasar)
-            
-        self.Contraseña = encriptado
-
-    def Desencriptar(self): 
-        
-        desencriptado = self.Encriptar()
-        for letra in self.Contraseña:
-            desencriptado += chr(ord(letra) - self.Ceasar)
-            
-        self.Contraseña = desencriptado
+    def Encriptar(self):
+        return Encrypter.RSA_Encrypt(self.Contraseña)
 
 Ariel = InputUser("Ariel_C", "12345678", "Estudiante", "noe@gmail.com")
 Ariel.GuardarEnDataUsers()
