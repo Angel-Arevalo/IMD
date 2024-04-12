@@ -41,6 +41,12 @@
     border-bottom: 0.1vw solid black;
     border-right: 0.1vw solid black;
 }
+.CuadradoPequeño1 {
+    width: 5vw;
+    height: 5vw;
+    border-bottom: 0.1vw solid black;
+    border-right: 0.1vw solid black;
+}
 .ContenedorCuadrtios {
     display: flex;
     flex-wrap: nowrap;
