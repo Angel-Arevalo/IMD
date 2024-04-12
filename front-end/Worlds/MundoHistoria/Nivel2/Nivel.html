@@ -9,7 +9,13 @@
 </head>
 <body>
     
-    <button onclick="Mover.ModificarRotacion()">Inclinar</button>
+    <div id="ContenedorBotones">
+        <button onclick="Mover.ModificarRotacion()" class="Boton">Inclinar</button>
+        <button class="Boton" onclick="Viajar('Evaluación')">Ir al examen</button>
+        <button class="Boton" onclick="Viajar('Menu')">Ir al menú</button>
+        <button class="Boton" onclick="Revisar()">Revisar</button>
+    </div>
+    
 
         <div id="ContendorFila">
             <div id="Cateto2">
@@ -99,6 +105,7 @@
         </div>
     
 </body>
+<script src="../LogicaLecciones.js"></script>
 <script src="Clases.js"></script>
 <script src="Nivel.js"></script>
 </html>

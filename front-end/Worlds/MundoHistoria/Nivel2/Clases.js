@@ -48,15 +48,11 @@ class MoverCuadrados {
                 AyudaFijar.top - 25 <= Fijar.top &&
                 AyudaFijar.bottom + 25 >= Fijar.bottom 
                 && this.Rotacion && !posicionesCuadrados[i]) {
-                    this.figura.style.left = Fijar.left + 'px';
-                    this.figura.style.top = Fijar.top + 'px'; 
-                    this.figura.style.width = Fijar.width + 'px';
-                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     posicionesCuadrados[i] = true;
-                    let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
-                    this.CrearDiv(background.substring(0, background.indexOf(')') + 1), this.referencia[i]);
+                    this.CrearDiv(this.referencia[i]);
                     this.soltar();
+                    posicionados += 1;
                     i = this.referencia.length;
             }
         }  
@@ -67,26 +63,13 @@ class MoverCuadrados {
         this.Rotacion = true
     }
 
-    CrearDiv(background, referencia) {
+    CrearDiv( referencia) {
         let Div = referencia;
         let DivOriginal = document.getElementById('Mover');
-        Div.style.background = `${ListaBackground(background)}`;
+        Div.style.background = `rgb(130, 87, 204)`;
         let body = document.body;
         //borro el div que ya estaba
         body.removeChild(DivOriginal);
         jugando = false;
-
-        function ListaBackground(background) {
-            let lista = [], ayuda, i = 0;
-            let recorte = background.substring(4, background.length - 1) + ',';
-
-            while (i < 3) {
-                ayuda = recorte.substring(0, recorte.indexOf(','));
-                recorte = recorte.substring(recorte.indexOf(',') + 2);
-                lista.push(parseFloat(ayuda) - 50)
-                i++;
-            }
-            return `rgb(${lista[0]}, ${lista[1]}, ${lista[2]})`;
-        }
     }
 }
