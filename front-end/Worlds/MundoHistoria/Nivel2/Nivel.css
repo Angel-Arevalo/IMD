@@ -1,31 +1,68 @@
 #Triangulo {
-    position: absolute;
-    left: 35%;
-    top: 25%;
-    width: 15.3vw;
+    width: 15vw;
     height: 20vw;
     clip-path: polygon(0 100%, 100% 100%, 0 0);
-    background: blue;
+    background: rgb(245, 170, 78);
+}
+#hipotenusa {
+    position: absolute;
+    top: -50%;
+    left: 63.5%;
+    width: 25vw;
+    height: 25vw;
+    display: flex;
+    flex-wrap: wrap;
+    transform: rotate(53.1301deg);
+}
+#hipotenusa > div {
+    background: rgb(130, 87, 204);
 }
 #Cateto1 {
-    position: absolute;
-    top: 59%;
-    left: 35%;
-    width: 15.3vw;
+    width: 15vw;
     height: 15vw;
     display: flex;
     flex-wrap: wrap;
 }
+#Cateto1 > div {
+    background: rgb(83, 83, 189);
+}
 #Cateto2 {
-    width: 20.3vw;
+    width: 20vw;
     height: 20vw;
     display: flex;
     flex-wrap: wrap;
 }
+#Cateto2 > div {
+    background: rgb(211, 113, 113);
+}
 .CuadradoPequeño {
     width: 5vw;
     height: 5vw;
-    background: red;
     border-bottom: 0.1vw solid black;
     border-right: 0.1vw solid black;
+}
+.ContenedorCuadrtios {
+    display: flex;
+    flex-wrap: nowrap;
+}
+#ContendorFila {
+    position: absolute;
+    left: 25%;
+    top: 45%;
+    width: 40vw;
+    height: 20vw;
+    display: flex;
+    flex-wrap: nowrap;
+}
+#ContendorFila > div {
+    margin: 0.1vw;
+}
+#ContenedorColumna > div {
+    margin: 0.1vh;
+}
+#ContenedorColumna {
+    width: 15.3vw;
+    height: 35.6vw;
+    display: flex;
+    flex-direction: column;
 }
