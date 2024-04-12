@@ -16,7 +16,7 @@ def Randomizer():
             x.append(r)
             pop = function(r, pop)
         r += 0.0001
-        if len(x) > 10000:
+        if len(x) > 5000:
             break
     
     return choice(x)*1000000//10
