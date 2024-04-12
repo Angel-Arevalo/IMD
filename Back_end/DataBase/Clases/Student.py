@@ -16,7 +16,7 @@ class Student(InputUser):
         b = b.fetchone()
         get_info = apuntador.execute(f"SELECT * FROM 'Aula_{codigo}' WHERE Nombre_Estudiante = '{self.Usuario}'")
         lista = get_info.fetchall()
-        get_info = "Usuario Correcto" if (len(lista) == 0) else "Usuario en eso"
+        get_info = "Usuario Correcto" if (len(lista) == 0) else "Usuario en uso"
         if (b != None and get_info == "Usuario Correcto"):
             a = apuntador.execute(f"SELECT MAX(Id_E) FROM 'Aula_{codigo}'")
             a = a.fetchone()[0]
@@ -42,7 +42,7 @@ class Student(InputUser):
             sql_cmd = f'''
                         INSERT INTO 'Mundo{i}_{codigo}'
                         (Id_E, Nombre_Estudiante, '{i}.Nivel_1', '{i}.Nivel_2', '{i}.Nivel_3', '{i}.Nivel_4', '{i}.Nivel_5')
-                        VALUES ({num}, '{nombre}', 0, 0, 0, 0, 0)
+                        VALUES ({num}, '{nombre}', -1, -1, -1, -1, -1)
                     '''
             apuntador.execute(sql_cmd)
         apuntador.commit()

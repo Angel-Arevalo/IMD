@@ -22,30 +22,6 @@ class InputUser:
         self.Rol = 1 if(str(Rol) == "Estudiante") else 2
         self.Email = str(Email)
         self.Ceasar = 10
-
-        @property
-        def Usuario(self):
-            return self.Usuario
-        
-        @property
-        def Contraseña(self):
-            return self.Contraseña
-        
-        @Contraseña.setter
-        def Contraseña(self, Contraseña):
-            self.Contraseña = Contraseña
-
-        @property
-        def Rol(self):
-            return self.Rol
-        
-        @property
-        def Email(self):
-            return self.Email
-        
-        @property
-        def Ceasar():
-            return "Hola"
         
     def __TablaRoles__():
         apuntador = sql.connect(Base_Direction)
@@ -141,5 +117,4 @@ class InputUser:
             
         self.Contraseña = desencriptado
 
-Ariel = InputUser("Ariel_C", "12345678", "Estudiante", "noe@gmail.com")
-Ariel.GuardarEnDataUsers()
+

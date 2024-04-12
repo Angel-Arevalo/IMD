@@ -61,7 +61,7 @@ class Teacher(InputUser):
         else:
             self.CrearAulaVirtual()
 
-    def NotasEstudiante(codigo, estudiante= "Aula", mundo= "Todos"): #Devuelve una lista de tuplas [(Estudiante_1), (Estudiante_2),...,(Estudiante_n)]
+    def NotasEstudiante(codigo, estudiante = "Aula", mundo= "Todos"): #Devuelve una lista de tuplas [(Estudiante_1), (Estudiante_2),...,(Estudiante_n)]
         apuntador = sql.connect(Base_Direction)
         if (estudiante == "Aula" and mundo == "Todos"):
             sql_cmd = f'''
@@ -97,7 +97,6 @@ class Teacher(InputUser):
                         FROM 'Mundo{mundo}_{codigo}' AS M1 
                         WHERE M1.Nombre_Estudiante = '{estudiante}'
                     '''
-            print("4")
             resultado = apuntador.execute(sql_cmd)
             resultado = resultado.fetchall()
         apuntador.commit()
