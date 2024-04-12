@@ -129,5 +129,3 @@ class InputUser:
     def Encriptar(self):
         return Encrypter.RSA_Encrypt(self.Contraseña)
 
-Ariel = InputUser("Ariel_C", "12345678", "Estudiante", "noe@gmail.com")
-Ariel.GuardarEnDataUsers()
