@@ -1,6 +1,6 @@
 var leer = localStorage.getItem('mensaje');
 let horaInicial;
-/*
+
 addEventListener('load', function() {
     if (leer == "1") {
         localStorage.setItem('mensaje','0');
@@ -8,14 +8,14 @@ addEventListener('load', function() {
         window.location.href = '../../../Log-in/Login.html';
     }  
 })
-*/
+
 let Veces = [false, false];
 let Nota = 0;
 
 function Eleccion(ele) {
     if (ele == "Volver") {
         localStorage.setItem('mensaje', '1');
-        window.location.href = "Leccion1.html";
+        window.location.href = "Leccion.html";
     }else if (ele == "VolverMenu"){
         localStorage.setItem('mensaje', '1');
         window.location.href = "../MundoHistoria.html";

@@ -15,17 +15,17 @@ function Viajar(direccion) {
     if (direccion == 'P') {
         window.location.href = "../EscogerMundo.html";
     }else if (direccion == 'Leccion 1') {
-        window.location.href = "Nivel1/Leccion1.html";
+        window.location.href = "Nivel1/Leccion.html";
     }else if(direccion == 'Examen 1') {
-        window.location.href = "Nivel1/Examen1.html";
+        window.location.href = "Nivel1/Examen.html";
     }else if(direccion == 'Nivel 1') {
-        window.location.href = "Nivel1/Nivel1.html";
+        window.location.href = "Nivel1/Nivel.html";
     }else if(direccion == 'Leccion 2') {
-        window.location.href = "Nivel2/Leccion2.html";
+        window.location.href = "Nivel2/Leccion.html";
     }else if(direccion == 'Examen 2') {
-        window.location.href = "Nivel2/Examen2.html";
+        window.location.href = "Nivel2/Examen.html";
     }else if(direccion == 'Nivel 2') {
-        window.location.href = "Nivel2/Nivel2.html";
+        window.location.href = "Nivel2/Nivel.html";
     }
 }
 
