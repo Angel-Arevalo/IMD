@@ -90,7 +90,7 @@ class InputUser:
     def GuardarEnDataUsers(self):
         Registro = self.VerificarRegistro()
         if (Registro == "Usuario Correcto"):
-            self.Encriptar() #llamado a la encriptación
+            self.RSA_Encrypt() #llamado a la encriptación
             apuntador = sql.connect(Base_Direction)
             try:
                 b = apuntador.execute("SELECT MAX(Id) FROM Usuarios_Registrados")
@@ -105,7 +105,7 @@ class InputUser:
 
     def VerificarLogin(self):
         # Aqui supongo que la contraseña no esta encriptada
-        self.Encriptar()
+        self.RSA_Encrypt()
         apuntador = sql.connect(Base_Direction)
         name = self.Usuario 
         password = self.Contraseña
