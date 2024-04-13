@@ -26,6 +26,8 @@ function Viajar(direccion) {
         window.location.href = "Nivel2/Examen.html";
     }else if(direccion == 'Nivel 2') {
         window.location.href = "Nivel2/Nivel.html";
+    }else if(direccion == 'Leccion 3') {
+        window.location.href = "Nivel3/Leccion.html";
     }
 }
 

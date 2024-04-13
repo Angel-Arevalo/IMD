@@ -137,22 +137,6 @@ body {
 }
 
 /*Imagenes*/
-#Sn {
-    top: 50%;
-    display: none;
-    position: absolute;
-    width: 50%;
-    height: auto;
-    left: 0;
-}
-#sqrt {
-    top: 50%;
-    display: none;
-    position: absolute;
-    width: 50%;
-    height: auto;
-    right: 0;
-}
 #BotonTerminar {
     position: absolute;
     bottom: 0;
@@ -169,4 +153,36 @@ body {
     position: absolute;
     top: -3%;
     left: -25%;
+}
+#ContendorTexto1 {
+    position: absolute;
+    left: 0;
+    bottom: 35%;
+    width: 45%;
+    height: auto;
+    display: none;
+}
+#ContendorTexto2 {
+    right: 0;
+    position: absolute;
+    bottom: 35%;
+    width: 45%;
+    height: auto;
+    display: none;
+}
+#Sn {
+    top: 50%;
+    display: none;
+    position: absolute;
+    width: 50%;
+    height: auto;
+    left: 0;
+}
+#sqrt {
+    top: 50%;
+    display: none;
+    position: absolute;
+    width: 50%;
+    height: auto;
+    right: 0;
 }
