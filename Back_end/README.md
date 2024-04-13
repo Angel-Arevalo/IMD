@@ -22,3 +22,5 @@ Ariel Cardenas:
 Angel porfa revisa como va a ser el tratamiento de datos, al crear la funcion que revisa el login supongo que la contraseña que recibo no esta encriptada, entonces la encripto y la comparo con la contraseña encriptada en la base de datos
 
 #Si hay un error que dice tabla cerrada, verifiquen que no se haya generado una tabla en la carpeta, si es asi eliminarla manualmente desde el file explorer, en otro caso, conectarse a la base de datos, eliminar tabla y cerrar base de datos. Asi el problema se deberia solucionar.
+
+#Falta crear archivo administrador  
