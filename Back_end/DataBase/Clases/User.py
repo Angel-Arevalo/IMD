@@ -22,7 +22,9 @@ class InputUser:
         self.Contraseña = str(Contraseña)
         self.Rol = 1 if(str(Rol) == "Estudiante") else 2
         self.Email = str(Email)
-        self.Ceasar = 10
+        self.modulus = 2491
+        self.publicExponent = 37 
+        self.privateExponent = 937
 
         @property
         def Usuario(self):
@@ -126,6 +128,16 @@ class InputUser:
         else:
             return "Usuario en uso"
 
-    def Encriptar(self):
-        return Encrypter.RSA_Encrypt(self.Contraseña)
+    def RSA_Encrypt(self): 
+
+        listOfNum=[]
+        for letter in self.Contraseña: 
+            letter = int.from_bytes(letter.encode(), 'big')
+            listOfNum.append(letter)
+
+        final_Password = ''
+        for Nums in listOfNum: 
+            final_Num = (Nums**self.publicExponent) % self.modulus
+            final_Password = final_Password+str(hex(final_Num))+' '
+        return final_Password
 
