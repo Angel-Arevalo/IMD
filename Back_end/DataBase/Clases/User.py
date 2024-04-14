@@ -1,5 +1,7 @@
 import sqlite3 as sql
-from Encrypter import Encrypter
+from email.message import EmailMessage
+import ssl 
+import smtplib
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
@@ -8,19 +10,21 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     Contraseña = data.get('Contraseña')
     Email = data.get('Correo')
     Rol = data.get('Rol')
-    User = InputUser(Nombre, Contraseña, Rol, Email) #Creación del objeto
+    User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
     if (Email != "") :#reviso si es un log in o un registro
         return User.GuardarEnDataUsers()
     else: 
         return User.VerificarLogin()
 
 class InputUser:
-    def __init__(self, Usuario, Contraseña,Rol, Email):#constructor
+    def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):#constructor
         self.Usuario = str(Usuario)
         self.Contraseña = str(Contraseña)
-        self.Rol = str(Rol)
+        self.Rol = 1 if(str(Rol) == "Estudiante") else 2
         self.Email = str(Email)
-        self.Ceasar = 10
+        self.modulus = 2491
+        self.publicExponent = 37 
+        self.privateExponent = 937
 
         @property
         def Usuario(self):
@@ -41,29 +45,68 @@ class InputUser:
         @property
         def Email(self):
             return self.Email
+        
+        
+    def __TablaRoles__():
+        apuntador = sql.connect(Base_Direction)
+        sql_cmd = '''
+                    CREATE TABLE IF NOT EXISTS 'Roles' (
+                        'Id_Rol' INT PRIMARY KEY,
+                        'Rol' TEXT NOT NULL UNIQUE,
+                        CHECK(Rol IN("Estudiante", "Profesor")),
+                        FOREIGN KEY(Id_Rol) REFERENCES Usuarios_Registrados(Rol)
+                        )
+                '''
+        apuntador.execute(sql_cmd) 
+        a = apuntador.execute('''SELECT Id_Rol=1 FROM Roles''')
+        if (a.fetchone() == None):
+            apuntador.execute('''INSERT INTO Roles (Id_Rol, Rol) VALUES (1, 'Estudiante')''')
+            apuntador.execute('''INSERT INTO Roles (Id_Rol, Rol) VALUES (2, 'Profesor')''')
+        apuntador.commit()
+        apuntador.close()
+        
+    def __CrearTabla_UsuariosR__():
+        apuntador = sql.connect(Base_Direction)
+        sql_cmd = '''
+                    CREATE TABLE IF NOT EXISTS 'Usuarios_Registrados' (
+                        'Id' INT AUTO_INCREMENT,
+                        'Nombre_Usuario' TEXT PRIMARY KEY NOT NULL,
+                        'Contraseña' TEXT NOT NULL,
+                        'Rol' INT NOT NULL,
+                        'Email' TEXT NOT NULL,
+                        CHECK(Rol IN(1,2))
+                        )
+                '''
+        apuntador.execute(sql_cmd)
+        apuntador.commit()
+        apuntador.close()
 
+    __CrearTabla_UsuariosR__()
+    __TablaRoles__()
 
     def GuardarEnDataUsers(self):
         Registro = self.VerificarRegistro()
         if (Registro == "Usuario Correcto"):
-            self.Encriptar() #llamado a la encriptación
+            self.RSA_Encrypt() #llamado a la encriptación
             apuntador = sql.connect(Base_Direction)
             try:
-                insert = 'INSERT INTO Usuarios (Nombre_Usuario, Contraseña, Rol, Email) VALUES (?, ?, ?, ?)'
-                apuntador.execute(insert, (self.Usuario, self.Contraseña, self.Rol, self.Email))
+                b = apuntador.execute("SELECT MAX(Id) FROM Usuarios_Registrados")
+                b = b.fetchone()[0]
+                num = int(b) + 1 if (b is not None) else 1
+                insert = 'INSERT INTO Usuarios_Registrados (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES (?, ?, ?, ?, ?)'
+                apuntador.execute(insert, (num, self.Usuario, self.Contraseña, self.Rol, self.Email))
                 apuntador.commit()
             finally:
                 apuntador.close()
-
         return Registro
 
     def VerificarLogin(self):
         # Aqui supongo que la contraseña no esta encriptada
-        self.Encriptar()
+        self.RSA_Encrypt()
         apuntador = sql.connect(Base_Direction)
         name = self.Usuario 
         password = self.Contraseña
-        get_info = apuntador.execute(f"SELECT * FROM Usuarios WHERE Contraseña = '{password}' AND Nombre_Usuario = '{name}'")
+        get_info = apuntador.execute(f"SELECT * FROM Usuarios_Registrados WHERE Contraseña = '{password}' AND Nombre_Usuario = '{name}'")
         store_info = get_info.fetchall()
         if (store_info == []): 
             return "Usuario o Contraseña Incorrectos"
@@ -74,13 +117,63 @@ class InputUser:
         #El mismo código que en VerificarLogin con algunas modificaciones
         apuntador = sql.connect(Base_Direction)
         name = self.Usuario
-        get_info = apuntador.execute(f"SELECT * FROM Usuarios WHERE Nombre_Usuario = '{name}'")
+        get_info = apuntador.execute(f"SELECT * FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
         lista = get_info.fetchall()
         if (len(lista) == 0):
             return "Usuario Correcto"
         else:
             return "Usuario en uso"
+
+    def RSA_Encrypt(self): 
+
+        listOfNum=[]
+        for letter in self.Contraseña: 
+            letter = int.from_bytes(letter.encode(), 'big')
+            listOfNum.append(letter)
+
+        final_Password = ''
+        for Nums in listOfNum: 
+            final_Num = (Nums**self.publicExponent) % self.modulus
+            final_Password = final_Password+str(hex(final_Num))+' '
+        return final_Password
+    
+    def RSA_Decrypt(self): 
         
-    def Encriptar(self):
-        return Encrypter.RSA_Encrypt(self.Contraseña)
+        name = self.Usuario
+        apuntador = sql.connect(Base_Direction)
+        encrypted_nums = apuntador.execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+
+        decrypted_message = ''
+        for encrypted_num_str in encrypted_nums:
+            encrypted_num = int(encrypted_num_str, 16)
+            decrypted_num = (encrypted_num ** self.privateExponent) % self.modulus
+            decrypted_message += chr(decrypted_num)
+
+        return decrypted_message
+
+    def RecuperarContraseña(self):
+
+        name = self.Usuario
+        apuntador = sql.connect(Base_Direction)
+
+        mail_sender = 'interactivemathematicaldemons@gmail.com'
+        password = 'jvjn shlv nzdf qpiy'
+        mail_receiver = apuntador.execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+
+        subject = 'RECUPERACION DE LA CONTRASEÑA'
+        body = f'''
+        Tu contraseña de Interactive Mathematical demonstration es: {self.RSA_Decrypt}
+        '''
+
+        em = EmailMessage()
+        em['From'] = mail_sender
+        em['To'] = mail_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+
+        context = ssl.create_default_context()
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
+            smtp.login(mail_sender, password)
+            smtp.sendmail(mail_sender, mail_receiver, em.as_string())
         
