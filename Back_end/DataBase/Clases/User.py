@@ -1,4 +1,7 @@
 import sqlite3 as sql
+from email.message import EmailMessage
+import ssl 
+import smtplib
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
@@ -12,8 +15,6 @@ def constructor(data): #función denominada así para lograr más encapsulamient
         return User.GuardarEnDataUsers()
     else: 
         return User.VerificarLogin()
-
-
 
 class InputUser:
     def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):#constructor
@@ -45,9 +46,6 @@ class InputUser:
         def Email(self):
             return self.Email
         
-        @property
-        def Ceasar():
-            return "Hola"
         
     def __TablaRoles__():
         apuntador = sql.connect(Base_Direction)
@@ -83,7 +81,6 @@ class InputUser:
         apuntador.commit()
         apuntador.close()
 
-    
     __CrearTabla_UsuariosR__()
     __TablaRoles__()
 
@@ -139,4 +136,44 @@ class InputUser:
             final_Num = (Nums**self.publicExponent) % self.modulus
             final_Password = final_Password+str(hex(final_Num))+' '
         return final_Password
+    
+    def RSA_Decrypt(self): 
+        
+        name = self.Usuario
+        apuntador = sql.connect(Base_Direction)
+        encrypted_nums = apuntador.execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+
+        decrypted_message = ''
+        for encrypted_num_str in encrypted_nums:
+            encrypted_num = int(encrypted_num_str, 16)
+            decrypted_num = (encrypted_num ** self.privateExponent) % self.modulus
+            decrypted_message += chr(decrypted_num)
+
+        return decrypted_message
+
+    def RecuperarContraseña(self):
+
+        name = self.Usuario
+        apuntador = sql.connect(Base_Direction)
+
+        mail_sender = 'interactivemathematicaldemons@gmail.com'
+        password = 'jvjn shlv nzdf qpiy'
+        mail_receiver = apuntador.execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+
+        subject = 'RECUPERACION DE LA CONTRASEÑA'
+        body = f'''
+        Tu contraseña de Interactive Mathematical demonstration es: {self.RSA_Decrypt}
+        '''
+
+        em = EmailMessage()
+        em['From'] = mail_sender
+        em['To'] = mail_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+
+        context = ssl.create_default_context()
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
+            smtp.login(mail_sender, password)
+            smtp.sendmail(mail_sender, mail_receiver, em.as_string())
 
