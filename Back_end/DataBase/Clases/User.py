@@ -25,7 +25,7 @@ class InputUser:
         self.Email = str(Email)
         self.modulus = 2491
         self.publicExponent = 37 
-        self.privateExponent = 937
+        self.privateExponent = 1293
 
         @property
         def Usuario(self):
