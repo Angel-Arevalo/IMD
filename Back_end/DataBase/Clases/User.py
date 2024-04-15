@@ -1,4 +1,8 @@
 import sqlite3 as sql
+from email.message import EmailMessage
+from ssl import create_default_context
+from smtplib import SMTP_SSL
+from verify_email import verify_email
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
@@ -13,8 +17,6 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     else: 
         return User.VerificarLogin()
 
-
-
 class InputUser:
     def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):#constructor
         self.Usuario = str(Usuario)
@@ -23,7 +25,7 @@ class InputUser:
         self.Email = str(Email)
         self.modulus = 2491
         self.publicExponent = 37 
-        self.privateExponent = 937
+        self.privateExponent = 1293
 
         @property
         def Usuario(self):
@@ -45,9 +47,12 @@ class InputUser:
         def Email(self):
             return self.Email
         
-        @property
-        def Ceasar():
-            return "Hola"
+    def ChecKEmail(self):
+        boolean = verify_email(self.Contraseña)
+        if boolean == True:
+            return 'Email Existente'
+        else:
+            return 'Error User'
         
     def __TablaRoles__():
         apuntador = sql.connect(Base_Direction)
@@ -83,7 +88,6 @@ class InputUser:
         apuntador.commit()
         apuntador.close()
 
-    
     __CrearTabla_UsuariosR__()
     __TablaRoles__()
 
@@ -139,5 +143,45 @@ class InputUser:
             final_Num = (Nums**self.publicExponent) % self.modulus
             final_Password = final_Password+str(hex(final_Num))+' '
         return final_Password
+    
+    def RSA_Decrypt(self): 
+        
+        name = self.Usuario
+        apuntador = sql.connect(Base_Direction)
+        encrypted_nums = apuntador.execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+
+        decrypted_message = ''
+        for encrypted_num_str in encrypted_nums:
+            encrypted_num = int(encrypted_num_str, 16)
+            decrypted_num = (encrypted_num ** self.privateExponent) % self.modulus
+            decrypted_message += chr(decrypted_num)
+
+        return decrypted_message
+
+    def RecuperarContraseña(self):
+
+        name = self.Usuario
+        apuntador = sql.connect(Base_Direction)
+
+        mail_sender = 'interactivemathematicaldemons@gmail.com'
+        password = 'jvjn shlv nzdf qpiy'
+        mail_receiver = apuntador.execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+
+        subject = 'RECUPERACION DE LA CONTRASEÑA'
+        body = f'''
+        Tu contraseña de Interactive Mathematical demonstration es: {self.RSA_Decrypt}
+        '''
+
+        em = EmailMessage()
+        em['From'] = mail_sender
+        em['To'] = mail_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+
+        context = create_default_context()
+
+        with SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
+            smtp.login(mail_sender, password)
+            smtp.sendmail(mail_sender, mail_receiver, em.as_string())
 
 

@@ -79,10 +79,6 @@ class MoverTriangulos {
                 AyudaFijar.top - 25 <= Fijar.top &&
                 AyudaFijar.bottom + 25 >= Fijar.bottom 
                 && Rotacion && !ListaValoresTriangulos[i]) {
-                    this.figura.style.left = Fijar.left + 'px';
-                    this.figura.style.top = Fijar.top + 'px'; 
-                    this.figura.style.width = Fijar.width + 'px';
-                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     ListaValoresTriangulos[i] = true;
                     let background = window.getComputedStyle(this.referencia[i]).getPropertyValue('background');
@@ -173,10 +169,6 @@ class MoverCasas extends MoverTriangulos {
                 AyudaFijar.top - 25 <= Fijar.top &&
                 AyudaFijar.bottom + 25 >= Fijar.bottom 
                 && Rotacion && !ListaValoresCasa[i]) {
-                    this.figura.style.left = Fijar.left + 'px';
-                    this.figura.style.top = Fijar.top + 'px'; 
-                    this.figura.style.width = Fijar.width + 'px';
-                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     ListaValoresCasa[i] = true;
                     this.soltar();
@@ -214,10 +206,6 @@ class MoverTrig extends MoverTriangulos {
                 AyudaFijar.top - 25 <= Fijar.top &&
                 AyudaFijar.bottom + 25 >= Fijar.bottom 
                 && Rotacion && !ListaSemiTrig[i]) {
-                    this.figura.style.left = Fijar.left + 'px';
-                    this.figura.style.top = Fijar.top + 'px'; 
-                    this.figura.style.width = Fijar.width + 'px';
-                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     ListaSemiTrig[i] = true;
                     this.soltar();
@@ -249,10 +237,6 @@ class MoverCuad extends MoverTriangulos {
                 AyudaFijar.top - 25 <= Fijar.top &&
                 AyudaFijar.bottom + 25 >= Fijar.bottom 
                 && Rotacion && !ListaCuad[i]) {
-                    this.figura.style.left = Fijar.left + 'px';
-                    this.figura.style.top = Fijar.top + 'px'; 
-                    this.figura.style.width = Fijar.width + 'px';
-                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     ListaCuad[i] = true;
                     this.soltar();
@@ -284,10 +268,6 @@ class MoverParalelepipedos extends MoverTriangulos {
                 AyudaFijar.top - 25 <= Fijar.top &&
                 AyudaFijar.bottom + 25 >= Fijar.bottom 
                 && Rotacion && !ListaValoresParalelepidos[i]) {
-                    this.figura.style.left = Fijar.left + 'px';
-                    this.figura.style.top = Fijar.top + 'px'; 
-                    this.figura.style.width = Fijar.width + 'px';
-                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     ListaValoresParalelepidos[i] = true;
                     this.soltar();
@@ -332,10 +312,6 @@ class MoverTMayor extends MoverTriangulos {
                 AyudaFijar.top - 25 <= Fijar.top &&
                 AyudaFijar.bottom + 25 >= Fijar.bottom 
                 && Rotacion && !ListaValoresTMyor[i]) {
-                    this.figura.style.left = Fijar.left + 'px';
-                    this.figura.style.top = Fijar.top + 'px'; 
-                    this.figura.style.width = Fijar.width + 'px';
-                    this.figura.style.height = Fijar.height + 'px';
                     this.Fijado = true;
                     ListaValoresTMyor[i] = true;
                     this.soltar();
