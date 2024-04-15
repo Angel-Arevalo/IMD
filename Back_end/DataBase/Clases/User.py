@@ -1,7 +1,8 @@
 import sqlite3 as sql
 from email.message import EmailMessage
-import ssl 
-import smtplib
+from ssl import create_default_context
+from smtplib import SMTP_SSL
+from verify_email import verify_email
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
@@ -46,6 +47,12 @@ class InputUser:
         def Email(self):
             return self.Email
         
+    def ChecKEmail(self):
+        boolean = verify_email(self.Contraseña)
+        if boolean == True:
+            return 'Email Existente'
+        else:
+            return 'Error User'
         
     def __TablaRoles__():
         apuntador = sql.connect(Base_Direction)
@@ -171,9 +178,9 @@ class InputUser:
         em['Subject'] = subject
         em.set_content(body)
 
-        context = ssl.create_default_context()
+        context = create_default_context()
 
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
+        with SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
             smtp.login(mail_sender, password)
             smtp.sendmail(mail_sender, mail_receiver, em.as_string())
 
