@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Examen | Nivel 2</title>
     <link rel="icon" href="../../../LogoPágina.png">
-    <link rel="stylesheet" href="Examen.css">
+    <link rel="stylesheet" href="../EstilosExamen.css">
 </head>
 <body>
     <div id="Instrucciones">
@@ -94,6 +94,15 @@
             <input type="text" placeholder="Respuestas aqui" id="IngresoRespuestas">
             <button class="Boton" id="BotonTerminar" onclick="Revision()">Terminar Examen</button>
         </div>
+
+        <div class="Ayudas">
+            <div id="Info">
+                Al seleccionar cualquiera de las siguientes opciones, perderá 0.25 de su nota:
+            </div>
+            <button id="b1" onclick="Mostrar('Tb')">Mostrar tablillas babilónicas</button>
+            <img src="../../../Imagenes/Mundo 1/Nivel 4/tablillas babilonicas.jpg" id="Tb">
+        </div>
+
 
     </div>
 </body>
