@@ -1,14 +1,14 @@
 var leer = localStorage.getItem('mensaje');
 let horaInicial;
 
-/*addEventListener('load', function() {
+addEventListener('load', function() {
     if (leer == "1") {
         localStorage.setItem('mensaje','0');
     } else if(leer == "0") {
         window.location.href = '../../../Log-in/Login.html';
     }  
 });
-*/
+
 let Veces = [false, false];
 let Nota = 0;
 
@@ -45,6 +45,6 @@ function Revision() {
     let ResiduoMinutos = (Calificacion.TomarTiempo() - horaInicial) % 60;
     let Minutos = (Calificacion.TomarTiempo() - horaInicial - ResiduoMinutos) / 60;
     console.log(ResiduoMinutos);
-    new Calificacion(['c', 'b', 'a', 'a', 'b'], document.getElementById('IngresoRespuestas').value, 
+    new Calificacion(['b', 'c', 'd', 'd', 'd'], document.getElementById('IngresoRespuestas').value, 
                         Nota + 0.5 * Minutos);
 }
