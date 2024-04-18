@@ -7,6 +7,7 @@ class Calificacion {
         if (this.#RevisarString(textoRespuestas)) {
             if (this.#RevisarNota(textoRespuestas.split(','))) {
                 this.#ReportarError(`Su nota es ${this.nota}`);
+                
             }
         }
 
@@ -72,6 +73,7 @@ class Calificacion {
     }
 
     static EnviarNota(nota) {
+        console.log(`La nota de Ariel es ${nota}`);
         //Aquí irá el código para enviar la nota al back-end
     }
 }

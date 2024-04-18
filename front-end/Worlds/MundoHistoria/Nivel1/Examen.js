@@ -46,4 +46,5 @@ function Revision() {
     console.log(ResiduoMinutos);
     new Calificacion(['c', 'b', 'a', 'a', 'b'], document.getElementById('IngresoRespuestas').value, 
                         Nota + 0.5 * Minutos);
+    Calificacion.EnviarNota(Nota)
 }
