@@ -53,43 +53,6 @@ class InputUser:
             return 'Email Existente'
         else:
             return 'Error User'
-        
-    def __TablaRoles__():
-        apuntador = sql.connect(Base_Direction)
-        sql_cmd = '''
-                    CREATE TABLE IF NOT EXISTS 'Roles' (
-                        'Id_Rol' INT PRIMARY KEY,
-                        'Rol' TEXT NOT NULL UNIQUE,
-                        CHECK(Rol IN("Estudiante", "Profesor")),
-                        FOREIGN KEY(Id_Rol) REFERENCES Usuarios_Registrados(Rol)
-                        )
-                '''
-        apuntador.execute(sql_cmd) 
-        a = apuntador.execute('''SELECT Id_Rol=1 FROM Roles''')
-        if (a.fetchone() == None):
-            apuntador.execute('''INSERT INTO Roles (Id_Rol, Rol) VALUES (1, 'Estudiante')''')
-            apuntador.execute('''INSERT INTO Roles (Id_Rol, Rol) VALUES (2, 'Profesor')''')
-        apuntador.commit()
-        apuntador.close()
-        
-    def __CrearTabla_UsuariosR__():
-        apuntador = sql.connect(Base_Direction)
-        sql_cmd = '''
-                    CREATE TABLE IF NOT EXISTS 'Usuarios_Registrados' (
-                        'Id' INT AUTO_INCREMENT,
-                        'Nombre_Usuario' TEXT PRIMARY KEY NOT NULL,
-                        'Contraseña' TEXT NOT NULL,
-                        'Rol' INT NOT NULL,
-                        'Email' TEXT NOT NULL,
-                        CHECK(Rol IN(1,2))
-                        )
-                '''
-        apuntador.execute(sql_cmd)
-        apuntador.commit()
-        apuntador.close()
-
-    __CrearTabla_UsuariosR__()
-    __TablaRoles__()
 
     def GuardarEnDataUsers(self):
         Registro = self.VerificarRegistro()
