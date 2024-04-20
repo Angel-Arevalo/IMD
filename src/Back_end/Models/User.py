@@ -1,8 +1,11 @@
+from ..DataBase.Du_Crud import DB_DataUsers
 import sqlite3 as sql
 from email.message import EmailMessage
 from ssl import create_default_context
 from smtplib import SMTP_SSL
 from verify_email import verify_email
+
+Cursor = DB_DataUsers()
 
 Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
 
@@ -47,6 +50,8 @@ class InputUser:
         def Email(self):
             return self.Email
         
+        Cursor.InicializarTablas()
+        
     def ChecKEmail(self):
         boolean = verify_email(self.Contraseña)
         if boolean == True:
@@ -58,26 +63,24 @@ class InputUser:
         Registro = self.VerificarRegistro()
         if (Registro == "Usuario Correcto"):
             self.RSA_Encrypt() #llamado a la encriptación
-            apuntador = sql.connect(Base_Direction)
             try:
-                b = apuntador.execute("SELECT MAX(Id) FROM Usuarios_Registrados")
-                b = b.fetchone()[0]
-                num = int(b) + 1 if (b is not None) else 1
-                insert = 'INSERT INTO Usuarios_Registrados (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES (?, ?, ?, ?, ?)'
-                apuntador.execute(insert, (num, self.Usuario, self.Contraseña, self.Rol, self.Email))
-                apuntador.commit()
+                num = Cursor.FetchOId('Usuarios_Registrados', 'Id')
+                insert = f'''
+                        INSERT INTO Usuarios_Registrados 
+                        (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES 
+                        ('{num}', '{self.Usuario}', '{self.Contraseña}', '{self.Rol}', '{self.Email}')
+                        '''
+                Cursor.Execute()
             finally:
-                apuntador.close()
+                return Registro ##Se puede mejorar
         return Registro
 
     def VerificarLogin(self):
         # Aqui supongo que la contraseña no esta encriptada
         self.RSA_Encrypt()
-        apuntador = sql.connect(Base_Direction)
         name = self.Usuario 
         password = self.Contraseña
-        get_info = apuntador.execute(f"SELECT * FROM Usuarios_Registrados WHERE Contraseña = '{password}' AND Nombre_Usuario = '{name}'")
-        store_info = get_info.fetchall()
+        store_info = Cursor.FetchA(f"SELECT * FROM Usuarios_Registrados WHERE Contraseña = '{password}' AND Nombre_Usuario = '{name}'")
         if (store_info == []): 
             return "Usuario o Contraseña Incorrectos"
         else: 
@@ -85,17 +88,14 @@ class InputUser:
 
     def VerificarRegistro(self):
         #El mismo código que en VerificarLogin con algunas modificaciones
-        apuntador = sql.connect(Base_Direction)
         name = self.Usuario
-        get_info = apuntador.execute(f"SELECT * FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
-        lista = get_info.fetchall()
+        lista = Cursor.FetchA(f"SELECT * FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
         if (len(lista) == 0):
             return "Usuario Correcto"
         else:
             return "Usuario en uso"
 
     def RSA_Encrypt(self): 
-
         listOfNum=[]
         for letter in self.Contraseña: 
             letter = int.from_bytes(letter.encode(), 'big')
@@ -108,10 +108,8 @@ class InputUser:
         return final_Password
     
     def RSA_Decrypt(self): 
-        
         name = self.Usuario
-        apuntador = sql.connect(Base_Direction)
-        encrypted_nums = apuntador.execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+        encrypted_nums = Cursor.Execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
 
         decrypted_message = ''
         for encrypted_num_str in encrypted_nums:
@@ -128,7 +126,7 @@ class InputUser:
 
         mail_sender = 'interactivemathematicaldemons@gmail.com'
         password = 'jvjn shlv nzdf qpiy'
-        mail_receiver = apuntador.execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+        mail_receiver = Cursor.Execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
 
         subject = 'RECUPERACION DE LA CONTRASEÑA'
         body = f'''
@@ -146,5 +144,3 @@ class InputUser:
         with SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
             smtp.login(mail_sender, password)
             smtp.sendmail(mail_sender, mail_receiver, em.as_string())
-
-

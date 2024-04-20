@@ -26,16 +26,15 @@ class DB_DataUsers:
             i = int(result)+1 if (result is not None) else 1
             return i
         result = self.Execute(query_tabla)
-        result = result.fetchone()[0]
-        return result
+        return result.fetchone()[0]
     
     def FetchA(self, sql_cmd):
         result = self.Execute(sql_cmd)
         return result.fetchall()
     
-    def InicializarTablas():
-        
-        pass
+    def InicializarTablas(self):
+        self.TablaRoles()
+        self.CrearTabla_UsuariosR()
 
     def TablaRoles(self):
         sql_cmd = '''
