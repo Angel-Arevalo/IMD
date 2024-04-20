@@ -4,7 +4,7 @@ from ssl import create_default_context
 from smtplib import SMTP_SSL
 from verify_email import verify_email
 
-Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
+Base_Direction = r'..\DataUsers.db'
 
 def constructor(data): #función denominada así para lograr más encapsulamiento
     Nombre = data.get('Nombre')

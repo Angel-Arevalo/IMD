@@ -7,6 +7,8 @@ Recuerde que debe poner estas lineas de código en la consola para que pueda log
 pip install flask
 pip install flask_cors
 pip install sqlite3
+pip install verify_email
+pip install pandas
 ´
 
 

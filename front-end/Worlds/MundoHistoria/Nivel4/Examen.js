@@ -9,7 +9,7 @@ addEventListener('load', function() {
     }  
 });
 
-let Veces = [false, false];
+let Veces = false;
 let Nota = 0;
 
 function Eleccion(ele) {
@@ -29,15 +29,10 @@ function Eleccion(ele) {
 
 function Mostrar(imagen) {
     console.log(Nota);
-    if (imagen == "SistemaN" && !Veces[0]) {
-        document.getElementById('Sn').style.display = "block";
+    if (imagen == "Tablillas" && !Veces) {
+        document.getElementById('Tablillas').style.display = "block";
         Nota += 0.25;
-        Veces[0] = true;
-    }
-    if (imagen == "sqrt" && !Veces[1]) {
-        Veces[1] = true;
-        Nota += 0.25;
-        document.getElementById('sqrt').style.display = "block";
+        Veces = true;
     }
 }
 

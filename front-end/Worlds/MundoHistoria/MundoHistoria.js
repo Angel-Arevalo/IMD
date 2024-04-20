@@ -28,6 +28,16 @@ function Viajar(direccion) {
         window.location.href = "Nivel2/Nivel.html";
     }else if(direccion == 'Leccion 3') {
         window.location.href = "Nivel3/Leccion.html";
+    }else if(direccion == 'Examen 3') {
+        window.location.href = "Nivel3/Examen.html";
+    }else if(direccion == 'Nivel 3') {
+        window.location.href = "Nivel3/Nivel.html";
+    }else if(direccion == 'Leccion 4') {
+        window.location.href = "Nivel4/Leccion.html";
+    }else if(direccion == 'Examen 4') {
+        window.location.href = "Nivel4/Examen.html";
+    }else if(direccion == 'Nivel 4') {
+        window.location.href = "Nivel4/Nivel.html";
     }
 }
 
