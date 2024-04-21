@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Examen 3 | Historia</title>
-    <link rel="stylesheet" href="../EstilosExamen.css">
+    <link rel="stylesheet" href="../../Logica y estilos de menús, lecciones y examenes/Estilos/EstilosExamen.css">
     <link rel="icon" href="../../../LogoPágina.png">
 </head>
 <body>
@@ -17,13 +17,13 @@
         - Al ingresar las respuestas en el <em style="color:rgb(71, 176, 176)">input</em>, separe la respuesta de cada pregunta <br>
         con una coma.
         <div id="BotonesElección">
-            <button class="Boton" id="BotIzq" onclick="Eleccion('Volver')">Regresar a la lección</button>
+            <button class="Boton" id="BotIzq" onclick="Viajar('Leccion')">Regresar a la lección</button>
             <button class="Boton" id="BotDer" onclick="Eleccion()">Continuar al examen</button>
         </div>
     </div>
     
     <div id="Mostrar">
-        <button class="Boton" id="Regresar" onclick="Eleccion('VolverMenu')">Volver al menú</button>
+        <button class="Boton" id="Regresar" onclick="Viajar('Menu')">Volver al menú</button>
         <div id="ContenedorTitulo">
             <h1>Cuestionario</h1>
         </div>
@@ -89,7 +89,7 @@
         <div id="ContenedorPies">
             <h1 style="margin-left: 35%; font-size: 100%;">Ingreso de respuestas</h1>
             <input type="text" placeholder="Respuestas aqui" id="IngresoRespuestas">
-            <button class="Boton" id="BotonTerminar" onclick="Revision()">Terminar Examen</button>
+            <button class="Boton" id="BotonTerminar" onclick="Revision(respuestas, Nota)">Terminar Examen</button>
         </div>
         
 
@@ -111,6 +111,7 @@
         
     </div>
 </body>
-<script src="../Calificacion.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/Calificacion.js"></script>
 <script src="Examen.js"></script>
 </html>

@@ -20,7 +20,7 @@ function Pasar(mundo) {
             window.location.href = '../Worlds/Tutorial/Tutorial.html';
             break;
         case Historia:
-            window.location.href = '../Worlds/MundoHistoria/MundoHistoria.html';
+            window.location.href = '../Worlds/MundoHistoria/Menu.html';
             break
     }
     

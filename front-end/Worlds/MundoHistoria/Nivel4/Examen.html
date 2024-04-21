@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Examen | Nivel 2</title>
     <link rel="icon" href="../../../LogoPágina.png">
-    <link rel="stylesheet" href="../EstilosExamen.css">
+    <link rel="stylesheet" href="../../Logica y estilos de menús, lecciones y examenes/Estilos/EstilosExamen.css">
 </head>
+
 <body>
     <div id="Instrucciones">
         <h2>Instrucciones y recomendaciones</h2>
-        - Cuando elijas <em style="color:rgb(227, 130, 130);">Continuar al examen</em>, si sales sin completar el examen, tu nota será 0. <br>
-        - Es recomendable leer la lección del nivel antes de entrar a responder el examen, si no lo has hecho, elige la opción <em style="color:rgb(227, 130, 130);">Regresar a la lección</em>. <br>
+        - Cuando elijas <em style="color:rgb(227, 130, 130);">Continuar al examen</em>, si sales sin completar el
+        examen, tu nota será 0. <br>
+        - Es recomendable leer la lección del nivel antes de entrar a responder el examen, si no lo has hecho, elige la
+        opción <em style="color:rgb(227, 130, 130);">Regresar a la lección</em>. <br>
         - Trata de no usar herramientas virtuales para hacer copia. <br>
-        - Al ingresar las respuestas en el <em style="color:rgb(71, 176, 176)">input</em>, separa la respuesta de cada pregunta con una coma.
+        - Al ingresar las respuestas en el <em style="color:rgb(71, 176, 176)">input</em>, separa la respuesta de cada
+        pregunta con una coma.
         <div id="BotonesElección">
-            <button class="Boton" id="BotIzq" onclick="Eleccion('Volver')">Regresar a la lección</button>
+            <button class="Boton" id="BotIzq" onclick="Viajar('Leccion')">Regresar a la lección</button>
             <button class="Boton" id="BotDer" onclick="Eleccion()">Continuar al examen</button>
         </div>
     </div>
-    
+
     <div id="Mostrar">
-        <button class="Boton" id="Regresar" onclick="Eleccion('VolverMenu')">Volver al menú</button>
+        <button class="Boton" id="Regresar" onclick="Viajar('Menu')">Volver al menú</button>
         <div id="ContenedorTitulo">
             <h1>Cuestionario</h1>
         </div>
-        
+
         <div id="Cuestionario">
             <div class="ContenedorPrgYRes">
                 <div class="Pregunta">
-                    ¿Qué significa que el sistema de numeración babilónico era acumulativo?
+                    1. ¿Qué significa que el sistema de numeración babilónico era acumulativo?
                     <br><br>
                     A) Los números se escribían en orden descendente. <br>
                     B) Se agregaban símbolos para formar números mayores. <br>
@@ -41,7 +46,7 @@
 
             <div class="ContenedorPrgYRes">
                 <div class="Pregunta">
-                    ¿Qué relación existe entre el sistema de numeración babilónico y la medición de ángulos?
+                    2. ¿Qué relación existe entre el sistema de numeración babilónico y la medición de ángulos?
                     <br><br>
                     A) Utiliza una base numérica diferente para medir ángulos. <br>
                     B) Establece una relación directa entre los grados y las unidades de medida babilónicas. <br>
@@ -53,15 +58,15 @@
 
             <div class="ContenedorPrgYRes">
                 <div class="Pregunta">
-                    ¿Cuál fue el papel del número 0 en el sistema de numeración babilónico?
+                    3. ¿Cuál fue el papel del número 0 en el sistema de numeración babilónico?
                     <br><br>
-                    A) No se utilizaba el número 0 en este sistema. <br>
-                    B) Representaba la unidad básica en la numeración babilónica. <br>
-                    C) Se utilizaba para indicar el final de una serie numérica. <br>
-                    D) Fue introducido para representar valores mayores a 59. <br>
+                    <span class="quad"></span>a.) No se utilizaba el número 0 en este sistema. <br>
+                    <span class="quad"></span>b.) Representaba la unidad básica en la numeración babilónica. <br>
+                    <span class="quad"></span>c.) Se utilizaba para indicar el final de una serie numérica. <br>
+                    <span class="quad"></span>d.) Fue introducido para representar valores mayores a 59. <br>
                 </div>
             </div>
-            
+
             <div class="Line"></div>
 
             <div class="ContenedorPrgYRes">
@@ -79,7 +84,8 @@
 
             <div class="ContenedorPrgYRes">
                 <div class="Pregunta">
-                    ¿Qué permite el hecho de que el número 60 tenga muchos divisores en el sistema de numeración babilónico?
+                    ¿Qué permite el hecho de que el número 60 tenga muchos divisores en el sistema de numeración
+                    babilónico?
                     <br><br>
                     A) Facilita la suma de números grandes. <br>
                     B) Permite una mayor precisión en las mediciones. <br>
@@ -92,7 +98,7 @@
         <div id="ContenedorPies">
             <h1 style="margin-left: 35%; font-size: 100%;">Ingreso de respuestas</h1>
             <input type="text" placeholder="Respuestas aqui" id="IngresoRespuestas">
-            <button class="Boton" id="BotonTerminar" onclick="Revision()">Terminar Examen</button>
+            <button class="Boton" id="BotonTerminar" onclick="Revision(respuestas, Nota)">Terminar Examen</button>
         </div>
 
         <div class="Ayudas">
@@ -106,6 +112,8 @@
 
     </div>
 </body>
-<script src="../Calificacion.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/Calificacion.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
 <script src="Examen.js"></script>
+
 </html>
