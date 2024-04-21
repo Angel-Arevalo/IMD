@@ -142,7 +142,7 @@ body {
     bottom: 0;
     left: 55%;
 }
-#Sn:hover, #sqrt:hover {
+#Sn:hover, #sqrt:hover, #Tablillas:hover {
     transform: scale(2.1);
 }
 #ContenedorPies {
@@ -170,7 +170,7 @@ body {
     height: auto;
     display: none;
 }
-#Sn {
+#Sn,#Tablillas {
     top: 50%;
     display: none;
     position: absolute;

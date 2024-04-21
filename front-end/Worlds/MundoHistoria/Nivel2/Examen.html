@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Examen 2 | Historia</title>
-    <link rel="stylesheet" href="../EstilosExamen.css">
+    <link rel="stylesheet" href="../../Logica y estilos de menús, lecciones y examenes/Estilos/EstilosExamen.css">
     <link rel="icon" href="../../../LogoPágina.png">
 </head>
+
 <body>
     <div id="Instrucciones">
         <h2>Instrucciones y recomendaciones</h2>
-        - Cuando elije <em style="color:rgb(227, 130, 130);">Continuar al examen</em>, si sale sin complentar el examen, su nota es 0. <br>
+        - Cuando elije <em style="color:rgb(227, 130, 130);">Continuar al examen</em>, si sale sin complentar el examen,
+        su nota es 0. <br>
         - Es recomendable leer la leccion del nivel antes de entrar a responder el examen,<br>
         si no lo ha hecho, elija la opcion <em style="color:rgb(227, 130, 130);">Regresar a la lección</em>. <br>
         - Trate de no usar herramientas virtuales para hacer copia. <br>
-        - Al ingresar las respuestas en el <em style="color:rgb(71, 176, 176)">input</em>, separe la respuesta de cada pregunta <br>
+        - Al ingresar las respuestas en el <em style="color:rgb(71, 176, 176)">input</em>, separe la respuesta de cada
+        pregunta <br>
         con una coma.
         <div id="BotonesElección">
-            <button class="Boton" id="BotIzq" onclick="Eleccion('Volver')">Regresar a la lección</button>
+            <button class="Boton" id="BotIzq" onclick="Viajar('Leccion')">Regresar a la lección</button>
             <button class="Boton" id="BotDer" onclick="Eleccion()">Continuar al examen</button>
         </div>
     </div>
-    
+
     <div id="Mostrar">
-        <button class="Boton" id="Regresar" onclick="Eleccion('VolverMenu')">Volver al menú</button>
+        <button class="Boton" id="Regresar" onclick="Viajar('Menu')">Volver al menú</button>
         <div id="ContenedorTitulo">
             <h1>Cuestionario</h1>
         </div>
-        
+
         <div id="Cuestionario">
             <div class="ContenedorPrgYRes">
                 <div class="Pregunta">
                     <!--0, 1, 2, 3, 4, 5, 6, 7, 8, 9; -&#8722; simbolo menos-->
                     <!--&#1632;, &#1633;, &#1634;, &#1635;, &#1636;, &#1637;, &#1638;, &#1639;, &#1640;, &#1641;-->
-                    1)  ¿Cuál fué el matemático eccidental que intercambió conocimientos con matemáticos Chinos y
+                    1) ¿Cuál fué el matemático eccidental que intercambió conocimientos con matemáticos Chinos y
                     en qué siglo fué?:<br><br>
                     <span class="quad"></span>a. <em>Matteo Ricci, XVII</em> <br>
                     <span class="quad"></span>b. <em>Pitágoras, XVIII</em> <br>
@@ -45,7 +49,7 @@
 
             <div class="ContenedorPrgYRes">
                 <div class="Pregunta">
-                    2)  ¿Cuál fué la contibución más importante de las matemáticas chinas durante la dinastía Tang, 
+                    2) ¿Cuál fué la contibución más importante de las matemáticas chinas durante la dinastía Tang,
                     especialmente en términos de notación numérica?
                     <br><br>
                     <span class="quad"></span>a. <em>El termino "geométria"</em> <br>
@@ -65,7 +69,7 @@
                     <span class="quad"></span>d. <em>Jiu Zhang Suan Shu, Han</em> <br>
                 </div>
             </div>
-            
+
             <div class="Line"></div>
             <div class="ContenedorPrgYRes">
                 <div class="Pregunta">
@@ -91,9 +95,9 @@
         <div id="ContenedorPies">
             <h1 style="margin-left: 35%; font-size: 100%;">Ingreso de respuestas</h1>
             <input type="text" placeholder="Respuestas aqui" id="IngresoRespuestas">
-            <button class="Boton" id="BotonTerminar" onclick="Revision()">Terminar Examen</button>
+            <button class="Boton" id="BotonTerminar" onclick="Revision(respuestas, Nota)">Terminar Examen</button>
         </div>
-        
+
 
         <div class="Ayudas">
             <div id="Info">
@@ -107,12 +111,14 @@
             <div id="ContendorTexto2">
                 <p>Fue de la dinastia Ching</p>
             </div>
-            
+
         </div>
 
-        
+
     </div>
 </body>
-<script src="../Calificacion.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/Calificacion.js"></script>
 <script src="Examen.js"></script>
+
 </html>

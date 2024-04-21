@@ -1,14 +1,3 @@
-//funciones para Cargar página
-var leer = localStorage.getItem('mensaje');
-
-addEventListener('load', function() {
-    if (leer == "1") {
-        localStorage.setItem('mensaje','0');
-    }else if(leer == "0") {
-        window.location.href = '../../../Log-in/Login.html';
-    }  
-})
-
 let Name = "";
 
 let jugando = false;
@@ -95,10 +84,6 @@ function CrearDiv(tipo) {
     document.body.appendChild(divNew);
 }
 
-function Regresar() {
-    localStorage.setItem('mensaje', '1');
-    window.location.href = '../MundoHistoria.html';
-}
 
 function Verificar() {
     if (Paralelepipedo + Cuadrados + Triangulos + Casas + SemiTrig + TMayor == 30) {
