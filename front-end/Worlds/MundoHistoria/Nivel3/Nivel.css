@@ -1,0 +1,113 @@
+/* Contenedores */
+#ContenedorGrande {
+    width: 35vw;
+    height: 35vw;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+#ContenedorPequeño {
+    width: 7.7vw;
+    height: 17.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* Fin de contenedores */
+#Cateto1 {
+    width: 10vw;
+    height: 10vw;
+    position: relative;
+}
+#hipotenuza {
+    width: 11.661903789vw;
+    height: 11.661903789vw;
+    background: blue;
+    margin-top: -25%;
+    position: relative;
+}
+/* Contenido de contenedor pequeño*/
+#Triangulo {
+    width: 7.5vw;
+    height: 10vw;
+    background-color: tomato;
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+#Cateto2 {
+    width: 7.5vw;
+    height: 7.5vw;
+    position: relative;
+}
+/* Fin de contenido de contenedor pequeño */
+
+/* Plantillas de creación de estilos repetidos */
+
+.TrianguloRectangulo {
+    height: 10vw;
+    width: 6vw;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    position: absolute;
+    background: gray;
+}
+.TrianguloRectangulo1 {
+    height: 10vw;
+    width: 6vw;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    position: absolute;
+    background: gray;
+}
+.Cuadrados {
+    width: 4vw;
+    height: 4vw;
+    position: absolute;
+    background: blueviolet;
+}
+.TrianguloAlargado {
+    height: 10vw;
+    width: 6vw;
+    clip-path: polygon(0 100%, 100% 0, 0 60%);
+    background: rgb(72, 226, 134);
+    position: absolute;
+}
+.TrianguloCateoPequeno {
+    width: 7.5vw;
+    height: 7.5vw;
+    position: absolute;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+/* Manipulaciones necesarias para las clases */
+#Mov1, #Mov4 {
+    right: 0;
+    bottom: 0;
+}
+#Mov2, #Mov5 {
+    left: 19.7%;
+    top: -20.5%;
+    transform: rotate(90deg) scaleX(-1);
+}
+#Mov3 {
+    left: 0;
+    bottom: 0;
+}
+#Mov5 {
+    transform: rotate(90deg) scaleX(-1);
+}
+#Mov6 {
+    right: 0;
+    bottom: 0;
+    background: gray;
+}
+#Mov7 {
+    left: 0;
+    top: 0;
+    transform: rotate(180deg);
+    background: green;
+}
+#Mov8 {
+    transform: rotate(59deg);
+    left: 25%;
+    top: -42.5%;
+}
