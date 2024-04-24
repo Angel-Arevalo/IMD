@@ -2,35 +2,39 @@ import json, sqlite3 as sql
 
 with open(r'src\Back_end\Utils\config.json') as jj:
     DB_Direction = json.load(jj)
-dir = print(DB_Direction['Base_Direction'])
 
 class DB_DataUsers:
     def __init__(self):
         self.DB_Direction = DB_Direction['Base_Direction']
-
-    def Conection(self):
-        Cursor = sql.connect(self.DB_Direction)
-        return Cursor
     
-    def Execute(self, sql_cmd):
-        C = self.Conection()
-        result = C.execute(sql_cmd)
+    def Execute(self, sql_cmd): # Solo para ejecutar una sentencia, no sirve para almacenar el resultado y luego trabajar sobre el
+        C = sql.connect(self.DB_Direction)
+        C.execute(sql_cmd)
         C.commit()
         C.close()
-        return result
     
-    def FetchOId(self, query_tabla, *IdF):
+    def FetchOId(self, query_tabla, *IdF): # Puede recibir una sentencia o el nombre de una tabla con el nombre de su columna de identificacion
+        Cursor = sql.connect(self.DB_Direction)
         if (len(IdF) != 0):
-            result = self.Execute(f"SELECT MAX('{IdF[0]}') FROM '{query_tabla}'")
+            result = Cursor.execute(f"SELECT MAX('{IdF[0]}') FROM '{query_tabla}'")
             result = result.fetchone()[0]
             i = int(result)+1 if (result is not None) else 1
+            Cursor.commit()
+            Cursor.close()
             return i
-        result = self.Execute(query_tabla)
-        return result.fetchone()[0]
+        result = Cursor.execute(query_tabla)
+        result = result.fetchone()[0]
+        Cursor.commit()
+        Cursor.close()
+        return result
     
     def FetchA(self, sql_cmd):
-        result = self.Execute(sql_cmd)
-        return result.fetchall()
+        Cursor = sql.connect(self.DB_Direction)
+        result = Cursor.execute(sql_cmd)
+        result = result.fetchall()
+        Cursor.commit()
+        Cursor.close()
+        return result
     
     def InicializarTablas(self):
         self.TablaRoles()
@@ -62,3 +66,6 @@ class DB_DataUsers:
                         )
                 '''
         self.Execute(sql_cmd)
+
+t1 = DB_DataUsers()
+oid = t1.Execute('''SELECT Id_Rol=1 FROM Roles''')

@@ -1,13 +1,17 @@
-from ..DataBase.Du_Crud import DB_DataUsers
+import sys
+# append the path of the parent directory
+sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
+
+from DataBase import Du_Crud
 import sqlite3 as sql
 from email.message import EmailMessage
 from ssl import create_default_context
 from smtplib import SMTP_SSL
 from verify_email import verify_email
 
-Cursor = DB_DataUsers()
+Cursor = Du_Crud.DB_DataUsers()
 
-Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
+Base_Direction = r'..\\NULL\\Back_end\\DataBase\\DataUsers.db'
 
 def constructor(data): #función denominada así para lograr más encapsulamiento
     Nombre = data.get('Nombre')
@@ -70,7 +74,7 @@ class InputUser:
                         (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES 
                         ('{num}', '{self.Usuario}', '{self.Contraseña}', '{self.Rol}', '{self.Email}')
                         '''
-                Cursor.Execute()
+                Cursor.Execute(insert)
             finally:
                 return Registro ##Se puede mejorar
         return Registro

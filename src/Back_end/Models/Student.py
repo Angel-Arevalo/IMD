@@ -1,5 +1,5 @@
-from ..DataBase.Du_Crud import DB_DataUsers
 from User import InputUser
+from DataBase.Du_Crud import DB_DataUsers
 
 Cursor = DB_DataUsers()
 

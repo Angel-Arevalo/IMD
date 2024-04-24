@@ -1,6 +1,6 @@
 from User import InputUser
-from ..DataBase.Du_Crud import DB_DataUsers
-from ..Utils.Random import Randomizer
+from DataBase.Du_Crud import DB_DataUsers
+from Utils.Random import Randomizer
 
 Cursor = DB_DataUsers()
 class Teacher(InputUser): 

@@ -1,4 +1,9 @@
-from ..DataBase.Du_Crud import DB_DataUsers
+import sys
+# append the path of the parent directory
+sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
+
+from DataBase.Du_Crud import DB_DataUsers
+
 Cursor = DB_DataUsers()
 
 class Encrypter: 

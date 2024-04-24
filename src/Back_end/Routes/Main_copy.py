@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from Models.User import constructor
+#from Models.User import constructor
+from Back_end.Models.User import constructor
 
 app = Flask(__name__)
 CORS(app, resources={r"/ruta_del_backend": {"origins": "*"}})
