@@ -12,9 +12,11 @@
 
 <body>
     <div id="ContenedorBotones">
+        <button class="Boton" onclick="mover.rotar(rotaciones[nombreId]);">Rotar figura</button>
+        <button class="Boton" onclick="Revisar()">Revisar</button>
         <button class="Boton" onclick="Viajar('Menu')">Volver al menú</button>
     </div>
-    
+
     <div id="ContenedorGrande">
         <div id="Cateto1"><!-- Movimiento n -->
             <div id="TrianguloRecortado" onclick="CrearObjeto('TrianguloRecortado')"></div>
@@ -24,27 +26,29 @@
         <div id="ContenedorPequeño">
             <div id="Triangulo"></div>
             <div id="Cateto2">
-                <div id="PuntaTriangulo"></div>
-                <div id="ParalelepidedoQueNoEsparalelepidedo" 
-                onclick="CrearObjeto('ParalelepidedoQueNoEsparalelepidedo')"></div>
-                <div id="TrianguloGrande"></div>
+                <div id="PuntaTriangulo" onclick="CrearObjeto('PuntaTriangulo')"></div>
+                <div id="ParalelepidedoQueNoEsparalelepidedo"
+                    onclick="CrearObjeto('ParalelepidedoQueNoEsparalelepidedo')"></div>
+                <div id="TrianguloGrande" onclick="CrearObjeto('TrianguloGrande')"></div>
             </div>
         </div>
         <div id="hipotenuza">
             <div id="TrianguloCompletoh"></div>
+            <div id="TrianguloGrandeh"></div>
+            <div id="ParalelepidedoQueNoEsparalelepidedoh"></div>
             <div id="TrianguloRecortadoh"></div>
             <div id="PuntaTrianguloh"></div>
-            <div id="ParalelepidedoQueNoEsparalelepidedoh"></div>
-            <div id="TrianguloGrandeh"></div>
         </div>
     </div>
 
     <div class="ContenedorGift">
         <img src="../../../Imagenes/Mundo 1/Nivel 3/Demostraion.gif" class="GiftContenedor">
     </div>
-    
+
 </body>
+
 <script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
 <script src="Mover.js"></script>
 <script src="Nivel.js"></script>
+
 </html>

@@ -1,12 +1,10 @@
 class Mover {
     constructor(figura, referencia) {
-        console.log(figura);
         console.log(referencia);
         this.figura = figura;
         this.FiguraMoviendose = false;
         this.InicioX = 0;
         this.InicioY = 0;
-        this.Fijado = false;
         this.referencia = referencia;
         this.Rotacion = false;
 
@@ -16,12 +14,10 @@ class Mover {
     }
 
     iniciarArrastre(evento) {
-        console.log("Entró a arrastre");
-        if(!this.Fijado) {
-            this.FiguraMoviendose = true;
-            this.inicioX = evento.clientX - this.figura.getBoundingClientRect().left;
-            this.inicioY = evento.clientY - this.figura.getBoundingClientRect().top;
-        }
+        this.FiguraMoviendose = true;
+        this.inicioX = evento.clientX - this.figura.getBoundingClientRect().left;
+        this.inicioY = evento.clientY - this.figura.getBoundingClientRect().top;
+        this.fijar();
     }
 
     arrastrar(evento) {
@@ -37,23 +33,35 @@ class Mover {
         this.FiguraMoviendose = false;
     }
 
-    obtenerRotacion(elemento) {
-        const estilo = window.getComputedStyle(elemento);
-        const transformacion = estilo.getPropertyValue('transform');
-        let angulo = 0;
-    
-        if (transformacion && transformacion !== 'none') {
-            const valores = transformacion.split('(')[1].split(')')[0].split(',');
-            const a = parseFloat(valores[0]);
-            const b = parseFloat(valores[1]);
-            angulo = Math.round(Math.atan2(b, a) * (180/Math.PI));
-        }
-    
-        console.log(angulo);
-        return angulo;
+    rotar(rotacion) {
+        this.figura.style.transform = `rotate(${rotacion + 307}deg)`
+        this.Rotacion = true;
     }
 
-    rotar() {
-        this.figura.style.transform = `rotate(${this.Grado + 307}deg)`
+    fijar() {
+        let ayuda = this.figura.getBoundingClientRect();
+        let referencia = this.referencia.getBoundingClientRect();
+
+        if (ayuda.left - 25 <= referencia.left &&
+            ayuda.right + 25 >= referencia.right &&
+            ayuda.top - 25 <= referencia.top &&
+            ayuda.bottom + 25 >= referencia.bottom && this.Rotacion) {
+            this.finalizar();
+        }
+    }
+
+    finalizar() {
+        contador += 1;
+        let divMovible = document.getElementById('Mover');
+        let divReferencia = this.referencia;
+
+        console.log(divReferencia.background);
+
+
+        document.body.removeChild(divMovible);
+        jugando = false;
+        function DarColor() {
+
+        }
     }
 }
