@@ -43,15 +43,7 @@
     position: relative;
 }
 /* Fin de contenido de contenedor pequeño */
-#TrianguloCompleto {
-    width: 10vw;
-    height: 12vw;
-    background: rebeccapurple;
-    position: absolute;
-    clip-path: polygon(100% 0, 100% 100%, 0 100%);
-    right: 0;
-}
-.TrianguloCompleto {
+#TrianguloCompleto, .TrianguloCompleto {
     width: 10vw;
     height: 12vw;
     background: rebeccapurple;
@@ -60,12 +52,14 @@
     right: 0;
 }
 #TrianguloCompletoh {
-    width: 7.8102vw;
-    height: 18.3vw;
+    width: 10vw;
+    height: 12vw;
     background: rebeccapurple;
     position: absolute;
-    left: 0;
-    top: 0;
+    left: -24.9%;
+    top: 9%;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    transform: rotate(320.1deg);
 }
 #TrianguloRecortado, .TrianguloRecortado {
     width: 12vw;
@@ -74,15 +68,15 @@
     clip-path: polygon(0 0, 100% 0, 20% 100%, 0 100%);
     background: blanchedalmond;
 }
-
 #TrianguloRecortadoh {
-    width: 17.5vw;
+    width: 12vw;
     height: 12vw;
     position: absolute;
-    background: rgb(88, 97, 196);
-    clip-path: polygon(0 0, 100% 0, 100% 16.67%, 44.63% 92%);
-    top: 0;
-    left: 0;
+    left: 12%;
+    top: -25.5%;
+    clip-path: polygon(0 0, 100% 0, 20% 100%, 0 100%);
+    background: blanchedalmond;
+    transform: rotate(231.4deg);
 }
 #PuntaTriangulo, .PuntaTriangulo {
     bottom: -1.5%;
@@ -95,13 +89,14 @@
     transform: rotate(270deg);
 }
 #PuntaTrianguloh {
-    width: 2.5vw;
-    height: 2vw;
+    top: -6.5%;
+    right: 10%;
+    width: 2vw;
+    height: 2.5vw;
     position: absolute;
-    right: 0;
-    top: 0;
-    background: red;
     clip-path: polygon(0 0, 100% 0, 0 100%);
+    background: red;
+    transform: rotate(231.4deg);
 }
 #ParalelepidedoQueNoEsparalelepidedo, .ParalelepidedoQueNoEsparalelepidedo {
     width: 16vw;
@@ -111,13 +106,14 @@
     position: absolute;
 }
 #ParalelepidedoQueNoEsparalelepidedoh {
-    width: 20vw;
-            height: 10.47vw;
-            position: absolute;
-            background: rgb(243, 165, 47);
-            clip-path: polygon(0 100%, 0 84%, 47.65% 0, 100% 100%);
-            bottom: 0;
-            left: 0;;
+    width: 14vw;
+    height: 14.5vw;
+    background: chartreuse;
+    clip-path: polygon(0 0, 100% 0, 15.625% 100%, 0 87.5%);
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: rotate(50deg);
 }
 #TrianguloGrande, .TrianguloGrande {
     position: absolute;
@@ -128,13 +124,11 @@
 }
 #TrianguloGrandeh {
     position: absolute;
-    width: 10.47vw;
-    height: 20vw;
+    width: 13.5vw;
+    height: 13.5vw;
     background: cyan;
-    clip-path: polygon(100% 100%, 0 47.65%, 100% 0);
-    right: 0;
-    bottom: 0;
-}
-#Mov1 {
-    right: 0;
+    clip-path: polygon(100% 100%, 15.625% 100%, 100% 0);
+    transform: rotate(140deg);
+    left: 62.7%;
+    top: 7.3%;
 }
