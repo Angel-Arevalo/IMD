@@ -54,7 +54,17 @@ body {
     margin-left: 4%;
     border-radius: 1vw;
 }
-
+.ContenedorGift {
+    position: absolute;
+    right: 15%;
+    width: 15vw;
+    height: auto;
+}
+.GiftContenedor {
+    width: 100%;
+    height: auto;
+    transform: scaleX(-1);
+}
 /*Configuración de carta de texto*/
 #Texto {
     position: absolute;

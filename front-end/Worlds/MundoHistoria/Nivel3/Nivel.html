@@ -14,31 +14,37 @@
     <div id="ContenedorBotones">
         <button class="Boton" onclick="Viajar('Menu')">Volver al menú</button>
     </div>
-
+    
     <div id="ContenedorGrande">
         <div id="Cateto1"><!-- Movimiento n -->
-            <div class="TrianguloRectangulo" id="Mov1"></div>
-            <div class="TrianguloRectangulo" id="Mov2"></div>
-            <div class="Cuadrados" id="Mov3"></div>
-            <div class="TrianguloAlargado" id="Mov4"></div>
-            <div class="TrianguloAlargado" id="Mov5"></div>
+            <div id="TrianguloRecortado" onclick="CrearObjeto('TrianguloRecortado')"></div>
+            <div id="TrianguloCompleto" onclick="CrearObjeto('TrianguloCompleto')"></div>
         </div>
 
         <div id="ContenedorPequeño">
             <div id="Triangulo"></div>
             <div id="Cateto2">
-                <div class="TrianguloCateoPequeno" id="Mov6"></div>
-                <div class="TrianguloCateoPequeno" id="Mov7"></div>
+                <div id="PuntaTriangulo"></div>
+                <div id="ParalelepidedoQueNoEsparalelepidedo" 
+                onclick="CrearObjeto('ParalelepidedoQueNoEsparalelepidedo')"></div>
+                <div id="TrianguloGrande"></div>
             </div>
         </div>
         <div id="hipotenuza">
-            <div class="TrianguloRectangulo1" id="Mov8"></div>
+            <div id="TrianguloCompletoh"></div>
+            <div id="TrianguloRecortadoh"></div>
+            <div id="PuntaTrianguloh"></div>
+            <div id="ParalelepidedoQueNoEsparalelepidedoh"></div>
+            <div id="TrianguloGrandeh"></div>
         </div>
     </div>
 
-
+    <div class="ContenedorGift">
+        <img src="../../../Imagenes/Mundo 1/Nivel 3/Demostraion.gif" class="GiftContenedor">
+    </div>
+    
 </body>
 <script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
+<script src="Mover.js"></script>
 <script src="Nivel.js"></script>
-
 </html>

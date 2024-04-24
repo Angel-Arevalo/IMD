@@ -1,7 +1,7 @@
 /* Contenedores */
 #ContenedorGrande {
-    width: 35vw;
-    height: 35vw;
+    width: auto;
+    height: auto;
     position: absolute;
     top: 70%;
     left: 50%;
@@ -9,8 +9,8 @@
     display: flex;
 }
 #ContenedorPequeño {
-    width: 7.7vw;
-    height: 17.5vw;
+    width: auto;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,96 +18,120 @@
 }
 /* Fin de contenedores */
 #Cateto1 {
-    width: 10vw;
-    height: 10vw;
+    width: 12vw;
+    height: 12vw;
     position: relative;
 }
 #hipotenuza {
-    width: 11.661903789vw;
-    height: 11.661903789vw;
-    background: blue;
+    width: 20vw;
+    height: 20vw;
     margin-top: -25%;
+    margin-left: -23%;
     position: relative;
+    transform: rotate(307deg);
 }
 /* Contenido de contenedor pequeño*/
 #Triangulo {
-    width: 7.5vw;
-    height: 10vw;
+    width: 16vw;
+    height: 12vw;
     background-color: tomato;
     clip-path: polygon(0 0, 0 100%, 100% 100%);
 }
 #Cateto2 {
-    width: 7.5vw;
-    height: 7.5vw;
+    width: 16vw;
+    height: 16vw;
     position: relative;
 }
 /* Fin de contenido de contenedor pequeño */
-
-/* Plantillas de creación de estilos repetidos */
-
-.TrianguloRectangulo {
-    height: 10vw;
-    width: 6vw;
-    clip-path: polygon(0 100%, 100% 100%, 100% 0);
-    position: absolute;
-    background: gray;
-}
-.TrianguloRectangulo1 {
-    height: 10vw;
-    width: 6vw;
-    clip-path: polygon(0 100%, 100% 100%, 100% 0);
-    position: absolute;
-    background: gray;
-}
-.Cuadrados {
-    width: 4vw;
-    height: 4vw;
-    position: absolute;
-    background: blueviolet;
-}
-.TrianguloAlargado {
-    height: 10vw;
-    width: 6vw;
-    clip-path: polygon(0 100%, 100% 0, 0 60%);
-    background: rgb(72, 226, 134);
-    position: absolute;
-}
-.TrianguloCateoPequeno {
-    width: 7.5vw;
-    height: 7.5vw;
+#TrianguloCompleto {
+    width: 10vw;
+    height: 12vw;
+    background: rebeccapurple;
     position: absolute;
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-/* Manipulaciones necesarias para las clases */
-#Mov1, #Mov4 {
     right: 0;
-    bottom: 0;
 }
-#Mov2, #Mov5 {
-    left: 19.7%;
-    top: -20.5%;
-    transform: rotate(90deg) scaleX(-1);
+#TrianguloCompletoh {
+    width: 10vw;
+    height: 12vw;
+    background: rebeccapurple;
+    position: absolute;
+    left: -24.9%;
+    top: 9%;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    transform: rotate(320.1deg);
 }
-#Mov3 {
-    left: 0;
-    bottom: 0;
+#TrianguloRecortado {
+    width: 12vw;
+    height: 12vw;
+    position: absolute;
+    clip-path: polygon(0 0, 100% 0, 20% 100%, 0 100%);
+    background: blanchedalmond;
 }
-#Mov5 {
-    transform: rotate(90deg) scaleX(-1);
+#TrianguloRecortadoh {
+    width: 12vw;
+    height: 12vw;
+    position: absolute;
+    left: 12%;
+    top: -25.5%;
+    clip-path: polygon(0 0, 100% 0, 20% 100%, 0 100%);
+    background: blanchedalmond;
+    transform: rotate(231.4deg);
 }
-#Mov6 {
+#PuntaTriangulo {
+    bottom: -1.5%;
+    left: 2%;
+    width: 2vw;
+    height: 2.5vw;
+    position: absolute;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    background: red;
+    transform: rotate(270deg);
+}
+#PuntaTrianguloh {
+    top: -6.5%;
+    right: 10%;
+    width: 2vw;
+    height: 2.5vw;
+    position: absolute;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    background: red;
+    transform: rotate(231.4deg);
+}
+#ParalelepidedoQueNoEsparalelepidedo {
+    width: 16vw;
+    height: 16vw;
+    background: chartreuse;
+    clip-path: polygon(0 0, 100% 0, 15.625% 100%, 0 87.5%);
+    position: absolute;
+}
+#ParalelepidedoQueNoEsparalelepidedoh {
+    width: 14vw;
+    height: 14.5vw;
+    background: chartreuse;
+    clip-path: polygon(0 0, 100% 0, 15.625% 100%, 0 87.5%);
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: rotate(50deg);
+}
+#TrianguloGrande {
+    position: absolute;
+    width: 16vw;
+    height: 16vw;
+    background: cyan;
+    clip-path: polygon(100% 100%, 15.625% 100%, 100% 0);
+}
+#TrianguloGrandeh {
+    position: absolute;
+    width: 13.5vw;
+    height: 13.5vw;
+    background: cyan;
+    clip-path: polygon(100% 100%, 15.625% 100%, 100% 0);
+    transform: rotate(140deg);
+    left: 62.7%;
+    top: 7.3%;
+}
+#Mov1 {
     right: 0;
-    bottom: 0;
-    background: gray;
-}
-#Mov7 {
-    left: 0;
-    top: 0;
-    transform: rotate(180deg);
-    background: green;
-}
-#Mov8 {
-    transform: rotate(59deg);
-    left: 25%;
-    top: -42.5%;
 }
