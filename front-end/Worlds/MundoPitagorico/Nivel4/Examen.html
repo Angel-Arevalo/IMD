@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen | Nivel 1</title>
+    <link rel="icon" href="../../../LogoPágina.png">
+    <link rel="stylesheet" href="../../Logica y estilos de menús, lecciones y examenes/Estilos/EstilosExamen.css">
+</head>
+
+<body>
+    <div id="Instrucciones">
+        <h2>Instrucciones y recomendaciones</h2>
+        - Cuando elije <em style="color:rgb(227, 130, 130);">Continuar al examen</em>, si sale sin complentar el examen,
+        su nota es 0. <br>
+        - Es recomendable leer la leccion del nivel antes de entrar a responder el examen,<br>
+        si no lo ha hecho, elija la opcion <em style="color:rgb(227, 130, 130);">Regresar a la lección</em>. <br>
+        - Trate de no usar herramientas virtuales para hacer copia. <br>
+        - Al ingresar las respuestas en el <em style="color:rgb(71, 176, 176)">input</em>, separe la respuesta de cada
+        pregunta <br>
+        con una coma.
+        <div id="BotonesElección">
+            <button class="Boton" id="BotIzq" onclick="Viajar('Leccion')">Regresar a la lección</button>
+            <button class="Boton" id="BotDer" onclick="Eleccion()">Continuar al examen</button>
+        </div>
+    </div>
+
+    <div id="Mostrar">
+        <button class="Boton" id="Regresar" onclick="Viajar('Menu')">Volver al menú</button>
+        <div id="ContenedorTitulo">
+            <h1>Cuestionario</h1>
+        </div>
+
+        <div id="Cuestionario">
+            <div class="ContenedorPrgYRes">
+                <div class="Pregunta">
+                    <!--0, 1, 2, 3, 4, 5, 6, 7, 8, 9; -&#8722; simbolo menos-->
+                    <!--&#1632;, &#1633;, &#1634;, &#1635;, &#1636;, &#1637;, &#1638;, &#1639;, &#1640;, &#1641;-->
+                    1) 
+                    <em>&#1639;&#1640;&#1636;&#1635;&#1634;&#1638;</em> :<br><br>
+                    <span class="quad"></span>a. <br>
+                    <span class="quad"></span>b.  <br>
+                    <span class="quad"></span>c.  <br>
+                    <span class="quad"></span>d.  <br>
+                </div>
+            </div>
+            <div class="Line"></div>
+
+            <div class="ContenedorPrgYRes">
+                <div class="Pregunta">
+                    2)  <br><br>
+                    <span class="quad"></span>a.  <br>
+                    <span class="quad"></span>b.  <br>
+                    <span class="quad"></span>c.  <br>
+                    <span class="quad"></span>d.  <br>
+                </div>
+            </div>
+            <div class="Line"></div>
+
+            <div class="ContenedorPrgYRes">
+                <div class="Pregunta">
+                    3) : <br><br>
+                    <span class="quad"></span>a.  <br>
+                    <span class="quad"></span>b.  <br>
+                    <span class="quad"></span>c.  <br>
+                    <span class="quad"></span>d.  <br>
+                </div>
+            </div>
+
+            <div class="Line"></div>
+            <div class="ContenedorPrgYRes">
+                <div class="Pregunta">
+                    4) <br><br>
+                    <span class="quad"></span>a.  <br>
+                    <span class="quad"></span>b.  <br>
+                    <span class="quad"></span>c.  <br>
+                    <span class="quad"></span>d.  <br>
+                </div>
+            </div>
+            <div class="Line"></div>
+            <div class="ContenedorPrgYRes">
+                <div class="Pregunta">
+                    5) <br><br>
+                    <span class="quad"></span>a.  <br>
+                    <span class="quad"></span>b.  <br>
+                    <span class="quad"></span>c.  <br>
+                    <span class="quad"></span>d.  <br>
+                </div>
+            </div>
+        </div>
+
+        <div id="ContenedorPies">
+            <h1 style="margin-left: 35%; font-size: 100%;">Ingreso de respuestas</h1>
+            <input type="text" placeholder="Respuestas aqui" id="IngresoRespuestas">
+            <button class="Boton" id="BotonTerminar" onclick="Revision(respuestas, Nota)">Terminar Examen</button>
+        </div>
+
+
+        <div class="Ayudas">
+            <div id="Info">
+                Al selecionar cualquiera de las siguientes opciones, perderá x% de su nota:
+            </div>
+            <button id="b1" onclick="Mostrar()">Ayuda 1</button>
+            <button id="b2" onclick="Mostrar()">Ayuda 2</button>
+        </div>
+
+
+    </div>
+
+
+</body>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/Calificacion.js"></script>
+<script src="Examen.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
+
+</html>

@@ -19,7 +19,6 @@ class Calificacion {
                     continue;
             }else {
                 this.#ReportarError("Carácteres no válidos ingresados.");
-                    console.log(textoRevisar[i]);
                     return false;
             }
         }
@@ -32,15 +31,12 @@ class Calificacion {
     #RevisarNota(ListaTextoRespuestas) {
         if (ListaTextoRespuestas.length != this.respuestas.length) {
             this.#ReportarError("No digitó la misma catidad de respuestas que de preguntas.");
-            console.log(ListaTextoRespuestas);
-            console.log(this.respuestas);
             return false;
         }
 
         for (var i = 0; i < ListaTextoRespuestas.length; i++) {
             
             for (let j = 0; j < ListaTextoRespuestas[i].length; j++) {
-                console.log(ListaTextoRespuestas[i][j]);
                 if (ListaTextoRespuestas[i][j] == ' ') {
                     continue;
                 }else if(ListaTextoRespuestas[i][j] == this.respuestas[i]) {

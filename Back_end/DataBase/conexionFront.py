@@ -23,17 +23,5 @@ def recibir_dato():#main del back end
     return jsonify({"mensaje": "hubo un error"})
 
 
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
