@@ -29,9 +29,9 @@ function Eleccion() {
 }
 
 function Revision(respuestas, Nota) {
-    let ResiduoMinutos = (Calificacion.TomarTiempo() - horaInicial)%60
-    let Minutos = (Calificacion.TomarTiempo() - horaInicial - ResiduoMinutos)/60;
-    console.log(ResiduoMinutos);
+    let Tiempo = Calificacion.TomarTiempo()
+    let ResiduoMinutos = (Tiempo - horaInicial)%60
+    let Minutos = (Tiempo - horaInicial - ResiduoMinutos)/60;
     new Calificacion(respuestas, document.getElementById('IngresoRespuestas').value, 
-                        Nota + 0.5 * Minutos);
+                        Nota + 0.4 * Minutos);
 }
