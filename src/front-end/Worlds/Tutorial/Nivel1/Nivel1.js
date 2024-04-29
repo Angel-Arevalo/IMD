@@ -1,20 +1,20 @@
 var Mensaje = localStorage.getItem('mensaje');
-var name;var empe = false;var Contar = 0;
+var name; var empe = false; var Contar = 0;
 //Funciones necesarias
-addEventListener('load', function() {
+addEventListener('load', function () {
     if (Mensaje == "1") {
         name = this.localStorage.getItem('Nombre');
-        this.localStorage.setItem('Nombre','');
-        localStorage.setItem('mensaje','0');
-    }else if(Mensaje == "0") {
+        this.localStorage.setItem('Nombre', '');
+        localStorage.setItem('mensaje', '0');
+    } else if (Mensaje == "0") {
         window.location.href = '../../../Log-in/Login.html';
-    }  
+    }
 })
 function Principal() {
-    localStorage.setItem('mensaje','1');
+    localStorage.setItem('mensaje', '1');
     window.location.href = '../../Tutorial/Tutorial.html';
 }
-function CrearDivs(x,y,z) {
+function CrearDivs(x, y, z) {
     let nuevoDiv = document.createElement('div');
     //estilos básicos
     nuevoDiv.id = "Cuadrado_" + z;
@@ -32,7 +32,7 @@ function CrearDivs(x,y,z) {
 function empezar() {
     if (!empe) {
         for (var i = 0; i < 8; i++) {
-            CrearDivs(10*i, 12, i);
+            CrearDivs(10 * i, 12, i);
         }
         const Figura0 = new MoverFigura(document.getElementById('Cuadrado_0'));
         const Figura1 = new MoverFigura(document.getElementById('Cuadrado_1'));
@@ -43,8 +43,8 @@ function empezar() {
         const Figura6 = new MoverFigura(document.getElementById('Cuadrado_6'));
         const Figura7 = new MoverFigura(document.getElementById('Cuadrado_7'));
         empe = true;
-    }else alert("Ya hay un juego en progreso");
-    
+    } else alert("Ya hay un juego en progreso");
+
 }
 //Clase para mover objetos
 class MoverFigura {
@@ -92,7 +92,7 @@ class MoverFigura {
     VerificarContador() {
         if (Contar == 8) {
             alert("Juego terminado, felicitaciones");
-            localStorage.setItem('mensaje','1');
+            localStorage.setItem('mensaje', '1');
             window.location.href = '../../Tutorial/Tutorial.html';
             return true;
         }
@@ -102,7 +102,7 @@ class MoverFigura {
     fijar() {
         const rectanguloFigura = this.figura.getBoundingClientRect();
         //verificaciones para fijar figuras
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_1.left && 
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_1.left &&
             rectanguloFigura.right + 25 >= this.Cuadrado_1.right &&
             rectanguloFigura.top - 25 <= this.Cuadrado_1.top &&
             rectanguloFigura.bottom + 25 >= this.Cuadrado_1.bottom) {
@@ -111,108 +111,108 @@ class MoverFigura {
             this.InicioX = this.Cuadrado_1.left;
             this.InicioY = this.Cuadrado_1.top;
             this.soltar();
-            if(!this.VerificarContador()) {
+            if (!this.VerificarContador()) {
                 Contar += 1;
                 document.getElementById('Contador').innerHTML = Contar;
-            }  
+            }
         }
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_2.left && 
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_2.left &&
             rectanguloFigura.right + 25 >= this.Cuadrado_2.right &&
-            rectanguloFigura.top -25 <= this.Cuadrado_2.top &&
+            rectanguloFigura.top - 25 <= this.Cuadrado_2.top &&
             rectanguloFigura.bottom + 25 >= this.Cuadrado_2.bottom) {
-                this.figura.style.left = this.Cuadrado_2.left + 'px';
-                this.figura.style.top = this.Cuadrado_2.top + 'px';
-                this.InicioX = this.Cuadrado_2.left;
-                this.InicioY = this.Cuadrado_2.top;
-                this.soltar();
-                if(!this.VerificarContador()) {
-                    Contar += 1;
-                    document.getElementById('Contador').innerHTML = Contar;
-                }  
+            this.figura.style.left = this.Cuadrado_2.left + 'px';
+            this.figura.style.top = this.Cuadrado_2.top + 'px';
+            this.InicioX = this.Cuadrado_2.left;
+            this.InicioY = this.Cuadrado_2.top;
+            this.soltar();
+            if (!this.VerificarContador()) {
+                Contar += 1;
+                document.getElementById('Contador').innerHTML = Contar;
             }
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_3.left && 
+        }
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_3.left &&
             rectanguloFigura.right + 25 >= this.Cuadrado_3.right &&
-            rectanguloFigura.top -25 <= this.Cuadrado_3.top &&
+            rectanguloFigura.top - 25 <= this.Cuadrado_3.top &&
             rectanguloFigura.bottom + 25 >= this.Cuadrado_3.bottom) {
-                this.figura.style.left = this.Cuadrado_3.left + 'px';
-                this.figura.style.top = this.Cuadrado_3.top + 'px';
-                this.InicioX = this.Cuadrado_3.left;
-                this.InicioY = this.Cuadrado_3.top;
-                this.soltar();
-                if(!this.VerificarContador()) {
-                    Contar += 1;
-                    document.getElementById('Contador').innerHTML = Contar;
-                }  
+            this.figura.style.left = this.Cuadrado_3.left + 'px';
+            this.figura.style.top = this.Cuadrado_3.top + 'px';
+            this.InicioX = this.Cuadrado_3.left;
+            this.InicioY = this.Cuadrado_3.top;
+            this.soltar();
+            if (!this.VerificarContador()) {
+                Contar += 1;
+                document.getElementById('Contador').innerHTML = Contar;
             }
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_4.left && 
+        }
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_4.left &&
             rectanguloFigura.right + 25 >= this.Cuadrado_4.right &&
-            rectanguloFigura.top -25 <= this.Cuadrado_4.top &&
+            rectanguloFigura.top - 25 <= this.Cuadrado_4.top &&
             rectanguloFigura.bottom + 25 >= this.Cuadrado_4.bottom) {
-                this.figura.style.left = this.Cuadrado_4.left + 'px';
-                this.figura.style.top = this.Cuadrado_4.top + 'px';
-                this.InicioX = this.Cuadrado_4.left;
-                this.InicioY = this.Cuadrado_4.top;
-                this.soltar();
-                if(!this.VerificarContador()) {
-                    Contar += 1;
-                    document.getElementById('Contador').innerHTML = Contar;
-                }  
+            this.figura.style.left = this.Cuadrado_4.left + 'px';
+            this.figura.style.top = this.Cuadrado_4.top + 'px';
+            this.InicioX = this.Cuadrado_4.left;
+            this.InicioY = this.Cuadrado_4.top;
+            this.soltar();
+            if (!this.VerificarContador()) {
+                Contar += 1;
+                document.getElementById('Contador').innerHTML = Contar;
             }
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_5.left && 
+        }
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_5.left &&
             rectanguloFigura.right + 25 >= this.Cuadrado_5.right &&
-            rectanguloFigura.top -25 <= this.Cuadrado_5.top &&
+            rectanguloFigura.top - 25 <= this.Cuadrado_5.top &&
             rectanguloFigura.bottom + 25 >= this.Cuadrado_5.bottom) {
-                this.figura.style.left = this.Cuadrado_5.left + 'px';
-                this.figura.style.top = this.Cuadrado_5.top + 'px';
-                this.InicioX = this.Cuadrado_5.left;
-                this.InicioY = this.Cuadrado_5.top;
-                this.soltar();
-                if(!this.VerificarContador()) {
-                    Contar += 1;
-                    document.getElementById('Contador').innerHTML = Contar;
-                }  
-            } 
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_6.left && 
-            rectanguloFigura.right + 25 >= this.Cuadrado_6.right &&
-            rectanguloFigura.top -25 <= this.Cuadrado_6.top &&
-            rectanguloFigura.bottom + 25 >= this.Cuadrado_6.bottom) {
-                this.figura.style.left = this.Cuadrado_6.left + 'px';
-                this.figura.style.top = this.Cuadrado_6.top + 'px';
-                this.InicioX = this.Cuadrado_6.left;
-                this.InicioY = this.Cuadrado_6.top;
-                this.soltar();
-                if(!this.VerificarContador()) {
-                    Contar += 1;
-                    document.getElementById('Contador').innerHTML = Contar;
-                }  
-            }        
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_7.left && 
-            rectanguloFigura.right + 25 >= this.Cuadrado_7.right &&
-            rectanguloFigura.top -25 <= this.Cuadrado_7.top &&
-            rectanguloFigura.bottom + 25 >= this.Cuadrado_7.bottom) {
-                this.figura.style.left = this.Cuadrado_7.left + 'px';
-                this.figura.style.top = this.Cuadrado_7.top + 'px';
-                this.InicioX = this.Cuadrado_7.left;
-                this.InicioY = this.Cuadrado_7.top;
-                this.soltar();
-                if(!this.VerificarContador()) {
-                    Contar += 1;
-                    document.getElementById('Contador').innerHTML = Contar;
-                }  
-            }  
-        if (rectanguloFigura.left - 25 <= this.Cuadrado_8.left && 
-            rectanguloFigura.right + 25 >= this.Cuadrado_8.right &&
-            rectanguloFigura.top -25 <= this.Cuadrado_8.top &&
-            rectanguloFigura.bottom + 25 >= this.Cuadrado_8.bottom) {
-                this.figura.style.left = this.Cuadrado_8.left + 'px';
-                this.figura.style.top = this.Cuadrado_8.top + 'px';
-                this.InicioX = this.Cuadrado_8.left;
-                this.InicioY = this.Cuadrado_8.top;
-                this.soltar();
-                if(!this.VerificarContador()) {
-                    Contar += 1;
-                    document.getElementById('Contador').innerHTML = Contar;
-                }  
+            this.figura.style.left = this.Cuadrado_5.left + 'px';
+            this.figura.style.top = this.Cuadrado_5.top + 'px';
+            this.InicioX = this.Cuadrado_5.left;
+            this.InicioY = this.Cuadrado_5.top;
+            this.soltar();
+            if (!this.VerificarContador()) {
+                Contar += 1;
+                document.getElementById('Contador').innerHTML = Contar;
             }
+        }
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_6.left &&
+            rectanguloFigura.right + 25 >= this.Cuadrado_6.right &&
+            rectanguloFigura.top - 25 <= this.Cuadrado_6.top &&
+            rectanguloFigura.bottom + 25 >= this.Cuadrado_6.bottom) {
+            this.figura.style.left = this.Cuadrado_6.left + 'px';
+            this.figura.style.top = this.Cuadrado_6.top + 'px';
+            this.InicioX = this.Cuadrado_6.left;
+            this.InicioY = this.Cuadrado_6.top;
+            this.soltar();
+            if (!this.VerificarContador()) {
+                Contar += 1;
+                document.getElementById('Contador').innerHTML = Contar;
+            }
+        }
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_7.left &&
+            rectanguloFigura.right + 25 >= this.Cuadrado_7.right &&
+            rectanguloFigura.top - 25 <= this.Cuadrado_7.top &&
+            rectanguloFigura.bottom + 25 >= this.Cuadrado_7.bottom) {
+            this.figura.style.left = this.Cuadrado_7.left + 'px';
+            this.figura.style.top = this.Cuadrado_7.top + 'px';
+            this.InicioX = this.Cuadrado_7.left;
+            this.InicioY = this.Cuadrado_7.top;
+            this.soltar();
+            if (!this.VerificarContador()) {
+                Contar += 1;
+                document.getElementById('Contador').innerHTML = Contar;
+            }
+        }
+        if (rectanguloFigura.left - 25 <= this.Cuadrado_8.left &&
+            rectanguloFigura.right + 25 >= this.Cuadrado_8.right &&
+            rectanguloFigura.top - 25 <= this.Cuadrado_8.top &&
+            rectanguloFigura.bottom + 25 >= this.Cuadrado_8.bottom) {
+            this.figura.style.left = this.Cuadrado_8.left + 'px';
+            this.figura.style.top = this.Cuadrado_8.top + 'px';
+            this.InicioX = this.Cuadrado_8.left;
+            this.InicioY = this.Cuadrado_8.top;
+            this.soltar();
+            if (!this.VerificarContador()) {
+                Contar += 1;
+                document.getElementById('Contador').innerHTML = Contar;
+            }
+        }
     }
 }

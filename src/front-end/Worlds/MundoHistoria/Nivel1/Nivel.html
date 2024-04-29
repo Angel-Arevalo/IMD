@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="Nivel.css">
     <link rel="icon" href="../../../LogoPágina.png">
 </head>
+
 <body>
-    
+
     <div id="Halcón">
         <div id="AlaIzquierda">
             <div class="Paralelepipedo" id="PS"></div><!--Paralelepipedo 1, 2-->
@@ -61,11 +63,11 @@
             <div class="Paralelepipedo" id="PP"></div>
         </div>
     </div>
-    
+
     <div class="ParalelepipedoMov" onclick="Name = 'Paralelepipedo';empezar()" id="Paralelepipedo"></div>
     <div class="TranguloColaiv" onclick="Name = 'Triangulo';empezar()" id="Triangulo"></div>
     <div class="Casamv" onclick="Name = 'Casa';empezar()" id="Casa"></div>
-     <div class="Cuadradomov" onclick="Name = 'Cuadrado';empezar()" id="Cuadrado"></div>
+    <div class="Cuadradomov" onclick="Name = 'Cuadrado';empezar()" id="Cuadrado"></div>
     <div class="Semi-trigmov" onclick="Name = 'Semi-trig';empezar()" id="Semi-trig"></div>
     <div class="Trianmov" onclick="Name = 'TMayor'; empezar()" id="TMayor"></div>
 
@@ -74,10 +76,12 @@
         <button class="Boton" onclick="Mover.ModificarReflexion('y')">Reflejar con respecto a y</button>
         <button class="Boton" onclick="Mover.ModificarRotacion()">Rotar</button>
         <button class="Boton" onclick="Verificar()">Verificar</button>
-        <button class="Boton" onclick="Regresar()">Regresar al menú</button>
+        <button class="Boton" onclick="Viajar('Menu')">Regresar al menú</button>
     </div>
-    
+
 </body>
 <script src="../Clases.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
 <script src="Nivel.js"></script>
+
 </html>

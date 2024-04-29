@@ -32,17 +32,5 @@ def actualizar_nota():#main del back end
 
     print(info_nota) """
 
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
