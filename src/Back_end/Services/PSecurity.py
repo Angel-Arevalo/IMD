@@ -1,5 +1,5 @@
 class Security:
-#Funciones que hace falta implementar
+#Funciones que hace falta implementar, quizas lo implemente Nicolas
     def __init__(self) -> None:
         pass
 
