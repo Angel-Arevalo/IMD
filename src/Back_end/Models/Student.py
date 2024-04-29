@@ -35,13 +35,3 @@ class Student(InputUser):
                     '''
             Cursor.Execute(sql_cmd)
 
-    def ActualizarNotas(Notas_dict: dict): #Esto no deberia estar aqui
-        i, codigo, nivel, nota, nombre = Notas_dict["Mundo"], Notas_dict["Codigo"], Notas_dict["Nivel"], Notas_dict["Nota"], Notas_dict["Nombre"]
-        sql_cmd = f'''
-                    UPDATE 'Mundo{i}_{codigo}'
-                    SET
-                    '{i}.Nivel_{nivel}' = {nota}
-                    WHERE
-                    Nombre_Estudiante = '{nombre}'
-                '''
-        Cursor.Execute(sql_cmd)
