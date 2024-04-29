@@ -1,4 +1,4 @@
-import math
+from math import sqrt
 
 class Calculator:
     def __init__(self, kwargs):
@@ -25,7 +25,7 @@ class Calculator:
         averageValue = self.valorMedio()
         summationOfDeviation = sum((x - averageValue) ** 2 for x in list(self.__dict__.values()))
         standardDeviationToThePowerOfTwo = summationOfDeviation / (quantity - 1)
-        standardDeviation = math.sqrt(standardDeviationToThePowerOfTwo)
+        standardDeviation = sqrt(standardDeviationToThePowerOfTwo)
 
         return standardDeviation
 
@@ -33,7 +33,7 @@ class Calculator:
 
         quantity = len(list(self.__dict__.values()))
         standardDeviation = self.desviacionEstandard()
-        rootOfQuantity = math.sqrt(quantity)
+        rootOfQuantity = sqrt(quantity)
         averageStandardDeviation = standardDeviation / rootOfQuantity
 
         return averageStandardDeviation
@@ -69,3 +69,7 @@ class Calculator:
         relativeErrorPercentage = self.errorRelativo(key) * 100
         return relativeErrorPercentage
 
+
+
+''' calculadora1 = Calculator({'a': 33.0, 'c': 45.8, 'd': 0.0, 'f': 54.0})
+print(calculadora1.desviacionEstandard()) '''

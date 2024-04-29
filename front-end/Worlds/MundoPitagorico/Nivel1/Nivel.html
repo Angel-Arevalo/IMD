@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demostración 1 | Pitágoras</title>
+    <link rel="icon" href="../../../LogoPágina.png">
+    <link rel="stylesheet" href="Nivel.css">
+    <link rel="stylesheet" href="../../Logica y estilos de menús, lecciones y examenes/Estilos/EstilosLeccion.css">
+</head>
+
+<body>
+    <div id="ContenedorBotones">
+        <button style="font-size: 1vw;" class="Boton" onclick="move.Rotate(90)">Rotar a la derecha</button>
+        <button style="font-size: 1vw;" class="Boton" onclick="move.Rotate(-90)">Rotar a la izquierda</button>
+        <button class="Boton" onclick="Terminar()">Verificar</button>
+        <button class="Boton" onclick="Viajar('Menu')">Regresar al menú</button>
+    </div>
+
+    <div id="Demostración">
+
+        <div class="Cuadrado">
+            <div class="TrianguloCuadrado1" id="T1" onclick="CreateObject('T1',0)"></div>
+            <div class="TrianguloCuadrado1" id="T2" onclick="CreateObject('T2',90)"></div>
+            <div class="TrianguloCuadrado1" id="T3" onclick="CreateObject('T3',180)"></div>
+            <div class="TrianguloCuadrado1" id="T4" onclick="CreateObject('T4',270)"></div>
+        </div>
+
+        <div class="Cuadrado">
+            <div id="Caja1">
+                <div class="TrianguloCuadrado2" id="D1"></div>
+                <div class="TrianguloCuadrado2" id="D2"></div>
+            </div>
+            <div id="Caja2">
+                <div class="TrianguloCuadrado2" id="D3"></div>
+                <div class="TrianguloCuadrado2" id="D4"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="Mover.js"></script>
+<script src="Nivel.js"></script>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
+
+</html>

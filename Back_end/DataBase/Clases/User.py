@@ -4,7 +4,7 @@ from ssl import create_default_context
 from smtplib import SMTP_SSL
 from verify_email import verify_email
 
-Base_Direction = r'..\NULL\Back_end\DataBase\DataUsers.db'
+Base_Direction = r'../DataUsers.db'
 
 def constructor(data): #función denominada así para lograr más encapsulamiento
     Nombre = data.get('Nombre')
@@ -183,3 +183,4 @@ class InputUser:
         with SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
             smtp.login(mail_sender, password)
             smtp.sendmail(mail_sender, mail_receiver, em.as_string())
+
