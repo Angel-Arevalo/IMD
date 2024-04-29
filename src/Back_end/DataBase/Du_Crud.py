@@ -17,13 +17,15 @@ class DB_DataUsers:
         Cursor = sql.connect(self.DB_Direction)
         if (len(IdF) != 0):
             result = Cursor.execute(f"SELECT MAX('{IdF[0]}') FROM '{query_tabla}'")
-            result = result.fetchone()[0]
+            result = result.fetchone()
+            result = result[0] if (result != None) else result
             i = int(result)+1 if (result is not None) else 1
             Cursor.commit()
             Cursor.close()
             return i
         result = Cursor.execute(query_tabla)
-        result = result.fetchone()[0]
+        result = result.fetchone()
+        result = result[0] if (result != None) else result
         Cursor.commit()
         Cursor.close()
         return result
@@ -66,6 +68,3 @@ class DB_DataUsers:
                         )
                 '''
         self.Execute(sql_cmd)
-
-t1 = DB_DataUsers()
-oid = t1.Execute('''SELECT Id_Rol=1 FROM Roles''')
