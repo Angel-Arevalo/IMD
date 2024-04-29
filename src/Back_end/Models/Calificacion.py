@@ -23,7 +23,7 @@ class Calificacion:
         self.Nivel = Nivel
         self.Nota = Nota
 
-    def ActualizarNotas(self): #Esto no deberia estar aqui
+    def ActualizarNotas(self):
         sql_cmd = f'''
                     UPDATE 'Mundo{self.Mundo}_{self.Codigo}'
                     SET
