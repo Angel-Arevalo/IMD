@@ -2,9 +2,8 @@ import sys
 
 sys.path.append("..\Back_end")
 
-from flask import Flask, request, jsonify
-from flask_cors import CORS, cross_origin
-from Models.User import constructor
+from flask import Flask, request
+from flask_cors import CORS
 from Routes.Registro import registro_bp
 from Routes.Login import login_bp
 

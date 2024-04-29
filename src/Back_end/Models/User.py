@@ -3,15 +3,12 @@ import sys
 sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
 
 from DataBase import Du_Crud
-import sqlite3 as sql
 from email.message import EmailMessage
 from ssl import create_default_context
 from smtplib import SMTP_SSL
 from verify_email import verify_email
 
 Cursor = Du_Crud.DB_DataUsers()
-
-Base_Direction = r'..\\NULL\\Back_end\\DataBase\\DataUsers.db'
 
 def constructor(data): #función denominada así para lograr más encapsulamiento
     Nombre = data.get('Nombre')
@@ -113,7 +110,7 @@ class InputUser:
             final_Password = final_Password+str(hex(final_Num))+' '
         return final_Password
     
-    def RSA_Decrypt(self): 
+    def RSA_Decrypt(self):
         name = self.Usuario
         encrypted_nums = Cursor.Execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
 
@@ -128,7 +125,6 @@ class InputUser:
     def RecuperarContraseña(self):
 
         name = self.Usuario
-        apuntador = sql.connect(Base_Direction)
 
         mail_sender = 'interactivemathematicaldemons@gmail.com'
         password = 'jvjn shlv nzdf qpiy'
