@@ -17,6 +17,7 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     Nombre = data.get('Nombre')
     Contraseña = data.get('Contraseña')
     Email = data.get('Correo')
+    print(Email)
     Rol = data.get('Rol')
     User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
     if (Email != "") :#reviso si es un log in o un registro
@@ -69,6 +70,7 @@ class InputUser:
             self.RSA_Encrypt() #llamado a la encriptación
             try:
                 num = Cursor.FetchOId('Usuarios_Registrados', 'Id')
+                print(num)
                 insert = f'''
                         INSERT INTO Usuarios_Registrados 
                         (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES 

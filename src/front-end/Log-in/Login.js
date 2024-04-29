@@ -40,7 +40,7 @@ class User {
     }
     //Enviar información al back-end
     SendData() {
-        fetch('http://localhost:5000/ruta_del_backend', {
+        fetch('http://localhost:5000/Backend/Login_Usuario', {
             method: 'POST',
             mode: 'cors',
             headers: {

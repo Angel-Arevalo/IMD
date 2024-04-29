@@ -16,9 +16,8 @@ class DB_DataUsers:
     def FetchOId(self, query_tabla, *IdF): # Puede recibir una sentencia o el nombre de una tabla con el nombre de su columna de identificacion
         Cursor = sql.connect(self.DB_Direction)
         if (len(IdF) != 0):
-            result = Cursor.execute(f"SELECT MAX('{IdF[0]}') FROM '{query_tabla}'")
-            result = result.fetchone()
-            result = result[0] if (result != None) else result
+            result = Cursor.execute(f"SELECT MAX({IdF[0]}) FROM {query_tabla}")
+            result = result.fetchone()[0]
             i = int(result)+1 if (result is not None) else 1
             Cursor.commit()
             Cursor.close()

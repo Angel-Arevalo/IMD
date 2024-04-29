@@ -29,7 +29,7 @@ class Registro {
     }
 
     SendData () {//lugar para enviar la información
-        fetch('http://localhost:5000/ruta_del_backend', {
+        fetch('http://localhost:5000/Backend/Registro_Usuario', {
             method: 'POST',
             mode: 'cors',
             headers: {
