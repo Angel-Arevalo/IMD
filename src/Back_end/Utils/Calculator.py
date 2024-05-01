@@ -1,29 +1,48 @@
 from math import sqrt
 
 class Calculator:
-    def __init__(self, kwargs):
 
-        for attr in kwargs.keys():
-            self.__dict__[attr] = kwargs[attr]
+    def __init__(self, RawData):
+
+        self.dict = {}
+        self.allGrades = []
+
+        # Aqui creo un diccionario con la llave por noimbre y una lista de notas como valor, ejemplo: {'Alex': [3.3, 4.4, 5.6, 7.6], 'Juan': [4.0, 9.0, 7.9, 9.8], 'Juana': [4.0, 9.0, 5.9, 9.8]}
+        for i in range(len(RawData)):
+            tupleRawData = RawData.pop(0)
+            key = tupleRawData[0]
+            grades = list(tupleRawData[1:])
+
+            self.dict[key] = grades
+
+        # Aqui creo una lista con todas las notas de todos los estudiantes, ejemplo: [3.3, 4.4, 5.6, 7.6, 4.0, 9.0, 7.9, 9.8, 4.0, 9.0, 5.9, 9.8]
+        for attr in self.dict.keys(): 
+            for grade in range(len(self.dict[attr])):
+
+                self.allGrades.append(self.dict[attr][grade])
+
+
+        print(self.dict)
+        print(self.allGrades)
 
     def sumatoria(self):
 
-        summation = sum(list(self.__dict__.values()))
+        summation = sum(list(self.allGrades))
         return summation
 
     def valorMedio(self):
 
         summation = self.sumatoria()
-        quantity = len(list(self.__dict__.values()))
+        quantity = len(list(self.allGrades))
         averageValue = 1 / quantity * summation
 
         return averageValue
 
     def desviacionEstandard(self):
 
-        quantity = len(list(self.__dict__.values()))
+        quantity = len(list(self.allGrades))
         averageValue = self.valorMedio()
-        summationOfDeviation = sum((x - averageValue) ** 2 for x in list(self.__dict__.values()))
+        summationOfDeviation = sum((x - averageValue) ** 2 for x in list(self.allGrades))
         standardDeviationToThePowerOfTwo = summationOfDeviation / (quantity - 1)
         standardDeviation = sqrt(standardDeviationToThePowerOfTwo)
 
@@ -31,7 +50,7 @@ class Calculator:
 
     def desviacionEstandardMedia(self):
 
-        quantity = len(list(self.__dict__.values()))
+        quantity = len(list(self.allGrades))
         standardDeviation = self.desviacionEstandard()
         rootOfQuantity = sqrt(quantity)
         averageStandardDeviation = standardDeviation / rootOfQuantity
@@ -70,6 +89,6 @@ class Calculator:
         return relativeErrorPercentage
 
 
+calculadora1 = Calculator([("Ariel", 3.3, 4.4, 5.6, 7.6), ("Juan", 4.0, 9.0, 7.9, 9.8), ("Juana", 4.0, 9.0, 5.9, 9.8)])
+print(calculadora1.desviacionEstandardMedia())
 
-''' calculadora1 = Calculator({'a': 33.0, 'c': 45.8, 'd': 0.0, 'f': 54.0})
-print(calculadora1.desviacionEstandard()) '''
