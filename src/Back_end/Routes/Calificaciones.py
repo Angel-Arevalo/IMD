@@ -16,3 +16,13 @@ def recibir_dato():
     except:
         return jsonify({"mensaje" : "Error al Actualizar"})
     return jsonify({"mensaje" : "Notas Actualizadas"})
+
+@calificacion_bp.route(r"/Backend/Calificaciones/InfoBasica", methods = ['POST'])
+def recibir_dato():
+    respuesta = constructor(data = request.json) # El nombre
+    try:
+        respuesta.ActualizarNotas()
+    except:
+        return jsonify({"mensaje" : "Error al Actualizar"})
+    return jsonify({"mensaje" : "Notas Actualizadas"})
+

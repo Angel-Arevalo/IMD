@@ -15,7 +15,7 @@ class Student(InputUser):
         get_info = Cursor.FetchA(f"SELECT * FROM 'Aula_{codigo}' WHERE Nombre_Estudiante = '{self.Usuario}'")
         b1 = "Usuario Correcto" if (len(get_info) == 0) else "Usuario en uso"
         if (b0 != None and b1 == "Usuario Correcto"):
-            num = Cursor.FetchOId(f'Aula_{codigo}', 'Id_E')
+            num = Cursor.FetchOId(b0, "Id_E")
             sql_cmd = f'''INSERT INTO 'Aula_{codigo}' 
                         (Id_E, Nombre_Estudiante, Mundo, Progreso, Nota_Final)
                         VALUES ({num}, '{self.Usuario}', 0, 0, 0)
