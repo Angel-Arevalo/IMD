@@ -98,7 +98,7 @@ body {
     margin-left: 20%;
     margin-bottom: 1%;
 }
-#ContenedorBotones {
+#ContenedorBotones, #ContenedorBotones1 {
     position: fixed;
     width:  6vw;
     height: auto;

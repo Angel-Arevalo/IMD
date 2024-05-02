@@ -1,25 +1,29 @@
 class Calificacion {
 
+    #Aunmento = 1;
     constructor(respuestas, textoRespuestas, Rebaja) {
         this.respuestas = respuestas;
         this.nota = -Rebaja;
+        this.#Aunmento = 5/respuestas.length;
+        console.log(this.#Aunmento);
 
-        if (this.#RevisarString(textoRespuestas)) {
-            if (this.#RevisarNota(textoRespuestas.split(','))) {
-                this.#ReportarError(`Su nota es ${this.nota}`);
-                
+
+        if (this._RevisarString(textoRespuestas)) {
+            if (this._RevisarNota(textoRespuestas.split(','))) {
+                this._CorrejirNota();
+                this._ReportarError(`Su nota es ${this.nota}`);
             }
         }
 
     }
 
-    #RevisarString(textoRevisar) {
+    _RevisarString(textoRevisar) {
         for (var i = 0; i < this.respuestas.length; i++) {
             if (textoRevisar[i] == ' ' || textoRevisar[i] == 'a' || textoRevisar[i] == 'b'
                 || textoRevisar[i] == 'c' || textoRevisar[i] == 'd' || textoRevisar[i] == ',') {
                     continue;
             }else {
-                this.#ReportarError("Carácteres no válidos ingresados.");
+                this._ReportarError("Carácteres no válidos ingresados.");
                     return false;
             }
         }
@@ -29,9 +33,9 @@ class Calificacion {
 
     //En este método verifico que en efecto se hayan puesto cáteres válidos
     //y si algún caracter es verdadero entonces incrementa la variable que cuenta los caracteres verdaderos
-    #RevisarNota(ListaTextoRespuestas) {
+    _RevisarNota(ListaTextoRespuestas) {
         if (ListaTextoRespuestas.length != this.respuestas.length) {
-            this.#ReportarError("No digitó la misma catidad de respuestas que de preguntas.");
+            this._ReportarError("No digitó la misma catidad de respuestas que de preguntas.");
             return false;
         }
 
@@ -41,7 +45,7 @@ class Calificacion {
                 if (ListaTextoRespuestas[i][j] == ' ') {
                     continue;
                 }else if(ListaTextoRespuestas[i][j] == this.respuestas[i]) {
-                    this.nota += 1;
+                    this.nota += this.#Aunmento;
                 }else if(ListaTextoRespuestas[i][j] == 'a' || ListaTextoRespuestas[i][j] == 'b'
                         || ListaTextoRespuestas[i][j] == 'c' || ListaTextoRespuestas[i][j] == 'd') {
                             continue;
@@ -52,7 +56,12 @@ class Calificacion {
         return true;
     }
 
-    #ReportarError(Error) {
+    _CorrejirNota() {
+        if (5 < this.nota) this.nota = 5;
+        if (this.nota < 0) this.nota = 0;
+    }
+
+    _ReportarError(Error) {
         alert(Error);
     }
 
