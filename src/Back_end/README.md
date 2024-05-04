@@ -1,6 +1,6 @@
 Instructivo de cómo iniciar el servidor del back-end.
 
-Entrar al archivo conexionFront y correr el código.
+Entrar al archivo main.py y correr el código.
 Recuerde que debe poner estas lineas de código en la consola para que pueda lograrlo:
 
 ´
