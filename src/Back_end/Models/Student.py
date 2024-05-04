@@ -34,4 +34,3 @@ class Student(InputUser):
                         VALUES ({num}, '{nombre}', -1, -1, -1, -1, -1)
                     '''
             Cursor.Execute(sql_cmd)
-
