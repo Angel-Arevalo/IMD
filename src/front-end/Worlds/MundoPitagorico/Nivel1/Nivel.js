@@ -1,5 +1,5 @@
 let FigurasPorAcomodar = Array.from(document.getElementsByClassName('TrianguloCuadrado2'));
-console.log(FigurasPorAcomodar[2].id);
+
 let FigurasAcomodadas = [false, false, false, false];
 let Playing = false, move, counter = 0;
 
