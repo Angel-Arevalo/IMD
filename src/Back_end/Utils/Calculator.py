@@ -77,6 +77,8 @@ class Calculator:
         averageValue = self.valorMedio()
         absoluteError = selectedValue - averageValue
 
+        if absoluteError < 0: 
+            absoluteError *=-1
         return absoluteError
 
     def errorRelativo(self, name = '', world = 1, grade = 1):
