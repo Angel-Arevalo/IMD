@@ -2,28 +2,17 @@ from math import sqrt
 
 class Calculator:
 
-    def __init__(self, RawData):
+    def __init__(self, rawData):
 
-        self.dict = {}
+        self.rawData = rawData
         self.allGrades = []
 
-        # Aqui creo un diccionario con la llave por noimbre y una lista de notas como valor, ejemplo: {'Alex': [3.3, 4.4, 5.6, 7.6], 'Juan': [4.0, 9.0, 7.9, 9.8], 'Juana': [4.0, 9.0, 5.9, 9.8]}
-        for i in range(len(RawData)):
-            tupleRawData = RawData.pop(0)
-            key = tupleRawData[0]
-            grades = list(tupleRawData[1:])
-
-            self.dict[key] = grades
-
         # Aqui creo una lista con todas las notas de todos los estudiantes, ejemplo: [3.3, 4.4, 5.6, 7.6, 4.0, 9.0, 7.9, 9.8, 4.0, 9.0, 5.9, 9.8]
-        for attr in self.dict.keys(): 
-            for grade in range(len(self.dict[attr])):
-
-                self.allGrades.append(self.dict[attr][grade])
-
-
-        print(self.dict)
-        print(self.allGrades)
+        for i in range (len(rawData)): 
+            for j in  range (len(rawData[i])):
+                for k in range(len(rawData[i][j])):
+                    if (isinstance(rawData[i][j][k], int) or isinstance(rawData[i][j][k], float)) and rawData[i][j][k] != -1:
+                        self.allGrades.append(rawData[i][j][k])
 
     def sumatoria(self):
 
@@ -64,28 +53,49 @@ class Calculator:
         percentageError = (averageStandardDeviation / averageValue) * 100
 
         return percentageError
+    
+    def valorUnico(self, name = '', world = 1, grade = 1): 
 
+        selectedName = []
+        for i in  range (len(self.rawData)):
+            for j in range (len(self.rawData[i])):
+                if self.rawData[i][j][0] == name:
+                    selectedName.append(self.rawData[i][j][1:])
 
-    def errorAbsoluto(self, key):
+        if len(selectedName) > 0:
+            return selectedName[world-1][grade-1]
+        
+        else: 
+            return -1
 
-        selectedValue = self.__dict__.get(key)
+    def errorAbsoluto(self, name = '', world = 1, grade = 1):
+
+        if self.valorUnico(name, world, grade) >= 0: 
+            selectedValue = self.valorUnico(name, world, grade)
+        else: 
+            selectedValue = self.valorMedio()
         averageValue = self.valorMedio()
         absoluteError = selectedValue - averageValue
 
+        if absoluteError < 0: 
+            absoluteError *=-1
         return absoluteError
 
-    def errorRelativo(self, key):
+    def errorRelativo(self, name = '', world = 1, grade = 1):
 
-        selectedValue = self.__dict__.get(key)
+        if self.valorUnico(name, world, grade) >= 0: 
+            selectedValue = self.valorUnico(name, world, grade)
+        else: 
+            selectedValue = self.valorMedio()
         averageValue = self.valorMedio()
         absoluteError = selectedValue - averageValue
         relativeError = absoluteError / averageValue
 
         return relativeError
 
-    def porcentajeDeErrorRelativo(self, key):
+    def porcentajeDeErrorRelativo(self, name = '', world = 1, grade = 1):
 
-        relativeErrorPercentage = self.errorRelativo(key) * 100
+        relativeErrorPercentage = self.errorRelativo(name, world, grade) * 100
         return relativeErrorPercentage
 
 
