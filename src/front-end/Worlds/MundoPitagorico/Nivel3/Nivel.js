@@ -1,7 +1,14 @@
 /* Variables necesarias */
-let Jugando = false;
+let Jugando = false, counter = 0;
 let Variables = Array.from(document.getElementsByClassName('CuadradoPequeño'));
-let TrueValues = [false];
+let LimitesPintar = 70;
+/* Listas para el control del fijado */
+
+let CuadradosImagen1 = Array.from(document.getElementsByClassName('CuadradoPequeño1'));
+let CuadradosImagen2 = [];
+
+/* Fin de listas para el control del fijado */
+
 let DivOld, DivNew, mover, degree = 0;
 /* Fin de variables necesarias */
 
@@ -11,14 +18,13 @@ function RenameAndFill(List, numberOfList) {
         if (List[i].id == ' ') {
             List[i].id = List[i].id + `${i}`;
         }
-        List[i].style.background = Backgrounds[numberOfList][i % 2];
     }
 }
 
 function Jugar(IndexOfList) {
     if (!Jugando) {
         if (IndexOfList < 9) degree = 36.87;
-        else degree = -53.13;
+        else degree = 60;
         DivOld = Variables[IndexOfList];
         let positions = DivOld.getBoundingClientRect();
         DivOld.removeAttribute('onclick');
@@ -35,22 +41,61 @@ function Jugar(IndexOfList) {
 
         DivOld.style.background = "rgb(87, 81, 87)";
 
-        mover = new Mover(document.getElementById('Mover'), degree);
+        if (IndexOfList < 9) mover = new Mover(document.getElementById('Mover'), degree);
+        else mover = new Mover2(document.getElementById('Mover'), degree);
+
+        ShowDegree();
         Jugando = true;
     } else alert("Ya está moviendo una figura")
 }
 
+function ShowDegree() {
+    let Write = document.getElementById("Rotacion");
+    Write.style.display = "block";
+    Write.innerHTML = `Grado de rotación ${mover.Grado}° 
+                    <input type="text" id="IngresarRotacion" onblur="play()">`;
+
+}
+
+function play() {
+    let x = document.getElementById('IngresarRotacion').value;
+    let Entero = parseInt(x);
+
+    if (isNaN(Entero)) {
+        alert("Ingreso de caráteres invalidos, ingrese solo números enteros");
+    } else mover._inclinar(Entero, 0);
+
+    ShowDegree();
+}
+
+function Pintar(lista, backgroun) {
+    for (let i = 0; i < lista.length; i++) {
+        lista[i].style.background = `rgb(${backgroun[0] + LimitesPintar},
+            ${backgroun[1] + LimitesPintar}, ${backgroun[2] + LimitesPintar})`;
+        LimitesPintar *= -1;
+    }
+}
+
+function verificar() {
+    if (counter == 25) {
+        alert("Juego terminado, bien hecho");
+    }else alert(`Aún quedan ${25 - counter} figuras sin acomodar`);
+}
 /* Incio de eventos */
 document.addEventListener('keydown', function (evento) {
 
     if (evento.key == "ArrowRight" &&
         !mover.FiguraMoviendose) {
         mover.cambiarInclinacion(1);
+        ShowDegree();
     } else if (evento.key == "ArrowLeft" &&
         !mover.FiguraMoviendose) {
         mover.cambiarInclinacion(-1);
-    } else if (evento.key == 's') {
+        ShowDegree();
+    } else if (evento.key.toLowerCase() == 's') {
         mover.soltar();
+    } else if (evento.key.toLowerCase() == 'v') {
+        verificar();
     }
 })
 /* Fin de eventos */
@@ -59,15 +104,13 @@ let lista = [document.getElementsByClassName('CuadradoPequeño'),
 document.getElementsByClassName('CuadradoPequeño1')
 ];
 
-let Backgrounds = [["rgb(192, 43, 192)", "rgb(192, 124, 192)"],
-[`rgb(${192 + 50}, 93, ${192 + 50})`,
-`rgb(${192 + 50}, 174, ${192 + 50})`]
-];
-
 for (let i = 0; i < 2; i++) {
     RenameAndFill(lista[i], i);
 }
 
-for (let i = 0; i < Variables.length; i++) {
-    TrueValues[i] = false;
-}
+CuadradosImagen2 = CuadradosImagen1.splice(9, 16);
+
+Pintar(Variables.slice(0, 9), [161, 15, 15]);
+Pintar(CuadradosImagen1, [209, 63, 63]);
+Pintar(CuadradosImagen2, [38, 226, 195]);
+Pintar(Variables.slice(9), [15, 75, 204]);
