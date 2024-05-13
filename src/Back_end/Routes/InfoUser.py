@@ -6,14 +6,16 @@ from flask import request, jsonify
 from flask import Blueprint
 from Models.Calificacion import constructor
 
-calificacion_bp = Blueprint("Calificaciones", __name__)
+informacion_bp = Blueprint("informacion", __name__)
 
-@calificacion_bp.route(r"/Backend/Calificaciones/Actualizar", methods = ['POST'])
+@informacion_bp.route(r"/Backend/InfoBasica", methods = ['POST'])
 def recibir_dato():
-    respuesta = constructor(data = request.json)
+    respuesta = request.json
+    n_usuario = respuesta.get("Usuario")
     try:
         respuesta.ActualizarNotas()
     except:
         return jsonify({"mensaje" : "Error al Actualizar"})
     return jsonify({"mensaje" : "Notas Actualizadas"})
 
+#Rol, Numero de Aula

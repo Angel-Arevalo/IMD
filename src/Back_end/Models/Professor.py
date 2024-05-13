@@ -1,13 +1,14 @@
 from User import InputUser
 from DataBase.Du_Crud import DB_DataUsers
 from Utils.Random import Randomizer
+from Utils.SqlFormatting import Calificacion
 
+Calificaciones = Calificacion()
 Cursor = DB_DataUsers()
 class Teacher(InputUser): 
 
     def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):
         super().__init__(Usuario, Contraseña, Rol, Email)
-        self.Codigo_Clases = []
         self.GuardarEnDataUsers()
 
     def __CrearTablaProgreso__(codigo: str):
@@ -42,11 +43,11 @@ class Teacher(InputUser):
                     '''
             Cursor.Execute(sql_cmd)
             Teacher.__CrearTablaProgreso__(codigo)
-            self.Codigo_Clases.append(codigo)
             return f"Aula {codigo} creada exitosamente"
         else:
             self.CrearAulaVirtual()
 
+        ## A esta funcion se la llama asi: Calificacion.NotasEstudiante('code') #Necesita almenos el codigo
     def NotasEstudiante(codigo, estudiante = "Aula", mundo= "Todos"): #Devuelve una lista de tuplas [(Estudiante_1), (Estudiante_2),...,(Estudiante_n)]
         if (estudiante == "Aula" and mundo == "Todos"):
             sql_cmd = f'''
@@ -80,4 +81,5 @@ class Teacher(InputUser):
                         WHERE M1.Nombre_Estudiante = '{estudiante}'
                     '''
             resultado = Cursor.FetchA(sql_cmd)
+        resultado = Calificacion.SepareList(resultado)
         return resultado
