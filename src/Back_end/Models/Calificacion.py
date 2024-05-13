@@ -114,5 +114,4 @@ class Calificacion:
         resultado = Calificacion.SepareList(resultado)
         return resultado
 
-a = Calificacion.NotasEstudiante("maw-710")
-print(a)
+""" a = Calificacion.NotasEstudiante("maw-710") """

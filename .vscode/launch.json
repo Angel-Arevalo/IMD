@@ -8,13 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-<<<<<<< HEAD
       "cwd": ".",
       "program": "build/Debug/outDebug",
-=======
-      "cwd": "c:/Users/User/Documents",
-      "program": "c:/Users/User/Documents/build/Debug/outDebug",
->>>>>>> main
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
