@@ -16,11 +16,10 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     Email = data.get('Correo')
     Rol = data.get('Rol')
     User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
-    Rol = Cursor.getRol(Nombre)
     if (Email != "") :#reviso si es un log in o un registro
-        return User.GuardarEnDataUsers(), Rol
+        return User.GuardarEnDataUsers(), Cursor.getRol(Nombre)
     else: 
-        return User.VerificarLogin(), Rol
+        return User.VerificarLogin(), Cursor.getRol(Nombre)
 
 class InputUser:
     def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):#constructor
