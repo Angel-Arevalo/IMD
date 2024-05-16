@@ -16,10 +16,11 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     Email = data.get('Correo')
     Rol = data.get('Rol')
     User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
+    Rol = Cursor.getRol(Nombre)
     if (Email != "") :#reviso si es un log in o un registro
-        return User.GuardarEnDataUsers()
+        return User.GuardarEnDataUsers(), Rol
     else: 
-        return User.VerificarLogin()
+        return User.VerificarLogin(), Rol
 
 class InputUser:
     def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):#constructor
@@ -66,7 +67,6 @@ class InputUser:
             self.RSA_Encrypt() #llamado a la encriptación
             try:
                 num = Cursor.FetchOId('Usuarios_Registrados', 'Id')
-                print(num)
                 insert = f'''
                         INSERT INTO Usuarios_Registrados 
                         (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES 
@@ -86,7 +86,7 @@ class InputUser:
         if (store_info == []): 
             return "Usuario o Contraseña Incorrectos"
         else: 
-            return "Usuario Registrado"
+            return "Usuario recibido"
 
     def VerificarRegistro(self):
         #El mismo código que en VerificarLogin con algunas modificaciones

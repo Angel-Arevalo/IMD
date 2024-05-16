@@ -3,6 +3,7 @@ import sys
 sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
 
 from DataBase import Du_Crud
+from Utils.SqlFormatting import CalificacionFormat
 
 Cursor = Du_Crud.DB_DataUsers()
 
@@ -24,6 +25,7 @@ class Calificacion:
         self.Nota = Nota
 
     def ActualizarNotas(self):
+        acumulado, progress = 0, 0
         sql_cmd = f'''
                     UPDATE 'Mundo{self.Mundo}_{self.Codigo}'
                     SET
@@ -31,51 +33,15 @@ class Calificacion:
                     WHERE
                     Nombre_Estudiante = '{self.Estudiante}'
                 '''
+        sql_cmd0 = f'''
+                    UPDATE 'Aula_{self.Codigo}'
+                    SET
+                    Mundo = '{self.Mundo}', Progreso = '{progress}', Nota_Final = '{acumulado}'
+                    WHERE
+                    Nombre_Estudiante = '{self.Estudiante}'
+                '''
         Cursor.Execute(sql_cmd)
-
-    def toList (lista, i = 0):
-        l = len(lista)
-        if i < l and type(lista[i]) == tuple:
-            lista[i] = list(lista[i])
-            return Calificacion.toList(lista ,i+1)
-        return lista
-
-    def cleanList (lista, i = 0, j = 0):
-        li, lj = len(lista), len(lista[0])
-        if i >= li:
-            return lista
-        if i < li and j < lj:
-            k = True if (j+1 != lj) else False
-            if k and type(lista[i][j+1]) == str:
-                lista[i].pop(j)
-            return Calificacion.cleanList(lista, i, j+1)
-        if j >= lj:
-            return Calificacion.cleanList(lista, i = i+1, j = 0)
-
-    def separeList1(lista: list, i, newL: list = [], j = 0):
-        if (j >= len(lista[i])) or (j != 0 and type(lista[i][j]) == str):
-            del lista[i][:j]
-            return lista, newL
-        newL.append(lista[i][j])
-        return Calificacion.separeList1(lista, i, newL, j+1)
-
-    def separeList2(lista: list):
-        newL: list = []
-        for i in range(len(lista)):
-            j = 0
-            newL.append([])
-            copy = lista
-            while len(copy[i]) > 0:
-                copy, a = Calificacion.separeList1(copy, i, newL=[])
-                newL[i].append(a)
-                del copy[i][i:j]
-        return newL
-
-    def SepareList(lista):
-        lista = Calificacion.toList(lista)
-        lista = Calificacion.cleanList(lista)
-        lista = Calificacion.separeList2(lista)
-        return lista
+        Cursor.Execute(sql_cmd0)
 
     ## A esta funcion se la llama asi: Calificacion.NotasEstudiante('code') #Necesita almenos el codigo
     def NotasEstudiante(codigo, estudiante = "Aula", mundo= "Todos"): #Devuelve una lista de tuplas [(Estudiante_1), (Estudiante_2),...,(Estudiante_n)]
@@ -111,7 +77,5 @@ class Calificacion:
                         WHERE M1.Nombre_Estudiante = '{estudiante}'
                     '''
             resultado = Cursor.FetchA(sql_cmd)
-        resultado = Calificacion.SepareList(resultado)
+        resultado = CalificacionFormat.SepareList(resultado)
         return resultado
-
-""" a = Calificacion.NotasEstudiante("maw-710") """

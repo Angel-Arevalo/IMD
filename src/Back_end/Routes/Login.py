@@ -11,11 +11,5 @@ login_bp = Blueprint("Login", __name__)
 @login_bp.route(r"/Backend/Login_Usuario", methods = ['POST'])
 def recibir_dato():
     respuesta = constructor(data = request.json)
-    # Las próximas condiciones retornan algo dependiento de la verificación en User (log in)
-    if (respuesta == "Usuario o Contraseña Incorrectos"):
-        return jsonify({"mensaje": "Usuario o Contraseña Incorrectos"})
-    if (respuesta == "Usuario Registrado"):
-        return jsonify({"mensaje": "Usuario recibido"})
-    # Respuesta por defecto
-    print(respuesta)
-    return jsonify({"mensaje": "hubo un error"})
+    print(respuesta[0])
+    return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1]})

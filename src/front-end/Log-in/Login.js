@@ -55,6 +55,7 @@ class User {
         .then(response => response.json())
         .then(data => {
             if(data.mensaje != "Usuario o Contraseña Incorrectos"){
+                localStorage.setItem('Rol', data.Rol)
                 localStorage.setItem('mensaje', '1');
                 localStorage.setItem('Nombre', this.#Username);
                 window.location.href = '../Worlds/EscogerMundo.html';

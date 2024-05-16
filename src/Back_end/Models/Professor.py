@@ -1,9 +1,8 @@
 from User import InputUser
 from DataBase.Du_Crud import DB_DataUsers
 from Utils.Random import Randomizer
-from Utils.SqlFormatting import Calificacion
+from Utils.SqlFormatting import CalificacionFormat
 
-Calificaciones = Calificacion()
 Cursor = DB_DataUsers()
 class Teacher(InputUser): 
 
@@ -32,16 +31,32 @@ class Teacher(InputUser):
         codigo = Code.Generar_Codigo()
         b = Cursor.FetchA(f"PRAGMA table_info('Aula_{codigo}')")
         if (not bool(b)):
+            id_U = Cursor.FetchOId(f"SELECT Id FROM Usuarios_Registrados WHERE Nombre_Usuario = '{self.Usuario}'")
+            id_A = Cursor.FetchOId('Aulas', 'Id_Aula')
+            id_I = Cursor.FetchOId('User_Aulas', 'Id_User_Aulas')
             sql_cmd = f'''
                         CREATE TABLE IF NOT EXISTS 'Aula_{codigo}' (
                         'Id_E' INT AUTO_INCREMENT,
                         'Nombre_Estudiante' TEXT NOT NULL PRIMARY KEY,
+                        'Correo' TEXT NOT NULL UNIQUE,
                         'Mundo' INT NOT NULL,
                         'Progreso' INT NOT NULL,
                         'Nota_Final' INT NOT NULL
                         )
                     '''
+            sql_cmd0 = f'''
+                        INSERT INTO Aulas 
+                        (Id_Aula, Aula) VALUES 
+                        ('{id_A}', 'Aula_{codigo}')
+                    '''
+            sql_cmd1 = f'''
+                        INSERT INTO User_Aulas 
+                        (Id_User_Aulas, Id_User, Id_Aula) VALUES 
+                        ('{id_I}', '{id_U}', '{id_A}')
+                    '''
             Cursor.Execute(sql_cmd)
+            Cursor.Execute(sql_cmd0)
+            Cursor.Execute(sql_cmd1)
             Teacher.__CrearTablaProgreso__(codigo)
             return f"Aula {codigo} creada exitosamente"
         else:
@@ -81,5 +96,16 @@ class Teacher(InputUser):
                         WHERE M1.Nombre_Estudiante = '{estudiante}'
                     '''
             resultado = Cursor.FetchA(sql_cmd)
-        resultado = Calificacion.SepareList(resultado)
+        resultado = CalificacionFormat.SepareList(resultado)
         return resultado
+    
+    def EstAula(codigo):
+        Aula = []
+        sql_cmd = f'''
+                    SELECT * FROM 'Aula_{codigo}' ORDER BY Nombre_Estudiante ASC
+                '''
+        result = Cursor.FetchA(sql_cmd)
+        result = CalificacionFormat.SepareList(result)
+        for i in range(len(result)):
+            Aula.append(result[i][0])
+        return Aula

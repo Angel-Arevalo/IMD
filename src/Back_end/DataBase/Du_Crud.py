@@ -1,7 +1,13 @@
 import json, sqlite3 as sql
 
+import sys
+# append the path of the parent directory
+sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
+
 with open(r'src\Back_end\Utils\config.json') as jj:
     DB_Direction = json.load(jj)
+
+from Utils.SqlFormatting import CalificacionFormat
 
 class DB_DataUsers:
     def __init__(self):
@@ -38,10 +44,11 @@ class DB_DataUsers:
         return result
     
     def InicializarTablas(self):
-        self.TablaRoles()
+        self.CrearTabla_TablaRoles()
         self.CrearTabla_UsuariosR()
+        self.CrearTabla_Aulas()
 
-    def TablaRoles(self):
+    def CrearTabla_TablaRoles(self):
         sql_cmd = '''
                     CREATE TABLE IF NOT EXISTS 'Roles' (
                         'Id_Rol' INT PRIMARY KEY,
@@ -62,8 +69,51 @@ class DB_DataUsers:
                         'Nombre_Usuario' TEXT PRIMARY KEY NOT NULL,
                         'Contraseña' TEXT NOT NULL,
                         'Rol' INT NOT NULL,
-                        'Email' TEXT NOT NULL,
+                        'Email' TEXT NOT NULL UNIQUE,
                         CHECK(Rol IN(1,2))
                         )
                 '''
         self.Execute(sql_cmd)
+    
+    def CrearTabla_Aulas(self):
+        sql_cmd1 = '''
+                    CREATE TABLE IF NOT EXISTS 'Aulas' (
+                    'Id_Aula' INT PRIMARY KEY,
+                    'Aula' TEXT UNIQUE
+                    )
+                '''
+        sql_cmd2 = '''
+                    CREATE TABLE IF NOT EXISTS 'User_Aulas' (
+                    'Id_User_Aulas' INT PRIMARY KEY,
+                    'Id_User' INT,
+                    'Id_Aula' INT,
+                    FOREIGN KEY(Id_User) REFERENCES Usuarios_Registrados(Id),
+                    FOREIGN KEY(Id_Aula) REFERENCES Aulas(Id_Aula),
+                    UNIQUE (Id_User, Id_Aula)
+                    )
+                '''
+        self.Execute(sql_cmd1)
+        self.Execute(sql_cmd2)
+
+    def getRol(self, user):
+        result = self.FetchA(f"SELECT Rol FROM Usuarios_Registrados WHERE Nombre_Usuario = '{user}'")
+        if (result == []):
+            return "Null"
+        return "Estudiante" if (result[0][0] == 1) else "Profesor"
+    
+    def Aulas(self, usuario):
+        Aulas = []
+        sql_cmd = f'''
+                    SELECT 
+                    Aulas.Aula
+                    FROM User_Aulas
+                    JOIN Usuarios_Registrados ON User_Aulas.Id_User = Usuarios_Registrados.Id
+                    JOIN Aulas ON User_Aulas.Id_Aula = Aulas.Id_Aula
+                    WHERE Usuarios_Registrados.Nombre_Usuario = '{usuario}'
+                '''
+        result = self.FetchA(sql_cmd)
+        for i in range(len(result)):
+            a = result[i][0]
+            a = a[5:len(a)]
+            Aulas.append(a)
+        return Aulas

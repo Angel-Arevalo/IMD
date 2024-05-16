@@ -16,4 +16,3 @@ def recibir_dato():
     except:
         return jsonify({"mensaje" : "Error al Actualizar"})
     return jsonify({"mensaje" : "Notas Actualizadas"})
-
