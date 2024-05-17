@@ -5,9 +5,9 @@ body {
 
 /*Plantillas*/
 .Boton {
-    height: 4vh;
-    width: 5vw;
-    padding: 0.35rem 0.4rem;
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     background:#ffffff;
     border: 0.1em solid black;
     border-radius: 0.5em;
@@ -123,8 +123,8 @@ body {
 #BontonVolver {
     top: 15%;
     left: 15%;
-    height: 4vh;
-    width: 7vw;
+    height: fit-content;
+    width: fit-content;
     position: absolute;
     padding: 0.35rem 0.4rem;
     background:#ffffff;

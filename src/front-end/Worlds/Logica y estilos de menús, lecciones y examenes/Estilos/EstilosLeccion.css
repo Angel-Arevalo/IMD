@@ -6,14 +6,14 @@ body {
 
 /* todas las plantillas necesarias para la creación del texto */
 .Boton {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     position: relative;
-    height: 2.8vw;
-    width: 100%;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border: 0.1em solid black;
     border-radius: 0.5em;

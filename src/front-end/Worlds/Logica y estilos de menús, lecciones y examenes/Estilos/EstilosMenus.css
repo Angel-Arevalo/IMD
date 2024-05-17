@@ -16,6 +16,9 @@ body {
     top: 40%;
 }
 .B {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,15 +26,15 @@ body {
     position: absolute;
     right: 5%;
     top: 24%;
-    height: 1.8vw;
-    width: 4.4vw;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border: 0.1em solid black;
     border-radius: 0.5em;
     font-size: 1vw;
 }
 .BL {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,14 +42,14 @@ body {
     position: absolute;
     right: 60%;
     top: 24%;
-    height: 1.8vw;
-    width: 4.4vw;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border: 0.1em solid black;
     border-radius: 0.5em;
 }
 .BE {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,9 +57,6 @@ body {
     position: absolute;
     right: 30%;
     top: 24%;
-    height: 1.8vw;
-    width: 5vw;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border: 0.1em solid black;
     border-radius: 0.5em;

@@ -256,9 +256,10 @@
     position: absolute;
 }
 .Boton {
-    margin: 0.5vw;
-    height: 70%;
-    width: 30%;
+    margin:0.5vw;
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     padding: 0.35rem 0.4rem;
     background:#ffffff;
     border: 0.1em solid black;
@@ -266,4 +267,6 @@
 }
 .Boton:hover {
     transform: scale(1.1);
+    height: fit-content;
+    width: fit-content;
 }

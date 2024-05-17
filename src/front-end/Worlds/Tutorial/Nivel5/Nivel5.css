@@ -59,27 +59,30 @@ body {
 }
 /*Objetos del cuerpo*/
 .Boton1 {
+    padding:0.7rem 0.8rem;
+    height: fit-content;
+    width: fit-content;
     position: relative;
-    width: 6%;
-    height: 6%;
     border-radius: 50%;
     left: 45%;
     margin-top: 10%;
     background: rgb(156, 142, 127);
 }
 .Boton2 {
+    padding:0.7rem 0.8rem;
+    height: fit-content;
+    width: fit-content;
     position: relative;
-    width: 15%;
-    height: 15%;
     border-radius: 50%;
     left: 41%;
     margin-top: 10%;
     background: rgb(156, 142, 127);
 }
 .Boton3 {
+    padding:0.7rem 0.8rem;
+    height: fit-content;
+    width: fit-content;
     position: relative;
-    width: 25%;
-    height: 25%;
     border-radius: 50%;
     left: 37%;
     margin-top: 10%;

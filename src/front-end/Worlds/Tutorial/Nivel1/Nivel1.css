@@ -32,12 +32,12 @@ body {
     border: 0.1em solid black;
 }
 #BotonPrincipal {
-    height: 4vh;
-    width: 7vw;
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     position: absolute;
     top: 25%;
     left: 2%;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border-radius: 0.5em;
     border: 0.1em solid black;

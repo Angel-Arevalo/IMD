@@ -73,34 +73,34 @@
 }
 /*Estilo de botones*/
 #BotonRotar {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     top: 3%;
     left: 18%;
-    height: 4vh;
-    width: 7vw;
     position: absolute;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border-radius: 0.5em;
     border: 0.1em solid black;
 }
 #BotonVerificar {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     top: 3%;
     left: 5%;
-    height: 4vh;
-    width: 7vw;
     position: absolute;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border-radius: 0.5em;
     border: 0.1em solid black;
 }
 #BotonVolver {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
     top: 3%;
     left: 35%;
-    height: 4vh;
-    width: 7vw;
     position: absolute;
-    padding: 0.35rem 0.4rem;
     background:#ffffff;
     border-radius: 0.5em;
     border: 0.1em solid black;
