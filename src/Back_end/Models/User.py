@@ -92,11 +92,11 @@ class InputUser:
     def VerificarRegistro(self):
         #El mismo código que en VerificarLogin con algunas modificaciones
         name = self.Usuario
-        lista = Cursor.FetchA(f"SELECT * FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+        lista = Cursor.FetchA(f"SELECT * FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}' or Email = '{self.Email}'")
         if (len(lista) == 0):
             return "Usuario Correcto"
         else:
-            return "Usuario en uso"
+            return "Usuario o Contraseña en uso" 
 
     def RSA_Encrypt(self): 
         listOfNum=[]
