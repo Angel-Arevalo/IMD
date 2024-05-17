@@ -10,6 +10,8 @@ from verify_email import verify_email
 
 Cursor = Du_Crud.DB_DataUsers()
 
+#EL E-MAIL DEBE SER UNICO
+
 def constructor(data): #función denominada así para lograr más encapsulamiento
     Nombre = data.get('Nombre')
     Contraseña = data.get('Contraseña')
