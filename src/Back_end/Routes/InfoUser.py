@@ -1,6 +1,6 @@
 import sys
 # append the path of the parent directory
-sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
+sys.path.append("src\Back_end")
 
 from flask import request, jsonify
 from flask import Blueprint
@@ -11,7 +11,7 @@ Admin = DB_DataUsers()
 informacion_bp = Blueprint("informacion", __name__)
 
 @informacion_bp.route(r"/Backend/InfoBasica/Aulas", methods = ['POST']) # Recibe el nombre del usuario
-def recibir_dato():
+def recibir_dato_A():
     respuesta = request.json
     n_usuario = respuesta.get("Usuario")
     try:
@@ -21,11 +21,11 @@ def recibir_dato():
     return jsonify({"mensaje" : "Peticion Procesada", "Aulas" : Aulas})
 
 @informacion_bp.route(r"/Backend/InfoAula", methods = ['POST'])
-def recibir_dato():
+def recibir_dato_IA(): #Each endpoint function must be unique
     respuesta = request.json
     code = respuesta.get("Codigo") # El formato del codigo debe ser "xyz-123"
     try:
         Salon = Teacher.EstAula(code) # Contiene nombre, correo, mundo en el que se encuentra, progreso total, nota final
     except:
         return jsonify({"mensaje" : "Error Peticion", "InfSalon" : []})
-    return jsonify({"mensaje" : "Peticion Procesada", "InfSalon" : Salon})
+    return jsonify({"mensaje" : "Peticion Procesada", "InfSalon" : Salon}) 

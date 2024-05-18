@@ -2,7 +2,7 @@ import json, sqlite3 as sql
 
 import sys
 # append the path of the parent directory
-sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
+sys.path.append("src\Back_end")
 
 with open(r'src\Back_end\Utils\config.json') as jj:
     DB_Direction = json.load(jj)

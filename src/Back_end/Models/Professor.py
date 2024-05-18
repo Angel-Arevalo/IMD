@@ -1,4 +1,8 @@
-from User import InputUser
+import sys
+# append the path of the parent directory
+sys.path.append("src\Back_end")
+
+from Models.User import InputUser
 from DataBase.Du_Crud import DB_DataUsers
 from Utils.Random import Randomizer
 from Utils.SqlFormatting import CalificacionFormat
@@ -61,44 +65,7 @@ class Teacher(InputUser):
             return f"Aula {codigo} creada exitosamente"
         else:
             self.CrearAulaVirtual()
-
-        ## A esta funcion se la llama asi: Calificacion.NotasEstudiante('code') #Necesita almenos el codigo
-    def NotasEstudiante(codigo, estudiante = "Aula", mundo= "Todos"): #Devuelve una lista de tuplas [(Estudiante_1), (Estudiante_2),...,(Estudiante_n)]
-        if (estudiante == "Aula" and mundo == "Todos"):
-            sql_cmd = f'''
-                        SELECT M1.*, M2.*, M3.*, M4.*
-                        FROM 'Mundo1_{codigo}' AS M1
-                        INNER JOIN 'Mundo2_{codigo}' AS M2 ON M1.Nombre_Estudiante = M2.Nombre_Estudiante
-                        INNER JOIN 'Mundo3_{codigo}' AS M3 ON M2.Nombre_Estudiante = M3.Nombre_Estudiante
-                        INNER JOIN 'Mundo4_{codigo}' AS M4 ON M3.Nombre_Estudiante = M4.Nombre_Estudiante
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        elif (estudiante == "Aula" and mundo != "Todos"): #Aqui hay un posible riesgo a que de error si el mundo no existe
-            sql_cmd = f'''
-                        SELECT M1.*
-                        FROM 'Mundo{mundo}_{codigo}' AS M1
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        elif (estudiante != "Aula" and mundo == "Todos"): #Aqui hay un posible riesgo a que de error si se escribe mal el nombre del estudiante o no existe
-            sql_cmd = f'''
-                        SELECT M1.*, M2.*, M3.*, M4.*
-                        FROM 'Mundo1_{codigo}' AS M1
-                        INNER JOIN 'Mundo2_{codigo}' AS M2 ON M1.Nombre_Estudiante = M2.Nombre_Estudiante
-                        INNER JOIN 'Mundo3_{codigo}' AS M3 ON M2.Nombre_Estudiante = M3.Nombre_Estudiante
-                        INNER JOIN 'Mundo4_{codigo}' AS M4 ON M3.Nombre_Estudiante = M4.Nombre_Estudiante
-                        WHERE M1.Nombre_Estudiante = '{estudiante}'
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        else: #Aqui hay un posible riesgo a que de error
-            sql_cmd = f'''
-                        SELECT M1.*
-                        FROM 'Mundo{mundo}_{codigo}' AS M1 
-                        WHERE M1.Nombre_Estudiante = '{estudiante}'
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        resultado = CalificacionFormat.SepareList(resultado)
-        return resultado
-    
+            
     def EstAula(codigo):
         Aula = []
         sql_cmd = f'''
@@ -109,3 +76,29 @@ class Teacher(InputUser):
         for i in range(len(result)):
             Aula.append(result[i][0])
         return Aula
+
+""" def ConvertArgs(args):
+    b = []
+    for i in range(len(args[0])):
+        b.append(args[0][i])
+    return b
+
+def ConvertGrades(array, *args):
+    args = ConvertArgs(args)
+    Response = {}
+    for i in range(len(array)):
+        a = array[i][0][0]
+        Response[a] = {}
+        for j in range(len(args)):
+            r = []
+            for k in array[i][j]:
+                if (type(k) != str):
+                    r.append(k)
+            Response[a][args[j]] = r
+    return Response
+
+def ConvertClassRoomDetail(arrays, *args):
+    pass
+
+def ConvertJsonFormat(order, array, *args): #Notas o Detalle Aula
+    return ConvertGrades(array, args) if (order == "Notas") else ConvertClassRoomDetail(array, args) """
