@@ -21,8 +21,8 @@ body {
     box-sizing: border-box;
 }
 #Empezar {
-    height: 4vh;
-    width: 7vw;
+    height: fit-content;
+    width: fit-content;
     position: absolute;
     top: 15%;
     left: 2%;
