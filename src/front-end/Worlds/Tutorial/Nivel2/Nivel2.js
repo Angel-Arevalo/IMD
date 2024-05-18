@@ -2,12 +2,12 @@ var contador = 0;
 
 var leer = localStorage.getItem('mensaje');
 //Evento para controlar que el que entre esté dentro de una cuenta
-addEventListener('load', function() {
+addEventListener('load', function () {
     if (leer == "1") {
-        localStorage.setItem('mensaje','0');
-    }else if(leer == "0") {
+        localStorage.setItem('mensaje', '0');
+    } else if (leer == "0") {
         window.location.href = '../../../Log-in/Login.html';
-    }  
+    }
 })
 
 class MoverSemi {
@@ -31,7 +31,7 @@ class MoverSemi {
             this.inicioY = evento.clientY - this.figura.getBoundingClientRect().top;
             this.Acomodar();
         }
-        
+
     }
 
     arrastrar(evento) {
@@ -60,24 +60,24 @@ class MoverSemi {
 
         if (radioSuperiorDerecho == "100%") {
             return "SuperiorDerecho";
-        }if (radioInferiorDerecho == "100%") {
+        } if (radioInferiorDerecho == "100%") {
             return "InferiorDerecho";
-        }if (radioSuperiorIzquierdo == "100%") {
+        } if (radioSuperiorIzquierdo == "100%") {
             return "SuperiorIzquierdo";
-        }if (radioInferiorIzquierdo == "100%") {
+        } if (radioInferiorIzquierdo == "100%") {
             return "InferiorIzquierdo";
         }
     }
 
     ObtenerSemi(Borde) {
         //Elección del borde, elección importante para
-        if (Borde ==  "SuperiorDerecho") {
+        if (Borde == "SuperiorDerecho") {
             return document.getElementById('cuarto2').getBoundingClientRect();
-        }if (Borde == "InferiorDerecho") {
+        } if (Borde == "InferiorDerecho") {
             return document.getElementById('cuarto4').getBoundingClientRect();
-        }if (Borde == "SuperiorIzquierdo") {
+        } if (Borde == "SuperiorIzquierdo") {
             return document.getElementById('cuarto1').getBoundingClientRect();
-        }if (Borde == "InferiorIzquierdo") {
+        } if (Borde == "InferiorIzquierdo") {
             return document.getElementById('cuarto3').getBoundingClientRect();
         }
     }
@@ -89,8 +89,8 @@ class MoverSemi {
         return false;
     }
 
-    Acomodar() {  
-        if (!this.VerificarGanador()){ 
+    Acomodar() {
+        if (!this.VerificarGanador()) {
             const Direct = this.figura.getBoundingClientRect();
             //condición para fijar el cuarto de circulo
             if (Direct.left - 25 <= this.DirecionDelBorde.left &&
@@ -117,11 +117,11 @@ function VerificarFin() {
     console.log(contador);
     if (contador == 4) {
         alert("Felicidades, ha pasado el nivel");
-        localStorage.setItem('mensaje','1');
+        localStorage.setItem('mensaje', '1');
         window.location.href = "../../Tutorial/Tutorial.html";
-    }else alert("No ha terminado");
+    } else alert("No ha terminado");
 }
 function Principal() {
-    localStorage.setItem('mensaje','1');
+    localStorage.setItem('mensaje', '1');
     window.location.href = '../../Tutorial/Tutorial.html';
 }

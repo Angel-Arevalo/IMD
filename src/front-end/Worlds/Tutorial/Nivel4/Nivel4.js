@@ -1,16 +1,5 @@
 let contador = 0;
 
-var Mensaje = localStorage.getItem('mensaje');
-//Funciones necesarias
-addEventListener('load', function() {
-    if (Mensaje == "1") {
-        this.localStorage.setItem('Nombre','');
-        localStorage.setItem('mensaje','0');
-    }else if(Mensaje == "0") {
-        window.location.href = '../../../Log-in/Login.html';
-    }  
-})
-
 class MoverUno {
     constructor(figura, referencia) {
         this.figura = figura;
@@ -166,11 +155,6 @@ const C3 = new MoverCirculo(document.getElementById('CM3'));
 function VerificarFinal() {
     if(contador == 7) {
         alert("Juego terminado, felicitaciones");
-        localStorage.setItem('mensaje','1');
-        window.location.href = "../../Tutorial/Tutorial.html"; 
+        Viajar('Menu')
     }else alert("Aun hay figuras sin acomodar");
-}
-function Irse() {
-    localStorage.setItem('mensaje','1');
-    window.location.href = "../../Tutorial/Tutorial.html"; 
 }

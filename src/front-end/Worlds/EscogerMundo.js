@@ -17,7 +17,7 @@ function Pasar(mundo) {
     localStorage.setItem('Nombre', Username);
     switch (mundo) {
         case Tutorial:
-            window.location.href = '../Worlds/Tutorial/Tutorial.html';
+            window.location.href = '../Worlds/Tutorial/Menu.html';
             break;
         case Historia:
             window.location.href = '../Worlds/MundoHistoria/Menu.html';

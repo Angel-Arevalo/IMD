@@ -1,34 +1,35 @@
 /*Cuadricula en la que están las L*/
 #Cuadricula {
-    width: 16vh;
-    height: 16vh;
+    width: 30vh;
+    height: 30.3vh;
     position: absolute;
     border: 0.1em solid black;
     top: 40%;
     left: 40%;
 }
 
-.L {
+.L, .LM {
     position: absolute;
-    width: 8vh;
-    height: 8vh;
+    width: 15vh;
+    height: 15vh;
     clip-path: polygon(0 0, 50% 0, 50% 50%, 100% 50%, 100% 100%, 0 100%);
     background: rgb(161, 161, 161);
     box-sizing: border-box;
+    border: 0.1em solid black;
 }
 #PrimeraL, #SegundaL{
     transform: rotate(90deg);
 }
 #SegundaL {
-    left: 8vh;
-    top: 0vh;
+    right: 0;
+    top: 0;
 }
 #TerceraL {
-    left: 4vh;
-    top: 4vh;
+    left: 7.5vh;
+    top: 7.7vh;
 }
 #CuartaL {
-    top: 8vh;
+    bottom: 0;
     left: 0vh;
 }
 #QuintaL {
@@ -38,12 +39,11 @@
 }
 #cuadrado {
     position: absolute;
-    width: 4vh;
-    height: 4vh;
-    right: 0vh;
-    top: 4vh;
+    width: 7.3vh;
+    height: 7.7vh;
+    right: 0.1vh;
+    top: 7.6vh;
     background: rgb(0, 0, 0);
-    transform: scaleX(-1); /* Reflejar horizontalmente */
 }
 
 #Lmov1 {
