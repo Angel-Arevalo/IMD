@@ -4,21 +4,20 @@ body {
 }
 
 /*Mejora de objetos usados en el documento html*/
-#rectangulo {
+#Contenedor {
     position: absolute;
     top: 35%;
     left: 15%;
-    width: 56vw;
+    width: 69vw;
     height: 7vw;
-    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
 }
-.rectanguloInterior {
-    float: left;
+.rectangulo {
     width: 7vw;
     height: 7vw;
     border: 0.1vw solid black;
     position: relative;
-    box-sizing: border-box;
 }
 #Empezar {
     height: 4vh;
