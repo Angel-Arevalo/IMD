@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,32 @@
     <link rel="icon" href="../../../LogoPágina.png" type="image/x-icon">
     <link rel="stylesheet" href="Nivel3.css">
 </head>
+
 <body>
 
     <div id="Cuadricula">
-            <div id="PrimeraL" class="L"></div>
-            <div id="SegundaL" class="L"></div>
-            <div id="TerceraL" class="L"></div>
-            <div id="CuartaL" class="L"></div>
-            <div id="QuintaL" class="L"></div>
-            <div id="cuadrado"></div>
-        </div>
+        <div id="PrimeraL" class="L"></div>
+        <div id="SegundaL" class="L"></div>
+        <div id="TerceraL" class="L"></div>
+        <div id="CuartaL" class="L"></div>
+        <div id="QuintaL" class="L"></div>
+        <div id="cuadrado"></div>
+    </div>
     </div>
 
 
-    <div id="Lmov1" class="L" onclick="NomFigu = 'Lmov1'"></div>
-    <div id="Lmov2" class="L" onclick="NomFigu = 'Lmov2'"></div>
-    <div id="Lmov3" class="L" onclick="NomFigu = 'Lmov3'"></div>
-    <div id="Lmov4" class="L" onclick="NomFigu = 'Lmov4'"></div>
-    <div id="Lmov5" class="L" onclick="NomFigu = 'Lmov5'"></div>
+    <div id="Lmov1" class="LM"></div>
+    <div id="Lmov2" class="LM"></div>
+    <div id="Lmov3" class="LM"></div>
+    <div id="Lmov4" class="LM"></div>
+    <div id="Lmov5" class="LM"></div>
 
     <button onclick="otar()" id="BotonRotar">Rotar</button>
     <button onclick="Verificar()" id="BotonVerificar">Verificar</button>
-    <button onclick="Principal()" id="BotonVolver">Ir a la página principal</button>
+    <button onclick="Viajar('Menu')" id="BotonVolver">Ir a la página principal</button>
 </body>
+<script src="../../Logica y estilos de menús, lecciones y examenes/Logica/LogicaLecciones.js"></script>
+<script src="MoverFigura.js"></script>
 <script src="Nivel3.js"></script>
+
 </html>
