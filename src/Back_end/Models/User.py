@@ -1,6 +1,6 @@
 import sys
 # append the path of the parent directory
-sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
+sys.path.append("src\Back_end")
 
 from DataBase import Du_Crud
 from email.message import EmailMessage
@@ -96,7 +96,7 @@ class InputUser:
         if (len(lista) == 0):
             return "Usuario Correcto"
         else:
-            return "Usuario o Contraseña en uso" 
+            return "Usuario o Correo en uso" 
 
     def RSA_Encrypt(self): 
         listOfNum=[]
