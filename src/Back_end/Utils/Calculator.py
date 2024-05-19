@@ -6,14 +6,25 @@ class Calculator:
 
         self.rawData = rawData
         self.allGrades = []
+        self.fullList = []
 
         # Aqui creo una lista con todas las notas de todos los estudiantes, ejemplo: [3.3, 4.4, 5.6, 7.6, 4.0, 9.0, 7.9, 9.8, 4.0, 9.0, 5.9, 9.8]
         for i in range (len(rawData)): 
             for j in  range (len(rawData[i])):
                 for k in range(len(rawData[i][j])):
-                    if (isinstance(rawData[i][j][k], int) or isinstance(rawData[i][j][k], float)) and rawData[i][j][k] != -1:
-                        self.allGrades.append(rawData[i][j][k])
+                    if (isinstance(rawData[i][j][k], int) or isinstance(rawData[i][j][k], float)):
+                        self.fullList.append(rawData[i][j][k])
+                        if rawData[i][j][k] != -1:
+                            self.allGrades.append(rawData[i][j][k])
 
+    def nivelesCompletados(self):
+        
+        return f'{len(self.fullList) - self.fullList.count(-1)}/{len(self.fullList)}'
+    
+    def progresoPorcentual(self):
+
+        return (len(self.fullList) - self.fullList.count(-1))/len(self.fullList) * 100
+    
     def sumatoria(self):
 
         summation = sum(list(self.allGrades))
@@ -46,7 +57,7 @@ class Calculator:
 
         return averageStandardDeviation
 
-    def porcentajeDeError(self):
+    def porcentajeDeDesviacion(self):
 
         averageValue = self.valorMedio()
         averageStandardDeviation = self.desviacionEstandardMedia()
@@ -98,21 +109,18 @@ class Calculator:
         relativeErrorPercentage = self.errorRelativo(name, world, grade) * 100
         return relativeErrorPercentage
 
-'''
-calculadora1 = Calculator([[['Jorge', 4.5, 4, 5, -1, -1], ['Jorge', 2.5, 5, 6, -1, -1], ['Jorge', 5, -1, -1, -1, -1], ['Jorge', -1, -1, -1, -1, -1]], [['Arielito', 3.4, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1]]])
-print(f''' ''''
+''' calculadora1 = Calculator([[['Jorge', 4.5, 4, 5, 3, -1], ['Jorge', 2.5, 5, 6, -1, -1], ['Jorge', 5, -1, -1, -1, -1], ['Jorge', -1, -1, -1, -1, -1]], [['Arielito', 3.4, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1]]])
+print(f''' '''
 
+PROGRESO: {calculadora1.nivelesCompletados()}
+PROGRESO PORCENTUAL: {calculadora1.progresoPorcentual()}
 SUMATORIA: {calculadora1.sumatoria()}
 VALOR MEDIO: {calculadora1.valorMedio()}
 DESVIACION STANDARD: {calculadora1.desviacionEstandard()}
 DESVIACION STANDARD MEDIA:{calculadora1.desviacionEstandardMedia()}
-PORCENTAJE DE ERROR: {calculadora1.porcentajeDeError()}
-ERROR ABSOLUTO: {calculadora1.errorAbsoluto()}
-ERROR RELATIVO: {calculadora1.errorRelativo()}
-PORCEMTAJE DE ERROR RELATIVO: {calculadora1.porcentajeDeErrorRelativo()}
+PORCENTAJE DE DESVIACION: {calculadora1.porcentajeDeDesviacion()}
+ERROR ABSOLUTO: {calculadora1.errorAbsoluto('Jorge', 1, 1)}
+ERROR RELATIVO: {calculadora1.errorRelativo('Jorge', 1, 1)}
+PORCENTAJE DE ERROR RELATIVO: {calculadora1.porcentajeDeErrorRelativo('Jorge', 1, 1)}
 
-''' ''')
-
-Para utilizar los errores hay que especificar el usuario, mundo y numero de nota del respectivo mundo. 
-
-'''
+''' ''') '''
