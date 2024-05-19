@@ -57,7 +57,7 @@ class Calculator:
 
         return averageStandardDeviation
 
-    def porcentajeDeError(self):
+    def porcentajeDeDesviacion(self):
 
         averageValue = self.valorMedio()
         averageStandardDeviation = self.desviacionEstandardMedia()
@@ -108,10 +108,8 @@ class Calculator:
 
         relativeErrorPercentage = self.errorRelativo(name, world, grade) * 100
         return relativeErrorPercentage
-    
-''' EJEMPLO: 
 
-calculadora1 = Calculator([[['Jorge', 4.5, 4, 5, -1, -1], ['Jorge', 2.5, 5, 6, -1, -1], ['Jorge', 5, -1, -1, -1, -1], ['Jorge', -1, -1, -1, -1, -1]], [['Arielito', 3.4, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1]]])
+''' calculadora1 = Calculator([[['Jorge', 4.5, 4, 5, 3, -1], ['Jorge', 2.5, 5, 6, -1, -1], ['Jorge', 5, -1, -1, -1, -1], ['Jorge', -1, -1, -1, -1, -1]], [['Arielito', 3.4, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1], ['Arielito', -1, -1, -1, -1, -1]]])
 print(f''' '''
 
 PROGRESO: {calculadora1.nivelesCompletados()}
@@ -120,10 +118,9 @@ SUMATORIA: {calculadora1.sumatoria()}
 VALOR MEDIO: {calculadora1.valorMedio()}
 DESVIACION STANDARD: {calculadora1.desviacionEstandard()}
 DESVIACION STANDARD MEDIA:{calculadora1.desviacionEstandardMedia()}
-PORCENTAJE DE ERROR: {calculadora1.porcentajeDeError()}
-ERROR ABSOLUTO: {calculadora1.errorAbsoluto()}
-ERROR RELATIVO: {calculadora1.errorRelativo()}
-PORCEMTAJE DE ERROR RELATIVO: {calculadora1.porcentajeDeErrorRelativo()}
+PORCENTAJE DE DESVIACION: {calculadora1.porcentajeDeDesviacion()}
+ERROR ABSOLUTO: {calculadora1.errorAbsoluto('Jorge', 1, 1)}
+ERROR RELATIVO: {calculadora1.errorRelativo('Jorge', 1, 1)}
+PORCENTAJE DE ERROR RELATIVO: {calculadora1.porcentajeDeErrorRelativo('Jorge', 1, 1)}
 
 ''' ''') '''
-
