@@ -1,6 +1,6 @@
 class User {
     //Variables
-    #Username;#UserPassword;//bool es true si y solo si sedigitó bien el usuario y contraseña
+    #Username;#UserPassword;//bool es true si y solo si se digitó bien el usuario y contraseña
     //Inicio de funciones set,get y constructor
     constructor() {
         this.#Username = "";

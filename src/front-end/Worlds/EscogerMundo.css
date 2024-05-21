@@ -5,6 +5,9 @@ body {
 }
 
 /*Manipulación de objetos del nav*/
+#Mostrar {
+    display: none;
+}
 #nav {
     margin: 0;
     width: 100%;

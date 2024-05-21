@@ -1,30 +1,43 @@
-var leer = localStorage.getItem('mensaje');
+const mostrar = document.getElementById("Mostrar");
 
-addEventListener('load', function () {
-    if (leer == "1") {
-        localStorage.setItem('mensaje', '0');
-    } else if (leer == "0") {
-        window.location.href = '../Log-in/Login.html';
-    }
-})
+class EscogerMundo {
+    #Rol; 
+    #Username;
 
-var Username = localStorage.getItem('Nombre');
-localStorage.setItem('Nombre', '');
-document.getElementById("Nombre").innerHTML = Username;
+    constructor() {
+        this.#Username = localStorage.getItem('Nombre');
+        this.#Rol =  localStorage.getItem('Rol');
 
-function Pasar(mundo) {
-    localStorage.setItem('mensaje', '1');
-    localStorage.setItem('Nombre', Username);
-    switch (mundo) {
-        case Tutorial:
-            window.location.href = '../Worlds/Tutorial/Menu.html';
-            break;
-        case Historia:
-            window.location.href = '../Worlds/MundoHistoria/Menu.html';
-            break
-        case Pitagoras:
-            window.location.href = '../Worlds/MundoPitagorico/Menu.html';
-            break
+        this.ShowName();
+        this._ShowBotoom();
     }
 
+    ShowName() {
+        document.getElementById("Nombre").innerHTML = this.#Username;
+    }
+
+    _ShowBotoom() {
+
+        if (this.#Rol == "Estudiante") {
+            //en esta parte verificamos si está en un
+            //aula
+            
+        }else {
+            const button = document.createElement('button');
+
+            button.setAttribute("class", "Boton");
+            button.style.position = "absolute";
+            button.style.top = "35%";
+            button.style.right = "5%";
+            button.textContent = "Revisar mis aulas";
+
+            button.addEventListener('click', function() {Viajar(4)});
+
+            document.body.appendChild(button);
+        }
+
+        mostrar.style.display = "block";
+    }
 }
+
+const escogerMundo = new EscogerMundo()

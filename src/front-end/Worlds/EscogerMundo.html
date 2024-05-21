@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundos</title>
+    <link rel="stylesheet" href="Logica y estilos de menús, lecciones y examenes/Estilos/EstilosLeccion.css">
     <link rel="stylesheet" href="EscogerMundo.css">
     <link rel="icon" href="../LogoPágina.png" type="image/x-icon">
 </head>
-    <body>
+
+<body>
     <!--Parte superior de la página-->
     <div id="nav">
         <div id="NombrePoo">IMD</div>
         <div id="Nombre"></div>
     </div>
-    <!--Elección del mundo 1-->
-    <div id="Tutorial" onclick="Pasar(Tutorial)"></div>
-    <p id="TutorialTEXT">Tutorial</p>
 
-    <!--Elección del mundo 2-->
-    <div id="Historia" onclick="Pasar(Historia)"></div>
-    <p id="HistoriaTEXT">Demostración de las civilizaciones antiguas</p>
+    <div id="Mostrar">
+        <!--Elección del mundo 1-->
+        <div id="Tutorial" onclick="Viajar(1)"></div>
+        <p id="TutorialTEXT">Tutorial</p>
 
-    <!--Elección del mundo 3-->
-    <div id="Pitagoras" onclick="Pasar(Pitagoras)"></div>
-    <div id="PitagorasTEXT">Demostraciones de Pitágoras</div>
+        <!--Elección del mundo 2-->
+        <div id="Historia" onclick="Viajar(2)"></div>
+        <p id="HistoriaTEXT">Demostración de las civilizaciones antiguas</p>
+
+        <!--Elección del mundo 3-->
+        <div id="Pitagoras" onclick="Viajar(3)"></div>
+        <div id="PitagorasTEXT">Demostraciones de Pitágoras</div>
+    </div>
+
 
 </body>
-    <script src="EscogerMundo.js"></script>
+<script>
+    let direction = '../Log-in/Login.html';
+</script>
+<script src="Logica y estilos de menús, lecciones y examenes/Logica/LogicaMenus.js"></script>
+<script src="EscogerMundo.js"></script>
+
 </html>

@@ -4,7 +4,7 @@ addEventListener('load', function() {
     if (leer == "1") {
         localStorage.setItem('mensaje','0');
     }else if(leer == "0") {
-        window.location.href = '../../Log-in/Login.html';
+        window.location.href = direction;
     }  
 })
 
@@ -37,6 +37,14 @@ function Viajar(direccion) {
         window.location.href = "Nivel4/Examen.html";
     }else if(direccion == 'Nivel 4') {
         window.location.href = "Nivel4/Nivel.html";
+    }else if (direccion == 1) {
+        window.location.href = '../Worlds/Tutorial/Menu.html';
+    }else if (direccion == 2) {
+        window.location.href = '../Worlds/MundoHistoria/Menu.html';
+    }else if (direccion == 3) {
+        window.location.href = '../Worlds/MundoPitagorico/Menu.html';
+    }else if (direccion == 4) {
+        window.location.href = "AdminAulas/AdminAulas.html";
     }
 }
 
