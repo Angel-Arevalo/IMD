@@ -5,24 +5,30 @@ body {
 }
 
 /*Manipulación de objetos del nav*/
-#Mostrar {
-    display: none;
-}
 #nav {
     margin: 0;
     width: 100%;
     height: 10vh;
     background: linear-gradient(to bottom, #69a1c7, #7e86dd);
     color: white;
-    display: flex;
     position: relative;
 }
 
-#Nombre {
+
+#NombreSelect {
+    display: flex;
+    flex-direction: row;
+    width: 35vw;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
     position: absolute;
-    right: 5%;
-    top: 30%;
-    font-size: 1.5rem;
+    right: 0;
+}
+
+#Nombre {
+    position: relative;
+    font-size: 2vw;
 }
 /*Animaciones de objetos del nav*/
 #NombrePoo {
@@ -43,87 +49,39 @@ body {
 /*Fin de manipulación de objetos del nav*/
 
 /*Inicio de creación de interacción con los mundos*/
-#Tutorial {
+#Mostrar {
+    width: 65vw;
+    height: 45vw;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translate(-40%, -50%);
+    display: none;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.Contend {
+    width: 7vw;
+    height: 14vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Contend div {
     width: 7vw;
     height: 7vw;
     border-radius: 50%;
     background: #e9e9e9;
-    position: relative;
-    margin-top: 8%;
-    margin-left: 15%;
 }
-#TutorialTEXT {
-    color:white;
-    position: relative;
-    margin-left: 17%;
-}
-
-#Historia {
-    width: 7vw;
-    height: 7vw;
-    border-radius: 50%;
-    background: #e9e9e9;
-    position: absolute;
-    margin-left: 31%;
-}
-#HistoriaTEXT {
-    color:white;
-    position: absolute;
-    top: 60%;
-    left: 27%;
-}
-
-#Pitagoras {
-    width: 7vw;
-    height: 7vw;
-    border-radius: 50%;
-    background: #e9e9e9;
-    position: absolute;
-    top: 28%;
-    left: 45%;
-}
-#PitagorasTEXT {
-    color:white;
-    position: absolute;
-    top: 43%;
-    left: 43%;
-}
-
-#Euclides {
-    width: 7vw;
-    height: 7vw;
-    border-radius: 50%;
-    background: #e9e9e9;
-    position: absolute;
-    top: 40%;
-    left: 61%;
-}
-#EuclidesTEXT {
-    color:white;
-    position: absolute;
-    top: 55%;
-    left: 60%;
-}
-/*Inicio de animaciones de la interacción con los mundos*/
-#Tutorial:hover {
+.Contend div:hover {
     transform: scale(1.25);
     box-shadow: 0 0 40px rgb(161, 109, 245);
-    background: white;
+    background: white;;
 }
-#Historia:hover {
-    transform: scale(1.25);
-    box-shadow: 0 0 40px rgb(161, 109, 245);
-    background: white;
+#TEXT {
+    text-align: center;
+    color: #e9e9e9;
 }
-#Pitagoras:hover {
-    transform: scale(1.25);
-    box-shadow: 0 0 40px rgb(161, 109, 245);
-    background: white;
-}
-#Euclides:hover {
-    transform: scale(1.25);
-    box-shadow: 0 0 40px rgb(161, 109, 245);
-    background: white;
-}
-/*Fin de animaciones de la interacción con los mundos*/
 /*Fin de creación de interacción con los mundos*/

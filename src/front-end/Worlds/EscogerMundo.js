@@ -1,5 +1,3 @@
-const mostrar = document.getElementById("Mostrar");
-
 class EscogerMundo {
     #Rol; 
     #Username;
@@ -36,8 +34,9 @@ class EscogerMundo {
             document.body.appendChild(button);
         }
 
-        mostrar.style.display = "block";
+        mostrar.style.display = "flex";
     }
 }
 
+const mostrar = document.getElementById("Mostrar");
 const escogerMundo = new EscogerMundo()
