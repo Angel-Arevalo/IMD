@@ -34,17 +34,16 @@ body {
 #NombrePoo {
     position: absolute;
     left: 3%;
-    top: 30%;
-    font-size: 2rem;
+    top: 50%;
+    transform: translate(-3%, -50%);
+    font-size: 2.5vw;
 }
-#NombrePoo:hover {
-    transform: scale(0.9);
+#NombrePoo:hover, #Nombre:hover {
     color: rgb(187, 171, 212);
 }
-#Nombre:hover {
-    transform: scale(0.9);
-    color: rgb(187, 171, 212);
-}
+.color-change {
+    transition: color 0.3s ease;
+  }
 /*Fin de animaciones de objetos del nav*/
 /*Fin de manipulación de objetos del nav*/
 

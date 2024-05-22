@@ -21,17 +21,17 @@ class EscogerMundo {
             //aula
             
         }else {
-            const button = document.createElement('button');
+            const button = document.createElement('div');
+            const Append = document.getElementById("NombreSelect");
 
             button.setAttribute("class", "Boton");
-            button.style.position = "absolute";
-            button.style.top = "35%";
-            button.style.right = "5%";
+            button.style.position = "relative";
             button.textContent = "Revisar mis aulas";
+            button.style.color = "black";
 
             button.addEventListener('click', function() {Viajar(4)});
 
-            document.body.appendChild(button);
+            Append.appendChild(button);
         }
 
         mostrar.style.display = "flex";
