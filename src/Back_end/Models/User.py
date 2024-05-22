@@ -19,9 +19,9 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     Rol = data.get('Rol')
     User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
     if (Email != "") :#reviso si es un log in o un registro
-        return User.GuardarEnDataUsers(), Cursor.getRol(Nombre)
+        return User.GuardarEnDataUsers(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
     else: 
-        return User.VerificarLogin(), Cursor.getRol(Nombre)
+        return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
 
 class InputUser:
     def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):#constructor
@@ -64,14 +64,16 @@ class InputUser:
 
     def GuardarEnDataUsers(self):
         Registro = self.VerificarRegistro()
+        x = -1 if self.Rol == 1 else 0
+        print(x)
         if (Registro == "Usuario Correcto"):
             self.RSA_Encrypt() #llamado a la encriptación
             try:
                 num = Cursor.FetchOId('Usuarios_Registrados', 'Id')
                 insert = f'''
                         INSERT INTO Usuarios_Registrados 
-                        (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES 
-                        ('{num}', '{self.Usuario}', '{self.Contraseña}', '{self.Rol}', '{self.Email}')
+                        (Id, Nombre_Usuario, Contraseña, Aula, Rol, Email) VALUES 
+                        ('{num}', '{self.Usuario}', '{self.Contraseña}','{x}' ,'{self.Rol}', '{self.Email}')
                         '''
                 Cursor.Execute(insert)
             finally:

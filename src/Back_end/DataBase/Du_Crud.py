@@ -68,6 +68,7 @@ class DB_DataUsers:
                         'Id' INT AUTO_INCREMENT,
                         'Nombre_Usuario' TEXT PRIMARY KEY NOT NULL,
                         'Contraseña' TEXT NOT NULL,
+                        'Aula' TEXT NOT NULL,
                         'Rol' INT NOT NULL,
                         'Email' TEXT NOT NULL UNIQUE,
                         CHECK(Rol IN(1,2))
@@ -100,6 +101,29 @@ class DB_DataUsers:
         if (result == []):
             return "Null"
         return "Estudiante" if (result[0][0] == 1) else "Profesor"
+    
+    def getAula(self, user):
+        x = sql.connect(self.DB_Direction)
+
+        Pointer = x.cursor()
+        result =  Pointer.execute(f"SELECT Aula FROM Usuarios_Registrados WHERE Nombre_Usuario = '{user}'")
+
+        result = Pointer.fetchone()
+
+        try:
+            return result[0]
+        except:
+            return "No registro"
+    
+    def getMail(self, user):
+        x = sql.connect(self.DB_Direction)
+
+        Pointer = x.cursor()
+        result =  Pointer.execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{user}'")
+
+        result = Pointer.fetchone()
+
+        result[0]
     
     def Aulas(self, usuario):
         Aulas = []

@@ -96,7 +96,7 @@ class AdminAulas {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "Codigo": classroom})
+            body: JSON.stringify({"Codigo": classroom})
         })
         .then(response => response.json())
         .then(data => {

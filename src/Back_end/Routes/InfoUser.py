@@ -6,6 +6,7 @@ from flask import request, jsonify
 from flask import Blueprint
 from DataBase.Du_Crud import DB_DataUsers
 from Models.Professor import Teacher
+from Models.Student import Student
 Admin = DB_DataUsers()
 
 informacion_bp = Blueprint("informacion", __name__)
@@ -34,3 +35,11 @@ def recibir_dato_IA(): #Each endpoint function must be unique
 def recibir_dato_IAE():
     respuesta = request.json
     return jsonify({"mensaje": Teacher.CrearAulaVirtual(respuesta.get("Usuario"))})
+
+@informacion_bp.route(r"/Backend/JoinClass", methods = ["POST"])
+def recibir_dato_IAEO():
+    respuesta = request.json
+    mail = Admin.getMail(respuesta.get("Usuario"))
+    res = Student.Unirse_Aula_Virtual(respuesta.get("Usuario"), respuesta.get("Codigo"), mail)
+    return jsonify({"mensaje": res[0], "pass": res[1]})
+
