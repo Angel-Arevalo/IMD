@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Aulas</title>
+    <link rel="icon" href="../../LogoPágina.png">
+    <link rel="stylesheet" href="../Logica y estilos de menús, lecciones y examenes/Estilos/EstilosLeccion.css">
+    <link rel="stylesheet" href="AdminAulas.css">
+</head>
+
+<body>
+    <div id="ContenedorBotones">
+        <button class="Boton" onclick="Viajar('P')">Volver al menú</button>
+    </div>
+
+    <div id="Titulo">
+        <div id="titulo"></div>
+    </div>
+
+    <div id="Contenido">
+
+        <div id="Botones">
+            <button class="Boton" id="Cur" onclick="adminAulas.ShowCur()">Ver mis cursos</button>
+            <button class="Boton" id="CrAula" onclick="adminAulas.CreateClass()">Crear aula</button>
+            <button class="Boton" id="CurId" onclick="adminAulas.SelectCur()"></button>
+        </div>
+
+        <div id="BODY">
+            <table id="TableClassrooms"></table>
+        </div>
+        
+    </div>
+</body>
+<script>
+    let direction = "../../Log-in/Login.html";
+</script>
+<script src="../Logica y estilos de menús, lecciones y examenes/Logica/LogicaMenus.js"></script>
+<script src="AdminAulas.js"></script>
+<script>
+    const adminAulas = new AdminAulas();
+</script>
+</html>

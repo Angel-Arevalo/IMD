@@ -30,12 +30,12 @@ class Teacher(InputUser):
                         '''
             Cursor.Execute(sql_cmd)
 
-    def CrearAulaVirtual(self):
+    def CrearAulaVirtual(Name):
         Code = Randomizer()
         codigo = Code.Generar_Codigo()
         b = Cursor.FetchA(f"PRAGMA table_info('Aula_{codigo}')")
         if (not bool(b)):
-            id_U = Cursor.FetchOId(f"SELECT Id FROM Usuarios_Registrados WHERE Nombre_Usuario = '{self.Usuario}'")
+            id_U = Cursor.FetchOId(f"SELECT Id FROM Usuarios_Registrados WHERE Nombre_Usuario = '{Name}'")
             id_A = Cursor.FetchOId('Aulas', 'Id_Aula')
             id_I = Cursor.FetchOId('User_Aulas', 'Id_User_Aulas')
             sql_cmd = f'''
@@ -64,7 +64,7 @@ class Teacher(InputUser):
             Teacher.__CrearTablaProgreso__(codigo)
             return f"Aula {codigo} creada exitosamente"
         else:
-            self.CrearAulaVirtual()
+            Teacher.CrearAulaVirtual()
             
     def EstAula(codigo):
         Aula = []

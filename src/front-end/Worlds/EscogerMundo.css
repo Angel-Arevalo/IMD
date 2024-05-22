@@ -41,9 +41,10 @@ body {
 #NombrePoo:hover, #Nombre:hover {
     color: rgb(187, 171, 212);
 }
-.color-change {
-    transition: color 0.3s ease;
-  }
+
+#Span {
+    color: black;
+}
 /*Fin de animaciones de objetos del nav*/
 /*Fin de manipulación de objetos del nav*/
 

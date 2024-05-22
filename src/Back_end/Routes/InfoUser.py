@@ -29,3 +29,8 @@ def recibir_dato_IA(): #Each endpoint function must be unique
     except:
         return jsonify({"mensaje" : "Error Peticion", "InfSalon" : []})
     return jsonify({"mensaje" : "Peticion Procesada", "InfSalon" : Salon}) 
+
+@informacion_bp.route(r"/Backend/CrearAula", methods = ['POST'])
+def recibir_dato_IAE():
+    respuesta = request.json
+    return jsonify({"mensaje": Teacher.CrearAulaVirtual(respuesta.get("Usuario"))})

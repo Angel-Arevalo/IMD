@@ -16,22 +16,16 @@ class EscogerMundo {
 
     _ShowBotoom() {
 
+        const button = document.getElementById("Span");
+
         if (this.#Rol == "Estudiante") {
             //en esta parte verificamos si está en un
             //aula
             
         }else {
-            const button = document.createElement('div');
-            const Append = document.getElementById("NombreSelect");
-
-            button.setAttribute("class", "Boton");
-            button.style.position = "relative";
             button.textContent = "Revisar mis aulas";
-            button.style.color = "black";
 
             button.addEventListener('click', function() {Viajar(4)});
-
-            Append.appendChild(button);
         }
 
         mostrar.style.display = "flex";
