@@ -19,12 +19,12 @@ class Student():
             Cursor.Execute(sql_input)
             sql_input = f'''
                         UPDATE Usuarios_Registrados
-                        SET Aula = 'Aula_{codigo}'
+                        SET Aula = '{codigo}'
                         WHERE Nombre_Usuario = '{Usuario}'
                         '''
             Cursor.Execute(sql_input)
             Student.__InicializarDatos__(Usuario, codigo)
-            return f"Se ha unido al Aula_{codigo} exitosamente", "true"
+            return f"Se ha unido al  aula {codigo} exitosamente", "true"
         else:
             return f"El Aula_{codigo} no existe", "false"
 

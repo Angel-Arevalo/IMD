@@ -36,6 +36,7 @@ function Revision(respuestas, Nota) {
         Minutos = (Tiempo - horaInicial - ResiduoMinutos)/60;
     }
     
-    new Calificacion(respuestas, document.getElementById('IngresoRespuestas').value, 
+    const calificacion = new Calificacion(respuestas, document.getElementById('IngresoRespuestas').value, 
                         Nota + 0.4 * Minutos);
+    Calificacion.EnviarNota(Mundo, Nivel, calificacion.nota, bajar = 0.5);
 }

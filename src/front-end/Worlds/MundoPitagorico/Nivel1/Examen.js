@@ -1,5 +1,6 @@
 let horaInicial;
 let respuestas = ['c', 'a', 'd', 'b', 'a'];
+console.log("Hello world");
 
 let Veces = [false, false];
 let Nota = 0;

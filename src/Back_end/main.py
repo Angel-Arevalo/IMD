@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("src\Back_end")
+sys.path.append("src\\Back_end")
 
 from flask import Flask, request
 from flask_cors import CORS

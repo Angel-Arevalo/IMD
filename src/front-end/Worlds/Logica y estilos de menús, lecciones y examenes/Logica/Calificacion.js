@@ -4,7 +4,7 @@ class Calificacion {
     constructor(respuestas, textoRespuestas, Rebaja) {
         this.respuestas = respuestas;
         this.nota = -Rebaja;
-        this.#Aunmento = 5/respuestas.length;
+        this.#Aunmento = 5 / respuestas.length;
         console.log(this.#Aunmento);
 
 
@@ -21,10 +21,10 @@ class Calificacion {
         for (var i = 0; i < this.respuestas.length; i++) {
             if (textoRevisar[i] == ' ' || textoRevisar[i] == 'a' || textoRevisar[i] == 'b'
                 || textoRevisar[i] == 'c' || textoRevisar[i] == 'd' || textoRevisar[i] == ',') {
-                    continue;
-            }else {
+                continue;
+            } else {
                 this._ReportarError("Carácteres no válidos ingresados.");
-                    return false;
+                return false;
             }
         }
 
@@ -40,15 +40,15 @@ class Calificacion {
         }
 
         for (var i = 0; i < ListaTextoRespuestas.length; i++) {
-            
+
             for (let j = 0; j < ListaTextoRespuestas[i].length; j++) {
                 if (ListaTextoRespuestas[i][j] == ' ') {
                     continue;
-                }else if(ListaTextoRespuestas[i][j] == this.respuestas[i]) {
+                } else if (ListaTextoRespuestas[i][j] == this.respuestas[i]) {
                     this.nota += this.#Aunmento;
-                }else if(ListaTextoRespuestas[i][j] == 'a' || ListaTextoRespuestas[i][j] == 'b'
-                        || ListaTextoRespuestas[i][j] == 'c' || ListaTextoRespuestas[i][j] == 'd') {
-                            continue;
+                } else if (ListaTextoRespuestas[i][j] == 'a' || ListaTextoRespuestas[i][j] == 'b'
+                    || ListaTextoRespuestas[i][j] == 'c' || ListaTextoRespuestas[i][j] == 'd') {
+                    continue;
                 }
             }
         }
@@ -71,14 +71,32 @@ class Calificacion {
         let horaInicio = fechaStr.split(' ')[4].split(':');
 
         for (let i = 0; i < 3; i++) {
-            horaInicio[i] = (horaInicio[i])*(Math.pow(60, 2 - i));
+            horaInicio[i] = (horaInicio[i]) * (Math.pow(60, 2 - i));
         }
 
         return horaInicio[0] + horaInicio[1] + horaInicio[2];
     }
 
-    static EnviarNota(nota) {
-        console.log(`La nota de Ariel es ${nota}`);
-        //Aquí irá el código para enviar la nota al back-end
+    static EnviarNota(Mundo, Nivel, Nota, bajar = 0.5) {
+        let Aula = localStorage.getItem('Aula');
+        let Nombre = localStorage.getItem('Nombre');
+        Nota = Nota * bajar;
+
+        fetch("http://localhost:5000/Backend/Calificaciones/Actualizar", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "Nombre": Nombre, "Aula": Aula,
+                "Nivel": Nivel, "Mundo": Mundo, "Nota": Nota
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.mensaje);
+            })
+            .catch(error => console.error(error))
     }
 }
