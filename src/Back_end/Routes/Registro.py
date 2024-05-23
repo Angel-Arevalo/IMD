@@ -11,5 +11,5 @@ registro_bp = Blueprint("Registro", __name__)
 @registro_bp.route(r"/Backend/Registro_Usuario", methods = ['POST'])
 def recibir_dato():
     respuesta = constructor(data = request.json)
-    print(respuesta[0])
-    return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1]})
+
+    return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], "Aula": respuesta[2]})

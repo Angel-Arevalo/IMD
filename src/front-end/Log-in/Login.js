@@ -48,8 +48,7 @@ class User {
             },
             body: JSON.stringify({'Nombre':this.#Username,
                                   'Contraseña':this.#UserPassword,
-                                  'Correo': "",
-                                  'Rol': "",})
+                                  'Correo': ""})
         }
         )
         .then(response => response.json())

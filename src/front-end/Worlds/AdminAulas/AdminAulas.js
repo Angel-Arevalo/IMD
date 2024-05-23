@@ -12,9 +12,6 @@ class AdminAulas {
         this.AskForCurs();
     }
 
-    get GET() {
-        console.log(this.#classrooms);
-    }
     ShowName() {
         const titulo = document.getElementById("Titulo");
 
@@ -29,7 +26,9 @@ class AdminAulas {
 
         if (this.#Select % 2 == 1) {
             this.AskForCurs();
-            this.BuildTable();
+            setTimeout(function () {
+                adminAulas.BuildTable()
+            }, 1000)
         } else document.getElementById("TableClassrooms").style.display = "none";
 
         cur.innerHTML = this.#List[this.#Select % 2];
@@ -56,6 +55,31 @@ class AdminAulas {
 
         table.style.display = "block";
 
+    }
+
+    BuildTableStudents(infoSalon) {
+        const table = document.getElementById("TableStudets");
+        let result = ""
+        let lengthInfo = Object.keys(infoSalon).length;
+        if (lengthInfo == 0) {
+            table.innerHTML = "<thead><tr>No hay estudiantes en esta aula</tr></thead>";
+        }else {
+            let keys = Array.from(Object.keys(infoSalon));
+        let values = Array.from(Object.values(infoSalon));
+
+        for (let i = 0; i < lengthInfo; i++) {
+            result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
+                        <td><button class='Boton'>Mostrar info de este estidiante</button></td></tr>`;
+        }
+
+        table.innerHTML = `<thead><tr><th>Nombre del estudiante</th>
+                            <th>Correo</th>
+                            <th><button class='Boton'>Mostrar info general</button></th></tr>
+                            </thead><tbody>${result}</tbody>`;
+        }
+        
+
+        table.style.display = "block";
     }
 
     AskForCurs() {
@@ -87,21 +111,26 @@ class AdminAulas {
             .then(data => {
                 alert(data.mensaje);
             })
-            .catch (error => console.error(error))
+            .catch(error => console.error(error))
     }
 
     AskForInfoOfClassroom(classroom) {
+        let dta;
         fetch("http://localhost:5000/Backend/InfoAula", {
             method: "POST",
             mode: "cors",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"Codigo": classroom})
+            body: JSON.stringify({ "Codigo": classroom })
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.InfSalon);
-        })
+            .then(response => response.json())
+            .then(data => {
+                dta = data.InfSalon;
+            })
+
+        setTimeout(function () {
+            adminAulas.BuildTableStudents(dta);
+        }, 1000);
     }
 }

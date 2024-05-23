@@ -19,8 +19,10 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     Rol = data.get('Rol')
     User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
     if (Email != "") :#reviso si es un log in o un registro
+        #registro
         return User.GuardarEnDataUsers(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
     else: 
+        #log-in
         return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
 
 class InputUser:
@@ -32,6 +34,7 @@ class InputUser:
         self.modulus = 2491
         self.publicExponent = 37 
         self.privateExponent = 1293
+        self.x = '-1'
 
         @property
         def Usuario(self):
@@ -65,7 +68,7 @@ class InputUser:
     def GuardarEnDataUsers(self):
         Registro = self.VerificarRegistro()
         x = -1 if self.Rol == 1 else 0
-        print(x)
+        self.x = x
         if (Registro == "Usuario Correcto"):
             self.RSA_Encrypt() #llamado a la encriptación
             try:

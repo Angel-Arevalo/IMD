@@ -26,8 +26,15 @@ class EscogerMundo {
                 this.mostrarCarta();
             }else {
                 button.style.display = "block";
+                button.textContent = `su aula es ${this.#Classroom}`;
+                let clas = this.#Classroom;
+                button.addEventListener('click', function() {
+                    alert(`Usted está en el aula ${clas}`)
+                });
                 this.mostrar();
-                document.body.removeChild(document.getElementById("Carta"));
+                try {
+                    document.body.removeChild(document.getElementById("Carta"));
+                }catch(error) {}
             }
 
         } else {
@@ -126,9 +133,9 @@ class EscogerMundo {
         let guion = code.indexOf('-');
 
         if (guion != -1 && guion == 3 && code.length == 7) {
-
+            code = code.substring(0, guion) + code.substring(guion+1)
         } else if (code.length == 6 && guion == -1) {
-            code = code.substring(0, 3) + "-" + code.substring(3);
+
         } else if (code.length < 6 || 7 < code.length) {
             alert("Cantidad de caracteres invalida");
             return '0';

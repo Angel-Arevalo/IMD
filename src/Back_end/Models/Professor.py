@@ -18,13 +18,11 @@ class Teacher(InputUser):
         for i in range(1, 5):
             sql_cmd = f'''
                             CREATE TABLE IF NOT EXISTS 'Mundo{i}_{codigo}' (
-                            'Id_E' INT AUTO_INCREMENT,
                             'Nombre_Estudiante' TEXT NOT NULL PRIMARY KEY,
                             '{i}.Nivel_1' INT NOT NULL,
                             '{i}.Nivel_2' INT NOT NULL,
                             '{i}.Nivel_3' INT NOT NULL,
                             '{i}.Nivel_4' INT NOT NULL,
-                            '{i}.Nivel_5' INT NOT NULL,
                             FOREIGN KEY(Nombre_Estudiante) REFERENCES 'Aula_{codigo}'(Nombre_Estudiante)
                             )
                         '''
@@ -64,15 +62,15 @@ class Teacher(InputUser):
             Teacher.CrearAulaVirtual()
             
     def EstAula(codigo):
-        Aula = []
         sql_cmd = f'''
-                    SELECT * FROM 'Aula_{codigo}' ORDER BY Nombre_Estudiante ASC
+                    SELECT Nombre_Estudiante, Correo
+                    From Aula_{codigo}
                 '''
         result = Cursor.FetchA(sql_cmd)
-        result = CalificacionFormat.SepareList(result)
+        res = {}
         for i in range(len(result)):
-            Aula.append(result[i][0])
-        return Aula
+            res[result[i][0]] = result[i][1]
+        return res
 
 """ def ConvertArgs(args):
     b = []

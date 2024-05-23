@@ -44,7 +44,8 @@ class Registro {
         .then(response => response.json())
         .then(data => {
             if (data.mensaje == "Usuario Correcto") {
-                localStorage.setItem('Rol', data.Rol)
+                localStorage.setItem('Aula', data.Aula);
+                localStorage.setItem('Rol', data.Rol);
                 localStorage.setItem('Nombre', this.#Username);
                 localStorage.setItem('mensaje', '1');
                 window.location.href = '../../Worlds/EscogerMundo.html';
