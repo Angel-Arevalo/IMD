@@ -87,6 +87,7 @@ class AdminAulas {
             .then(data => {
                 alert(data.mensaje);
             })
+            .catch (error => console.error(error))
     }
 
     AskForInfoOfClassroom(classroom) {

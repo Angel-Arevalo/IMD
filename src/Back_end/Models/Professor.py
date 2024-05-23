@@ -42,10 +42,7 @@ class Teacher(InputUser):
                         CREATE TABLE IF NOT EXISTS 'Aula_{codigo}' (
                         'Id_E' INT AUTO_INCREMENT,
                         'Nombre_Estudiante' TEXT NOT NULL PRIMARY KEY,
-                        'Correo' TEXT NOT NULL UNIQUE,
-                        'Mundo' INT NOT NULL,
-                        'Progreso' INT NOT NULL,
-                        'Nota_Final' INT NOT NULL
+                        'Correo' TEXT NOT NULL UNIQUE
                         )
                     '''
             sql_cmd0 = f'''

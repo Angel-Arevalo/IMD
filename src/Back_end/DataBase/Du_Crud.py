@@ -1,5 +1,5 @@
 import json, sqlite3 as sql
-
+from pandas import read_sql_query
 import sys
 # append the path of the parent directory
 sys.path.append("src\Back_end")
@@ -19,6 +19,15 @@ class DB_DataUsers:
         C.commit()
         C.close()
     
+    def ShowTable(self, codigo):
+        C = sql.connect(self.DB_Direction)
+        c = C.cursor()
+
+        df = read_sql_query(f"SELECT name FROM sqlite_master WHERE type='table' AND name = 'Aula_{codigo}'", c)
+
+        df
+        C.close()
+
     def FetchOId(self, query_tabla, *IdF): # Puede recibir una sentencia o el nombre de una tabla con el nombre de su columna de identificacion
         Cursor = sql.connect(self.DB_Direction)
         if (len(IdF) != 0):
