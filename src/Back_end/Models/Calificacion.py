@@ -12,8 +12,8 @@ def constructor(data):
     Mundo = data.get("Mundo")
     Codigo = data.get("Aula")
     Nivel = data.get("Nivel")
-    Nota = data.get("Nota")
-    Nota = Calificacion(Estudiante, Mundo, Codigo, Nivel, Nota) #Creación del objeto
+    Notas = data.get("Nota")
+    Nota = Calificacion(Estudiante, Mundo, Codigo, Nivel, Notas) #Creación del objeto
     return Nota
 
 class Calificacion:
@@ -41,8 +41,6 @@ class Calificacion:
                         SELECT M1.*, M2.*, M3.*, M4.*
                         FROM 'Mundo1_{codigo}' AS M1
                         INNER JOIN 'Mundo2_{codigo}' AS M2 ON M1.Nombre_Estudiante = M2.Nombre_Estudiante
-                        INNER JOIN 'Mundo3_{codigo}' AS M3 ON M2.Nombre_Estudiante = M3.Nombre_Estudiante
-                        INNER JOIN 'Mundo4_{codigo}' AS M4 ON M3.Nombre_Estudiante = M4.Nombre_Estudiante
                     '''
             resultado = Cursor.FetchA(sql_cmd)
         elif (estudiante == "Aula" and mundo != "Todos"): #Aqui hay un posible riesgo a que de error si el mundo no existe
@@ -56,17 +54,16 @@ class Calificacion:
                         SELECT M1.*, M2.*, M3.*, M4.*
                         FROM 'Mundo1_{codigo}' AS M1
                         INNER JOIN 'Mundo2_{codigo}' AS M2 ON M1.Nombre_Estudiante = M2.Nombre_Estudiante
-                        INNER JOIN 'Mundo3_{codigo}' AS M3 ON M2.Nombre_Estudiante = M3.Nombre_Estudiante
-                        INNER JOIN 'Mundo4_{codigo}' AS M4 ON M3.Nombre_Estudiante = M4.Nombre_Estudiante
                         WHERE M1.Nombre_Estudiante = '{estudiante}'
                     '''
             resultado = Cursor.FetchA(sql_cmd)
-        else: #Aqui hay un posible riesgo a que de error
+        elif (estudiante != "Aula" and mundo != "Todos"):
             sql_cmd = f'''
                         SELECT M1.*
                         FROM 'Mundo{mundo}_{codigo}' AS M1 
                         WHERE M1.Nombre_Estudiante = '{estudiante}'
                     '''
             resultado = Cursor.FetchA(sql_cmd)
-        resultado = CalificacionFormat.SepareList(resultado)
+
+        print(resultado)
         return resultado

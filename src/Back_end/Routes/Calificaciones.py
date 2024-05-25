@@ -4,7 +4,7 @@ sys.path.append("src\Back_end")
 
 from flask import request, jsonify
 from flask import Blueprint
-from Models.Calificacion import constructor
+from Models.Calificacion import constructor, Calificacion
 
 calificacion_bp = Blueprint("Calificaciones", __name__)
 

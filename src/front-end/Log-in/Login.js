@@ -58,6 +58,7 @@ class User {
                 localStorage.setItem('mensaje', '1');
                 localStorage.setItem('Nombre', this.#Username);
                 localStorage.setItem('Aula', data.Aula);
+                localStorage.setItem('Notas', data.Notas);
                 window.location.href = '../Worlds/EscogerMundo.html';
             }else alert(data.mensaje)})
         .catch(error => console.error('Error:', error));

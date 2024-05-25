@@ -28,7 +28,7 @@ function Eleccion() {
     console.log(horaInicial);
 }
 
-function Revision(respuestas, Nota) {
+function Revision(respuestas, Nota, Mundo, Nivel) {
     let  Minutos = 0;
     if (Nota != 0) {
         let Tiempo = Calificacion.TomarTiempo()

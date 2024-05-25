@@ -4,10 +4,6 @@ Cursor = DB_DataUsers()
 
 class Student():
 
-    def __init__(self, Usuario: str, Email: str):
-        self.Username = Usuario
-
-
     def Unirse_Aula_Virtual(Usuario, codigo, mail):
         # Check if the classroom table exists
         if Cursor.FetchOId(f"SELECT name FROM sqlite_master WHERE type='table' AND name = 'Aula_{codigo}'") is not None:
@@ -26,7 +22,7 @@ class Student():
             Student.__InicializarDatos__(Usuario, codigo)
             return f"Se ha unido al  aula {codigo} exitosamente", "true"
         else:
-            return f"El Aula_{codigo} no existe", "false"
+            return f"El aula {codigo} no existe", "false"
 
 
     def __InicializarDatos__(nombre, codigo):
