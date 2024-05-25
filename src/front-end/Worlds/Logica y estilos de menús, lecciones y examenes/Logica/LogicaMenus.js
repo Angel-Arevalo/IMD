@@ -47,25 +47,4 @@ function Viajar(direccion) {
         window.location.href = "AdminAulas/AdminAulas.html";
     }
 }
-
-function Comp(Mundo) {
-    fetch("http://localhost:5000/Backend/PedirNotasPersonales", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "Nombre": localStorage.getItem('Nombre'),
-            "Aula": localStorage.getItem('Aula'),
-            "Mundo": Mundo.toString()
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.mensaje);
-        })
-        .catch(error => console.error(error));
-}
-
 //Fin de funciones para viajar entre archivos

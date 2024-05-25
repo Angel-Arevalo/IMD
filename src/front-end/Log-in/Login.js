@@ -59,9 +59,24 @@ class User {
                 localStorage.setItem('Nombre', this.#Username);
                 localStorage.setItem('Aula', data.Aula);
                 localStorage.setItem('Notas', data.Notas);
+                this.ChangeNotas();
                 window.location.href = '../Worlds/EscogerMundo.html';
             }else alert(data.mensaje)})
         .catch(error => console.error('Error:', error));
+    }
+
+    ChangeNotas() {
+        let notas = localStorage.getItem('Notas');
+
+        notas = notas.split(',');
+
+        for (let i = 0; i < notas.length; i++) {
+            if (isNaN(parseInt(notas[i]))) {
+                notas.splice(i, 1);
+            }else notas[i] = parseInt(notas[i]);
+        }
+
+        localStorage.setItem("Notas", notas)
     }
 }
 
