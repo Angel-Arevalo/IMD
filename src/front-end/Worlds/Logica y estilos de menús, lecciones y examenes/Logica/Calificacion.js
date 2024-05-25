@@ -1,7 +1,7 @@
 class Calificacion {
 
     #Aunmento = 1;
-    constructor(respuestas, textoRespuestas, Rebaja) {
+    constructor(respuestas = [], textoRespuestas = "", Rebaja = 0) {
         this.respuestas = respuestas;
         this.nota = -Rebaja;
         this.#Aunmento = 5 / respuestas.length;
@@ -77,7 +77,7 @@ class Calificacion {
         return horaInicio[0] + horaInicio[1] + horaInicio[2];
     }
 
-    static EnviarNota(Mundo, Nivel, Nota, bajar = 0.5) {
+    static EnviarNota(Mundo, Nivel, Nota, bajar) {
         let Aula = localStorage.getItem('Aula');
         let Nombre = localStorage.getItem('Nombre');
         Nota = Nota * bajar;
@@ -95,7 +95,7 @@ class Calificacion {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data.mensaje);
+                console.log(localStorage);
             })
             .catch(error => console.error(error))
     }

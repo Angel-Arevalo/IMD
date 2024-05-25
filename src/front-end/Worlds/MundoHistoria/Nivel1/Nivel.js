@@ -83,10 +83,3 @@ function CrearDiv(tipo) {
 
     document.body.appendChild(divNew);
 }
-
-
-function Verificar() {
-    if (Paralelepipedo + Cuadrados + Triangulos + Casas + SemiTrig + TMayor == 30) {
-        localStorage.setItem('Calificacion', Calificar());
-    }else alert("Aún hay figuras sin acomodar");
-}

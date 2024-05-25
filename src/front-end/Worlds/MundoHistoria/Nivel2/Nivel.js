@@ -40,12 +40,6 @@ function CrearObjeto(objeto) {
     document.body.appendChild(div);
 }
 
-function Revisar() {
-    if (posicionados == 25) {
-        alert("Felicidades, está todo acomodado.");
-    }else alert("Aún hay figuras sin acomodar.");
-}
-
 document.addEventListener('keydown', function Rotar(event){
 
     if (event.key == 'v') {

@@ -32,12 +32,6 @@ function CreateObject(Name, degree) {
     } else alert("Ya está moviendo una figura")
 }
 
-function Terminar() {
-    if (counter == 4) {
-        alert('Juego terminado, bien hecho.')
-    } else alert(`Aún hay figuras ${4 - counter} sin acomodar`);
-}
-
 document.addEventListener('keydown', function (event) {
     if ((event.key.toLocaleLowerCase() == 'x' ||
         event.key.toLocaleLowerCase() == 'y')

@@ -1,4 +1,5 @@
 var leer = localStorage.getItem('mensaje');
+let listOfNotes = [];
 
 addEventListener('load', function () {
     if (leer == "1") {
@@ -16,25 +17,25 @@ function Viajar(direccion) {
     } else if (direccion == 'Leccion 1') {
         window.location.href = "Nivel1/Leccion.html";
     } else if (direccion == 'Examen 1') {
-        window.location.href = "Nivel1/Examen.html";
+        comporbarNivelHecho(0);
     } else if (direccion == 'Nivel 1') {
         window.location.href = "Nivel1/Nivel.html";
     } else if (direccion == 'Leccion 2') {
         window.location.href = "Nivel2/Leccion.html";
     } else if (direccion == 'Examen 2') {
-        window.location.href = "Nivel2/Examen.html";
+        comporbarNivelHecho(1);
     } else if (direccion == 'Nivel 2') {
         window.location.href = "Nivel2/Nivel.html";
     } else if (direccion == 'Leccion 3') {
         window.location.href = "Nivel3/Leccion.html";
     } else if (direccion == 'Examen 3') {
-        window.location.href = "Nivel3/Examen.html";
+        comporbarNivelHecho(2);
     } else if (direccion == 'Nivel 3') {
         window.location.href = "Nivel3/Nivel.html";
     } else if (direccion == 'Leccion 4') {
         window.location.href = "Nivel4/Leccion.html";
     } else if (direccion == 'Examen 4') {
-        window.location.href = "Nivel4/Examen.html";
+        comporbarNivelHecho(3);
     } else if (direccion == 'Nivel 4') {
         window.location.href = "Nivel4/Nivel.html";
     } else if (direccion == 1) {
@@ -48,3 +49,24 @@ function Viajar(direccion) {
     }
 }
 //Fin de funciones para viajar entre archivos
+
+//funciones de comprobación
+function ObtenerListasDeNotas(inicio) {
+    listOfNotes = localStorage.getItem("Notas").split(',');
+
+    listOfNotes = listOfNotes.splice(inicio, 4);
+
+    for (let i = 0; i < listOfNotes.length; i++) {
+        listOfNotes[i] = parseFloat(listOfNotes[i]);
+    }
+}
+
+function comporbarNivelHecho(nivel) {
+    let nota = listOfNotes[nivel];
+
+    if (nota == -1) {
+        window.location.href =`Nivel${nivel + 1}/Examen.html`;
+    }else alert("Usted ya realizó este examen");
+}
+
+//Fin de funciones de comprobación
