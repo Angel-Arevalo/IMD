@@ -1,5 +1,5 @@
 var leer = localStorage.getItem('mensaje');
-let listOfNotes = [];
+let listOfNotes = [], listOfNotesChallenge = [];
 
 addEventListener('load', function () {
     if (leer == "1") {
@@ -11,40 +11,50 @@ addEventListener('load', function () {
 
 //Funciones para viajar entre archivos
 function Viajar(direccion) {
-    localStorage.setItem('mensaje', '1');
     if (direccion == 'P') {
+        localStorage.setItem('mensaje', '1');
         window.location.href = "../EscogerMundo.html";
     } else if (direccion == 'Leccion 1') {
+        localStorage.setItem('mensaje', '1');
         window.location.href = "Nivel1/Leccion.html";
     } else if (direccion == 'Examen 1') {
         comporbarNivelHecho(0);
     } else if (direccion == 'Nivel 1') {
-        window.location.href = "Nivel1/Nivel.html";
+        localStorage.setItem('mensaje', '1');
+        comporbarRetoHecho(0);
     } else if (direccion == 'Leccion 2') {
+        localStorage.setItem('mensaje', '1');
         window.location.href = "Nivel2/Leccion.html";
     } else if (direccion == 'Examen 2') {
         comporbarNivelHecho(1);
     } else if (direccion == 'Nivel 2') {
-        window.location.href = "Nivel2/Nivel.html";
+        comporbarRetoHecho(1);
     } else if (direccion == 'Leccion 3') {
+        localStorage.setItem('mensaje', '1');
         window.location.href = "Nivel3/Leccion.html";
     } else if (direccion == 'Examen 3') {
         comporbarNivelHecho(2);
     } else if (direccion == 'Nivel 3') {
-        window.location.href = "Nivel3/Nivel.html";
+        comporbarRetoHecho(2);
     } else if (direccion == 'Leccion 4') {
+        localStorage.setItem('mensaje', '1');
         window.location.href = "Nivel4/Leccion.html";
     } else if (direccion == 'Examen 4') {
         comporbarNivelHecho(3);
     } else if (direccion == 'Nivel 4') {
+        localStorage.setItem('mensaje', '1');
         window.location.href = "Nivel4/Nivel.html";
     } else if (direccion == 1) {
+        localStorage.setItem('mensaje', '1');
         window.location.href = '../Worlds/Tutorial/Menu.html';
     } else if (direccion == 2) {
+        localStorage.setItem('mensaje', '1');
         window.location.href = '../Worlds/MundoHistoria/Menu.html';
     } else if (direccion == 3) {
+        localStorage.setItem('mensaje', '1');
         window.location.href = '../Worlds/MundoPitagorico/Menu.html';
     } else if (direccion == 4) {
+        localStorage.setItem('mensaje', '1');
         window.location.href = "AdminAulas/AdminAulas.html";
     }
 }
@@ -52,21 +62,30 @@ function Viajar(direccion) {
 
 //funciones de comprobación
 function ObtenerListasDeNotas(inicio) {
-    listOfNotes = localStorage.getItem("Notas").split(',');
-
-    listOfNotes = listOfNotes.splice(inicio, 4);
+    listOfNotes = localStorage.getItem("Notas").split(',').splice(inicio, 7);
 
     for (let i = 0; i < listOfNotes.length; i++) {
         listOfNotes[i] = parseFloat(listOfNotes[i]);
     }
+
+    listOfNotesChallenge = listOfNotes.splice(4, 3);
 }
 
 function comporbarNivelHecho(nivel) {
     let nota = listOfNotes[nivel];
 
     if (nota == -1) {
+        localStorage.setItem('mensaje', '1');
         window.location.href =`Nivel${nivel + 1}/Examen.html`;
     }else alert("Usted ya realizó este examen");
 }
 
+function comporbarRetoHecho(reto) {
+    let nota = listOfNotesChallenge[reto];
+
+    if (nota == -1) {
+        localStorage.setItem('mensaje', '1');
+        window.location.href = `Nivel${reto + 1}/Nivel.html`;
+    }else alert("Usted ya realizó este reto");
+}
 //Fin de funciones de comprobación

@@ -15,7 +15,7 @@ class Teacher(InputUser):
         self.GuardarEnDataUsers()
 
     def __CrearTablaProgreso__(codigo: str):
-        for i in range(1, 5):
+        for i in range(1, 3):
             sql_cmd = f'''
                             CREATE TABLE IF NOT EXISTS 'Mundo{i}_{codigo}' (
                             'Nombre_Estudiante' TEXT NOT NULL PRIMARY KEY,
@@ -23,6 +23,9 @@ class Teacher(InputUser):
                             '{i}.Nivel_2' INT NOT NULL,
                             '{i}.Nivel_3' INT NOT NULL,
                             '{i}.Nivel_4' INT NOT NULL,
+                            '{i}.Reto_1' INT NOT NULL,
+                            '{i}.Reto_2' INT NOT NULL,
+                            '{i}.Reto_3' INT NOT NULL,
                             FOREIGN KEY(Nombre_Estudiante) REFERENCES 'Aula_{codigo}'(Nombre_Estudiante)
                             )
                         '''

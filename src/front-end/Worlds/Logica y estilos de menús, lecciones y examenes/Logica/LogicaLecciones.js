@@ -25,11 +25,11 @@ function Eleccion(Mundo, Nivel) {
     document.getElementById('Instrucciones').style.display = "none";
     document.getElementById('Mostrar').style.display = "block";
     horaInicial = Calificacion.TomarTiempo();
-    ModifyLocalStorage(4 * (Mundo - 1) + Nivel - 1);
-    Calificacion.EnviarNota(Mundo, Nivel, 0, 0)
+    ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1);
+    Calificacion.EnviarNota(Mundo, Nivel, 0, 0, 1)
 }
 
-function Revision(respuestas, Nota, Mundo, Nivel, bajar = 0.5) {
+function Revision(respuestas, Nota, Mundo, Nivel, bajar = 0.5, bajarReto = 1) {
     let Minutos = 0;
 
     if (Nota != 0) {
@@ -39,9 +39,10 @@ function Revision(respuestas, Nota, Mundo, Nivel, bajar = 0.5) {
     }
 
     const calificacion = new Calificacion(respuestas, document.getElementById('IngresoRespuestas').value,
-        Nota + 0.4 * Minutos);
-    Calificacion.EnviarNota(Mundo, Nivel, calificacion.nota, bajar);
-    ModifyLocalStorage(4 * (Mundo - 1) + Nivel - 1, calificacion.nota);
+        Nota + 0.4 * Minutos, bajarReto);
+    Calificacion.EnviarNota(Mundo, Nivel, calificacion.nota, bajar, 1);
+    ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1, calificacion.nota);
+    Viajar("Menu");
 }
 
 function ModifyLocalStorage(index, nota = 0) {
@@ -53,21 +54,14 @@ function ModifyLocalStorage(index, nota = 0) {
 }
 
 function Verificar(objetos, Acomodados = 0, m, n) {
-    console.log("Hello world");
     // m means world and n means level
     let nota = 0;
     if (objetos == Acomodados) {
-
-        nota = localStorage.getItem("Notas").split(',');
-        nota = parseFloat(nota[4 * (m - 1) + n - 1]);
-        nota = 2.5 + nota;
-
-        if (5 < nota) nota = 5;
-
-        Calificacion.EnviarNota(m, n, nota, 1);
-        ModifyLocalStorage(4 * (m - 1) + n - 1, nota);
+        nota = 2.5;
+        Calificacion.EnviarNota(m, ((7 * (m - 1) + 3 + n)%7)%3, nota, 1, 2);
+        ModifyLocalStorage(7 * (m - 1) + 3 + n, nota);
 
         alert("Juego terminado, bien hecho");
-        Viajar("Menu");
+        setTimeout(Viajar("Menu"), 4000)
     }else alert(`Aún quedan ${objetos - Acomodados} figuras por acomodar`);
 }

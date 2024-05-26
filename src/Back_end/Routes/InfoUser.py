@@ -7,6 +7,7 @@ from flask import Blueprint
 from DataBase.Du_Crud import DB_DataUsers
 from Models.Professor import Teacher
 from Models.Student import Student
+from Routes.Login import askForNotes
 Admin = DB_DataUsers()
 
 informacion_bp = Blueprint("informacion", __name__)
@@ -41,5 +42,11 @@ def recibir_dato_IAEO():
     respuesta = request.json
     mail = Admin.getMail(respuesta.get("Usuario"))
     res = Student.Unirse_Aula_Virtual(respuesta.get("Usuario"), respuesta.get("Codigo"), mail)
-    return jsonify({"mensaje": res[0], "pass": res[1]})
+    
+    toReturn = {"mensaje": res[0], "pass": res[1]}
+
+    if res[1] == "true":
+        toReturn["Notas"] = askForNotes(respuesta.get("Usuario"), respuesta.get("Codigo"))
+    
+    return jsonify(toReturn)
 

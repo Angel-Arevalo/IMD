@@ -14,7 +14,7 @@ def recibir_dato():
     data = request.json
     respuesta = constructor(data)
 
-    if respuesta[0] != "Usuario o Contraseña Incorrectos":
+    if respuesta[0] != "Usuario o Contraseña Incorrectos" and respuesta[1] != "Profesor":
         lista = askForNotes(data.get('Nombre'), respuesta[2])
         return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], 
                         "Aula": respuesta[2], "Notas": lista})
@@ -22,18 +22,17 @@ def recibir_dato():
     return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], "Aula": respuesta[2]})
 
 def askForNotes(nombre, aula):
-    print(nombre + " " + aula)
-    
-    toReturn = []
+    if aula != '-1':
 
-    for j in range(1, 3):
-        notas = Calificacion.NotasEstudiante(aula, nombre, j)
-        
-        resultado = []
+        toReturn = ""
 
-        for i in range(len(notas[0])):
-            resultado.append(notas[0][i])
-        
-        toReturn.append(resultado)
+        for j in range(1, 3):
+            notas = Calificacion.NotasEstudiante(aula, nombre, j)
+            
+            resultado = "" if j == 1 else ","
 
-    return toReturn
+            for i in range(len(notas[0])):
+                resultado += f"{notas[0][i]}," if i != len(notas[0]) - 1 else f"{notas[0][i]}"
+            
+            toReturn += resultado
+        return toReturn

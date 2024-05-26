@@ -13,25 +13,40 @@ def constructor(data):
     Codigo = data.get("Aula")
     Nivel = data.get("Nivel")
     Notas = data.get("Nota")
-    Nota = Calificacion(Estudiante, Mundo, Codigo, Nivel, Notas) #Creación del objeto
+    tipo = data.get("Tipo")
+
+    Nota = Calificacion(Estudiante, Mundo, Codigo, Nivel, Notas, tipo) #Creación del objeto
     return Nota
 
 class Calificacion:
-    def __init__(self, Estudiante, Mundo, Codigo, Nivel, Nota): 
+    def __init__(self, Estudiante, Mundo, Codigo, Nivel, Nota, tipo): 
         self.Estudiante = Estudiante
         self.Mundo = Mundo
         self.Codigo = Codigo
         self.Nivel = Nivel
         self.Nota = Nota
+        self.Tipo = tipo
 
     def ActualizarNotas(self):
-        sql_cmd = f'''
-                    UPDATE 'Mundo{self.Mundo}_{self.Codigo}'
-                    SET
-                    '{self.Mundo}.Nivel_{self.Nivel}' = {self.Nota}
-                    WHERE
-                    Nombre_Estudiante = '{self.Estudiante}'
-                '''
+
+        if self.Tipo == 1:
+            sql_cmd = f'''
+                        UPDATE 'Mundo{self.Mundo}_{self.Codigo}'
+                        SET
+                        '{self.Mundo}.Nivel_{self.Nivel}' = {self.Nota}
+                        WHERE
+                        Nombre_Estudiante = '{self.Estudiante}'
+                    '''
+        else:
+            sql_cmd = f'''
+                        UPDATE 'Mundo{self.Mundo}_{self.Codigo}'
+                        SET
+                        '{self.Mundo}.Reto_{self.Nivel}' = {self.Nota}
+                        WHERE
+                        Nombre_Estudiante = '{self.Estudiante}'
+                    '''
+            
+
         Cursor.Execute(sql_cmd)
 
     ## A esta funcion se la llama asi: Calificacion.NotasEstudiante('code') #Necesita almenos el codigo
@@ -65,5 +80,4 @@ class Calificacion:
                     '''
             resultado = Cursor.FetchA(sql_cmd)
 
-        print(resultado)
         return resultado

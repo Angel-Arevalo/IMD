@@ -1,7 +1,7 @@
 class Calificacion {
 
     #Aunmento = 1;
-    constructor(respuestas = [], textoRespuestas = "", Rebaja = 0) {
+    constructor(respuestas = [], textoRespuestas = "", Rebaja = 0, bajarReto) {
         this.respuestas = respuestas;
         this.nota = -Rebaja;
         this.#Aunmento = 5 / respuestas.length;
@@ -12,6 +12,7 @@ class Calificacion {
             if (this._RevisarNota(textoRespuestas.split(','))) {
                 this._CorrejirNota();
                 this._ReportarError(`Su nota es ${this.nota}`);
+                this.nota *= bajarReto;
             }
         }
 
@@ -77,10 +78,11 @@ class Calificacion {
         return horaInicio[0] + horaInicio[1] + horaInicio[2];
     }
 
-    static EnviarNota(Mundo, Nivel, Nota, bajar) {
+    static EnviarNota(Mundo, Nivel, Nota, bajar, tipo) {
         let Aula = localStorage.getItem('Aula');
         let Nombre = localStorage.getItem('Nombre');
         Nota = Nota * bajar;
+        console.log(tipo);
 
         fetch("http://localhost:5000/Backend/Calificaciones/Actualizar", {
             method: "POST",
@@ -90,7 +92,8 @@ class Calificacion {
             },
             body: JSON.stringify({
                 "Nombre": Nombre, "Aula": Aula,
-                "Nivel": Nivel, "Mundo": Mundo, "Nota": Nota
+                "Nivel": Nivel, "Mundo": Mundo, 
+                "Nota": Nota, "Tipo": tipo
             })
         })
             .then(response => response.json())

@@ -29,7 +29,7 @@ class Student():
         for i in range(1,3):
             sql_cmd = f'''
                         INSERT INTO 'Mundo{i}_{codigo}'
-                        (Nombre_Estudiante, '{i}.Nivel_1', '{i}.Nivel_2', '{i}.Nivel_3', '{i}.Nivel_4')
-                        VALUES ('{nombre}', -1, -1, -1, -1)
+                        (Nombre_Estudiante, '{i}.Nivel_1', '{i}.Nivel_2', '{i}.Nivel_3', '{i}.Nivel_4', '{i}.Reto_1', '{i}.Reto_2', '{i}.Reto_3')
+                        VALUES ('{nombre}', -1, -1, -1, -1, -1, -1, -1)
                     '''
             Cursor.Execute(sql_cmd)
