@@ -1,3 +1,6 @@
+let cargando = false;
+let dta;
+
 class AdminAulas {
 
     #UserName;
@@ -6,7 +9,6 @@ class AdminAulas {
     constructor() {
         this.#UserName = localStorage.getItem("Nombre");
         this.#List = ["Ver mis cursos", "Dejar de ver mis cursos"];
-
 
         this.ShowName();
         this.AskForCurs();
@@ -22,20 +24,23 @@ class AdminAulas {
     ShowCur() {
         const cur = document.getElementById("Cur");
 
-        this.#Select += 1;
+        if (!cargando) {
+            this.#Select += 1;
+        } else alert("Está cargando otro proceso.");
 
-        if (this.#Select % 2 == 1) {
+
+        if (this.#Select % 2 == 1 && !cargando) {
+            cargando = true;
             this.AskForCurs();
-            setTimeout(function () {
-                adminAulas.BuildTable()
-            }, 1000)
-        } else document.getElementById("TableClassrooms").style.display = "none";
-
+            new BuildProgressVar(document.getElementById("BODY"), "la información de sus aulas");
+        } else if (this.#Select % 2 == 0){
+            document.getElementById("BODY").innerHTML = "";
+        }
         cur.innerHTML = this.#List[this.#Select % 2];
     }
 
     BuildTable() {
-        const table = document.getElementById("TableClassrooms");
+        const table = document.createElement("Table");
         let result = "";
         if (this.#classrooms.length == 0) {
             table.innerHTML = "<thead><tr><th>Usted no tiene aulas</th></thead>"
@@ -54,35 +59,46 @@ class AdminAulas {
         }
 
         table.style.display = "block";
+        table.id = "tableClassrooms";
+
+        document.getElementById("BODY").appendChild(table);
 
     }
 
     BuildTableStudents(infoSalon) {
-        const table = document.getElementById("TableStudets");
+        const table = document.createElement("table");
         let result = ""
         let lengthInfo = Object.keys(infoSalon).length;
         if (lengthInfo == 0) {
             table.innerHTML = "<thead><tr>No hay estudiantes en esta aula</tr></thead>";
-        }else {
+        } else {
             let keys = Array.from(Object.keys(infoSalon));
-        let values = Array.from(Object.values(infoSalon));
+            let values = Array.from(Object.values(infoSalon));
 
-        for (let i = 0; i < lengthInfo; i++) {
-            result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
-                        <td><button class='Boton'>Mostrar info de este estidiante</button></td></tr>`;
-        }
+            for (let i = 0; i < lengthInfo; i++) {
+                result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
+                        <td><button class='Boton'>Mostrar info de este estudiante</button></td></tr>`;
+            }
 
-        table.innerHTML = `<thead><tr><th>Nombre del estudiante</th>
+            table.innerHTML = `<thead><tr><th>Nombre del estudiante</th>
                             <th>Correo</th>
                             <th><button class='Boton'>Mostrar info general</button></th></tr>
                             </thead><tbody>${result}</tbody>`;
         }
-        
 
+        table.id = "TableStudets";
         table.style.display = "block";
+        document.getElementById("BODY").appendChild(table);
+    }
+
+    ClearTableStudent() {
+        try {
+            document.getElementById("BODY").removeChild(document.getElementById("TableStudets"));
+        } catch { }
     }
 
     AskForCurs() {
+
         fetch('http://localhost:5000/Backend/InfoBasica/Aulas', {
             method: "POST",
             mode: "cors",
@@ -96,6 +112,7 @@ class AdminAulas {
                 this.#classrooms = data.Aulas;
             })
             .catch(error => console.error('Error:', error));
+
     }
 
     CreateClass() {
@@ -115,22 +132,23 @@ class AdminAulas {
     }
 
     AskForInfoOfClassroom(classroom) {
-        let dta;
-        fetch("http://localhost:5000/Backend/InfoAula", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ "Codigo": classroom })
-        })
-            .then(response => response.json())
-            .then(data => {
-                dta = data.InfSalon;
+        if (!cargando) {
+            fetch("http://localhost:5000/Backend/InfoAula", {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "Codigo": classroom })
             })
+                .then(response => response.json())
+                .then(data => {
+                    dta = data.InfSalon;
+                })
 
-        setTimeout(function () {
-            adminAulas.BuildTableStudents(dta);
-        }, 1000);
+            this.ClearTableStudent();
+            new BuildProgressVar(document.getElementById("BODY"), "aula " + classroom, 0);
+        } else alert("Está cargando otro proceso.");
+
     }
 }

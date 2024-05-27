@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    gap: 30px;
 }
 
 #Titulo {
@@ -33,7 +34,7 @@ body {
 }
 
 #Contenido {
-    width: 60%;
+    width: 80%;
     height: 40%;
 }
 
@@ -56,26 +57,25 @@ td {
     border-bottom: 0.1vw solid black;
 }
 
+/* Estilos para crear el progress var */
 @keyframes rellenar {
     to {
-        stroke-dasharray: var(--porcentaje) 100;
+        stroke-dasharray: 100 100;
     }
 }
 
 .porcentajes {
     position: relative;
+    width: 15vw;
+    height: 15vw;
 }
 
 .porcentajes span {
     position: absolute;
-    top: 0%;
-    left: 0%;
-    bottom: 0%;
-    right: 0%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font: 25px/1em Verdana;
+    font: 1.5vw Verdana;
 }
 
 circle {
@@ -83,13 +83,11 @@ circle {
     stroke-width: 20;
     transform: rotate(-90deg);
     transform-origin: 50%;
-    stroke-dasharray: 100 100;
-    stroke: #AAA;
 }
 
 circle:nth-child(2) {
     /* el segundo círculo, es el que se ve por encima del anterior y debe tener el color mas intenso y el area del porcentaje */
     stroke: var(--color);
     stroke-dasharray: 0 100;
-    animation: rellenar 2s linear forwards;
+    animation: rellenar 2.5s linear infinite;
 }
