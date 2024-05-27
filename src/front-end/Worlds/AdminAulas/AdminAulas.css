@@ -16,6 +16,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 #Botones {
     width: 100%;
     height: 20%;
@@ -24,6 +25,7 @@ body {
     justify-content: space-around;
     align-items: center;
 }
+
 #ContenedorBotones {
     position: absolute;
     left: 0;
@@ -34,9 +36,11 @@ body {
     width: 60%;
     height: 40%;
 }
+
 #CurId {
     display: none;
 }
+
 #BODY {
     width: 100%;
     height: auto;
@@ -45,7 +49,47 @@ body {
     justify-content: space-around;
     align-items: center;
 }
-th, td {
+
+th,
+td {
     text-align: center;
     border-bottom: 0.1vw solid black;
+}
+
+@keyframes rellenar {
+    to {
+        stroke-dasharray: var(--porcentaje) 100;
+    }
+}
+
+.porcentajes {
+    position: relative;
+}
+
+.porcentajes span {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
+    right: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 25px/1em Verdana;
+}
+
+circle {
+    fill: none;
+    stroke-width: 20;
+    transform: rotate(-90deg);
+    transform-origin: 50%;
+    stroke-dasharray: 100 100;
+    stroke: #AAA;
+}
+
+circle:nth-child(2) {
+    /* el segundo círculo, es el que se ve por encima del anterior y debe tener el color mas intenso y el area del porcentaje */
+    stroke: var(--color);
+    stroke-dasharray: 0 100;
+    animation: rellenar 2s linear forwards;
 }
