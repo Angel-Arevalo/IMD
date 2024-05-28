@@ -74,13 +74,13 @@ class AdminAulas {
         } else {
             let keys = Object.keys(infoSalon);
             let values = Object.values(infoSalon);
-    
+
             for (let i = 0; i < lengthInfo; i++) {
                 result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
                             <td><button class='Boton' onclick='adminAulas.AskForStudents("${this.#Aula}", "${keys[i]}")'>
                             Mostrar info de este estudiante</button></td></tr>`;
             }
-    
+
             table.innerHTML = `<thead><tr>
                                 <th>Nombre del estudiante</th>
                                 <th>Correo</th>
@@ -88,12 +88,12 @@ class AdminAulas {
                                 </tr></thead>
                                 <tbody>${result}</tbody>`;
         }
-    
+
         table.id = "TableStudents";
         table.style.display = "block";
         document.getElementById("BODY").appendChild(table);
     }
-    
+
 
     ClearTableStudent() {
         try {
@@ -102,7 +102,77 @@ class AdminAulas {
     }
 
     CrateTableNotes() {
+        const table = document.createElement("table");
 
+        let keys = Array.from(Object.keys(notes));
+        let values = Object.values(notes);
+        let result = "";
+        let rW1 = "";
+        let rW2 = "";
+
+        for (let i = 0; i < keys.length; i++) {
+            for (let j = 0; j < values[i].length; j++) {
+                let world2 = Array.from(values[i].split(','));
+                let world1 = world2.splice(0, 7);
+                rW1 = "";
+                rW2 = "";
+
+                for (let k = 0; k < 4; k++) {
+                    if (world2[k] == '-1') world2[k] = '0';
+
+                    if (world1[k] == '-1') world1[k] = '0';
+                    try {
+                        if (world1[k + 4] == "-1") world1[k + 4] = '0';
+                        if (world2[k + 4] == "-1") world2[k + 4] = '0';
+                    } catch { }
+
+                    if (k != 3) {
+                        rW1 += `<td>${parseFloat(world1[k]) + parseFloat(world1[k + 4])}</td>`;
+                        rW2 += `<td>${parseFloat(world2[k]) + parseFloat(world2[k + 4])}</td>`;
+                    } else {
+                        rW1 += `<td>${world1[k]}</td>`;
+                        rW2 += `<td>${world2[k]}</td>`;
+                    }
+                }
+            }
+            result += `<tr>
+                       <td>${keys[i]}</td>
+                       <td><table>
+                       <thead>
+                       <tr>
+                       <th>Nivel 1</th> 
+                       <th>Nivel 2</th>
+                       <th>Nivel 3</th>
+                       <th>Nivel 4</th></tr>
+                       </thead>
+                       <tbody>
+                       <tr>${rW1}</tr>
+                       </tbody>
+                       </table></td>
+                       <td><table>
+                       <thead>
+                       <tr>
+                       <th>Nivel 1</th> 
+                       <th>Nivel 2</th>
+                       <th>Nivel 3</th>
+                       <th>Nivel 4</th></tr>
+                       </thead>
+                       <tbody>
+                       <tr>${rW2}</tr>
+                       </tbody>
+                       </table></td>
+                       </tr>`
+        }
+
+        table.innerHTML = `<thead><tr>
+                            <td>Estudiante</td>
+                            <td>Mundo Historico</td>
+                            <td>Mundo Griego</td></tr></thead>
+                            <tbody>
+                            ${result}
+                            </tbody>`
+
+        document.getElementById("Notes").appendChild(table);
     }
 
     AskForCurs() {
@@ -161,7 +231,7 @@ class AdminAulas {
 
     }
 
-    AskForStudents(classroom, estudiante = "") {
+    AskForStudents(classroom, estudiante) {
         if (!cargando) {
 
             fetch("http://localhost:5000/Backend/Calificaciones/PedirNotas", {
@@ -175,8 +245,10 @@ class AdminAulas {
                 .then(response => response.json())
                 .then(data => {
                     notes = data;
+                    console.log(data);
                 })
                 .catch(error => console.error(error))
+            new BuildProgressVar(document.getElementById("Notes"), "notas de " + estudiante, 2);
         } else alert("Está cargando otro proceso")
     }
 }
