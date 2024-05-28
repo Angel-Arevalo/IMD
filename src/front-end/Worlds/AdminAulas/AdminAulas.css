@@ -42,7 +42,7 @@ body {
     display: none;
 }
 
-#BODY {
+#BODY, #Notes {
     width: 100%;
     height: auto;
     display: flex;

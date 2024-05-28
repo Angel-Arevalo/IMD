@@ -45,7 +45,7 @@ class BuildProgressVar {
         this.direction.removeChild(document.getElementById("ProgressVar"));
         cargando = false;
 
-        if (this.tipo != 1) adminAulas.BuildTableStudents(dta);
+        if (this.tipo != 1) adminAulas.buildTableStudents(dta);
         else adminAulas.BuildTable();
     }
 }

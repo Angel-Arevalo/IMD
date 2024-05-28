@@ -1,8 +1,8 @@
 let cargando = false;
-let dta;
+let dta, notes;
 
 class AdminAulas {
-
+    #Aula = "";
     #UserName;
     #List; #Select = 0;
     #classrooms = [];
@@ -33,7 +33,7 @@ class AdminAulas {
             cargando = true;
             this.AskForCurs();
             new BuildProgressVar(document.getElementById("BODY"), "la información de sus aulas");
-        } else if (this.#Select % 2 == 0){
+        } else if (this.#Select % 2 == 0) {
             document.getElementById("BODY").innerHTML = "";
         }
         cur.innerHTML = this.#List[this.#Select % 2];
@@ -65,36 +65,44 @@ class AdminAulas {
 
     }
 
-    BuildTableStudents(infoSalon) {
+    buildTableStudents(infoSalon) {
         const table = document.createElement("table");
-        let result = ""
+        let result = "";
         let lengthInfo = Object.keys(infoSalon).length;
         if (lengthInfo == 0) {
-            table.innerHTML = "<thead><tr>No hay estudiantes en esta aula</tr></thead>";
+            table.innerHTML = "<thead><tr><th>No hay estudiantes en esta aula</th></tr></thead>";
         } else {
-            let keys = Array.from(Object.keys(infoSalon));
-            let values = Array.from(Object.values(infoSalon));
-
+            let keys = Object.keys(infoSalon);
+            let values = Object.values(infoSalon);
+    
             for (let i = 0; i < lengthInfo; i++) {
                 result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
-                        <td><button class='Boton'>Mostrar info de este estudiante</button></td></tr>`;
+                            <td><button class='Boton' onclick='adminAulas.AskForStudents("${this.#Aula}", "${keys[i]}")'>
+                            Mostrar info de este estudiante</button></td></tr>`;
             }
-
-            table.innerHTML = `<thead><tr><th>Nombre del estudiante</th>
-                            <th>Correo</th>
-                            <th><button class='Boton'>Mostrar info general</button></th></tr>
-                            </thead><tbody>${result}</tbody>`;
+    
+            table.innerHTML = `<thead><tr>
+                                <th>Nombre del estudiante</th>
+                                <th>Correo</th>
+                                <th><button class='Boton'>Mostrar info general</button></th>
+                                </tr></thead>
+                                <tbody>${result}</tbody>`;
         }
-
-        table.id = "TableStudets";
+    
+        table.id = "TableStudents";
         table.style.display = "block";
         document.getElementById("BODY").appendChild(table);
     }
+    
 
     ClearTableStudent() {
         try {
             document.getElementById("BODY").removeChild(document.getElementById("TableStudets"));
         } catch { }
+    }
+
+    CrateTableNotes() {
+
     }
 
     AskForCurs() {
@@ -145,10 +153,30 @@ class AdminAulas {
                 .then(data => {
                     dta = data.InfSalon;
                 })
-
+                .catch(error => console.error(error))
             this.ClearTableStudent();
             new BuildProgressVar(document.getElementById("BODY"), "aula " + classroom, 0);
+            this.#Aula = classroom;
         } else alert("Está cargando otro proceso.");
 
+    }
+
+    AskForStudents(classroom, estudiante = "") {
+        if (!cargando) {
+
+            fetch("http://localhost:5000/Backend/Calificaciones/PedirNotas", {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ "Aula": classroom, "Nombre": estudiante })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    notes = data;
+                })
+                .catch(error => console.error(error))
+        } else alert("Está cargando otro proceso")
     }
 }
