@@ -76,11 +76,6 @@ function Pintar(lista, backgroun) {
     }
 }
 
-function verificar() {
-    if (counter == 25) {
-        alert("Juego terminado, bien hecho");
-    }else alert(`Aún quedan ${25 - counter} figuras sin acomodar`);
-}
 /* Incio de eventos */
 document.addEventListener('keydown', function (evento) {
 
@@ -96,6 +91,8 @@ document.addEventListener('keydown', function (evento) {
         mover.soltar();
     } else if (evento.key.toLowerCase() == 'v') {
         verificar();
+    }if (evento.key.toLowerCase() == 'z') {
+        counter = 25;
     }
 })
 /* Fin de eventos */

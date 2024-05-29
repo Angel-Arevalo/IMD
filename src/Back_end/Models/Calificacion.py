@@ -46,14 +46,13 @@ class Calificacion:
                         Nombre_Estudiante = '{self.Estudiante}'
                     '''
             
-
         Cursor.Execute(sql_cmd)
 
     ## A esta funcion se la llama asi: Calificacion.NotasEstudiante('code') #Necesita almenos el codigo
     def NotasEstudiante(codigo, estudiante = "Aula", mundo = "Todos"): #Devuelve una lista de tuplas [(Estudiante_1), (Estudiante_2),...,(Estudiante_n)]
         if (estudiante == "Aula" and mundo == "Todos"):
             sql_cmd = f'''
-                        SELECT M1.*, M2.*, M3.*, M4.*
+                        SELECT M1.*, M2.*
                         FROM 'Mundo1_{codigo}' AS M1
                         INNER JOIN 'Mundo2_{codigo}' AS M2 ON M1.Nombre_Estudiante = M2.Nombre_Estudiante
                     '''

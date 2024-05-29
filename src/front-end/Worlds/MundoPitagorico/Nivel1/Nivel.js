@@ -46,6 +46,8 @@ document.addEventListener('keydown', function (event) {
         !move.FiguraMoviendose) {
         move.Rotate(-90);
     } if (event.key.toLowerCase() == 'v') {
-        Terminar()
+        Verificar()
+    } if (event.key.toLowerCase() == 'z') {
+        counter = 4;
     }
 })

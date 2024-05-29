@@ -9,11 +9,13 @@ let rotaciones = {
 
 
 document.addEventListener('keydown', function (evento) {
-    console.log(mover.FiguraMoviendose);
+
     if(evento.key == 'v' && !mover.FiguraMoviendose) {
         mover.rotar(rotaciones[nombreId]);
     }if (evento.key == 's') {
         mover.soltar();
+    }if (evento.key.toLowerCase() == 'z') {
+        contador = 5;
     }
 })
 

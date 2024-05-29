@@ -35,6 +35,7 @@ class AdminAulas {
             new BuildProgressVar(document.getElementById("BODY"), "la información de sus aulas");
         } else if (this.#Select % 2 == 0) {
             document.getElementById("BODY").innerHTML = "";
+            document.getElementById("Notes").innerHTML = "";
         }
         cur.innerHTML = this.#List[this.#Select % 2];
     }
@@ -84,7 +85,9 @@ class AdminAulas {
             table.innerHTML = `<thead><tr>
                                 <th>Nombre del estudiante</th>
                                 <th>Correo</th>
-                                <th><button class='Boton'>Mostrar info general</button></th>
+                                <th><button class='Boton'
+                                onclick="adminAulas.AskForStudents('${this.#Aula}', 'Aula')">
+                                Mostrar info general</button></th>
                                 </tr></thead>
                                 <tbody>${result}</tbody>`;
         }
@@ -105,7 +108,7 @@ class AdminAulas {
         const table = document.createElement("table");
 
         let keys = Array.from(Object.keys(notes));
-        let values = Object.values(notes);
+        let values = Array.from(Object.values(notes));
         let result = "";
         let rW1 = "";
         let rW2 = "";
@@ -119,13 +122,12 @@ class AdminAulas {
 
                 for (let k = 0; k < 4; k++) {
                     if (world2[k] == '-1') world2[k] = '0';
-
                     if (world1[k] == '-1') world1[k] = '0';
                     try {
                         if (world1[k + 4] == "-1") world1[k + 4] = '0';
                         if (world2[k + 4] == "-1") world2[k + 4] = '0';
                     } catch { }
-
+                    
                     if (k != 3) {
                         rW1 += `<td>${parseFloat(world1[k]) + parseFloat(world1[k + 4])}</td>`;
                         rW2 += `<td>${parseFloat(world2[k]) + parseFloat(world2[k + 4])}</td>`;
@@ -171,6 +173,8 @@ class AdminAulas {
                             <tbody>
                             ${result}
                             </tbody>`
+
+        table.style.width = "100%";
 
         document.getElementById("Notes").appendChild(table);
     }
@@ -233,7 +237,7 @@ class AdminAulas {
 
     AskForStudents(classroom, estudiante) {
         if (!cargando) {
-
+            document.getElementById("Notes").innerHTML = "";
             fetch("http://localhost:5000/Backend/Calificaciones/PedirNotas", {
                 method: "POST",
                 mode: "cors",
@@ -245,7 +249,7 @@ class AdminAulas {
                 .then(response => response.json())
                 .then(data => {
                     notes = data;
-                    console.log(data);
+
                 })
                 .catch(error => console.error(error))
             new BuildProgressVar(document.getElementById("Notes"), "notas de " + estudiante, 2);

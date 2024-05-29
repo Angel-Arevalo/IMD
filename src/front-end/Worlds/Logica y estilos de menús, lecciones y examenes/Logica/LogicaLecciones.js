@@ -21,6 +21,7 @@ function Viajar(direccion) {
     }
 }
 
+// con esta el usuario decide hacer el exámen o no
 function Eleccion(Mundo, Nivel) {
     document.getElementById('Instrucciones').style.display = "none";
     document.getElementById('Mostrar').style.display = "block";
@@ -29,20 +30,21 @@ function Eleccion(Mundo, Nivel) {
     Calificacion.EnviarNota(Mundo, Nivel, 0, 0, 1)
 }
 
-function Revision(respuestas, Nota, Mundo, Nivel, bajar = 0.5, bajarReto = 1) {
+// esta es la función de verificación de los examenes
+function Revision(respuestas, Nota, Mundo, Nivel, bajar = 0.5) {
     let Minutos = 0;
 
-    if (Nota != 0) {
-        let Tiempo = Calificacion.TomarTiempo()
-        let ResiduoMinutos = (Tiempo - horaInicial) % 60
-        Minutos = (Tiempo - horaInicial - ResiduoMinutos) / 60;
-    }
+    let Tiempo = Calificacion.TomarTiempo()
+    let ResiduoMinutos = (Tiempo - horaInicial) % 60
+    Minutos = (Tiempo - horaInicial - ResiduoMinutos) / 60;
+
 
     const calificacion = new Calificacion(respuestas, document.getElementById('IngresoRespuestas').value,
-        Nota + 0.4 * Minutos, bajarReto);
+                                          Nota + 0.4 * Minutos);
     Calificacion.EnviarNota(Mundo, Nivel, calificacion.nota, bajar, 1);
-    ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1, calificacion.nota);
-    Viajar("Menu");
+    ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1, calificacion.nota * bajar);
+    setTimeout(function(){Viajar("Menu")}, 1000);
+
 }
 
 function ModifyLocalStorage(index, nota = 0) {
@@ -53,15 +55,25 @@ function ModifyLocalStorage(index, nota = 0) {
     localStorage.setItem("Notas", notas);
 }
 
-function Verificar(objetos, Acomodados = 0, m, n) {
+// esta es la función de verificación de los retos
+function Verificar(objetos, Acomodados = 0, m, n, r, tipo = 1, respuestas = []) {
     // m means world and n means level
-    let nota = 0;
-    if (objetos == Acomodados) {
-        nota = 2.5;
-        Calificacion.EnviarNota(m, ((7 * (m - 1) + 3 + n)%7)%3, nota, 1, 2);
-        ModifyLocalStorage(7 * (m - 1) + 3 + n, nota);
+    if (tipo != 1) {
+        const calificacion = new Calificacion(respuestas, document.getElementById('IngresoRespuestas').value, 0, 0.5);
+        console.log(calificacion.nota);
+        Calificacion.EnviarNota(m, r, calificacion.nota, 1, 2);
+        ModifyLocalStorage(7 * (m - 1) + 3 + n, calificacion.nota);
+        setTimeout(function(){Viajar("Menu")}, 1000);
+    } else {
+        let nota = 0;
+        if (objetos == Acomodados) {
+            nota = 2.5;
+            Calificacion.EnviarNota(m, r, nota, 1, 2);
+            ModifyLocalStorage(7 * (m - 1) + 3 + n, nota);
 
-        alert("Juego terminado, bien hecho");
-        setTimeout(Viajar("Menu"), 4000)
-    }else alert(`Aún quedan ${objetos - Acomodados} figuras por acomodar`);
+            alert("Juego terminado, bien hecho");
+            Viajar("Menu");
+            setTimeout(function(){Viajar("Menu")}, 1000);
+        } else alert(`Aún quedan ${objetos - Acomodados} figuras por acomodar`);
+    }
 }

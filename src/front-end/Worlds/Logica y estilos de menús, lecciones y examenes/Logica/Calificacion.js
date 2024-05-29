@@ -1,7 +1,7 @@
 class Calificacion {
 
     #Aunmento = 1;
-    constructor(respuestas = [], textoRespuestas = "", Rebaja = 0, bajarReto) {
+    constructor(respuestas = [], textoRespuestas = "", Rebaja = 0, bajarReto = 1) {
         this.respuestas = respuestas;
         this.nota = -Rebaja;
         this.#Aunmento = 5 / respuestas.length;
@@ -82,7 +82,7 @@ class Calificacion {
         let Aula = localStorage.getItem('Aula');
         let Nombre = localStorage.getItem('Nombre');
         Nota = Nota * bajar;
-        console.log(tipo);
+        console.log(Nota);
 
         fetch("http://localhost:5000/Backend/Calificaciones/Actualizar", {
             method: "POST",
@@ -98,7 +98,7 @@ class Calificacion {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(localStorage);
+                console.log(data.mensaje);
             })
             .catch(error => console.error(error))
     }

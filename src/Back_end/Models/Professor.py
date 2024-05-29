@@ -19,13 +19,13 @@ class Teacher(InputUser):
             sql_cmd = f'''
                             CREATE TABLE IF NOT EXISTS 'Mundo{i}_{codigo}' (
                             'Nombre_Estudiante' TEXT NOT NULL PRIMARY KEY,
-                            '{i}.Nivel_1' INT NOT NULL,
-                            '{i}.Nivel_2' INT NOT NULL,
-                            '{i}.Nivel_3' INT NOT NULL,
-                            '{i}.Nivel_4' INT NOT NULL,
-                            '{i}.Reto_1' INT NOT NULL,
-                            '{i}.Reto_2' INT NOT NULL,
-                            '{i}.Reto_3' INT NOT NULL,
+                            '{i}.Nivel_1' REAL NOT NULL,
+                            '{i}.Nivel_2' REAL NOT NULL,
+                            '{i}.Nivel_3' REAL NOT NULL,
+                            '{i}.Nivel_4' REAL NOT NULL,
+                            '{i}.Reto_1' REAL NOT NULL,
+                            '{i}.Reto_2' REAL NOT NULL,
+                            '{i}.Reto_3' REAL NOT NULL,
                             FOREIGN KEY(Nombre_Estudiante) REFERENCES 'Aula_{codigo}'(Nombre_Estudiante)
                             )
                         '''

@@ -24,17 +24,17 @@ class EscogerMundo {
 
             if (this.#Classroom == "-1") {
                 this.mostrarCarta();
-            }else {
+            } else {
                 button.style.display = "block";
                 button.textContent = `su aula es ${this.#Classroom}`;
                 let clas = this.#Classroom;
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     alert(`Usted está en el aula ${clas}`)
                 });
                 this.mostrar();
                 try {
                     document.body.removeChild(document.getElementById("Carta"));
-                }catch(error) {}
+                } catch (error) { }
             }
 
         } else {
@@ -120,7 +120,15 @@ class EscogerMundo {
                 .then(data => {
                     if (data.pass == "true") {
                         this.#Classroom = code;
+                        localStorage.setItem("Aula", code);
                         this._ShowButton();
+                        let x = "";
+
+                        for (let i = 0; i < 14; i++) {
+                            if (i < 13) x += '-1,';
+                            else x += '-1';
+                        }
+                        localStorage.setItem("Notas", x);
                     }
                     alert(data.mensaje);
                 })
@@ -133,7 +141,7 @@ class EscogerMundo {
         let guion = code.indexOf('-');
 
         if (guion != -1 && guion == 3 && code.length == 7) {
-            code = code.substring(0, guion) + code.substring(guion+1)
+            code = code.substring(0, guion) + code.substring(guion + 1)
         } else if (code.length == 6 && guion == -1) {
 
         } else if (code.length < 6 || 7 < code.length) {
