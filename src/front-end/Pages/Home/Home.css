@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+    content: 100dvh;
+    font-family: "Nanum Myeongjo", serif;
+}
+
+.header {
+    min-height: 100dvh;
+    width: 100%;
+    background-image: linear-gradient(rgba(15, 27, 23, 0.6), rgba(4,9,30,0.7)), url(../../Imagenes/HomeP/Banner.png);
+    background-position: center;
+    background-size: auto;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    padding: 1% 3%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav img {
+    width: 150px;
+    opacity: 0.9;
+}
+
+.home-link {
+    flex: 1;
+    text-align: right;
+}
+
+.home-link ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.home-link ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.home-link ul li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: rgba(244, 67, 54, 0.7);
+    display: block;
+    margin: auto;
+    transition: 0.4s;
+}
+
+.home-link ul li:hover::after {
+    width: 100%;
+}
+
+.maintext {
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.maintext h1 {
+    font-size: 60px;
+}
+
+.maintext h2 {
+    margin: 10px 0 40px;
+    font-size: 25px;
+}
+
+nav .fa-solid {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .maintext h1 {
+        font-size: 44px;
+    }
+
+    .maintext h2 {
+        margin: 10px 0 40px;
+        font-size: 10px;
+    }
+
+    .home-link ul li:hover::after {
+        display: block;
+    }
+
+    .home-link {
+        position: absolute;
+        background: rgba(244, 67, 54, 0.85);
+        height: 100dvh;
+        width: 200px;
+        top: 0;
+        right: -300px ;
+        text-align: left;
+        z-index: 2;
+        padding: 30px;
+        transition: 1s;
+    }
+
+    nav .fa-solid {
+        display: block;
+        color: #fff;
+        margin: 10px;
+        font-size: 22px;
+        cursor: cursor;
+    }
+
+    
+}
