@@ -36,7 +36,6 @@ def PedirNotas():
 def separarLista(lista):
     dict = {}
     
-
     for i in range(len(lista)):
         result = ""
         for j in range(len(lista[i])):

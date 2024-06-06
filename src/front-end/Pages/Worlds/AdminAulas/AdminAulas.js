@@ -63,7 +63,6 @@ class AdminAulas {
         table.id = "tableClassrooms";
 
         document.getElementById("BODY").appendChild(table);
-
     }
 
     buildTableStudents(infoSalon) {
@@ -99,9 +98,11 @@ class AdminAulas {
 
 
     ClearTableStudent() {
+        
         try {
-            document.getElementById("BODY").removeChild(document.getElementById("TableStudets"));
-        } catch { }
+            console.log("Hello world");
+            document.getElementById("BODY").removeChild(document.getElementById("TableStudents"));
+        } catch {console.log("No pasa nada")}
     }
 
     CrateTableNotes() {
@@ -121,11 +122,12 @@ class AdminAulas {
                 rW2 = "";
 
                 for (let k = 0; k < 4; k++) {
-                    if (world2[k] == '-1') world2[k] = '0';
-                    if (world1[k] == '-1') world1[k] = '0';
+                    if (world2[k] == '-1.0') world2[k] = '0';
+                    if (world1[k] == '-1.0') world1[k] = '0';
                     try {
-                        if (world1[k + 4] == "-1") world1[k + 4] = '0';
-                        if (world2[k + 4] == "-1") world2[k + 4] = '0';
+                        if (world1[k + 4] == "-1.0") world1[k + 4] = '0';
+                        if (world2[k + 4] == "-1.0") world2[k + 4] = '0';
+                        console.log(world2[k], world2[k+4]);
                     } catch { }
                     
                     if (k != 3) {
@@ -249,7 +251,7 @@ class AdminAulas {
                 .then(response => response.json())
                 .then(data => {
                     notes = data;
-
+                    console.log(notes);
                 })
                 .catch(error => console.error(error))
             new BuildProgressVar(document.getElementById("Notes"), "notas de " + estudiante, 2);
