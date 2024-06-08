@@ -1,30 +1,39 @@
-const wrapper = document.querySelector('.wrapper');
-const loginLink = document.querySelector('.loginLink');
-const registerLink = document.querySelector('.registerLink');
+const wrapperL = document.querySelector('.wrapper-LogIn');
+const wrapperR = document.querySelector('.wrapper-Register');
 const btnLogin = document.querySelector('.btnLogin');
 const btnRegister = document.querySelector('.btnRegister');
+const btnforL = document.querySelector('.registerLink')
+const btnforR = document.querySelector('.loginLink');
+const btnCloseR = document.querySelector('.iconCloseR');
+const btnCloseL = document.querySelector('.iconCloseL');
 
-loginLink.addEventListener('click', ()=> {
-    wrapper.classList.add('active');
-
-});
-
-registerLink.addEventListener('click', ()=> {
-    wrapper.classList.remove('active');
-
-});
-
-btnLogin.addEventListener('click', ()=> {
-    wrapper.classList.remove('activeLogin');
-    wrapper.classList.add('activeRegister');
-    
+btnRegister.addEventListener('click', ()=> {
+    wrapperR.style.transform = "scale(0)";
+    wrapperL.style.transform = "scale(1)";    
     });
-
-btnRegister.addEventListener('click', ()=> {    
-    wrapper.classList.remove('activeRegister');
-    wrapper.classList.add('activeLogin');
-
+    
+btnLogin.addEventListener('click', ()=> {
+    wrapperL.style.transform = "scale(0)";
+    wrapperR.style.transform = "scale(1)";
 });
+
+btnforL.addEventListener('click', ()=> {
+    wrapperR.style.transform = "scale(0)";
+    wrapperL.style.transform = "scale(1)";    
+    });
+    
+btnforR.addEventListener('click', ()=> {
+    wrapperL.style.transform = "scale(0)";
+    wrapperR.style.transform = "scale(1)";
+});
+
+btnCloseL.addEventListener('click', ()=> {
+    wrapperL.style.transform = "scale(0)";
+})
+
+btnCloseR.addEventListener('click', ()=> {
+    wrapperR.style.transform = "scale(0)";
+})
 
 var homeLinks = document.getElementById("homeLinks");
 

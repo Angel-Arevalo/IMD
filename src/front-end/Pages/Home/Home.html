@@ -33,11 +33,11 @@
         </div>
     </section>
 
-    <section class="SignUp-LogIn">
+    <section class="SignUp">
 
-        <div class="wrapper">
+        <div class="wrapper-Register">
 
-            <span class="iconClose"> 
+            <span class="iconCloseR"> 
                 <i class="fa-solid fa-xmark"></i> 
             </span>
 
@@ -65,23 +65,35 @@
                     </div>
                     <button id="SendToBackEnd" class="Plantilla" onclick="Send()">Crear usuario</button>
                     <div class="forgotRegister">
-                        <p>Already have an account? <a href="#" class="registerLink">Sign In</a></p>
+                        <p>Already have an account? <a href="#" class="registerLink">Sign In</a> </p>
                     </div>
                 </form>
             </div>
+
+        </div>
+
+    </section>
+
+    <section class="LogIn">
+
+        <div class="wrapper-LogIn">
+
+            <span class="iconCloseL"> 
+                <i class="fa-solid fa-xmark"></i> 
+            </span>
 
             <div class="formLogin">
                 <h2>Log In</h2>
                 <form action="#">
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-user"></i> </span>
-                        <input type="text" id="UserName" class="Plantilla" placeholder="Ingrese su Usuario">
+                        <input type="text" id="InputUser" class="Plantilla" placeholder="Ingrese su Usuario">
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
-                        <input type="text" id="PassWord" class="Plantilla" placeholder="Ingrese su Contraseña">
+                        <input type="password" id="InputPassword" class="Plantilla" placeholder="Ingrese su Contraseña">
                     </div>
-                    <button id="SendToBackEnd" class="Plantilla" onclick="Send()">Log In</button>
+                    <button id="SendToBackEnd" class="Plantilla" onclick="Save()">Log In</button>
                     <div class="forgotLogin">
                         <p>Don't have an account? <a href="#" class="loginLink">Sign Up</a></p>
                     </div>
