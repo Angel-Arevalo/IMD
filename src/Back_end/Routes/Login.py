@@ -5,7 +5,7 @@ sys.path.append("src\Back_end")
 
 from flask import request, jsonify
 from flask import Blueprint
-from Models.User import constructor
+from Models.User import constructor, construnctorObject
 
 login_bp = Blueprint("Login", __name__)
 
@@ -20,6 +20,18 @@ def recibir_dato():
                         "Aula": respuesta[2], "Notas": lista})
 
     return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], "Aula": respuesta[2]})
+
+@login_bp.route(r"/Backend/RecoverCount", methods = ["POST"])
+def Recover():
+    data = request.json
+    respuesta = construnctorObject(data)
+
+    return jsonify({"mensaje": respuesta.RecuperarContraseña()}) if respuesta != "El usuario no existe" else jsonify({"mensaje": "El usuario no existe"})
+
+
+
+
+
 
 def askForNotes(nombre, aula):
     if aula != '-1':

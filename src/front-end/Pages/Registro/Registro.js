@@ -87,7 +87,3 @@ class Registro {
 }
 
 const regis = new Registro();
-
-function Send() {
-    regis.SaveUser();
-}

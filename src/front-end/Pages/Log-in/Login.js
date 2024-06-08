@@ -1,14 +1,21 @@
 class User {
     //Variables
-    #Username;#UserPassword;//bool es true si y solo si se digitó bien el usuario y contraseña
+    #Username;#UserPassword;
+    #CodeVerify;//bool es true si y solo si se digitó bien el usuario y contraseña
     //Inicio de funciones set,get y constructor
     constructor() {
         this.#Username = "";
         this.#UserPassword = "";
+        this.#CodeVerify = "";
+        this.ListToSavePass = ["a", "b"];
     }
 
     get GetName() {
         return this.#Username;
+    }
+
+    Name(UserName) {
+        this.#Username = UserName;
     }
     //fin de funciones set, get y constructor
 
@@ -38,6 +45,32 @@ class User {
         }
         alert(Help);
     }
+
+    //Función con la única condición para poder recuperar la cuenta
+    CompareCodes() {
+        let code = document.getElementById("InputCode").value;
+        if (this.#CodeVerify == code) {
+            const Recover = document.getElementsByClassName("Recover")[0];
+            Recover.innerHTML = "";
+            Recover.innerHTML = `<h2>Elija una nueva contraseña</h2>
+                                <input type="password" 
+                                id = "Pass1"
+                                class="Plantilla" 
+                                onblur="user.ListToSavePass[0] = document.getElementById('Pass1').value">
+                                <input type="password" 
+                                id = "Pass2"
+                                class="Plantilla" 
+                                onblur="user.ListToSavePass[1] = document.getElementById('Pass2').value;
+                                user.ComparePass()">`;
+        }
+        else alert("No es el código correcto");
+    }
+
+    ComparePass() {
+        if (this.ListToSavePass[0] == this.ListToSavePass[1]) {
+            alert("Las contraseñas coinciden");
+        }else alert("Las contraseñas no coinciden")
+    }
     //Enviar información al back-end
     SendData() {
         fetch('http://localhost:5000/Backend/Login_Usuario', {
@@ -65,6 +98,25 @@ class User {
         .catch(error => console.error('Error:', error));
     }
 
+    RecoverMail() {
+        fetch("http://localhost:5000/Backend/RecoverCount", {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'Nombre': this.#Username})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.mensaje != "El usuario no existe") {
+                ShowOptions();
+                this.#CodeVerify = data.mensaje;
+            }else alert(data.mensaje);
+        })
+        .catch(error => console.error("Error: ", error));
+    }
+
     ChangeNotas() {
         let notas = localStorage.getItem('Notas');
 
@@ -79,11 +131,5 @@ class User {
         localStorage.setItem("Notas", notas)
     }
 }
-
 //objeto para la creación de usuario y contraseña
 const user = new User;
-
-function Save() {//función para obtener el usuario del archivo HTML
-    user.SaveUser();
-}
-

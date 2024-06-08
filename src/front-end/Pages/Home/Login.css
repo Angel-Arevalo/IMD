@@ -114,6 +114,14 @@
         margin: 4px;
     }
 
+    #Contain {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+    }
+
     .forgotRegister, .forgotLogin {
         position: relative;
         font-size: 1em;

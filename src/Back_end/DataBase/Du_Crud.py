@@ -130,6 +130,7 @@ class DB_DataUsers:
         result =  Pointer.execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{user}'")
 
         result = Pointer.fetchone()
+
         return result[0]
     
     def Aulas(self, usuario):

@@ -44,3 +44,25 @@ var homeLinks = document.getElementById("homeLinks");
     function hideMenu(){
         homeLinks.style.right = "-300px";
     }
+
+
+    function GoToRecover() {
+        let NameHelp = document.getElementById("InputUser").value;
+
+        if (NameHelp.length != 0) {
+            user.Name(NameHelp);
+            user.RecoverMail();
+        }
+        else alert("Para recuperar su cuenta se necesita por lo menos el nombre del usuario");
+    }
+
+    function ShowOptions() {
+        const recover = document.getElementsByClassName("Recover")[0];
+        const log = document.getElementsByClassName("LogIn")[0];
+        const regis = document.getElementsByClassName("SignUp")[0];
+
+
+        log.style.display = "none";
+        regis.style.display = "none";
+        recover.style.display = "block";
+    }
