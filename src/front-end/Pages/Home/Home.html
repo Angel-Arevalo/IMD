@@ -56,24 +56,24 @@
                 <form action="#">
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-user"></i> </span>
-                        <input type="text" id="UserName" class="Plantilla" placeholder="Ingrese su Nombre">
+                        <input type="text" id="UserName" class="Plantilla" placeholder="Enter your full name">
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
-                        <input type="password" id="PassWord" class="Plantilla" placeholder="Ingrese una Contraseña">
+                        <input type="password" id="PassWord" class="Plantilla" placeholder="Create password">
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-envelope"></i> </span>
-                        <input type="text" id="Email" class="Plantilla" placeholder="Ingrese su Correo">
+                        <input type="text" id="Email" class="Plantilla" placeholder="Enter your email">
                     </div>
                     <div class="selectB">
                         <span class="icon"> <i class="fa-solid fa-school"></i> </span>
                         <select id="Selector" class="Plantilla">
-                            <option value="Estudiante"> Estudiante</option>
-                            <option value="Profesor">Profesor</option>
+                            <option value="Estudiante"> Student</option>
+                            <option value="Profesor">Professor</option>
                         </select>
                     </div>
-                    <button id="SendToBackEnd" class="Plantilla" onclick="regis.SaveUser();">Crear usuario</button>
+                    <button id="SendToBackEnd" class="Plantilla" onclick="regis.SaveUser()">Create User</button>
                     <div class="forgotRegister">
                         <p>Already have an account? <a href="#" class="registerLink">Sign In</a> </p>
                     </div>
@@ -97,17 +97,17 @@
                 <form action="#">
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-user"></i> </span>
-                        <input type="text" id="InputUser" class="Plantilla" placeholder="Ingrese su Usuario">
+                        <input type="text" id="InputUser" class="Plantilla" placeholder="Your User">
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
-                        <input type="password" id="InputPassword" class="Plantilla" placeholder="Ingrese su Contraseña">
+                        <input type="password" id="InputPassword" class="Plantilla" placeholder="Enter your password">
                     </div>
-                    <button id="SendToBackEnd" class="Plantilla" onclick="user.SaveUser();">Log In</button>
+                    <button id="SendToBackEnd" class="Plantilla" onclick="user.SaveUser()">Log In</button>
                     <div class="forgotLogin">
                         <div id="Contain">
                             <p>Don't have an account? <a class="loginLink">Sign Up</a></p>
-                            <p>Forgot your password? <a class="loginLink" onclick="GoToRecover()">get it back</a></p>
+                            <a class="loginLink" onclick="GoToRecover()">Forgot password?</a>
                         </div>
                     </div>
                 </form>

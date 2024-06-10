@@ -135,8 +135,9 @@
         right: -9%;
     }
 
-    .forgotRegister .registerLink, .forgotLogin .loginLink{
+    .forgotLogin .loginLink{
         color: rgba(15, 25, 15, 1);
         font-size: 0.95em;
+        cursor: pointer;
     }
 }
