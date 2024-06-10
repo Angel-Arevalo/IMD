@@ -1,6 +1,7 @@
 class Registro {
     //Variables
     #Username; #UserPassword; #UserEmail; #Rol; #ValidAdress = false;
+    #CodeConfirm;
 
     //Constructor
     constructor() {
@@ -8,6 +9,7 @@ class Registro {
         this.#UserPassword = "";
         this.#UserEmail = "";
         this.#Rol = "";
+        this.#CodeConfirm = "zaosjáasoicj";
     }
 
     //Guarda el usuario
@@ -48,6 +50,8 @@ class Registro {
                 localStorage.setItem('Rol', data.Rol);
                 localStorage.setItem('Nombre', this.#Username);
                 localStorage.setItem('mensaje', '1');
+                this.#CodeConfirm = data.codigo;
+                console.log(this.#CodeConfirm);
                 window.location.href = '../Worlds/EscogerMundo.html';
             }else alert(data.mensaje);
         })

@@ -21,7 +21,8 @@ def constructor(data): #función denominada así para lograr más encapsulamient
     User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
     if (Email != "") :#reviso si es un log in o un registro
         #registro
-        return User.GuardarEnDataUsers(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
+        code = User.ConfirmarCorreoRegistro()
+        return User.GuardarEnDataUsers(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code
     else: 
         #log-in
         return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
@@ -170,3 +171,15 @@ class InputUser:
 
             return code
         return "El usuario no existe"
+    
+    def ConfirmarCorreoRegistro(self):
+        name = self.Usuario
+        mail = self.Email
+
+        code = rand.Generar_Codigo()
+        titulo = f'Confirmación de la cuenta de {name}'
+        contexto = f'Bienveni@ a IMD {name}, para poder continuar con la experiencias de IMD debe ingresar el siguiente código {code}.'
+        
+        InputUser.SendMail(titulo, contexto, mail)
+
+        return code
