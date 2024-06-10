@@ -12,4 +12,4 @@ registro_bp = Blueprint("Registro", __name__)
 def recibir_dato():
     respuesta = constructor(data = request.json)
 
-    return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], "Aula": respuesta[2]})
+    return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], "Aula": respuesta[2], "codigo": respuesta[3]})
