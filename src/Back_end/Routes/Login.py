@@ -28,8 +28,12 @@ def Recover():
 
     return jsonify({"mensaje": respuesta.RecuperarContraseña()}) if respuesta != "El usuario no existe" else jsonify({"mensaje": "El usuario no existe"})
 
-
-
+@login_bp.route(r"/Backend/ChangePassword", methods = ["POST"])
+def Change():
+    data = request.json
+    respuesta = construnctorObject(data, 2)
+    respuesta.UpdatePassWord()
+    return jsonify({"mensaje": "123"})
 
 
 

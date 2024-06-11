@@ -1,6 +1,6 @@
-class User {
+class Login {
     //Variables
-    #Username;#UserPassword;
+    #Username; #UserPassword;
     #CodeVerify;//bool es true si y solo si se digitó bien el usuario y contraseña
     //Inicio de funciones set,get y constructor
     constructor() {
@@ -20,16 +20,17 @@ class User {
     //fin de funciones set, get y constructor
 
     //Guardar usuario
-    SaveUser() {  
+    SaveUser() {
         let NameHelp = document.getElementById("InputUser").value;
         let PassHelp = document.getElementById("InputPassword").value;
 
         if (NameHelp != "" && PassHelp != "") {
             this.#UserPassword = PassHelp;
             this.#Username = NameHelp;
+            document.body.classList.add("disabled");
             this.SendData();
-        } else this.AlertUser(NameHelp,PassHelp);
-        
+        } else this.AlertUser(NameHelp, PassHelp);
+
     }
 
     //Método para alertar que se está insertando algo mal
@@ -66,10 +67,17 @@ class User {
         else alert("No es el código correcto");
     }
 
-    ComparePass() {
-        if (this.ListToSavePass[0] == this.ListToSavePass[1]) {
-            alert("Las contraseñas coinciden");
-        }else alert("Las contraseñas no coinciden")
+    VerifyCode() {
+        let code = document.getElementById("code").value;
+        if (this.#CodeVerify == code) controler.FillCartPassWordNew();
+        else alert("Los códigos no coinciden");
+    }
+
+    VerifyPassWord() {
+        const Pass1 = document.getElementById("NewPass").value;
+        const Pass2 = document.getElementById("NewPassConfirm").value;
+        if (Pass1 == Pass2) this.ChangePassword(Pass1);
+        else alert("Las contraseñas no coinciden.");
     }
     //Enviar información al back-end
     SendData() {
@@ -79,23 +87,27 @@ class User {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'Nombre':this.#Username,
-                                  'Contraseña':this.#UserPassword,
-                                  'Correo': ""})
+            body: JSON.stringify({
+                'Nombre': this.#Username,
+                'Contraseña': this.#UserPassword,
+                'Correo': ""
+            })
         }
         )
-        .then(response => response.json())
-        .then(data => {
-            if(data.mensaje != "Usuario o Contraseña Incorrectos"){
-                localStorage.setItem('Rol', data.Rol)
-                localStorage.setItem('mensaje', '1');
-                localStorage.setItem('Nombre', this.#Username);
-                localStorage.setItem('Aula', data.Aula);
-                localStorage.setItem('Notas', data.Notas);
-                this.ChangeNotas();
-                window.location.href = '../Worlds/EscogerMundo.html';
-            }else alert(data.mensaje)})
-        .catch(error => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                if (data.mensaje != "Usuario o Contraseña Incorrectos") {
+                    localStorage.setItem('Rol', data.Rol)
+                    localStorage.setItem('mensaje', '1');
+                    localStorage.setItem('Nombre', this.#Username);
+                    localStorage.setItem('Aula', data.Aula);
+                    localStorage.setItem('Notas', data.Notas);
+                    this.ChangeNotas();
+                    window.location.href = '../Worlds/EscogerMundo.html';
+                } else alert(data.mensaje);
+                document.body.classList.remove("disabled");
+            })
+            .catch(error => console.error('Error:', error));
     }
 
     RecoverMail() {
@@ -105,16 +117,36 @@ class User {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'Nombre': this.#Username})
+            body: JSON.stringify({ 'Nombre': this.#Username })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.mensaje != "El usuario no existe") {
-                ShowOptions();
-                this.#CodeVerify = data.mensaje;
-            }else alert(data.mensaje);
+            .then(response => response.json())
+            .then(data => {
+                let Cart = document.body;
+                Cart.classList.remove("disabled");
+                if (data.mensaje != "El usuario no existe") {
+                    controler.FillCartRecover();
+                    this.#CodeVerify = data.mensaje;
+
+                } else alert(data.mensaje);
+            })
+            .catch(error => console.error("Error: ", error));
+    }
+    //cambiar la contraseña en el back-end
+    ChangePassword(pass) {
+        fetch("http://localhost:5000/Backend/ChangePassword", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "Nombre": this.#Username, "Contraseña": pass })
         })
-        .catch(error => console.error("Error: ", error));
+            .then(response => response.json())
+            .then(data => {
+                controler.FillCartLogIn();
+                data.mensaje;
+            })
+            .catch(error => console.error("Error: ", error));
     }
 
     ChangeNotas() {
@@ -125,11 +157,11 @@ class User {
         for (let i = 0; i < notas.length; i++) {
             if (isNaN(parseInt(notas[i]))) {
                 notas.splice(i, 1);
-            }else notas[i] = parseInt(notas[i]);
+            } else notas[i] = parseInt(notas[i]);
         }
 
         localStorage.setItem("Notas", notas)
     }
 }
 //objeto para la creación de usuario y contraseña
-const user = new User;
+const user = new Login();

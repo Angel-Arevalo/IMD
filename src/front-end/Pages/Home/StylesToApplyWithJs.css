@@ -1,0 +1,69 @@
+#x {
+    width: 30vw;
+    height: 62vh;
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 0.2vw solid rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3vw);
+    border-radius: 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0.4vw 0.4vw 0.7vw rgba(244, 67, 54, 0.6);
+    padding: 0.2vw;
+}
+
+body.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.Selectors {
+    width: 100%;
+    position: relative;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.In {
+    position: relative;
+    width: 65%;
+    height: 10%;
+    border-radius: 1vw;
+    border: 0.1vw solid rgba(78, 46, 46, 0.788);
+}
+
+progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    height: 2vh;
+}
+
+.Boton {
+    padding:0.3rem 0.4rem;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background:#ffffff;
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+    margin: 1vw;
+    font-size: 1.2vw;
+}
+.Boton:hover {
+    transform: scale(1.5);
+}

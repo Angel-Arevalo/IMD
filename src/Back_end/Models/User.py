@@ -27,9 +27,9 @@ def constructor(data): #función denominada así para lograr más encapsulamient
         #log-in
         return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
 
-def construnctorObject(data):
+def construnctorObject(data, x = 1):
     Nombre = data.get('Nombre')
-    Contraseña = ""
+    Contraseña = "" if x == 1 else data.get("Contraseña")
     try:
         Email = Cursor.getMail(Nombre)
     except:
@@ -183,3 +183,10 @@ class InputUser:
         InputUser.SendMail(titulo, contexto, mail)
 
         return code
+    
+    def UpdatePassWord(self):
+        passWord = self.RSA_Encrypt()
+
+        sql_query = f"UPDATE Usuarios_Registrados SET Contraseña = '{passWord}' WHERE Nombre_Usuario = '{self.Usuario}'"
+        
+        Cursor.Execute(sql_query)

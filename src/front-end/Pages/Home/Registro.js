@@ -12,22 +12,35 @@ class Registro {
         this.#CodeConfirm = "zaosjáasoicj";
     }
 
+    get GetMail() {
+        return this.#UserEmail;
+    }
     //Guarda el usuario
     SaveUser() {
         let Name = document.getElementById('UserName').value;
         let Pass = document.getElementById('PassWord').value;
+        let PassConfim = document.getElementById("PassWordConfirm").value;
         let Adress = document.getElementById('Email').value;
 
-        if ((Name != "") && (Pass != "") && (Pass.length >= 8) && (Adress != "")) {
+        if ((Name != "") && (Pass != "") && (Pass.length >= 8) && (PassConfim == Pass) && (Adress != "")) {
             this.RevisionCorreo(Adress);//reviso que el correo sea correcto
             if(this.#ValidAdress) {
                 this.#UserPassword = Pass;
                 this.#Username = Name;
                 this.#UserEmail = Adress;
                 this.#Rol = document.getElementById('Selector').value;
+                document.body.classList.add("disabled");
                 this.SendData();
             } else this.AlertUser(Name,Pass,Adress);
-        } else this.AlertUser(Name,Pass,Adress);
+        } else this.AlertUser(Name,Pass, PassConfim,Adress);
+    }
+
+    VerifyCode(){
+        let code = document.getElementById("code").value;
+        if (this.#CodeConfirm == code) {
+            alert("Usted ahora hace parte de IMD");
+            window.location.href = "../Worlds/EscogerMundo.html";
+        }else alert("Los códigos no coinciden");
     }
 
     SendData () {//lugar para enviar la información
@@ -51,24 +64,29 @@ class Registro {
                 localStorage.setItem('Nombre', this.#Username);
                 localStorage.setItem('mensaje', '1');
                 this.#CodeConfirm = data.codigo;
-                console.log(this.#CodeConfirm);
-                window.location.href = '../Worlds/EscogerMundo.html';
+
+                controler.FillCartCodeVerify();
             }else alert(data.mensaje);
+            document.body.classList.remove("disabled");
         })
         .catch(error => console.error('Error:', error));
     }
 
     //Método para alertar que se está insertando algo mal
-    AlertUser(Name, Pass, Adress) {
+    AlertUser(Name, Pass, PassC, Adress) {
         let Help = "", bool = false, boolAdress = false;
+        let boolHelp = false;
         if (Name == "") {
             Help += "Usuario incorrecto. ";
         } if (Pass == "") {
             bool = true;
             Help += "Contraseña vacía. ";
-        } if (Pass.length < 8 && bool == false) {
+        }if (Pass.length < 8 && bool == false) {
             Help += "Contraseña invalida.";
-        } if(Adress == "") {Help += " Correo vacio."; boolAdress = true}
+            boolHelp = true;
+        }if(Pass != PassC && !boolHelp){
+                Help += "Las contraseñas no coinciden.";
+        }if(Adress == "") {Help += " Correo vacio."; boolAdress = true}
         if (!this.#ValidAdress && !boolAdress) {Help += " Correo invalido."};
         
         alert(Help);

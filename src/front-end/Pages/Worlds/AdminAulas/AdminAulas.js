@@ -3,15 +3,20 @@ let dta, notes;
 
 class AdminAulas {
     #Aula = "";
-    #UserName;
+    #UserName = "";
     #List; #Select = 0;
     #classrooms = [];
+    #MailsStudents = "";
     constructor() {
         this.#UserName = localStorage.getItem("Nombre");
         this.#List = ["Ver mis cursos", "Dejar de ver mis cursos"];
 
         this.ShowName();
         this.AskForCurs();
+    }
+
+    ShowMails() {
+        console.log(this.#MailsStudents);
     }
 
     ShowName() {
@@ -66,9 +71,12 @@ class AdminAulas {
     }
 
     buildTableStudents(infoSalon) {
+        this.#MailsStudents = "";
         const table = document.createElement("table");
         let result = "";
         let lengthInfo = Object.keys(infoSalon).length;
+        // las llaves son los nombres de los estudiantes
+        // los valores son los correos
         if (lengthInfo == 0) {
             table.innerHTML = "<thead><tr><th>No hay estudiantes en esta aula</th></tr></thead>";
         } else {
@@ -76,6 +84,7 @@ class AdminAulas {
             let values = Object.values(infoSalon);
 
             for (let i = 0; i < lengthInfo; i++) {
+                i < lengthInfo - 1 ? this.#MailsStudents += `${values[i]},`: this.#MailsStudents += `${values[i]}`;
                 result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
                             <td><button class='Boton' onclick='adminAulas.AskForStudents("${this.#Aula}", "${keys[i]}")'>
                             Mostrar info de este estudiante</button></td></tr>`;
@@ -100,9 +109,8 @@ class AdminAulas {
     ClearTableStudent() {
         
         try {
-            console.log("Hello world");
             document.getElementById("BODY").removeChild(document.getElementById("TableStudents"));
-        } catch {console.log("No pasa nada")}
+        } catch {}
     }
 
     CrateTableNotes() {
@@ -127,7 +135,6 @@ class AdminAulas {
                     try {
                         if (world1[k + 4] == "-1.0") world1[k + 4] = '0';
                         if (world2[k + 4] == "-1.0") world2[k + 4] = '0';
-                        console.log(world2[k], world2[k+4]);
                     } catch { }
                     
                     if (k != 3) {
@@ -251,7 +258,6 @@ class AdminAulas {
                 .then(response => response.json())
                 .then(data => {
                     notes = data;
-                    console.log(notes);
                 })
                 .catch(error => console.error(error))
             new BuildProgressVar(document.getElementById("Notes"), "notas de " + estudiante, 2);

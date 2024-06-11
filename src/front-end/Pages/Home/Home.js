@@ -1,4 +1,4 @@
-const wrapperL = document.querySelector('.wrapper-LogIn');
+/*const wrapperL = document.querySelector('.wrapper-LogIn');
 const wrapperR = document.querySelector('.wrapper-Register');
 const btnLogin = document.querySelector('.btnLogin');
 const btnRegister = document.querySelector('.btnRegister');
@@ -34,7 +34,7 @@ btnCloseL.addEventListener('click', ()=> {
 btnCloseR.addEventListener('click', ()=> {
     wrapperR.style.transform = "scale(0)";
 })
-
+*/
 var homeLinks = document.getElementById("homeLinks");
 
     function showMenu(){
@@ -54,15 +54,4 @@ var homeLinks = document.getElementById("homeLinks");
             user.RecoverMail();
         }
         else alert("Para recuperar su cuenta se necesita por lo menos el nombre del usuario");
-    }
-
-    function ShowOptions() {
-        const recover = document.getElementsByClassName("Recover")[0];
-        const log = document.getElementsByClassName("LogIn")[0];
-        const regis = document.getElementsByClassName("SignUp")[0];
-
-
-        log.style.display = "none";
-        regis.style.display = "none";
-        recover.style.display = "block";
     }
