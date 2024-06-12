@@ -45,9 +45,9 @@ class InputUser:
         self.Contraseña = str(Contraseña)
         self.Rol = 1 if(str(Rol) == "Estudiante") else 2
         self.Email = str(Email)
-        self.modulus = 2491
-        self.publicExponent = 37 
-        self.privateExponent = 1293
+        self.modulus = 3233
+        self.publicExponent = 65537
+        self.privateExponent = 2753  
         self.x = '-1'
 
         @property
@@ -119,7 +119,7 @@ class InputUser:
 
     def RSA_Encrypt(self): 
         listOfNum=[]
-        for letter in self.Contraseña: 
+        for letter in self.password: 
             letter = int.from_bytes(letter.encode(), 'big')
             listOfNum.append(letter)
 
@@ -127,11 +127,12 @@ class InputUser:
         for Nums in listOfNum: 
             final_Num = (Nums**self.publicExponent) % self.modulus
             final_Password = final_Password+str(hex(final_Num))+' '
-        return final_Password
+        return final_Password.rstrip()
     
-    def RSA_Decrypt(self):
+    def RSA_Decrypt(self, name): 
         name = self.Usuario
         encrypted_nums = Cursor.Execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+        encrypted_nums = encrypted_nums.split(' ')
 
         decrypted_message = ''
         for encrypted_num_str in encrypted_nums:
