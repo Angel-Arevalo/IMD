@@ -1,29 +1,43 @@
 import sys
 # append the path of the parent directory
-sys.path.append("C:\\Users\\Usuario\\Documents\\GitHub\\Null\\src\\Back_end")
+sys.path.append("src\Back_end")
 
 from DataBase import Du_Crud
-import sqlite3 as sql
 from email.message import EmailMessage
 from ssl import create_default_context
 from smtplib import SMTP_SSL
 from verify_email import verify_email
+from Utils.Random import Randomizer
 
 Cursor = Du_Crud.DB_DataUsers()
-
-Base_Direction = r'..\\NULL\\Back_end\\DataBase\\DataUsers.db'
+rand = Randomizer()
+#EL E-MAIL DEBE SER UNICO
 
 def constructor(data): #función denominada así para lograr más encapsulamiento
     Nombre = data.get('Nombre')
     Contraseña = data.get('Contraseña')
     Email = data.get('Correo')
-    print(Email)
     Rol = data.get('Rol')
     User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
     if (Email != "") :#reviso si es un log in o un registro
-        return User.GuardarEnDataUsers()
+        #registro
+        code = User.ConfirmarCorreoRegistro()
+        return User.GuardarEnDataUsers(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code
     else: 
-        return User.VerificarLogin()
+        #log-in
+        return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
+
+def construnctorObject(data, x = 1):
+    Nombre = data.get('Nombre')
+    Contraseña = "" if x == 1 else data.get("Contraseña")
+    try:
+        Email = Cursor.getMail(Nombre)
+    except:
+        return "El usuario no existe"
+
+    Rol = ""
+    User = InputUser(Nombre, Contraseña, Rol, Email)#Creación del objeto
+    return User
 
 class InputUser:
     def __init__(self, Usuario: str, Contraseña: str, Rol: str, Email: str):#constructor
@@ -34,6 +48,7 @@ class InputUser:
         self.modulus = 3233
         self.publicExponent = 65537
         self.privateExponent = 2753  
+        self.x = '-1'
 
         @property
         def Usuario(self):
@@ -66,15 +81,16 @@ class InputUser:
 
     def GuardarEnDataUsers(self):
         Registro = self.VerificarRegistro()
+        x = -1 if self.Rol == 1 else 0
+        self.x = x
         if (Registro == "Usuario Correcto"):
             self.RSA_Encrypt() #llamado a la encriptación
             try:
                 num = Cursor.FetchOId('Usuarios_Registrados', 'Id')
-                print(num)
                 insert = f'''
                         INSERT INTO Usuarios_Registrados 
-                        (Id, Nombre_Usuario, Contraseña, Rol, Email) VALUES 
-                        ('{num}', '{self.Usuario}', '{self.Contraseña}', '{self.Rol}', '{self.Email}')
+                        (Id, Nombre_Usuario, Contraseña, Aula, Rol, Email) VALUES 
+                        ('{num}', '{self.Usuario}', '{self.Contraseña}','{x}' ,'{self.Rol}', '{self.Email}')
                         '''
                 Cursor.Execute(insert)
             finally:
@@ -90,16 +106,16 @@ class InputUser:
         if (store_info == []): 
             return "Usuario o Contraseña Incorrectos"
         else: 
-            return "Usuario Registrado"
+            return "Usuario recibido"
 
     def VerificarRegistro(self):
         #El mismo código que en VerificarLogin con algunas modificaciones
         name = self.Usuario
-        lista = Cursor.FetchA(f"SELECT * FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
+        lista = Cursor.FetchA(f"SELECT * FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}' or Email = '{self.Email}'")
         if (len(lista) == 0):
             return "Usuario Correcto"
         else:
-            return "Usuario en uso"
+            return "Usuario o Correo en uso" 
 
     def RSA_Encrypt(self): 
         listOfNum=[]
@@ -126,28 +142,52 @@ class InputUser:
 
         return decrypted_message
 
-    def RecuperarContraseña(self):
-
-        name = self.Usuario
-        apuntador = sql.connect(Base_Direction)
-
+    def SendMail(titulo, context, destinators = []):
         mail_sender = 'interactivemathematicaldemons@gmail.com'
         password = 'jvjn shlv nzdf qpiy'
-        mail_receiver = Cursor.Execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
-
-        subject = 'RECUPERACION DE LA CONTRASEÑA'
-        body = f'''
-        Tu contraseña de Interactive Mathematical demonstration es: {self.RSA_Decrypt}
-        '''
-
         em = EmailMessage()
+
         em['From'] = mail_sender
-        em['To'] = mail_receiver
-        em['Subject'] = subject
-        em.set_content(body)
+        em['To'] = destinators
+        em['Subject'] = titulo
+        em.set_content(context)
 
-        context = create_default_context()
+        contextMail = create_default_context()
 
-        with SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp: 
+        with SMTP_SSL('smtp.gmail.com', 465, context = contextMail) as smtp: 
             smtp.login(mail_sender, password)
-            smtp.sendmail(mail_sender, mail_receiver, em.as_string())
+            smtp.sendmail(mail_sender,destinators, em.as_string())
+
+    def RecuperarContraseña(self):
+
+        if self.VerificarRegistro() == "Usuario o Correo en uso":
+            name = self.Usuario
+            mail_receiver = self.Email
+
+            code = rand.Generar_Codigo()
+            titulo = f'Recuperación de la contraseña de la cuenta de {name}'
+            contexto = f'El código de recuperación de la cuenta de {name} es {code}'
+
+            InputUser.SendMail(titulo,contexto,mail_receiver)
+
+            return code
+        return "El usuario no existe"
+    
+    def ConfirmarCorreoRegistro(self):
+        name = self.Usuario
+        mail = self.Email
+
+        code = rand.Generar_Codigo()
+        titulo = f'Confirmación de la cuenta de {name}'
+        contexto = f'Bienveni@ a IMD {name}, para poder continuar con la experiencias de IMD debe ingresar el siguiente código {code}.'
+        
+        InputUser.SendMail(titulo, contexto, mail)
+
+        return code
+    
+    def UpdatePassWord(self):
+        passWord = self.RSA_Encrypt()
+
+        sql_query = f"UPDATE Usuarios_Registrados SET Contraseña = '{passWord}' WHERE Nombre_Usuario = '{self.Usuario}'"
+        
+        Cursor.Execute(sql_query)
