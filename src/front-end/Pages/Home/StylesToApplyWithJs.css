@@ -31,6 +31,12 @@ body.disabled {
     justify-content: space-around;
     align-items: center;
 }
+.Selecto {
+    width: 100%;
+    height: 5%;
+    top: 0;
+    position: relative;
+}
 
 .In {
     position: relative;
@@ -66,4 +72,25 @@ progress {
 }
 .Boton:hover {
     transform: scale(1.5);
+}
+
+.ImgContend {
+    width: 6%;
+    height: auto;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+
+@keyframes CloseCart {
+    from {
+        opacity: 1;
+    }to {
+        opacity: 0;
+    }
+}
+
+@keyframes OpenCart {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
