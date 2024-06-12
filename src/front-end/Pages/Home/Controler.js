@@ -47,7 +47,7 @@ class Controler {
     FillCartLogIn() {
         Controler.CrearCarta();
         const Cart = document.getElementById("x");
-        
+
         Cart.style.height = "62vh";
         Cart.innerHTML = `<h2>Ingresando a IMD</h2>
             <img src="../../Imagenes/HomeP/cerrar.png" class="ImgContend" onclick="controler.CloseCart(1)">
@@ -95,7 +95,7 @@ class Controler {
         Cart.innerHTML = `<h2>Verificando el correo</h2>
             <img src="../../Imagenes/HomeP/cerrar.png" class="ImgContend" onclick="controler.CloseCart(1)">
             <h3>En la siguiente linea ingrese el código enviado
-            al correo ${regis.GetMail}</h3>
+            al correo digitado</h3>
             <input type="text" class="In" placeholder="Ingrese el código" id="code">
             <button class="Boton" onclick="regis.VerifyCode()">Verificar cuenta</button>`;
         this.OpenCart();
@@ -124,6 +124,7 @@ class Controler {
             registrado cuando usted se unió a IMD en la siguiente linea.</h3>
             <input type="text" class="In" placeholder="Ingrese el código" id="code">
             <button class="Boton" onclick="user.VerifyCode()">Verificar cuenta</button>`;
+        this.OpenCart();
     }
 
     /* Por último, crea una nueva contraseña */
@@ -134,6 +135,7 @@ class Controler {
             <input type="password" class="In" placeholder="Ingrese la nueva contraseña" id="NewPass">
             <input type="password" class="In" placeholder="Confirmela" id="NewPassConfirm">
             <button class="Boton" onclick="user.VerifyPassWord()">Cambiar contraseña</button>`;
+        this.OpenCart();
     }
 
 

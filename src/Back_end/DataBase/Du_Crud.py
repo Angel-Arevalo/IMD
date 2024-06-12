@@ -80,6 +80,7 @@ class DB_DataUsers:
                         'Aula' TEXT NOT NULL,
                         'Rol' INT NOT NULL,
                         'Email' TEXT NOT NULL UNIQUE,
+                        'CheckMail' NOT NULL,
                         CHECK(Rol IN(1,2))
                         )
                 '''
@@ -128,6 +129,16 @@ class DB_DataUsers:
 
         Pointer = x.cursor()
         result =  Pointer.execute(f"SELECT Email FROM Usuarios_Registrados WHERE Nombre_Usuario = '{user}'")
+
+        result = Pointer.fetchone()
+
+        return result[0]
+    
+    def getCheckMail(self, user: str):
+        x = sql.connect(self.DB_Direction)
+
+        Pointer = x.cursor()
+        result =  Pointer.execute(f"SELECT CheckMail FROM Usuarios_Registrados WHERE Nombre_Usuario = '{user}'")
 
         result = Pointer.fetchone()
 

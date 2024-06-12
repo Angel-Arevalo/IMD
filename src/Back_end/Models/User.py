@@ -3,6 +3,7 @@ import sys
 sys.path.append("src\Back_end")
 
 from DataBase import Du_Crud
+from Utils.Encrypter import Encrypter
 from email.message import EmailMessage
 from ssl import create_default_context
 from smtplib import SMTP_SSL
@@ -25,7 +26,13 @@ def constructor(data): #función denominada así para lograr más encapsulamient
         return User.GuardarEnDataUsers(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code
     else: 
         #log-in
-        return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre)
+        check = Cursor.getCheckMail(Nombre)
+        code = "0"
+        User.Email = Cursor.getMail(Nombre)
+        if str(check) == "-1":
+            code = User.ConfirmarCorreoRegistro()
+        #verifico que haya confirmado su email, si no lo hace, no puede ingresar a la página
+        return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code, check
 
 def construnctorObject(data, x = 1):
     Nombre = data.get('Nombre')
@@ -82,15 +89,16 @@ class InputUser:
     def GuardarEnDataUsers(self):
         Registro = self.VerificarRegistro()
         x = -1 if self.Rol == 1 else 0
+        chekMail = -1
         self.x = x
         if (Registro == "Usuario Correcto"):
-            self.RSA_Encrypt() #llamado a la encriptación
+            en = Encrypter(self.Contraseña) #llamado a la encriptación
             try:
                 num = Cursor.FetchOId('Usuarios_Registrados', 'Id')
                 insert = f'''
                         INSERT INTO Usuarios_Registrados 
-                        (Id, Nombre_Usuario, Contraseña, Aula, Rol, Email) VALUES 
-                        ('{num}', '{self.Usuario}', '{self.Contraseña}','{x}' ,'{self.Rol}', '{self.Email}')
+                        (Id, Nombre_Usuario, Contraseña, Aula, Rol, Email, CheckMail) VALUES 
+                        ('{num}', '{self.Usuario}', '{en.RSA_Encrypt()}','{x}' ,'{self.Rol}', '{self.Email}', '{chekMail}')
                         '''
                 Cursor.Execute(insert)
             finally:
@@ -99,9 +107,10 @@ class InputUser:
 
     def VerificarLogin(self):
         # Aqui supongo que la contraseña no esta encriptada
-        self.RSA_Encrypt()
+        en = Encrypter(self.Contraseña)
         name = self.Usuario 
-        password = self.Contraseña
+        password = en.RSA_Encrypt()
+
         store_info = Cursor.FetchA(f"SELECT * FROM Usuarios_Registrados WHERE Contraseña = '{password}' AND Nombre_Usuario = '{name}'")
         if (store_info == []): 
             return "Usuario o Contraseña Incorrectos"
@@ -116,31 +125,6 @@ class InputUser:
             return "Usuario Correcto"
         else:
             return "Usuario o Correo en uso" 
-
-    def RSA_Encrypt(self): 
-        listOfNum=[]
-        for letter in self.password: 
-            letter = int.from_bytes(letter.encode(), 'big')
-            listOfNum.append(letter)
-
-        final_Password = ''
-        for Nums in listOfNum: 
-            final_Num = (Nums**self.publicExponent) % self.modulus
-            final_Password = final_Password+str(hex(final_Num))+' '
-        return final_Password.rstrip()
-    
-    def RSA_Decrypt(self, name): 
-        name = self.Usuario
-        encrypted_nums = Cursor.Execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
-        encrypted_nums = encrypted_nums.split(' ')
-
-        decrypted_message = ''
-        for encrypted_num_str in encrypted_nums:
-            encrypted_num = int(encrypted_num_str, 16)
-            decrypted_num = (encrypted_num ** self.privateExponent) % self.modulus
-            decrypted_message += chr(decrypted_num)
-
-        return decrypted_message
 
     def SendMail(titulo, context, destinators = []):
         mail_sender = 'interactivemathematicaldemons@gmail.com'
@@ -159,7 +143,6 @@ class InputUser:
             smtp.sendmail(mail_sender,destinators, em.as_string())
 
     def RecuperarContraseña(self):
-
         if self.VerificarRegistro() == "Usuario o Correo en uso":
             name = self.Usuario
             mail_receiver = self.Email
@@ -186,8 +169,17 @@ class InputUser:
         return code
     
     def UpdatePassWord(self):
-        passWord = self.RSA_Encrypt()
+        en = Encrypter(self.Contraseña)
+        #es mejor crear un objeto y usar sus métodos
+        sql_query = f"UPDATE Usuarios_Registrados SET Contraseña = '{en.RSA_Encrypt()}' WHERE Nombre_Usuario = '{self.Usuario}'"
+        
+        Cursor.Execute(sql_query)
 
-        sql_query = f"UPDATE Usuarios_Registrados SET Contraseña = '{passWord}' WHERE Nombre_Usuario = '{self.Usuario}'"
+    def UpdateCheckMail(self):
+        x = 0
+        sql_query = f'''UPDATE Usuarios_Registrados
+                    SET CheckMail = '{x}'
+                    WHERE Nombre_Usuario = '{self.Usuario}'
+                    '''
         
         Cursor.Execute(sql_query)

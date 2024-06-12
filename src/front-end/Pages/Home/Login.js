@@ -103,7 +103,13 @@ class Login {
                     localStorage.setItem('Aula', data.Aula);
                     localStorage.setItem('Notas', data.Notas);
                     this.ChangeNotas();
-                    window.location.href = '../Worlds/EscogerMundo.html';
+                    if (data.Check == "0")
+                        window.location.href = '../Worlds/EscogerMundo.html';
+                    else {
+                        regis.Name(this.#Username);
+                        regis.Code(data.code);
+                        controler.FillCartCodeVerify();
+                    }
                 } else alert(data.mensaje);
                 document.body.classList.remove("disabled");
             })
