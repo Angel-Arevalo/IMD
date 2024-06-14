@@ -1,9 +1,12 @@
-from User import InputUser
+import sys
+# append the path of the parent directory
+sys.path.append("src\Back_end")
+
+from Models.User import InputUser
 from DataBase.Du_Crud import DB_DataUsers
 from Utils.Random import Randomizer
-from Utils.SqlFormatting import Calificacion
+from Utils.SqlFormatting import CalificacionFormat
 
-Calificaciones = Calificacion()
 Cursor = DB_DataUsers()
 class Teacher(InputUser): 
 
@@ -12,74 +15,88 @@ class Teacher(InputUser):
         self.GuardarEnDataUsers()
 
     def __CrearTablaProgreso__(codigo: str):
-        for i in range(1, 5):
+        for i in range(1, 3):
             sql_cmd = f'''
                             CREATE TABLE IF NOT EXISTS 'Mundo{i}_{codigo}' (
-                            'Id_E' INT AUTO_INCREMENT,
                             'Nombre_Estudiante' TEXT NOT NULL PRIMARY KEY,
-                            '{i}.Nivel_1' INT NOT NULL,
-                            '{i}.Nivel_2' INT NOT NULL,
-                            '{i}.Nivel_3' INT NOT NULL,
-                            '{i}.Nivel_4' INT NOT NULL,
-                            '{i}.Nivel_5' INT NOT NULL,
+                            '{i}.Nivel_1' REAL NOT NULL,
+                            '{i}.Nivel_2' REAL NOT NULL,
+                            '{i}.Nivel_3' REAL NOT NULL,
+                            '{i}.Nivel_4' REAL NOT NULL,
+                            '{i}.Reto_1' REAL NOT NULL,
+                            '{i}.Reto_2' REAL NOT NULL,
+                            '{i}.Reto_3' REAL NOT NULL,
                             FOREIGN KEY(Nombre_Estudiante) REFERENCES 'Aula_{codigo}'(Nombre_Estudiante)
                             )
                         '''
             Cursor.Execute(sql_cmd)
 
-    def CrearAulaVirtual(self):
+    def CrearAulaVirtual(Name):
         Code = Randomizer()
         codigo = Code.Generar_Codigo()
         b = Cursor.FetchA(f"PRAGMA table_info('Aula_{codigo}')")
         if (not bool(b)):
+            id_U = Cursor.FetchOId(f"SELECT Id FROM Usuarios_Registrados WHERE Nombre_Usuario = '{Name}'")
+            id_A = Cursor.FetchOId('Aulas', 'Id_Aula')
+            id_I = Cursor.FetchOId('User_Aulas', 'Id_User_Aulas')
             sql_cmd = f'''
                         CREATE TABLE IF NOT EXISTS 'Aula_{codigo}' (
                         'Id_E' INT AUTO_INCREMENT,
                         'Nombre_Estudiante' TEXT NOT NULL PRIMARY KEY,
-                        'Mundo' INT NOT NULL,
-                        'Progreso' INT NOT NULL,
-                        'Nota_Final' INT NOT NULL
+                        'Correo' TEXT NOT NULL UNIQUE
                         )
                     '''
+            sql_cmd0 = f'''
+                        INSERT INTO Aulas 
+                        (Id_Aula, Aula) VALUES 
+                        ('{id_A}', 'Aula_{codigo}')
+                    '''
+            sql_cmd1 = f'''
+                        INSERT INTO User_Aulas 
+                        (Id_User_Aulas, Id_User, Id_Aula) VALUES 
+                        ('{id_I}', '{id_U}', '{id_A}')
+                    '''
             Cursor.Execute(sql_cmd)
+            Cursor.Execute(sql_cmd0)
+            Cursor.Execute(sql_cmd1)
             Teacher.__CrearTablaProgreso__(codigo)
             return f"Aula {codigo} creada exitosamente"
         else:
-            self.CrearAulaVirtual()
+            Teacher.CrearAulaVirtual()
+            
+    def EstAula(codigo):
+        sql_cmd = f'''
+                    SELECT Nombre_Estudiante, Correo
+                    From Aula_{codigo}
+                '''
+        result = Cursor.FetchA(sql_cmd)
+        res = {}
+        for i in range(len(result)):
+            res[result[i][0]] = result[i][1]
+        return res
 
-        ## A esta funcion se la llama asi: Calificacion.NotasEstudiante('code') #Necesita almenos el codigo
-    def NotasEstudiante(codigo, estudiante = "Aula", mundo= "Todos"): #Devuelve una lista de tuplas [(Estudiante_1), (Estudiante_2),...,(Estudiante_n)]
-        if (estudiante == "Aula" and mundo == "Todos"):
-            sql_cmd = f'''
-                        SELECT M1.*, M2.*, M3.*, M4.*
-                        FROM 'Mundo1_{codigo}' AS M1
-                        INNER JOIN 'Mundo2_{codigo}' AS M2 ON M1.Nombre_Estudiante = M2.Nombre_Estudiante
-                        INNER JOIN 'Mundo3_{codigo}' AS M3 ON M2.Nombre_Estudiante = M3.Nombre_Estudiante
-                        INNER JOIN 'Mundo4_{codigo}' AS M4 ON M3.Nombre_Estudiante = M4.Nombre_Estudiante
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        elif (estudiante == "Aula" and mundo != "Todos"): #Aqui hay un posible riesgo a que de error si el mundo no existe
-            sql_cmd = f'''
-                        SELECT M1.*
-                        FROM 'Mundo{mundo}_{codigo}' AS M1
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        elif (estudiante != "Aula" and mundo == "Todos"): #Aqui hay un posible riesgo a que de error si se escribe mal el nombre del estudiante o no existe
-            sql_cmd = f'''
-                        SELECT M1.*, M2.*, M3.*, M4.*
-                        FROM 'Mundo1_{codigo}' AS M1
-                        INNER JOIN 'Mundo2_{codigo}' AS M2 ON M1.Nombre_Estudiante = M2.Nombre_Estudiante
-                        INNER JOIN 'Mundo3_{codigo}' AS M3 ON M2.Nombre_Estudiante = M3.Nombre_Estudiante
-                        INNER JOIN 'Mundo4_{codigo}' AS M4 ON M3.Nombre_Estudiante = M4.Nombre_Estudiante
-                        WHERE M1.Nombre_Estudiante = '{estudiante}'
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        else: #Aqui hay un posible riesgo a que de error
-            sql_cmd = f'''
-                        SELECT M1.*
-                        FROM 'Mundo{mundo}_{codigo}' AS M1 
-                        WHERE M1.Nombre_Estudiante = '{estudiante}'
-                    '''
-            resultado = Cursor.FetchA(sql_cmd)
-        resultado = Calificacion.SepareList(resultado)
-        return resultado
+""" def ConvertArgs(args):
+    b = []
+    for i in range(len(args[0])):
+        b.append(args[0][i])
+    return b
+
+def ConvertGrades(array, *args):
+    args = ConvertArgs(args)
+    Response = {}
+    for i in range(len(array)):
+        a = array[i][0][0]
+        Response[a] = {}
+        for j in range(len(args)):
+            r = []
+            for k in array[i][j]:
+                if (type(k) != str):
+                    r.append(k)
+            Response[a][args[j]] = r
+    return Response
+
+def ConvertClassRoomDetail(arrays, *args):
+    pass
+
+def ConvertJsonFormat(order, array, *args): #Notas o Detalle Aula
+    return ConvertGrades(array, args) if (order == "Notas") else ConvertClassRoomDetail(array, args) """

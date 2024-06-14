@@ -38,4 +38,4 @@ class Randomizer():
         shuffle(alfabeto)
         caracteres_r = "".join(alfabeto[:3])
         numeros = self.Generar_Numeros()
-        return f"{caracteres_r}-{numeros}"
+        return f"{caracteres_r}{numeros}"
