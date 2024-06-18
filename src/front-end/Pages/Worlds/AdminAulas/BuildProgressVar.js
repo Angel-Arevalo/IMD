@@ -49,4 +49,17 @@ class BuildProgressVar {
         if (this.tipo == 1) adminAulas.BuildTable();
         if (this.tipo == 2) adminAulas.CrateTableNotes();
     }
+
+    // esta función la coloco acá por el simple hecho de que
+    // el otro archivo ya tiene mas de 200 líneas escritas
+    SendMail() {
+        fetch("http://localhost:5000/Backend/EnviarCorreos",{
+            method: "POST",
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"Aula": adminAulas.Aula, "destinatarios": adminAulas.Mails})
+        })
+    }
 }

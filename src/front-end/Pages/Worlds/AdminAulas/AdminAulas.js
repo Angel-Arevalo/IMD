@@ -15,6 +15,13 @@ class AdminAulas {
         this.AskForCurs();
     }
 
+    get Aula() {
+        return this.#Aula;
+    }
+
+    get Mails() {
+        return this.#MailsStudents;
+    }
     ShowMails() {
         console.log(this.#MailsStudents);
     }
@@ -47,6 +54,7 @@ class AdminAulas {
 
     BuildTable() {
         const table = document.createElement("Table");
+        table.setAttribute("class", "table-styleCourses");
         let result = "";
         if (this.#classrooms.length == 0) {
             table.innerHTML = "<thead><tr><th>Usted no tiene aulas</th></thead>"
@@ -56,15 +64,14 @@ class AdminAulas {
                             <td>${this.#classrooms[i]}</td>
                             <td><button class='Boton' 
                             onclick='adminAulas.AskForInfoOfClassroom("${this.#classrooms[i]}")'>
-                            mostrar info de esta aula</button></td>
+                            Mostrar info</button></td>
                             </tr>`;
 
             }
 
-            table.innerHTML = `<thead><tr><th>Códigos de sus aulas</th><th>Mostrar</th></tr></thead><tbody>${result}</tbody>`;
+            table.innerHTML = `<thead><tr><th>Códigos aulas</th><th>Info Aula</th></tr></thead><tbody>${result}</tbody>`;
         }
 
-        table.style.display = "block";
         table.id = "tableClassrooms";
 
         document.getElementById("BODY").appendChild(table);
@@ -73,6 +80,7 @@ class AdminAulas {
     buildTableStudents(infoSalon) {
         this.#MailsStudents = "";
         const table = document.createElement("table");
+        table.setAttribute("class", "table-styleCourses");
         let result = "";
         let lengthInfo = Object.keys(infoSalon).length;
         // las llaves son los nombres de los estudiantes
@@ -84,7 +92,7 @@ class AdminAulas {
             let values = Object.values(infoSalon);
 
             for (let i = 0; i < lengthInfo; i++) {
-                i < lengthInfo - 1 ? this.#MailsStudents += `${values[i]},`: this.#MailsStudents += `${values[i]}`;
+                i < lengthInfo - 1 ? this.#MailsStudents += `${values[i]},` : this.#MailsStudents += `${values[i]}`;
                 result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
                             <td><button class='Boton' onclick='adminAulas.AskForStudents("${this.#Aula}", "${keys[i]}")'>
                             Mostrar info de este estudiante</button></td></tr>`;
@@ -98,19 +106,29 @@ class AdminAulas {
                                 Mostrar info general</button></th>
                                 </tr></thead>
                                 <tbody>${result}</tbody>`;
+            
+            const button = document.createElement("button");
+            button.setAttribute("class", "Boton");
+            button.id = "mailSender";
+            button.textContent = "Enviar correo al aula " + this.#Aula;
+            button.setAttribute("onclick", () => {
+                let input = document.getElementById("InputSender");
+                input.style.display = "block";
+            });
+            document.getElementById("Botones").appendChild(button);
         }
 
         table.id = "TableStudents";
-        table.style.display = "block";
+
         document.getElementById("BODY").appendChild(table);
     }
 
 
     ClearTableStudent() {
-        
+
         try {
             document.getElementById("BODY").removeChild(document.getElementById("TableStudents"));
-        } catch {}
+        } catch { }
     }
 
     CrateTableNotes() {
@@ -136,7 +154,7 @@ class AdminAulas {
                         if (world1[k + 4] == "-1.0") world1[k + 4] = '0';
                         if (world2[k + 4] == "-1.0") world2[k + 4] = '0';
                     } catch { }
-                    
+
                     if (k != 3) {
                         rW1 += `<td>${parseFloat(world1[k]) + parseFloat(world1[k + 4])}</td>`;
                         rW2 += `<td>${parseFloat(world2[k]) + parseFloat(world2[k + 4])}</td>`;
@@ -184,7 +202,7 @@ class AdminAulas {
                             </tbody>`
 
         table.style.width = "100%";
-
+        table.setAttribute("class", "table-styleCourses");
         document.getElementById("Notes").appendChild(table);
     }
 
@@ -224,6 +242,10 @@ class AdminAulas {
 
     AskForInfoOfClassroom(classroom) {
         if (!cargando) {
+            try {
+                let x = document.getElementById("mailSender");
+                document.getElementById("Botones").removeChild(x);
+            }catch{}
             fetch("http://localhost:5000/Backend/InfoAula", {
                 method: "POST",
                 mode: "cors",

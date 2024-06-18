@@ -5,7 +5,7 @@ sys.path.append("src\Back_end")
 
 from flask import request, jsonify
 from flask import Blueprint
-from Models.User import constructor, construnctorObject
+from Models.User import constructor, construnctorObject, InputUser
 
 login_bp = Blueprint("Login", __name__)
 
@@ -38,7 +38,17 @@ def Change():
     respuesta.UpdatePassWord()
     return jsonify({"mensaje": "123"})
 
-
+@login_bp.route(r"/Backend/EnviarCorreos", methods = ["POST"])
+def SendMail():
+    data = request.json
+    titulo = f'''
+              Información para el aula {data.get("Aula")} del profesor {data.get("Profesor")}
+             '''
+    
+    destinators = data.get("destinatarios").split(',')
+    print(destinators)
+    InputUser.SendMail(titulo, data.get("contexto"), destinators)
+    return [1,2,3]
 
 def askForNotes(nombre, aula):
     if aula != '-1':

@@ -42,22 +42,18 @@ body {
     display: none;
 }
 
-#BODY, #Notes {
-    width: 100%;
+#BODY, #Notes, #InputSender {
+    width: 80vw;
     height: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
-
-th,
-td {
-    text-align: center;
-    border-bottom: 0.1vw solid black;
-
+#InputSender {
+    display: none;
+    height: 35vw;
 }
-
 /* Estilos para crear el progress var */
 @keyframes rellenar {
     to {
@@ -91,4 +87,33 @@ circle:nth-child(2) {
     stroke: var(--color);
     stroke-dasharray: 0 100;
     animation: rellenar 2.5s linear infinite;
+}
+
+/* Estilos de las tablas bonitas */
+.table-styleCourses {
+    border-collapse: collapse;
+    margin: 2.5vw 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    width: 20vw;
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.425);
+}
+.table-styleCourses thead tr {
+    background-color: #2a3a37;
+    color: #ffffff;
+    text-align: center;
+}
+.table-styleCourses th,
+.table-styleCourses td {
+    padding: 1.2vw 2.5vw;
+    text-align: center;
+}
+.table-styleCourses tbody tr {
+    border-bottom: 0.1vw solid #dddddd;
+}
+.table-styleCourses tbody tr:last-of-type {
+    border-bottom: 0.2vw solid #2a3a37;
+}
+.table-styleCourses tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }
