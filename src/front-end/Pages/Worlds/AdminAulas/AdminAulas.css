@@ -42,7 +42,7 @@ body {
     display: none;
 }
 
-#BODY, #Notes, #InputSender {
+#BODY, #Notes {
     width: 80vw;
     height: auto;
     display: flex;
@@ -51,8 +51,17 @@ body {
     align-items: center;
 }
 #InputSender {
+    width: 80vw;
     display: none;
     height: 35vw;
+}
+
+.context {
+    position: relative;
+    width: 80%;
+    height: 70%;
+    font-size: 2em;
+    font-family: sans-serif;
 }
 /* Estilos para crear el progress var */
 @keyframes rellenar {

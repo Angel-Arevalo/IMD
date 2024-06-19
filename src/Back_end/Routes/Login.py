@@ -41,12 +41,9 @@ def Change():
 @login_bp.route(r"/Backend/EnviarCorreos", methods = ["POST"])
 def SendMail():
     data = request.json
-    titulo = f'''
-              Información para el aula {data.get("Aula")} del profesor {data.get("Profesor")}
-             '''
+    titulo = f'Información para el aula {data.get("Aula")} del profesor {data.get("Profesor")}'
     
     destinators = data.get("destinatarios").split(',')
-    print(destinators)
     InputUser.SendMail(titulo, data.get("contexto"), destinators)
     return [1,2,3]
 

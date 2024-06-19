@@ -1,29 +1,16 @@
 let cargando = false;
 let dta, notes;
+const SendMail = ["Enviar correo al aula ", "Cerrar bandeja de envio"];
 
 class AdminAulas {
-    #Aula = "";
-    #UserName = "";
-    #List; #Select = 0;
-    #classrooms = [];
-    #MailsStudents = "";
+    #Aula = ""; #UserName = ""; #List; #Select = 0;
+    #classrooms = []; #MailsStudents = "";
     constructor() {
         this.#UserName = localStorage.getItem("Nombre");
         this.#List = ["Ver mis cursos", "Dejar de ver mis cursos"];
 
         this.ShowName();
         this.AskForCurs();
-    }
-
-    get Aula() {
-        return this.#Aula;
-    }
-
-    get Mails() {
-        return this.#MailsStudents;
-    }
-    ShowMails() {
-        console.log(this.#MailsStudents);
     }
 
     ShowName() {
@@ -48,6 +35,10 @@ class AdminAulas {
         } else if (this.#Select % 2 == 0) {
             document.getElementById("BODY").innerHTML = "";
             document.getElementById("Notes").innerHTML = "";
+            let x = document.getElementById("mailSender");
+            if (x != null) {
+                document.getElementById("Botones").removeChild(x);
+            }
         }
         cur.innerHTML = this.#List[this.#Select % 2];
     }
@@ -106,14 +97,24 @@ class AdminAulas {
                                 Mostrar info general</button></th>
                                 </tr></thead>
                                 <tbody>${result}</tbody>`;
-            
+
             const button = document.createElement("button");
             button.setAttribute("class", "Boton");
             button.id = "mailSender";
-            button.textContent = "Enviar correo al aula " + this.#Aula;
-            button.setAttribute("onclick", () => {
+            button.textContent = SendMail[0] + this.#Aula;
+            button.addEventListener("click", () => {
                 let input = document.getElementById("InputSender");
-                input.style.display = "block";
+                if (button.textContent != SendMail[1]) {
+                    button.textContent = SendMail[1];
+                    input.style.display = "flex";
+                    input.style.flexDirection = "column";
+                    input.style.justifyContent = "space-around";
+                    input.style.alignItems = "center";
+                } else {
+                    input.style.display = "none";
+                    button.textContent = SendMail[0] + this.#Aula;
+                }
+
             });
             document.getElementById("Botones").appendChild(button);
         }
@@ -133,6 +134,8 @@ class AdminAulas {
 
     CrateTableNotes() {
         const table = document.createElement("table");
+        let x = document.getElementById("InputSender");
+        x.style.display = "none";
 
         let keys = Array.from(Object.keys(notes));
         let values = Array.from(Object.values(notes));
@@ -245,7 +248,9 @@ class AdminAulas {
             try {
                 let x = document.getElementById("mailSender");
                 document.getElementById("Botones").removeChild(x);
-            }catch{}
+            } catch { }
+            let x = document.getElementById("InputSender");
+            x.style.display = "none";
             fetch("http://localhost:5000/Backend/InfoAula", {
                 method: "POST",
                 mode: "cors",
@@ -284,5 +289,27 @@ class AdminAulas {
                 .catch(error => console.error(error))
             new BuildProgressVar(document.getElementById("Notes"), "notas de " + estudiante, 2);
         } else alert("Está cargando otro proceso")
+    }
+
+    SendMail() {
+        const context = document.getElementsByClassName("context")[0].value;
+        if (context != "") {
+            fetch("http://localhost:5000/Backend/EnviarCorreos", {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "Aula": this.#Aula, "destinatarios": this.#MailsStudents,
+                    "contexto": context, "Profesor": this.#UserName
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Se envió el correo al aula " + this.#Aula);
+                })
+                .catch(error => console.error(error))
+        } else alert("El correo no puede estar vacío.");
     }
 }
