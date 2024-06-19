@@ -23,6 +23,7 @@ body {
         padding: 1% 3%;
         justify-content: space-between;
         align-items: center;
+        cursor: pointer;
     }
     
     nav img {
