@@ -45,6 +45,7 @@ class AdminAulas {
 
     BuildTable() {
         const table = document.createElement("Table");
+        
         table.setAttribute("class", "table-styleCourses");
         let result = "";
         if (this.#classrooms.length == 0) {
@@ -134,8 +135,6 @@ class AdminAulas {
 
     CrateTableNotes() {
         const table = document.createElement("table");
-        let x = document.getElementById("InputSender");
-        x.style.display = "none";
 
         let keys = Array.from(Object.keys(notes));
         let values = Array.from(Object.values(notes));
@@ -249,6 +248,7 @@ class AdminAulas {
                 let x = document.getElementById("mailSender");
                 document.getElementById("Botones").removeChild(x);
             } catch { }
+            document.getElementById("Notes").innerHTML = "";
             let x = document.getElementById("InputSender");
             x.style.display = "none";
             fetch("http://localhost:5000/Backend/InfoAula", {

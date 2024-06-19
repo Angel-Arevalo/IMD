@@ -51,6 +51,7 @@ body {
     align-items: center;
 }
 #InputSender {
+    margin-top: 5%;
     width: 80vw;
     display: none;
     height: 35vw;
