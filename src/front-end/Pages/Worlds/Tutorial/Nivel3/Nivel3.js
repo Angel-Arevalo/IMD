@@ -19,7 +19,7 @@ function otar() {
 
 function Verificar() {
     if (contar == 5) {
-        alert("Juego terminado, felicitaciones");
+        alert("Juego terminado");
         localStorage.setItem('mensaje','1');
         window.location.href = "../../Tutorial/Tutorial.html";
     }else alert("Aún hay fichas sin acomodar");

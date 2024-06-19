@@ -35,6 +35,7 @@ class AdminAulas {
         } else if (this.#Select % 2 == 0) {
             document.getElementById("BODY").innerHTML = "";
             document.getElementById("Notes").innerHTML = "";
+            document.getElementsByClassName("context")[0].value = "";
             let x = document.getElementById("mailSender");
             if (x != null) {
                 document.getElementById("Botones").removeChild(x);
@@ -112,6 +113,7 @@ class AdminAulas {
                     input.style.justifyContent = "space-around";
                     input.style.alignItems = "center";
                 } else {
+                    document.getElementsByClassName("context")[0].value = "";
                     input.style.display = "none";
                     button.textContent = SendMail[0] + this.#Aula;
                 }
@@ -249,6 +251,7 @@ class AdminAulas {
                 document.getElementById("Botones").removeChild(x);
             } catch { }
             document.getElementById("Notes").innerHTML = "";
+            document.getElementsByClassName("context")[0].value = "";
             let x = document.getElementById("InputSender");
             x.style.display = "none";
             fetch("http://localhost:5000/Backend/InfoAula", {
@@ -294,6 +297,7 @@ class AdminAulas {
     SendMail() {
         const context = document.getElementsByClassName("context")[0].value;
         if (context != "") {
+            document.body.classList.add("disabled");
             fetch("http://localhost:5000/Backend/EnviarCorreos", {
                 method: "POST",
                 mode: "cors",
@@ -307,6 +311,8 @@ class AdminAulas {
             })
                 .then(response => response.json())
                 .then(data => {
+                    document.getElementsByClassName("context")[0].value = "";
+                    document.body.classList.remove("disabled");
                     alert("Se envió el correo al aula " + this.#Aula);
                 })
                 .catch(error => console.error(error))

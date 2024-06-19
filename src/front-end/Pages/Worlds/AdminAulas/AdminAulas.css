@@ -7,7 +7,11 @@ body {
     align-items: center;
     gap: 30px;
 }
-
+/* Estilo que aplico cuando se envia un correo */
+body.disabled {
+    pointer-events: none;
+    opacity: 0.2;
+}
 #Titulo {
     width: 40%;
     height: 15%;

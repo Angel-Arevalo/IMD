@@ -154,7 +154,7 @@ const C3 = new MoverCirculo(document.getElementById('CM3'));
 
 function VerificarFinal() {
     if(contador == 7) {
-        alert("Juego terminado, felicitaciones");
+        alert("Juego terminado");
         Viajar('Menu')
     }else alert("Aun hay figuras sin acomodar");
 }

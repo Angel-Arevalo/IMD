@@ -25,9 +25,12 @@ function Viajar(direccion) {
 function Eleccion(Mundo, Nivel) {
     document.getElementById('Instrucciones').style.display = "none";
     document.getElementById('Mostrar').style.display = "block";
-    horaInicial = Calificacion.TomarTiempo();
-    ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1);
-    Calificacion.EnviarNota(Mundo, Nivel, 0, 0, 1)
+    let rol = localStorage.getItem("Rol");
+    if (rol == "Estudiante") {
+        horaInicial = Calificacion.TomarTiempo();
+        ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1);
+        Calificacion.EnviarNota(Mundo, Nivel, 0, 0, 1)
+    }
 }
 
 // esta es la función de verificación de los examenes
@@ -40,19 +43,23 @@ function Revision(respuestas, Nota, Mundo, Nivel, bajar = 0.5) {
 
 
     const calificacion = new Calificacion(respuestas, document.getElementById('IngresoRespuestas').value,
-                                          Nota + 0.4 * Minutos);
-    Calificacion.EnviarNota(Mundo, Nivel, calificacion.nota, bajar, 1);
-    ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1, calificacion.nota * bajar);
-    setTimeout(function(){Viajar("Menu")}, 1000);
-
+        Nota + 0.4 * Minutos);
+    let rol = localStorage.getItem("Rol");
+    if (rol == "Estudiante") {
+        Calificacion.EnviarNota(Mundo, Nivel, calificacion.nota, bajar, 1);
+        ModifyLocalStorage(7 * (Mundo - 1) + Nivel - 1, calificacion.nota * bajar);
+    } setTimeout(function () { Viajar("Menu") }, 1000);
 }
 
 function ModifyLocalStorage(index, nota = 0) {
-    let notas = localStorage.getItem("Notas").split(',');
+    let rol = localStorage.getItem("Rol");
+    if (rol == "Estudiante") {
+        let notas = localStorage.getItem("Notas").split(',');
 
-    notas[index] = `${nota}`;
+        notas[index] = `${nota}`;
 
-    localStorage.setItem("Notas", notas);
+        localStorage.setItem("Notas", notas);
+    }
 }
 
 // esta es la función de verificación de los retos
@@ -63,7 +70,7 @@ function Verificar(objetos, Acomodados = 0, m, n, r, tipo = 1, respuestas = []) 
         console.log(calificacion.nota);
         Calificacion.EnviarNota(m, r, calificacion.nota, 1, 2);
         ModifyLocalStorage(7 * (m - 1) + 3 + n, calificacion.nota);
-        setTimeout(function(){Viajar("Menu")}, 1000);
+        setTimeout(function () { Viajar("Menu") }, 1000);
     } else {
         let nota = 0;
         if (objetos == Acomodados) {
@@ -73,7 +80,7 @@ function Verificar(objetos, Acomodados = 0, m, n, r, tipo = 1, respuestas = []) 
 
             alert("Juego terminado, bien hecho");
             Viajar("Menu");
-            setTimeout(function(){Viajar("Menu")}, 1000);
+            setTimeout(() => { Viajar("Menu") }, 1000);
         } else alert(`Aún quedan ${objetos - Acomodados} figuras por acomodar`);
     }
 }

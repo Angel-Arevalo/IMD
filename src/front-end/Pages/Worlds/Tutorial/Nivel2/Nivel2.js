@@ -116,7 +116,7 @@ const Semi4 = new MoverSemi(document.getElementById('MovCuarto4'));
 function VerificarFin() {
     console.log(contador);
     if (contador == 4) {
-        alert("Felicidades, ha pasado el nivel");
+        alert("Juego terminado");
         localStorage.setItem('mensaje', '1');
         window.location.href = "../../Tutorial/Tutorial.html";
     } else alert("No ha terminado");

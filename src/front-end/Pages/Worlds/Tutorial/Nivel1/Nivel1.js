@@ -3,10 +3,6 @@ let ArrayOfObjectsToMove = Array.from(document.getElementsByClassName("rectangul
 let ArrayOfObjects = [];
 let ArrayOfObjectsNotDOM = []
 
-function Principal() {
-    localStorage.setItem('mensaje', '1');
-    window.location.href = '../../Tutorial/Tutorial.html';
-}
 function CrearDivs(x, y) {
     let nuevoDiv = document.createElement('div');
     //estilos básicos

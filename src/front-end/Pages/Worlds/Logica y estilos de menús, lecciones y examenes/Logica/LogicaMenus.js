@@ -62,13 +62,19 @@ function Viajar(direccion) {
 
 //funciones de comprobación
 function ObtenerListasDeNotas(inicio) {
-    listOfNotes = localStorage.getItem("Notas").split(',').splice(inicio, 7);
+    let rol = localStorage.getItem("Rol");
+    if (rol == "Estudiante") {
+        listOfNotes = localStorage.getItem("Notas").split(',').splice(inicio, 7);
 
-    for (let i = 0; i < listOfNotes.length; i++) {
-        listOfNotes[i] = parseFloat(listOfNotes[i]);
+        for (let i = 0; i < listOfNotes.length; i++) {
+            listOfNotes[i] = parseFloat(listOfNotes[i]);
+        }
+
+        listOfNotesChallenge = listOfNotes.splice(4, 3);
+    } else {
+        listOfNotes = ['-1', '-1', '-1', '-1', '-1', '-1', '-1'];
+        listOfNotesChallenge = ['-1', '-1', '-1', '-1', '-1', '-1', '-1'];
     }
-
-    listOfNotesChallenge = listOfNotes.splice(4, 3);
 }
 
 function comporbarNivelHecho(nivel) {
@@ -76,8 +82,8 @@ function comporbarNivelHecho(nivel) {
 
     if (nota == -1) {
         localStorage.setItem('mensaje', '1');
-        window.location.href =`Nivel${nivel + 1}/Examen.html`;
-    }else alert("Usted ya realizó este examen");
+        window.location.href = `Nivel${nivel + 1}/Examen.html`;
+    } else alert("Usted ya realizó este examen");
 }
 
 function comporbarRetoHecho(reto) {
@@ -86,6 +92,6 @@ function comporbarRetoHecho(reto) {
     if (nota == -1) {
         localStorage.setItem('mensaje', '1');
         window.location.href = `Nivel${reto + 1}/Nivel.html`;
-    }else alert("Usted ya realizó este reto");
+    } else alert("Usted ya realizó este reto");
 }
 //Fin de funciones de comprobación

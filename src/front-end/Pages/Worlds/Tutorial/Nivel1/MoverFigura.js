@@ -80,6 +80,8 @@ class MoverFigura {
     static Verificar() {
         if (Contar == 8) {
             alert("Juego terminado");
+            window.location.href = "../Menu.html";
+            localStorage.setItem('mensaje', '1');
         }else alert("Aún quedan " + (8 - Contar) + " Figuras por acomodar");
     }
 }

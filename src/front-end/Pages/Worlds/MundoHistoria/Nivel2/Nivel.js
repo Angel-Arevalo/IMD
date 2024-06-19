@@ -3,8 +3,6 @@ let posicionesCuadrados = [false, false, false, false, false, false, false, fals
                            false, false, false, false, false, false, false, false, false, false]
 
 
-console.log(document.getElementsByClassName("CuadradoPequeño1"));
-
 function Jugar(nombre) {
     if (!jugando) {
         CrearObjeto(nombre);
@@ -42,7 +40,9 @@ function CrearObjeto(objeto) {
 
 document.addEventListener('keydown', function Rotar(event){
 
-    if (event.key == 'v') {
+    if (event.key.toLowerCase() == 'v') {
         Mover.ModificarRotacion();
+    }else if (event.key.toLowerCase() == 'z') {
+        posicionados = 25;
     }
 })
