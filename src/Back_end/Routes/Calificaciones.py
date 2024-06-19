@@ -11,7 +11,6 @@ calificacion_bp = Blueprint("Calificaciones", __name__)
 @calificacion_bp.route(r"/Backend/Calificaciones/Actualizar", methods = ['POST'])
 def recibir_dato():
     respuesta = constructor(data = request.json)
-    print(respuesta.Nota)
     try:
         respuesta.ActualizarNotas()
     except:
@@ -31,7 +30,6 @@ def PedirNotas():
 
     lista = separarLista(lista)
     return jsonify(lista)
-
 
 def separarLista(lista):
     dict = {}

@@ -1,22 +1,16 @@
 let cargando = false;
 let dta, notes;
+const SendMail = ["Enviar correo al aula ", "Cerrar bandeja de envio"];
 
 class AdminAulas {
-    #Aula = "";
-    #UserName = "";
-    #List; #Select = 0;
-    #classrooms = [];
-    #MailsStudents = "";
+    #Aula = ""; #UserName = ""; #List; #Select = 0;
+    #classrooms = []; #MailsStudents = "";
     constructor() {
         this.#UserName = localStorage.getItem("Nombre");
         this.#List = ["Ver mis cursos", "Dejar de ver mis cursos"];
 
         this.ShowName();
         this.AskForCurs();
-    }
-
-    ShowMails() {
-        console.log(this.#MailsStudents);
     }
 
     ShowName() {
@@ -41,12 +35,18 @@ class AdminAulas {
         } else if (this.#Select % 2 == 0) {
             document.getElementById("BODY").innerHTML = "";
             document.getElementById("Notes").innerHTML = "";
+            let x = document.getElementById("mailSender");
+            if (x != null) {
+                document.getElementById("Botones").removeChild(x);
+            }
         }
         cur.innerHTML = this.#List[this.#Select % 2];
     }
 
     BuildTable() {
         const table = document.createElement("Table");
+        
+        table.setAttribute("class", "table-styleCourses");
         let result = "";
         if (this.#classrooms.length == 0) {
             table.innerHTML = "<thead><tr><th>Usted no tiene aulas</th></thead>"
@@ -56,15 +56,14 @@ class AdminAulas {
                             <td>${this.#classrooms[i]}</td>
                             <td><button class='Boton' 
                             onclick='adminAulas.AskForInfoOfClassroom("${this.#classrooms[i]}")'>
-                            mostrar info de esta aula</button></td>
+                            Mostrar info</button></td>
                             </tr>`;
 
             }
 
-            table.innerHTML = `<thead><tr><th>Códigos de sus aulas</th><th>Mostrar</th></tr></thead><tbody>${result}</tbody>`;
+            table.innerHTML = `<thead><tr><th>Códigos aulas</th><th>Info Aula</th></tr></thead><tbody>${result}</tbody>`;
         }
 
-        table.style.display = "block";
         table.id = "tableClassrooms";
 
         document.getElementById("BODY").appendChild(table);
@@ -73,6 +72,7 @@ class AdminAulas {
     buildTableStudents(infoSalon) {
         this.#MailsStudents = "";
         const table = document.createElement("table");
+        table.setAttribute("class", "table-styleCourses");
         let result = "";
         let lengthInfo = Object.keys(infoSalon).length;
         // las llaves son los nombres de los estudiantes
@@ -84,7 +84,7 @@ class AdminAulas {
             let values = Object.values(infoSalon);
 
             for (let i = 0; i < lengthInfo; i++) {
-                i < lengthInfo - 1 ? this.#MailsStudents += `${values[i]},`: this.#MailsStudents += `${values[i]}`;
+                i < lengthInfo - 1 ? this.#MailsStudents += `${values[i]},` : this.#MailsStudents += `${values[i]}`;
                 result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
                             <td><button class='Boton' onclick='adminAulas.AskForStudents("${this.#Aula}", "${keys[i]}")'>
                             Mostrar info de este estudiante</button></td></tr>`;
@@ -98,19 +98,39 @@ class AdminAulas {
                                 Mostrar info general</button></th>
                                 </tr></thead>
                                 <tbody>${result}</tbody>`;
+
+            const button = document.createElement("button");
+            button.setAttribute("class", "Boton");
+            button.id = "mailSender";
+            button.textContent = SendMail[0] + this.#Aula;
+            button.addEventListener("click", () => {
+                let input = document.getElementById("InputSender");
+                if (button.textContent != SendMail[1]) {
+                    button.textContent = SendMail[1];
+                    input.style.display = "flex";
+                    input.style.flexDirection = "column";
+                    input.style.justifyContent = "space-around";
+                    input.style.alignItems = "center";
+                } else {
+                    input.style.display = "none";
+                    button.textContent = SendMail[0] + this.#Aula;
+                }
+
+            });
+            document.getElementById("Botones").appendChild(button);
         }
 
         table.id = "TableStudents";
-        table.style.display = "block";
+
         document.getElementById("BODY").appendChild(table);
     }
 
 
     ClearTableStudent() {
-        
+
         try {
             document.getElementById("BODY").removeChild(document.getElementById("TableStudents"));
-        } catch {}
+        } catch { }
     }
 
     CrateTableNotes() {
@@ -136,7 +156,7 @@ class AdminAulas {
                         if (world1[k + 4] == "-1.0") world1[k + 4] = '0';
                         if (world2[k + 4] == "-1.0") world2[k + 4] = '0';
                     } catch { }
-                    
+
                     if (k != 3) {
                         rW1 += `<td>${parseFloat(world1[k]) + parseFloat(world1[k + 4])}</td>`;
                         rW2 += `<td>${parseFloat(world2[k]) + parseFloat(world2[k + 4])}</td>`;
@@ -184,7 +204,7 @@ class AdminAulas {
                             </tbody>`
 
         table.style.width = "100%";
-
+        table.setAttribute("class", "table-styleCourses");
         document.getElementById("Notes").appendChild(table);
     }
 
@@ -224,6 +244,13 @@ class AdminAulas {
 
     AskForInfoOfClassroom(classroom) {
         if (!cargando) {
+            try {
+                let x = document.getElementById("mailSender");
+                document.getElementById("Botones").removeChild(x);
+            } catch { }
+            document.getElementById("Notes").innerHTML = "";
+            let x = document.getElementById("InputSender");
+            x.style.display = "none";
             fetch("http://localhost:5000/Backend/InfoAula", {
                 method: "POST",
                 mode: "cors",
@@ -262,5 +289,27 @@ class AdminAulas {
                 .catch(error => console.error(error))
             new BuildProgressVar(document.getElementById("Notes"), "notas de " + estudiante, 2);
         } else alert("Está cargando otro proceso")
+    }
+
+    SendMail() {
+        const context = document.getElementsByClassName("context")[0].value;
+        if (context != "") {
+            fetch("http://localhost:5000/Backend/EnviarCorreos", {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "Aula": this.#Aula, "destinatarios": this.#MailsStudents,
+                    "contexto": context, "Profesor": this.#UserName
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Se envió el correo al aula " + this.#Aula);
+                })
+                .catch(error => console.error(error))
+        } else alert("El correo no puede estar vacío.");
     }
 }

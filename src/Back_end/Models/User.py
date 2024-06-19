@@ -35,6 +35,7 @@ def constructor(data): #función denominada así para lograr más encapsulamient
         return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code, check
 
 def construnctorObject(data, x = 1):
+    #con el 1 es un mail normal, con el 2 es cambio de contraseña
     Nombre = data.get('Nombre')
     Contraseña = "" if x == 1 else data.get("Contraseña")
     try:
