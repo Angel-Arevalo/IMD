@@ -8,45 +8,121 @@
     <link rel="stylesheet" href="Logica y estilos de menús, lecciones y examenes/Estilos/EstilosLeccion.css">
     <link rel="stylesheet" href="EscogerMundo.css">
     <link rel="icon" href="../../LogoPágina.png" type="image/x-icon">
+    <style>
+        body {
+            background-image: url('../../Imagenes/HomeP/EscogerMundo/Fondo_escogermundos.png');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            margin: 0;
+            padding: 0;
+            height: 100vh; 
+        }
+
+        #nav {
+            width: 100%;
+            height: 10vh;
+            background: linear-gradient(to bottom, #69a1c7, #7e86dd);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #Mostrar {
+            width: 65vw;
+            height: 45vw;
+            position: absolute;
+            left: 40%;
+            top: 50%;
+            transform: translate(-40%, -50%);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .Contend {
+            width: 7vw;
+            height: 14vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #e9e9e9;
+            cursor: pointer;
+        }
+
+        .circle {
+            width: 7vw;
+            height: 7vw;
+            border-radius: 50%;
+            background: #e9e9e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .circle img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .circle:hover {
+            transform: scale(1.25);
+            box-shadow: 0 0 40px rgb(161, 109, 245);
+            background: white;
+        }
+    </style>
 </head>
 
 <body>
-    <!--Parte superior de la página-->
+    <!-- Parte superior de la página -->
     <div id="nav">
         <div id="NombrePoo">IMD</div>
         <div id="NombreSelect">
             <div id="Nombre"></div>
             <button class="Boton" id="Span"></button>
         </div>
-
     </div>
 
     <div id="Mostrar">
-        <!--Elección del mundo 1-->
-        <div class="Contend" id="Tuto">
-            <div onclick="Viajar(1)"></div>
+        <!-- Elección del tutorial -->
+        <div class="Contend" onclick="Viajar(1)">
+            <div class="circle">
+                <img src="../../Imagenes/HomeP/EscogerMundo/tutorial.png" alt="Imagen Tutorial">
+            </div>
             <p id="TEXT">Tutorial</p>
         </div>
 
-        <!--Elección del mundo 2-->
-        <div class="Contend">
-            <div onclick="Viajar(2)"></div>
+        <!-- Elección del mundo 1 -->
+        <div class="Contend" onclick="Viajar(2)">
+            <div class="circle">
+                <img src="../../Imagenes/HomeP/EscogerMundo/mundo_1.png" alt="Imagen Mundo 1">
+            </div>
             <p id="TEXT">Mundo de la historia</p>
         </div>
 
-        <!--Elección del mundo 3-->
-        <div class="Contend" id="Tuto">
-            <div onclick="Viajar(3)"></div>
+        <!-- Elección del mundo 2 -->
+        <div class="Contend" onclick="Viajar(3)">
+            <div class="circle">
+                <img src="../../Imagenes/HomeP/EscogerMundo/mundo_2.jpg" alt="Imagen Mundo 2">
+            </div>
             <p id="TEXT">Mundo Griego/Pitágorico</p>
         </div>
     </div>
 
-
+    <!-- Scripts al final del body -->
+    <script>
+        let direction = '../Home/Home.html';
+    </script>
+    <script src="Logica y estilos de menús, lecciones y examenes/Logica/LogicaMenus.js"></script>
+    <script src="EscogerMundo.js"></script>
 </body>
-<script>
-    let direction = '../Home/Home.html';
-</script>
-<script src="Logica y estilos de menús, lecciones y examenes/Logica/LogicaMenus.js"></script>
-<script src="EscogerMundo.js"></script>
 
 </html>
