@@ -43,13 +43,44 @@ class Controler {
 
     // aqui relleno una carta con todos los input del login
     // así mismo con todos los eventos necesarios para poder
-    // seguir con el proycto
+    // seguir con el proyecto
     FillCartLogIn() {
         Controler.CrearCarta();
         const Cart = document.getElementById("x");
 
-        Cart.style.height = "62vh";
-        Cart.innerHTML = `<h2>Ingresando a IMD</h2>
+        Cart.style.height = "60dvh";
+        Cart.innerHTML = `
+            <div class="wrapper LogIn">
+
+                <span class="iconClose" onclick="controler.CloseCart(1)">
+                    <i class="fa-solid fa-xmark"></i> 
+                </span>
+
+                <div class="formLogin">
+
+                    <h2>Log In</h2>
+                    <div class="inputB">
+                        <span class="icon"> <i class="fa-solid fa-user"></i> </span>
+                        <input type="text" id="InputUser" class="input" placeholder=" ">
+                        <span class="label"> Ingrese su Usuario </span>
+                    </div>
+                    <div class="inputB">
+                        <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
+                        <input type="password" id="InputPassword" class="input" placeholder=" ">
+                        <span class="label"> Ingrese su Contraseña </span>
+                    </div>
+                    <button id="SendToBackEnd" class="input" onclick="user.SaveUser()">Log In</button>
+                    <div class="forgot LogIn">
+                        <span> Don't have an account? <div class="link" onclick="controler.FillCartSingUp()"> Sign Up </div> </span>
+                        <span> <div class="link" onclick="controler.VerifyUser()"> Forgot password? </div> </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+            /* `<h2>Ingresando a IMD</h2>
             <img src="../../Imagenes/HomeP/cerrar.png" class="ImgContend" onclick="controler.CloseCart(1)">
             <input type="text" class="In" placeholder="Ingrese el nombre" id="InputUser">
             <input type="password" class="In" placeholder="Ingrese su contraseña" id="InputPassword">
@@ -57,7 +88,7 @@ class Controler {
             <div class="Selectors">
                 <div onclick="controler.FillCartSingUp()">¿No tiene una cuenta? Cree una</div>
                 <div onclick="controler.VerifyUser()">¿Olvidó su contraseña? Recupere su cuenta</div>
-            </div>`;
+            </div>`; */
         this.OpenCart();
     }
 
@@ -68,24 +99,51 @@ class Controler {
         Controler.CrearCarta();
         const Cart = document.getElementById("x");
 
-        Cart.style.height = "85vh";
-        Cart.innerHTML = `<div class="Selecto">
-                <img src="../../Imagenes/HomeP/cerrar.png" class="ImgContend" onclick="controler.CloseCart(1)">
-                        </div>
-            <h2>Registrandose en IMD</h2>
-            <input type="text" class="In" placeholder="Ingrese el nombre" id="UserName">
-            <input type="password" class="In" placeholder="Ingrese su contraseña" id="PassWord">
-            <input type="password" class="In" placeholder="Confirme su contraseña" id="PassWordConfirm">
-            <input type="text" class="In" placeholder="Ingrese su correo electrónico" id="Email">
-            <select id="Selector">
-                <option>Estudiante</option>
-                <option>Profesor</option>
-            </select>
-            <button class ="Boton" onclick ="regis.SaveUser()">Registrarse</button>
+        Cart.style.height = "75dvh";
+        Cart.innerHTML = `
+            <div class="wrapper Register">
 
-            <div class="Selectors">
-                <div onclick="controler.FillCartLogIn()">¿Ya tiene una cuenta? Ingrese</div>
-            </div>`;
+                <span class="iconClose" onclick="controler.CloseCart(1)">
+                    <i class="fa-solid fa-xmark"></i>
+                </span>
+
+                <div class="formRegister">
+                    <h2>Sign Up</h2>
+                    <div class="inputB">
+                        <span class="icon"> <i class="fa-solid fa-user"></i> </span>
+                        <input type="text" id="UserName" class="input" placeholder=" ">
+                        <span class="label"> Enter your full name </span>
+                    </div>
+                    <div class="inputB">
+                        <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
+                        <input type="password" id="PassWord" class="input" placeholder=" ">
+                        <span class="label"> Enter password </span>
+                    </div>
+                    <div class="inputB">
+                        <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                        <input type="Password" id="confirmPassWord" class="input" placeholder=" ">
+                        <span class="label"> Confirm password </span>
+                    </div>
+                    <div class="inputB">
+                        <span class="icon"> <i class="fa-solid fa-envelope"></i> </span>
+                        <input type="text" id="Email" class="input" placeholder=" ">
+                        <span class="label"> Enter your email </span>
+                    </div>
+                    <div class="selectB">
+                        <span class="icon"> <i class="fa-solid fa-school"></i> </span>
+                        <select id="Selector" class="input">
+                            <option value="Estudiante"> Student</option>
+                            <option value="Profesor">Professor</option>
+                        </select>
+                    </div>
+                    <button id="SendToBackEnd" class="input" onclick="regis.SaveUser()">Create User</button>
+                    <div class="forgot Register">
+                        <span> Already have an account? <div class="link" onclick="controler.FillCartLogIn()"> Sign In </div> </span>
+                    </div>
+                </div>
+
+            </div>
+            `;
         this.OpenCart();
     }
 

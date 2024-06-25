@@ -23,17 +23,19 @@
 
 <body>
     <section class="homePage">
-        <nav>
-            <a><img src="../../LogoPágina.png"></a>
-            <div class="home-link" id="homeLinks">
-                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
-                <ul>
-                    <li class="btnLogin"><div onclick="controler.FillCartSingUp()" style="color: white;">Sign up</div></li>
-                    <li class="btnRegister"><div onclick="controler.FillCartLogIn()" style="color: white;">Log In</div></li>
-                </ul>
-            </div>
-            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
-        </nav>
+        <div class="navegation">
+            <nav>
+                <a><img src="../../LogoPágina.png"></a>
+                <div class="home-link" id="homeLinks">
+                    <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                    <ul>
+                        <li class="btnLogin"><div onclick="controler.FillCartSingUp()" style="color: white;">Sign up</div></li>
+                        <li class="btnRegister"><div onclick="controler.FillCartLogIn()" style="color: white;">Log In</div></li>
+                    </ul>
+                </div>
+                <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+            </nav>
+        </div>
 
         <div class="maintext">
             <h1>Welcome to IMD</h1>
@@ -49,3 +51,8 @@
     const controler = new Controler();
 </script>
 </html>
+
+<p>  </p>
+
+
+<p> Don't have an account? <div class="link" onclick="controler.FillCartSingUp()"> Sign Up </div> </p>
