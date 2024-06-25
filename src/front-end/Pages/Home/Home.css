@@ -15,20 +15,28 @@ body {
 .homePage {
 
     font-family: "Nanum Myeongjo", serif;
-    min-height: 100dvh;
-    width: 100%;
+    display: grid;
+    height: 100dvh;
+    width: 100dvw;
+    grid-template-rows: 1fr 5fr;
 
     nav {
+        z-index: 1;
+        grid-area: 1 / 1 / 2 / 2;
         display: flex;
-        padding: 1% 3%;
+        padding: 0.5% 3%;
         justify-content: space-between;
         align-items: center;
-        cursor: pointer;
+    }
+
+    nav .fa-solid {
+        display: none;
     }
     
     nav img {
-        width: 150px;
+        width: 10dvw;
         opacity: 0.9;
+        cursor: pointer;
     }
     
     .home-link {
@@ -41,6 +49,7 @@ body {
         display: inline-block;
         padding: 8px 12px;
         position: relative;
+        cursor: pointer;
     }
     
     .home-link ul li a{
@@ -63,43 +72,28 @@ body {
     .home-link ul li:hover::after {
         width: 100%;
     }
-    
+
     .maintext {
-        width: 90%;
+        display: flex;
+        flex-direction: column;
         color: #fff;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
+        font-size: 1.5em;
     }
-    
-    .maintext h1 {
-        font-size: 60px;
-    }
-    
-    .maintext h2 {
+
+    .maintext h1, .maintext h2 {  
+        position: relative;
+        top: 25%;
         margin: 10px 0 40px;
-        font-size: 25px;
     }
-    
-    nav .fa-solid {
-        display: none;
-    }
-    
+
     @media (max-width: 768px) {
-        .homePage {
-            justify-content: flex-start;
-            right: 0;
+
+        nav img {
+            width: 15dvw
         }
 
-        .maintext h1 {
-            font-size: 44px;
-        }
-    
-        .maintext h2 {
-            margin: 10px 0 40px;
-            font-size: 10px;
+        .maintext {
+            font-size: small;
         }
     
         .home-link ul li:hover::after {
@@ -107,16 +101,26 @@ body {
         }
     
         .home-link {
-            position: absolute;
+            height: 1dvw;
+            width: 96dvh;
+            display: flex;
+            position: relative;
+            top: 50%;
+            right: 50%;
+            transform: translate(43%, -50%) rotate(90deg);
             background: rgba(244, 67, 54, 0.85);
-            height: 100dvh;
-            width: 200px;
-            top: 0;
-            right: -300px ;
-            text-align: left;
             z-index: 2;
             padding: 30px;
+            position: fixed;
             transition: 1s;
+            height: 20dvw;
+        }
+
+        .home-link ul {
+            transform: rotate(-90deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
         }
     
         nav .fa-solid {
@@ -124,9 +128,9 @@ body {
             color: #fff;
             margin: 10px;
             font-size: 22px;
-            cursor: cursor;
+            cursor: pointer;
         }
-    
-        
+
     }
+
 }
