@@ -61,12 +61,12 @@ class Controler {
                     <h2>Log In</h2>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-user"></i> </span>
-                        <input type="text" id="InputUser" class="input" placeholder=" ">
+                        <input type="text" id="InputUser" class="input" placeholder="">
                         <span class="label"> Ingrese su Usuario </span>
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
-                        <input type="password" id="InputPassword" class="input" placeholder=" ">
+                        <input type="password" id="InputPassword" class="input" placeholder="">
                         <span class="label"> Ingrese su Contraseña </span>
                     </div>
                     <button id="SendToBackEnd" class="input" onclick="user.SaveUser()">Log In</button>
@@ -80,15 +80,6 @@ class Controler {
             </div>
 
             `;
-            /* `<h2>Ingresando a IMD</h2>
-            <img src="../../Imagenes/HomeP/cerrar.png" class="ImgContend" onclick="controler.CloseCart(1)">
-            <input type="text" class="In" placeholder="Ingrese el nombre" id="InputUser">
-            <input type="password" class="In" placeholder="Ingrese su contraseña" id="InputPassword">
-            <button class ="Boton" onclick ="user.SaveUser()">Ingresar</button>
-            <div class="Selectors">
-                <div onclick="controler.FillCartSingUp()">¿No tiene una cuenta? Cree una</div>
-                <div onclick="controler.VerifyUser()">¿Olvidó su contraseña? Recupere su cuenta</div>
-            </div>`; */
         this.OpenCart();
     }
 
@@ -108,25 +99,26 @@ class Controler {
                 </span>
 
                 <div class="formRegister">
+
                     <h2>Sign Up</h2>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-user"></i> </span>
-                        <input type="text" id="UserName" class="input" placeholder=" ">
+                        <input type="text" id="UserName" class="input" placeholder="">
                         <span class="label"> Enter your full name </span>
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
-                        <input type="password" id="PassWord" class="input" placeholder=" ">
+                        <input type="password" id="PassWord" class="input" placeholder="">
                         <span class="label"> Enter password </span>
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-check"></i> </span>
-                        <input type="Password" id="confirmPassWord" class="input" placeholder=" ">
+                        <input type="password" id="confirmPassWord" class="input" placeholder="">
                         <span class="label"> Confirm password </span>
                     </div>
                     <div class="inputB">
                         <span class="icon"> <i class="fa-solid fa-envelope"></i> </span>
-                        <input type="text" id="Email" class="input" placeholder=" ">
+                        <input type="text" id="Email" class="input" placeholder="">
                         <span class="label"> Enter your email </span>
                     </div>
                     <div class="selectB">
@@ -150,12 +142,22 @@ class Controler {
     FillCartCodeVerify() {
         Controler.CrearCarta();
         const Cart = document.getElementById("x");
-        Cart.innerHTML = `<h2>Verificando el correo</h2>
-            <img src="../../Imagenes/HomeP/cerrar.png" class="ImgContend" onclick="controler.CloseCart(1)">
-            <h3>En la siguiente linea ingrese el código enviado
+        Cart.style.width = "30dvw";
+        Cart.style.height = "50dvh";
+        Cart.innerHTML = `
+            <h2 class="verify">Verificando el correo</h2>
+            <span class="iconClose" onclick="controler.CloseCart(1)">
+                <i class="fa-solid fa-xmark"></i> 
+            </span>
+            <h3 class="verify">En la siguiente linea ingrese el código enviado
             al correo digitado</h3>
-            <input type="text" class="In" placeholder="Ingrese el código" id="code">
-            <button class="Boton" onclick="regis.VerifyCode()">Verificar cuenta</button>`;
+            <div class="inputB">
+                <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                <input type="text" id="code" class="input" placeholder="">
+                <span class="label"> Ingrese el código </span>
+            </div>
+            <button class="Boton" onclick="regis.VerifyCode()">Verificar cuenta</button>
+            `;
         this.OpenCart();
     }
 
@@ -177,11 +179,22 @@ class Controler {
     FillCartRecover() {
         Controler.CrearCarta();
         const Cart = document.getElementById("x");
-        Cart.innerHTML = `<h2>Recuperando la cuenta de ${user.GetName}</h2>
-            <h3>Ingrese el código enviado al correo 
-            registrado cuando usted se unió a IMD en la siguiente linea.</h3>
-            <input type="text" class="In" placeholder="Ingrese el código" id="code">
-            <button class="Boton" onclick="user.VerifyCode()">Verificar cuenta</button>`;
+        Cart.style.width = "30dvw";
+        Cart.style.height = "50dvh";
+        Cart.innerHTML = `
+                <h2 class="verify">Recuperando la cuenta de ${user.GetName}</h2>
+                <span class="iconClose" onclick="controler.CloseCart(1)">
+                    <i class="fa-solid fa-xmark"></i> 
+                </span>
+                <h3 class="verify">Ingrese el código enviado al correo 
+                registrado cuando usted se unió a IMD en la siguiente linea</h3>
+                <div class="inputB">
+                    <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                    <input type="text" id="code" class="input" placeholder="">
+                    <span class="label"> Ingrese el código </span>
+                </div>
+                <button class="Boton" onclick="user.VerifyCode()">Verificar cuenta</button>
+            `;
         this.OpenCart();
     }
 
@@ -189,10 +202,21 @@ class Controler {
     FillCartPassWordNew() {
         Controler.CrearCarta();
         const Cart = document.getElementById("x");
-        Cart.innerHTML = `<h2>Ingrese su nueva contraseña</h2>
-            <input type="password" class="In" placeholder="Ingrese la nueva contraseña" id="NewPass">
-            <input type="password" class="In" placeholder="Confirmela" id="NewPassConfirm">
-            <button class="Boton" onclick="user.VerifyPassWord()">Cambiar contraseña</button>`;
+        Cart.style.height = "45dvh";
+        Cart.innerHTML = `
+                <h2 class="verify Pass">Ingrese su nueva contraseña</h2>
+                <div class="inputB  Pass">
+                    <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                    <input type="password" id="NewPass" class="input" placeholder="">
+                    <span class="label"> Ingrese la nueva contraseña </span>
+                </div>
+                <div class="inputB  Pass">
+                    <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                    <input type="password" id="NewPassConfirm" class="input" placeholder="">
+                    <span class="label"> Confirme la contraseña </span>
+                </div>
+                <button class="Boton" onclick="user.VerifyPassWord()">Cambiar contraseña</button>
+            `;
         this.OpenCart();
     }
 

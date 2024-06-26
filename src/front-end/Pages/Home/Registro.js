@@ -27,7 +27,7 @@ class Registro {
     SaveUser() {
         let Name = document.getElementById('UserName').value;
         let Pass = document.getElementById('PassWord').value;
-        let PassConfim = document.getElementById("PassWordConfirm").value;
+        let PassConfim = document.getElementById("confirmPassWord").value;
         let Adress = document.getElementById('Email').value;
 
         if ((Name != "") && (Pass != "") && (Pass.length >= 8) && (PassConfim == Pass) && (Adress != "")) {
