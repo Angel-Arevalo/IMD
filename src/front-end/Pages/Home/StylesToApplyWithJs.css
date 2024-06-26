@@ -18,50 +18,16 @@
     overflow: hidden;
 }
 
-/* 
-body.disabled {
-    pointer-events: none;
-    opacity: 0.7;
-}
-
-.Selectors {
-    width: 100%;
-    position: relative;
-    height: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-.Selecto {
-    width: 100%;
-    height: 5%;
-    top: 0;
-    position: relative;
-}
-
-.In {
-    position: relative;
-    width: 65%;
-    height: 10%;
-    border-radius: 1vw;
-    border: 0.1vw solid rgba(78, 46, 46, 0.788);
-}
-
-progress {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-    height: 2vh;
-} */
-
-.wrapper h2{
+.wrapper h2 {
     font-size: 2em;
     color: rgba(15, 25, 15, 1);
     text-align: center;
-    position: flex;
+}
+
+.verify {
+    color: rgba(15, 25, 15, 1);
+    text-align: center;
+    transform: translateY(5dvh);
 }
 
 .inputB {
@@ -78,6 +44,7 @@ progress {
         background: transparent;
         border: none;
         outline: none;
+        margin-bottom: -5%;
         padding: 0 35px 0 5px;
         color: rgba(2, 2, 20, 1);
         font-weight: 4800;
@@ -131,7 +98,7 @@ progress {
 }
 
 button {
-    width: 100%;
+    width: 90%;
     height: 6dvh;
     border-radius: 1dvh;
     cursor: pointer;
@@ -151,12 +118,12 @@ button {
 
     .link {
         color: rgba(15, 25, 15, 1);
+        cursor: pointer;
     }
 
     span {
         display: flex;
         justify-content: space-evenly;
-        margin: 5%;
     }
 
 }
@@ -175,7 +142,13 @@ button {
     align-items: center;
     border-bottom-left-radius: 20px;
     cursor: pointer;
+    margin-bottom: 5%;
 }
+
+.Pass {
+    transform: none;
+    margin: 0%;
+} 
 
 @keyframes CloseCart {
     from {
