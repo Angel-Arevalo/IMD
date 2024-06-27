@@ -13,6 +13,9 @@
 <body>
     <div id="ContenedorBotones">
         <button class="Boton" onclick="Viajar('P')">Volver al menú</button>
+        <button class="Boton" id="Cur" onclick="adminAulas.ShowCur()">Ver mis cursos</button>
+        <button class="Boton" id="CrAula" onclick="adminAulas.CreateClass()">Crear aula</button>
+        <button class="Boton" id="CurId" onclick="adminAulas.SelectCur()"></button>
     </div>
 
     <div id="Titulo">
@@ -20,12 +23,6 @@
     </div>
 
     <div id="Contenido">
-
-        <div id="Botones">
-            <button class="Boton" id="Cur" onclick="adminAulas.ShowCur()">Ver mis cursos</button>
-            <button class="Boton" id="CrAula" onclick="adminAulas.CreateClass()">Crear aula</button>
-            <button class="Boton" id="CurId" onclick="adminAulas.SelectCur()"></button>
-        </div>
 
         <div id="BODY">
 
@@ -39,7 +36,7 @@
             <textarea type="text" class="context" placeholder="Escriba el cuerpo del correo"></textarea>
             <button class="Boton" onclick="adminAulas.SendMail()" id="Mail">Enviar correo</button>
         </div>
-        
+
     </div>
 </body>
 <script>
@@ -51,4 +48,5 @@
     const adminAulas = new AdminAulas();
 </script>
 <script src="BuildProgressVar.js"></script>
+
 </html>

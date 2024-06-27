@@ -1,6 +1,8 @@
 class Controler {
 
     #CartIsOpen = false;
+    #ListShowPassword = ["text", "password"];
+    #Counter = 0;
     constructor() {
         this.Mover = true;
         this.i = 0;
@@ -65,7 +67,7 @@ class Controler {
                         <span class="label"> Ingrese su Usuario </span>
                     </div>
                     <div class="inputB">
-                        <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
+                        <span class="icon"> <i class="fa-solid fa-lock" onclick="controler.showPassword('InputPassword')"></i> </span>
                         <input type="password" id="InputPassword" class="input" placeholder="">
                         <span class="label"> Ingrese su Contraseña </span>
                     </div>
@@ -83,6 +85,13 @@ class Controler {
         this.OpenCart();
     }
 
+    showPassword(id) {
+        const x = document.getElementById(id);
+
+        x.type = this.#ListShowPassword[this.#Counter];
+
+        this.#Counter = (this.#Counter + 1) % 2;
+    }
     /* Muy parecido al anterior con la exepción de que ahora trae todo
        lo necesario para hacer el registro, a partir de acá todas las funciones
        son para el proceso del registro */
@@ -107,12 +116,12 @@ class Controler {
                         <span class="label"> Enter your full name </span>
                     </div>
                     <div class="inputB">
-                        <span class="icon"> <i class="fa-solid fa-lock"></i> </span>
+                        <span class="icon"> <i class="fa-solid fa-lock" onclick="controler.showPassword('PassWord')"></i> </span>
                         <input type="password" id="PassWord" class="input" placeholder="">
                         <span class="label"> Enter password </span>
                     </div>
                     <div class="inputB">
-                        <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                        <span class="icon"> <i class="fa-solid fa-check" onclick="controler.showPassword('confirmPassWord')"></i> </span>
                         <input type="password" id="confirmPassWord" class="input" placeholder="">
                         <span class="label"> Confirm password </span>
                     </div>
@@ -206,12 +215,12 @@ class Controler {
         Cart.innerHTML = `
                 <h2 class="verify Pass">Ingrese su nueva contraseña</h2>
                 <div class="inputB  Pass">
-                    <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                    <span class="icon"> <i class="fa-solid fa-check" onclick="controler.showPassword('NewPass')"></i> </span>
                     <input type="password" id="NewPass" class="input" placeholder="">
                     <span class="label"> Ingrese la nueva contraseña </span>
                 </div>
                 <div class="inputB  Pass">
-                    <span class="icon"> <i class="fa-solid fa-check"></i> </span>
+                    <span class="icon"> <i class="fa-solid fa-check" onclick="controler.showPassword('NewPassConfirm')"></i> </span>
                     <input type="password" id="NewPassConfirm" class="input" placeholder="">
                     <span class="label"> Confirme la contraseña </span>
                 </div>
