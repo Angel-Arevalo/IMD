@@ -26,13 +26,18 @@ def constructor(data): #función denominada así para lograr más encapsulamient
         return User.GuardarEnDataUsers(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code
     else: 
         #log-in
-        check = Cursor.getCheckMail(Nombre)
-        code = "0"
-        User.Email = Cursor.getMail(Nombre)
-        if str(check) == "-1":
-            code = User.ConfirmarCorreoRegistro()
-        #verifico que haya confirmado su email, si no lo hace, no puede ingresar a la página
-        return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code, check
+        x = User.VerificarLogin()
+        if x != "Usuario o Contraseña Incorrectos":
+            check = Cursor.getCheckMail(Nombre)
+            code = "0"
+            User.Email = Cursor.getMail(Nombre)
+            if str(check) == "-1":
+                code = User.ConfirmarCorreoRegistro()
+            #verifico que haya confirmado su email, si no lo hace, no puede ingresar a la página
+            return User.VerificarLogin(), Cursor.getRol(Nombre), Cursor.getAula(Nombre), code, check
+        
+        else: 
+            return "Usuario o Contraseña Incorrectos"
 
 def construnctorObject(data, x = 1):
     #con el 1 es un mail normal, con el 2 es cambio de contraseña
