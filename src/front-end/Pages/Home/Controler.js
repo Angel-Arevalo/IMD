@@ -92,8 +92,7 @@ class Controler {
 
         this.#Counter = (this.#Counter + 1) % 2;
     }
-    /* Muy parecido al anterior con la exepción de que ahora trae todo
-       lo necesario para hacer el registro, a partir de acá todas las funciones
+    /* Muy parecido al anterior con la exepción de que ahora trae todo lo necesario para hacer el registro, a partir de acá todas las funciones
        son para el proceso del registro */
     FillCartSingUp() {
         Controler.CrearCarta();
@@ -171,8 +170,7 @@ class Controler {
     }
 
 
-    /* Reviso el primer input del login para poder obtener el nombre
-       del usuario y así poder enviar correo, lo siguiente es solo para
+    /* Reviso el primer input del login para poder obtener el nombre del usuario y así poder enviar correo, lo siguiente es solo para
        recuperar contraseña */
     VerifyUser() {
         if (document.getElementById("InputUser").value.length != 0) {

@@ -14,6 +14,15 @@ function Viajar(direccion) {
     if (direccion == 'P') {
         localStorage.setItem('mensaje', '1');
         window.location.href = "../EscogerMundo.html";
+    } else if (direccion == 'Tutorial') {
+        localStorage.setItem('mensaje', '1')
+        window.location.href = '../Tutorial/Menu.html'
+    } else if (direccion == 'Historia') {
+        localStorage.setItem('mensaje', '1')
+        window.location.href = '../MundoHistoria/Menu.html'
+    } else if (direccion == 'Pitagorico') {
+        localStorage.setItem('mensaje', '1')
+        window.location.href = '../MundoPitagorico/Menu.html'
     } else if (direccion == 'Leccion 1') {
         localStorage.setItem('mensaje', '1');
         window.location.href = "Nivel1/Leccion.html";
