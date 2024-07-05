@@ -14,15 +14,18 @@ def recibir_dato():
     data = request.json
     respuesta = constructor(data)
 
-    if respuesta[0] != "Usuario o Contraseña Incorrectos" and respuesta[1] != "Profesor":
-        lista = askForNotes(data.get('Nombre'), respuesta[2])
-        return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], 
-                        "Aula": respuesta[2], "Notas": lista, "code": respuesta[3], 
-                        "Check": respuesta[4]})
+    if respuesta != "Usuario o Contraseña Incorrectos":
+        if respuesta[0] != "Usuario o Contraseña Incorrectos" and respuesta[1] != "Profesor":
+            lista = askForNotes(data.get('Nombre'), respuesta[2])
+            return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], 
+                            "Aula": respuesta[2], "Notas": lista, "code": respuesta[3], 
+                            "Check": respuesta[4]})
 
-    return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], 
-                    "Aula": respuesta[2], "code": respuesta[3], 
-                    "Check": respuesta[4]})
+        return jsonify({"mensaje" : respuesta[0], "Rol" : respuesta[1], 
+                        "Aula": respuesta[2], "code": respuesta[3], 
+                        "Check": respuesta[4]})
+    else:
+        return jsonify({"mensaje": respuesta})
 
 @login_bp.route(r"/Backend/RecoverCount", methods = ["POST"])
 def Recover():
