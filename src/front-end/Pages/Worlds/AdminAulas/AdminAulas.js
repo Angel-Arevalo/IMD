@@ -36,17 +36,18 @@ class AdminAulas {
             document.getElementById("BODY").innerHTML = "";
             document.getElementById("Notes").innerHTML = "";
             document.getElementsByClassName("context")[0].value = "";
+
             let x = document.getElementById("mailSender");
-            if (x != null) {
-                document.getElementById("Botones").removeChild(x);
-            }
+            if (x != null) document.getElementById("ContenedorBotones").removeChild(x);
+            document.getElementById("InputSender").style.display = "none";
+
         }
         cur.innerHTML = this.#List[this.#Select % 2];
     }
 
     BuildTable() {
         const table = document.createElement("Table");
-        
+
         table.setAttribute("class", "table-styleCourses");
         let result = "";
         if (this.#classrooms.length == 0) {
@@ -119,7 +120,7 @@ class AdminAulas {
                 }
 
             });
-            document.getElementById("Botones").appendChild(button);
+            document.getElementById("ContenedorBotones").appendChild(button);
         }
 
         table.id = "TableStudents";
@@ -248,7 +249,7 @@ class AdminAulas {
         if (!cargando) {
             try {
                 let x = document.getElementById("mailSender");
-                document.getElementById("Botones").removeChild(x);
+                document.getElementById("ContenedorBotones").removeChild(x);
             } catch { }
             document.getElementById("Notes").innerHTML = "";
             document.getElementsByClassName("context")[0].value = "";

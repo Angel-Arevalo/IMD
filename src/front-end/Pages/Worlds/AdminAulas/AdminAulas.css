@@ -5,7 +5,6 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    gap: 30px;
 }
 /* Estilo que aplico cuando se envia un correo */
 body.disabled {
@@ -20,6 +19,7 @@ body.disabled {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 7vw;
 }
 
 #Botones {
@@ -33,6 +33,7 @@ body.disabled {
 
 #ContenedorBotones {
     position: absolute;
+    width: 12vw;
     left: 0;
     top: 5%;
 }
@@ -107,7 +108,7 @@ circle:nth-child(2) {
 .table-styleCourses {
     border-collapse: collapse;
     margin: 2.5vw 0;
-    font-size: 0.9em;
+    font-size: 1em;
     font-family: sans-serif;
     width: 20vw;
     box-shadow: 0 0 1vw rgba(0, 0, 0, 0.425);
