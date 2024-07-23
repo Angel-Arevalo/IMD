@@ -45,6 +45,7 @@ body {
 #Span {
     display: none;
     color: black;
+    cursor: pointer;
 }
 /*Fin de animaciones de objetos del nav*/
 /*Fin de manipulación de objetos del nav*/
@@ -69,6 +70,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .Contend div {
     width: 7vw;
