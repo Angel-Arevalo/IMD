@@ -12,14 +12,19 @@
 
 <body>
     <div id="ContenedorBotones">
-        <button class="Boton" onclick="Viajar('P')">Volver al menú</button>
-        <button class="Boton" id="Cur" onclick="adminAulas.ShowCur()">Ver mis cursos</button>
-        <button class="Boton" id="CrAula" onclick="adminAulas.CreateClass()">Crear aula</button>
-        <button class="Boton" id="CurId" onclick="adminAulas.SelectCur()"></button>
+        <div id="Menu" onclick="Viajar('P')">
+            <img src="../../../Imagenes/Controler/home.png" class="fix" alt="return">
+        </div>
+        <div id="Menu" id="Cur" onclick="adminAulas.ShowCur()">
+            <img src="../../../Imagenes/Controler/Mostrar.png" class="fix" alt="return" id="img-show">
+        </div>
+        <div id="Menu" id="CrAula" onclick="adminAulas.CreateClass()">
+            <img src="../../../Imagenes/Controler/CreateAula.png" class="fix" alt="return" id="img-show">
+        </div>
     </div>
 
     <div id="Titulo">
-        <div id="titulo"></div>
+        
     </div>
 
     <div id="Contenido">

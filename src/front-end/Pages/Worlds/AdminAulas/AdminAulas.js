@@ -1,13 +1,15 @@
 let cargando = false;
-let dta, notes;
-const SendMail = ["Enviar correo al aula ", "Cerrar bandeja de envio"];
+let dta, notes, counter = 1;
+const SendMail = ['<img src="../../../Imagenes/Controler/OpenMail.png" class="fix" alt="return" id="img-show">', 
+                  '<img src="../../../Imagenes/Controler/CloseMail.png" class="fix" alt="return" id="img-show">'];
 
 class AdminAulas {
     #Aula = ""; #UserName = ""; #List; #Select = 0;
     #classrooms = []; #MailsStudents = "";
     constructor() {
         this.#UserName = localStorage.getItem("Nombre");
-        this.#List = ["Ver mis cursos", "Dejar de ver mis cursos"];
+        this.#List = ["../../../Imagenes/Controler/Mostrar.png", 
+                     "../../../Imagenes/Controler/Cerrar.png"];
 
         this.ShowName();
         this.AskForCurs();
@@ -18,6 +20,7 @@ class AdminAulas {
 
         titulo.innerHTML = `Bienvenido profesor ${this.#UserName}`;
         titulo.style.fontSize = "3vw";
+        titulo.style.color = "white";
     }
 
     ShowCur() {
@@ -42,7 +45,7 @@ class AdminAulas {
             document.getElementById("InputSender").style.display = "none";
 
         }
-        cur.innerHTML = this.#List[this.#Select % 2];
+        document.getElementById("img-show").setAttribute("src", this.#List[this.#Select % 2]);
     }
 
     BuildTable() {
@@ -101,14 +104,14 @@ class AdminAulas {
                                 </tr></thead>
                                 <tbody>${result}</tbody>`;
 
-            const button = document.createElement("button");
-            button.setAttribute("class", "Boton");
+            const button = document.createElement("div");
+            button.setAttribute("id", "Menu");
             button.id = "mailSender";
-            button.textContent = SendMail[0] + this.#Aula;
+            button.innerHTML = '<img src="../../../Imagenes/Controler/OpenMail.png" class="fix" alt="return" id="img-show">';
             button.addEventListener("click", () => {
                 let input = document.getElementById("InputSender");
-                if (button.textContent != SendMail[1]) {
-                    button.textContent = SendMail[1];
+                if (counter % 2 == 1) {
+                    button.innerHTML = SendMail[1];
                     input.style.display = "flex";
                     input.style.flexDirection = "column";
                     input.style.justifyContent = "space-around";
@@ -116,9 +119,9 @@ class AdminAulas {
                 } else {
                     document.getElementsByClassName("context")[0].value = "";
                     input.style.display = "none";
-                    button.textContent = SendMail[0] + this.#Aula;
+                    button.innerHTML = SendMail[0];
                 }
-
+                counter++;
             });
             document.getElementById("ContenedorBotones").appendChild(button);
         }
@@ -199,9 +202,9 @@ class AdminAulas {
         }
 
         table.innerHTML = `<thead><tr>
-                            <td>Estudiante</td>
-                            <td>Mundo Historico</td>
-                            <td>Mundo Griego</td></tr></thead>
+                            <th>Estudiante</th>
+                            <th>Mundo Historico</th>
+                            <th>Mundo Griego</th></tr></thead>
                             <tbody>
                             ${result}
                             </tbody>`
@@ -230,6 +233,7 @@ class AdminAulas {
     }
 
     CreateClass() {
+        document.body.classList.add("disabled");
         fetch("http://localhost:5000/Backend/CrearAula", {
             method: "POST",
             mode: "cors",
@@ -240,6 +244,7 @@ class AdminAulas {
         })
             .then(response => response.json())
             .then(data => {
+                document.body.classList.remove("disabled");
                 alert(data.mensaje);
             })
             .catch(error => console.error(error))
