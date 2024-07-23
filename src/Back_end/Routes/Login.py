@@ -1,11 +1,11 @@
 import sys
 from Models.Calificacion import Calificacion
 # append the path of the parent directory
-sys.path.append("src\Back_end")
+sys.path.append("src\\Back_end")
 
 from flask import request, jsonify
 from flask import Blueprint
-from Models.User import constructor, construnctorObject, InputUser
+from Models.Login import constructor, construnctorObject, InputUser
 
 login_bp = Blueprint("Login", __name__)
 

@@ -1,6 +1,6 @@
 import sys
 # append the path of the parent directory
-sys.path.append("src\Back_end")
+sys.path.append("src\\Back_end")
 
 from flask import request, jsonify
 from flask import Blueprint

@@ -1,10 +1,10 @@
 import sys
 # append the path of the parent directory
-sys.path.append("src\Back_end")
+sys.path.append("src\\Back_end")
 
 from flask import request, jsonify
 from flask import Blueprint
-from Models.User import constructor, construnctorObject
+from Models.Registro import constructor, construnctorObject
 
 registro_bp = Blueprint("Registro", __name__)
 
