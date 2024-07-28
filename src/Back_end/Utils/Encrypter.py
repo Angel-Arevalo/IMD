@@ -27,7 +27,6 @@ class Encrypter:
         return final_Password.rstrip()
     
     def RSA_Decrypt(self, name): 
-
         encrypted_nums = Cursor.Execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
         encrypted_nums = encrypted_nums.split(' ')
 
