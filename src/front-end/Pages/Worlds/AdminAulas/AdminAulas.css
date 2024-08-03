@@ -142,3 +142,11 @@ td {
 .table-styleCourses tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
+
+/* divs importantes para mejorar la vista de imagenes */
+.showcur {
+    width: 5vw;
+    height: auto;
+}.showcur:hover {
+    transform: scale(1.2);
+}

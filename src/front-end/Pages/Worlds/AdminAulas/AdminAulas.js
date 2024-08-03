@@ -59,9 +59,8 @@ class AdminAulas {
             for (let i = 0; i < this.#classrooms.length; i++) {
                 result += `<tr>
                             <td>${this.#classrooms[i]}</td>
-                            <td><button class='Boton' 
-                            onclick='adminAulas.AskForInfoOfClassroom("${this.#classrooms[i]}")'>
-                            Mostrar info</button></td>
+                            <td><img class='showcur' src='../../../Imagenes/Controler/aula.png'
+                            onclick='adminAulas.AskForInfoOfClassroom("${this.#classrooms[i]}")'></td>
                             </tr>`;
 
             }
@@ -91,16 +90,17 @@ class AdminAulas {
             for (let i = 0; i < lengthInfo; i++) {
                 i < lengthInfo - 1 ? this.#MailsStudents += `${values[i]},` : this.#MailsStudents += `${values[i]}`;
                 result += `<tr><td>${keys[i]}</td><td>${values[i]}</td>
-                            <td><button class='Boton' onclick='adminAulas.AskForStudents("${this.#Aula}", "${keys[i]}")'>
-                            Mostrar info de este estudiante</button></td></tr>`;
+                            <td><img class='showcur' onclick='adminAulas.AskForStudents("${this.#Aula}", "${keys[i]}")'
+                            src='../../../Imagenes/Controler/notasind.png'>
+                             </td></tr>`;
             }
 
             table.innerHTML = `<thead><tr>
                                 <th>Nombre del estudiante</th>
                                 <th>Correo</th>
-                                <th><button class='Boton'
-                                onclick="adminAulas.AskForStudents('${this.#Aula}', 'Aula')">
-                                Mostrar info general</button></th>
+                                <th><img class='showcur'
+                                onclick="adminAulas.AskForStudents('${this.#Aula}', 'Aula')"
+                                src='../../../Imagenes/Controler/aulatod.png'></th>
                                 </tr></thead>
                                 <tbody>${result}</tbody>`;
 
