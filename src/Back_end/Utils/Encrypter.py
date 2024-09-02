@@ -23,11 +23,10 @@ class Encrypter:
         final_Password = ''
         for Nums in listOfNum: 
             final_Num = (Nums**self.publicExponent) % self.modulus
-            final_Password = final_Password+str(hex(final_Num))+' '
+            final_Password += str(hex(final_Num))+' '
         return final_Password.rstrip()
     
     def RSA_Decrypt(self, name): 
-        name = self.Usuario
         encrypted_nums = Cursor.Execute(f"SELECT Contraseña FROM Usuarios_Registrados WHERE Nombre_Usuario = '{name}'")
         encrypted_nums = encrypted_nums.split(' ')
 
